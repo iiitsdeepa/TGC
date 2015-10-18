@@ -1,0 +1,22 @@
+Hey, ok so this is the instructions/questions thread thing. I'll regularly pull this file, so if there's anything you need to ask me, just put it here, or hangouts. 
+
+Goal: make a page/handler that recieves a post from a page with a code. The handler will use the code sent to reply with a json file full of data that the handler makes on spot.
+
+Overview: 
+	Each handler is a page. There are five handlers included in the main python file. The first two do database stuff, so see the next section for what they do. The Main class is the portion of the main page that you are working on. The next one one, Cards, is the current one that serves a snippet of html with all of the politician data for a given district. The third one is the one that needs to mimic the functionality of the Cards handler, but serve the data as json instead of a html snippet. The data comes from the cloud datastore associated with the entire website (just google's version of a database).
+
+Getting the Database ready:
+	Google app engine is pretty new and uploading bulk data can be a bit tricky. The first two handlers, Upload, and UploadHandler get the job done. To get the database ready, make sure the associated process_x function is active (not commented out) in the UploadHandler class, and then go to localhost:8080/up, and upload the text file. I have provided the text files full of data for both representatives and senators. Just do this for both files each time you start to work on the site. If you need any help just like ask me.
+
+Creating the Json:
+	The Json created will use the data pulled from the datastore. There are a series of functions I've already made that pull the data from the datastore and output them in the form of a python dictionary. These functions are part of BaseHandler, can be found there, and are usable by any of the other classes in the program.
+
+		getHR(district): this function gets the data for the house representative of a given district, and returns it in the form of a python dictionary
+		getSs(district): this function gets the data for the senior senator of a given district, and returns it in the form of a python dictionary
+		getJs(district): this function gets the data for the junior senator of a given district, and returns it in the form of a python dictionary
+
+		the format for a district is state:district number, ex... KY:3
+
+	The data required for each politician may change soon, and when it does I will edit the getHR, getSs, and getJs functions so they do what they need to do and still provide you with the needed data. I highly recommend that you take the python dictionary each of those functions gives you, creat a json from the data, then combine each of those three json files into a super json file, and then return that.
+
+

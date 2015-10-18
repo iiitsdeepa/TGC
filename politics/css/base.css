@@ -1,0 +1,149 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+	width: 100%;
+    background: lavender;
+}
+
+#badge{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 15vw;
+	height: 70px;
+	line-height: 70px;
+	font-weight: bold;
+	color: white;
+	z-index: 50;
+	text-align: center;
+	background-image: url("/images/blassyfabric.png");
+    background-repeat: repeat;
+	border: solid 2px #122440;
+}
+#nav_container{
+	z-index: 50;
+	position: absolute;
+	top: 10px;
+	right: 0;
+}
+
+#titlebar{
+	position: fixed;
+	left: 0;
+	top: 10px;
+	width: 100%;
+	height: 32px;
+	z-index: 0;
+	background-color: white;
+	border-top: solid darkred 10px;
+	border-bottom: solid darkred 10px;
+	z-index: 5;
+}
+
+#tablet_titlebar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	width: 100%;
+	z-index: 5;
+}
+
+#nav ul{
+	list-style:none;
+}
+
+#content{
+	position: relative;
+	background-image: url("/images/stitched_wool.png");
+    background-repeat: repeat;
+	z-index: 0;
+	width: 100%;
+	min-height: 80vh;
+	margin: 0;
+	padding-top: 100px;
+	overflow: hidden;
+}
+
+#footer{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	flex-wrap: wrap;
+	padding-bottom: 50px;
+	font-size: 12px;
+	color: white;
+	margin: 0;
+	background-image: url("/images/blassyfabric.png");
+    background-repeat: repeat;
+	z-index: 0;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+	border-top: solid white 3px;
+}
+#footer ul{
+	list-style: none;
+	padding-left: 0;
+
+}
+#footfoot{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align:center;
+}
+
+
+/*Mobile only: the nav is a drawer*/
+@media screen and (max-width: 959px){
+
+	#titlebar{
+		top: 0;
+		height: 40px;
+		background-color: darkred;
+	}
+	#badge{
+		top: 0;
+		left: 25vw;
+		width: 50vw;
+		height: 42px;
+		line-height: 42px
+	}
+
+	#nav_container{
+		width: 100vw;
+		background-color: lavender;
+	}
+
+	#nav ul a{
+		font-size: 12px;
+	}
+	#footer h4{
+		font-size: 22px;
+	}
+	.footbox{
+		display: block;
+		padding: 1%;
+		padding-left: 20px;
+		width: 100vw;
+	}
+
+
+}
+
+@media screen and (min-width: 960px){
+	#footer{
+		font-size: 18px; 
+	}
+	#footer h4{
+		font-size: 22px;
+	}
+	.footbox{
+		display: block;
+		padding: 1% 5vw;
+	}
+}

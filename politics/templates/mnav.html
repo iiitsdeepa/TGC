@@ -1,0 +1,86 @@
+<style>
+	#badge{
+		top: 0;
+		left: 25vw;
+		width: 50vw;
+		height: 42px;
+		line-height: 42px
+	}
+	#nav_expand{
+		display: block;
+		position: fixed;
+		color: white;
+		top: 0;
+		left: 0;
+		line-height: 50px;
+		height: 50px;
+		width: 50px;
+		text-align: center;
+		background-color: #A23333;
+		z-index: 50;
+	}
+	#nav_expand:active{
+		color: lightblue;
+	}
+	#nav_container{
+		position: fixed;
+		width: 100%;
+		height: calc(100% - 50px);
+		top: 50px;
+		left: -100vw;
+		background-color: lavender;
+		overflow-y: auto;
+		border: 0;
+		background-color: lavender;
+	}
+
+	#nav{
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 65%;
+		background-color: lavender;
+		color: darkred;
+	}
+	#nav ul{
+		padding-left: 0px;
+	}
+	#nav ul ul{
+		padding-left: 30px;
+	}
+	#nav ul a{
+		display:block;
+		position: relative;
+		color:#333;
+		text-decoration:none;
+		font-weight:700;
+		font-size:12px;
+		line-height:32px;
+		padding:5px 15px;
+		color: #162d50;
+		font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+	}
+	#nav ul a:hover{
+		color: white;
+	}
+	#nav ul li:hover{
+		background-color: #A23333;
+	}
+</style>
+
+<div id='nav'>
+	<ul>
+		<li class='nav_option' id='home_option'><a href='#'>Home</a></li>
+		  <li class='nav_option' id='mrep_option'><a href='#'>My Representatives</a></li>
+		  <li class='nav_option' id='pcomp_option'><a href='#'>Party Comparison</a></li>
+		  <li class='nav_option' id='ccomp_option'><a href='#'>Candidate Comparison</a></li>
+		  <li class='nav_option' id='lbranch'><a href='#'>Legislative Branch</a>
+		    <ul class='subnav'>
+		      <li class='subnav_option'><a href='#'>Composition</a></li>
+		      <li class='subnav_option'><a href='#'>Effictiveness</a></li>
+		      <li class='subnav_option'><a href='#'>Budget</a></li>
+		    </ul>
+		  </li>
+		  <li class='nav_option'><a href='#'>Judicial Branch</a></li>
+	</ul>
+</div>

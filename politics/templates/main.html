@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>The Glass Capitol</title>
+      <link rel='stylesheet' href='css/main.css'/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+      <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
+    </head>
+
+    <body>
+
+      <div class='subsection' id='head_section'>
+        <p id='title' style="font-family: 'Sail', cursive;">The Glass Capitol</p>
+      </div>
+
+      
+      <div class='section' id='opener'>
+        <div class='quote'>
+          <p class='qoute_text'>
+            "Democracy is only as good or bad as its people"
+            <p class='quote_author'>--Anonymous</p>
+          </p>
+        </div>
+
+        <div id='desktop_sell'>
+          <div class='dsell_box'>
+            <img class='star' src='/images/star.png'><br>
+            Relevant<br><br><span class='sp_description'>We keep track of issues relevant in today's ever advancing world</span>
+          </div>
+          <div class='dsell_box'>
+            <img class='star' src='/images/star.png'><br>
+            Simple<br><br><span class='sp_description'>We pride ourselves in being the easiest to use source of government information</span>
+          </div>
+          <div class='dsell_box'>
+            <img class='star' src='/images/star.png'><br>
+            Powerful<br><br><span class='sp_description'>We give the American people the power to keep our politicians accountable, and tie our government to our will</span>
+          </div>
+          <div class='dsell_box'>
+            <img class='star' src='/images/star.png'><br>
+            Personalized<br><br><span class='sp_description'>With an account we can ensure the issues you care about are front and center</span>
+          </div>
+          <div class='dsell_box'>
+            <img class='star' src='/images/star.png'><br>
+            Fast<br><br><span class='sp_description'>Every stat and metric we keep is only a few clicks or taps away</span>
+          </div>
+        </div>
+      </div>
+
+    <div id='grey_back'>
+
+      <div id='catch'>
+        <p id='pre_signup'>We collect objective stats and metrics measuring the performance, ideals, and goals of our government, and present them so that we as a people can ensure that our government addresses our needs, and is held accountable for its actions.</p>
+        <div id='findrep'>
+          <p id='stack_question'>How Do Your Representatives Stack Up??</p>
+          <form method='post' name='zip_form' id='zip_form' onsubmit="javascript:handleZip();return false;">
+            <p id='zip_title'>Find Your District Now!</p>
+          <input id='zip' type="text" name="zip" placeholder='Enter Zip or Address' style='text-align:center;'>
+          <div id='map_container'></div>
+          <div id='use_location' class='redbutton z-depth-1 zformbutton' onclick='useLocation()'>Use GPS</div>
+          <div id='zip_submit' class='redbutton z-depth-1 zformbutton' onclick='handleZip()'>Submit</div>
+          <p id='data_note'>**We NEVER save any address or location data. We only save your district.</p>
+          </form>
+        </div>
+      </div>
+
+      <div class='section' id='benefits_wrapper'>
+        <div class='card_button z-depth-1' id='lcard_button' onclick='scrollCardsLeft()'><</div>
+        <div class='card_button z-depth-1' id='rcard_button' onclick ='scrollCardsRight()'>></div>
+
+        <div id='benefits_outside' class='outside_scroller'></div>
+        
+        <div id='gc_benefits' class='horizontal z-depth-1'>
+
+          <div class='h_scroller' id='benefits_scroller'>
+            <div class='scroller_constant' id='benefits_constant'>
+              <div id='constant_content'>
+                <div id='rep_question'></div>
+                <ul id='stack_list'>
+                  <li>See performance relative to other representatives</li><br>
+                  <li>Learn how they legislate on the issues you care about</li><br>
+                  <li>Compare to historical politicans and congresses</li><br>
+                  <li>Find out who funds thier campaigns and who lobbies with them<br>
+                </ul>
+                <div class='swipe_prompt'>
+                  Swipe Right To See Examples
+                  <img style='position:relative;width:100%' src='/images/arrow.png'>
+                </div>
+              </div>
+            </div>
+            <div class='card_holder' id='bcard_holder'>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <div class='section' id='signup_stuff'>
+      <p id='signup_description'>Create your account so we can help you be more informed, and ensure that your representatives hear your voice and act on your concerns</p>
+
+      <div id='sform_container'>
+        <form method="post" name="signup" id='signup_form' onsubmit="javascript:signupValidate();return false;">
+          <div class='input_container' id='username_container'>
+            <p class='input_lable'>Username</p>
+            <input id='username' type='text' name='username' placeholder=''>
+          </div>
+
+          <div class='input_container' id='email_container'>
+            <p class='input_lable'>Email</p>
+            <input id='email' type="text" name="email" placeholder=''>
+          </div>
+
+          <div class='input_container' id='username_container'>
+            <p class='input_lable'>Password</p>
+            <input id='password' type="password" name="password" placeholder=''>
+          </div>
+
+          <div class='input_container' id='username_container'>
+            <p class='input_lable'>Confirm</p>
+            <input id='confirm_pass' type='password' name='confim' placeholder=''>
+          </div>
+        </form>
+      </div>
+      
+      <div id='sbutton' onclick='showSignup()'>Signup now</div>
+
+      <p id='gat'>Get Access To</p>
+
+      <div class='tribox'>
+        <div class='tbox z-depth-1'>
+          <div class='tbox_img_c'><img class='timg' src='/images/graph.png'></div>
+          <p class='tbox_text'>Our full range of stats and figures:</p>
+          <ul class='tlist'>
+            <li>- Search by issue</li>
+            <li>- Compare politicians</li>
+          </ul>
+        </div>
+        <div class='tbox z-depth-1'>
+          <div class='tbox_img_c'><img class='timg' src='/images/gears.png'></div>
+          <p class='tbox_text'>A personalized feed full of:</p>
+          <ul class='tlist'>
+            <li>- Issues you care about</li>
+            <li>- Ways to make your voice heard</li>
+          </ul>
+        </div>
+        <div class='tbox z-depth-1'>
+          <div class='tbox_img_c'><img class='timg' src='/images/clock.png'></div>
+          <p class='tbox_text'>Historical data:</p>
+          <ul class='tlist'>
+            <li>- Compare current politicians to historical politicians</li>
+            <li>- Has our government always been this way?</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class='blue-back'>
+    <div id='start_wrapper'>
+      <div id='start'>
+        Start Now
+      </div>
+    </div>
+
+      <footer class="page-footer z-depth-1 blue-back" id="footer" style="background-color:#162d50;color:gainsboro;margin:0">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5>Credits and Acknowledgments</h5>
+              <p>Alex Haynes</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5>Other Open Government</h5>
+              <ul>
+                <li><a href="https://www.govtrack.us/">Govtrack</a></li>
+                <li><a href="http://sunlightfoundation.com/">The Sunlight Foundation</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright" style="background-color:none !important;color:gainsboro;">
+          <div class="container">
+          © 2014 Copyright The Glass Capitol
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+      <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+      <script src="http://maps.googleapis.com/maps/api/js"></script>
+      <script type="text/javascript" src="/js/materialize.min.js"></script>
+      <script type="text/javascript" src="/js/main.js"></script>
+
+    </body>
+  </html>

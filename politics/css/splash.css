@@ -1,0 +1,37 @@
+#title{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 60px;
+	color: #162d50;
+}
+
+#fullcap{
+	display: block;
+	margin: 0 auto;
+	width: 50vw;
+}
+
+#morecontent{
+	position: relative;
+	height: 30vh;
+	text-align: center;
+}
+
+#desktop_sell{
+	margin: 0 auto;
+	padding-top: 40px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+.dsell_box{
+	width: 5vw;
+	height: 15vw;
+	margin: 10px;
+	text-align: center;
+}
+.star{
+	position: relative;
+	width: 2vw;
+}
