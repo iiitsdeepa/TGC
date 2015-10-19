@@ -4,7 +4,7 @@
       <title>The Glass Capitol</title>
       <link rel='stylesheet' href='css/base.css'/>
       <!--Import materialize.css-->
-      <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Pinyon+Script|Alex+Brush|Parisienne|UnifrakturCook:700|UnifrakturMaguntia|Cookie|Playball' rel='stylesheet' type='text/css'>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
@@ -14,15 +14,38 @@
 
     <body>
       <div id='badge'>
-        <img src='/images/gclogo_noback.png' style='position:absolute;height:90%;top:5%;left:2%;'>
+        <img id='logo'src='/images/gclogo_noback.png' style='height:100%;'>
         The Glass Capitol
+          <div id='nav_expand' onclick="javascript:expandNav();return false;">
+          <img id='expand' src='/images/hmenu.png' style='width:50px;height:50px;'>
+        </div>
       </div>
-      <div id='nav_container'></div>
+
+
+
       <div id='titlebar'></div>
-      <div id='tablet_titlebar'></div>
-      <div id='nav_expand' onclick="javascript:expandNav();return false;">
-        <img src='/images/hmenu.png' style='width:50px;height:50px;'>
+
+      <div id='nav_container'>
+        <nav id='nav'>
+          <ul>
+            <li class='nav_option' id='home_option'><a href='#'>Home</a></li>
+            <li class='nav_option' id='mrep_option'><a href='#'>My Representatives</a></li>
+            <li class='nav_option' id='pcomp_option'><a href='#'>Party Comparison</a></li>
+            <li class='nav_option' id='ccomp_option'><a href='#'>Candidate Comparison</a></li>
+            <li class='nav_option' id='lbranch'><a href='#'>Legislative Branch</a>
+              <ul class='subnav'>
+                <li class='subnav_option'><a href='#'>Congressional Makeup</a></li>
+                <li class='subnav_option'><a href='#'>Effictiveness</a></li>
+                <li class='subnav_option'><a href='#'>Budget</a></li>
+              </ul>
+            </li>
+            <li class='nav_option'><a href='#'>Judicial Branch</a></li>
+          </ul>
+        </nav>
+        <div id='nav_close' onclick="javascript:collapseNav();return false;"></div>
       </div>
+
+
       <script type="text/javascript" src="/js/base.js"></script>
     <div id='content'>
     {% block content %}

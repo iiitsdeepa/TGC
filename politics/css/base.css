@@ -6,50 +6,6 @@ html, body{
     background: lavender;
 }
 
-#badge{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 15vw;
-	height: 70px;
-	line-height: 70px;
-	font-weight: bold;
-	color: white;
-	z-index: 50;
-	text-align: center;
-	background-image: url("/images/blassyfabric.png");
-    background-repeat: repeat;
-	border: solid 2px #122440;
-}
-#nav_container{
-	z-index: 50;
-	position: absolute;
-	top: 10px;
-	right: 0;
-}
-
-#titlebar{
-	position: fixed;
-	left: 0;
-	top: 10px;
-	width: 100%;
-	height: 32px;
-	z-index: 0;
-	background-color: white;
-	border-top: solid darkred 10px;
-	border-bottom: solid darkred 10px;
-	z-index: 5;
-}
-
-#tablet_titlebar{
-	position: fixed;
-	top: 0;
-	left: 0;
-	display: none;
-	width: 100%;
-	z-index: 5;
-}
-
 #nav ul{
 	list-style:none;
 }
@@ -98,29 +54,72 @@ html, body{
 }
 
 
-/*Mobile only: the nav is a drawer*/
-@media screen and (max-width: 959px){
-
-	#titlebar{
+/*Mobile nav*/
+@media screen and (max-width: 965px){
+	#badge{
+		position: fixed;
 		top: 0;
-		height: 40px;
+		left: 0;
+		width: 100vw;
+		height: 50px;
+		font-weight: bold;
+		color: white;
+		font-size: 125%;
+		line-height: 50px;
+		text-align: center;
+		z-index: 55;
+		font-family: 'Playball', cursive;
+	}
+	#logo{
+		vertical-align: bottom;
+	}
+	#titlebar{
+		position: fixed;
+		top: 0;
+		width: 100vw;
+		height: 50px;
+		background-color: darkred;
+		z-index: 50;
+	}
+	#nav_expand{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 50px;
+		height: 50px;
+		z-index: 60;
+	}
+	#nav_close{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 20px;
 		background-color: darkred;
 	}
-	#badge{
-		top: 0;
-		left: 25vw;
-		width: 50vw;
-		height: 42px;
-		line-height: 42px
-	}
-
 	#nav_container{
+		position: fixed;
+		left: 0;
+		top: -50vh;
 		width: 100vw;
-		background-color: lavender;
+		height: 50vh;
+		background-color: white;
+		z-index: 50;
+		opacity: .95;
 	}
-
+	#nav ul{
+		margin: 0;
+		padding: 0;
+	}
 	#nav ul a{
-		font-size: 12px;
+		display: block;
+		margin: 10px;
+		width: 100vw;
+		text-decoration: none;
+		font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-weight: bold;
+		color: darkred;
+		text-align: center;
 	}
 	#footer h4{
 		font-size: 22px;
@@ -135,7 +134,130 @@ html, body{
 
 }
 
-@media screen and (min-width: 960px){
+
+/*Desktop*/
+@media screen and (min-width: 966px){
+	#badge{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 15vw;
+		height: 70px;
+		line-height: 70px;
+		font-weight: bold;
+		color: white;
+		z-index: 50;
+		text-align: center;
+		background-image: url("/images/blassyfabric.png");
+	    background-repeat: repeat;
+		border: solid 2px #122440;
+		font-family: 'Playball', cursive;
+		font-size: 115%;
+		font-weight: bold;
+	}
+	#logo{
+		position:absolute;
+		height:90%;
+		top:5%;
+		left:2%;
+	}
+	#titlebar{
+		position: fixed;
+		left: 0;
+		top: 10px;
+		width: 100%;
+		height: 32px;
+		z-index: 0;
+		background-color: white;
+		border-top: solid darkred 10px;
+		border-bottom: solid darkred 10px;
+		z-index: 5;
+	}
+	#nav_container{
+		position: fixed;
+		top: 10px;
+		padding-top: 10px;
+		right: 10px;
+		z-index: 30;
+	}
+	#nav_expand{
+		display: none;
+	}
+	#nav_close{
+		display: none;
+	}
+	#nav ul{
+		list-style:none;
+		position:relative;
+		float:left;
+		margin:0;
+		padding:0;
+	}
+	#nav ul a{
+		display:block;
+		color:#333;
+		text-decoration:none;
+		font-weight:700;
+		font-size:16px;
+		line-height:32px;
+		padding:0 15px;
+		color: #162d50;
+		font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+	}
+	#nav ul a:hover{
+		color: white;
+	}
+	#nav ul a:active{
+		color: lightblue;
+	}
+	#nav ul li{
+		position:relative;
+		float:left;
+		margin:0;
+		padding:0;
+	}
+	#nav ul li.current-menu-item{
+		background:#ddd
+	}
+	#nav ul li:hover{
+		background-color: #A23333;
+	}
+	#nav ul ul{
+		display:none;
+		position:absolute;
+		top:100%;
+		left:0;
+		background:#fff;
+		padding:0;
+		background-image: url("/images/rlassyfabric.png");
+    background-repeat: repeat;
+	}
+	#nav ul ul li{
+		float:none;
+		width:200px
+	}
+	#nav ul ul li:hover{
+		background:white;
+	}
+	#nav ul ul a{
+		line-height:120%;
+		padding:10px 15px;
+		color: white;
+		background-color: darkred;
+	}
+	#nav ul ul a:hover{
+		background:#A23333;
+	}
+	#nav ul ul a:active{
+		color:lightblue;
+	}
+	#nav ul ul ul{
+		top:0;
+		left:100%
+	}
+	#nav ul li:hover > ul{
+		display:block
+	}
 	#footer{
 		font-size: 18px; 
 	}
