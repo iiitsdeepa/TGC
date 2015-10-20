@@ -461,7 +461,7 @@ class Cards(BaseHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render('landing.html')
+        self.render('splash.html')
 
     def post(self):
         passcode = self.request.get('passcode')
