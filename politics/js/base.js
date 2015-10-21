@@ -1,7 +1,4 @@
 function expandNav(){
-
-	$('#badge').css('display', 'none');
-
 		$('#nav_container').animate({
 	        top: '0',
 	    }, 500, function(){
@@ -11,7 +8,6 @@ function expandNav(){
 }
 
 function collapseNav(){
-	$('#badge').css('display', '');
 	$('#nav_container').animate({
         top: '-50vh',
     }, 500, function(){
