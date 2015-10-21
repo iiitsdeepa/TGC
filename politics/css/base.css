@@ -24,33 +24,47 @@ html, body{
 
 #footer{
 	position: relative;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	flex-wrap: wrap;
-	padding-bottom: 50px;
 	font-size: 12px;
-	color: white;
-	margin: 0;
-	background-image: url("/images/blassyfabric.png");
-    background-repeat: repeat;
-	z-index: 0;
+	color: #EAEAEA;
+	text-shadow: 0px 1px 0px black;
 	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
-	border-top: solid white 3px;
+	border-top: solid #122440 5px;
+	background-color: #0E1C32;
 }
 #footer ul{
 	list-style: none;
 	padding-left: 0;
 
 }
-#footfoot{
+#footbox_wrapper{
+	position: relative;
+	display: flex;
+	margin: 20px;
+	margin-bottom: 0;
+	background-color: #3F4C60;
+}
+.footbox{
+	margin: 0 1px;
+	background-color: #0E1C32;
+	padding-bottom: 20px;
+	text-align: center;
+}
+#fboxmargin{
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	height: 20px;
+	background-color: #0E1C32;
+}
+#footfoot{
+	position: relative;
 	height: 50px;
 	line-height: 50px;
-	text-align:center;
+	text-align:right;
+	padding-right: 20px;
+	background-color: #0B1628;
+	border-top: solid 2px black;
 }
 
 
@@ -265,7 +279,12 @@ html, body{
 		font-size: 22px;
 	}
 	.footbox{
-		display: block;
-		padding: 1% 5vw;
+		width: 33.3%;
+	}
+	#fbox1{
+		margin-left: 0 !important;
+	}
+	#fbox3{
+		margin-right: 0 !important;
 	}
 }
