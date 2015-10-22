@@ -8,15 +8,11 @@ function expandNav(){
 }
 
 function collapseNav(){
+	h = -1 * $('nav_container').height()
 	$('#nav_container').animate({
-        top: '-50vh',
+        top: '-260px',
     }, 500, function(){
     	$('#nav_expand').attr('onclick', 'expandNav()')
     	$('#badge').css('display', '');
     });
 }
-
-$(document).ready(function() {
-    console.log( "ready!" );
-    optimizeNav();
-});

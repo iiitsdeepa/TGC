@@ -117,16 +117,32 @@ html, body{
 	#nav_container{
 		position: fixed;
 		left: 0;
-		top: -50vh;
+		top: -350px;
 		width: 100vw;
-		height: 50vh;
+		min-height: 350px;
 		background-color: white;
 		z-index: 52;
 		opacity: .95;
 	}
+	.mexp{
+		position: absolute;
+		top: 5%;
+		right: 0;
+		width: 15%;
+		height: 90%;
+		background-color: orange;
+		text-align: center;
+		font-size: 200%;
+		z-index: 5;
+	}
 	#nav ul{
 		margin: 0;
 		padding: 0;
+	}
+	#nav ul li{
+		position: relative;
+		height: 42px;
+		overflow: hidden;
 	}
 	#nav ul a{
 		display: block;
@@ -142,7 +158,10 @@ html, body{
 		background-color: lavender;
 	}
 	#nav ul ul{
-		display: none;
+		
+	}
+	#nav ul ul a{
+		background-color: lightblue;
 	}
 	#footer h4{
 		font-size: 22px;
@@ -216,6 +235,9 @@ html, body{
 		display: none;
 	}
 	#nav_close{
+		display: none;
+	}
+	.mexp{
 		display: none;
 	}
 	#nav ul{
