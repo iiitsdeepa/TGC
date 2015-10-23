@@ -13,7 +13,7 @@ html, body{
 #content{
 	position: relative;
 	background-image: url("/images/stitched_wool.png");
-    background-repeat: repeat;
+	background-repeat: ;
 	z-index: 0;
 	width: 100%;
 	min-height: 80vh;
@@ -107,7 +107,7 @@ html, body{
 		z-index: 60;
 	}
 	#nav_close{
-		position: absolute;
+		position: relative;
 		bottom: 0;
 		left: 0;
 		width: 100%;
@@ -117,12 +117,13 @@ html, body{
 	#nav_container{
 		position: fixed;
 		left: 0;
-		top: -350px;
+		top: -100vh;
 		width: 100vw;
-		min-height: 350px;
+		max-height: 100vh;
 		background-color: white;
 		z-index: 52;
 		opacity: .95;
+		overflow: auto;
 	}
 	.mexp{
 		position: absolute;
@@ -141,10 +142,11 @@ html, body{
 	}
 	#nav ul li{
 		position: relative;
-		height: 42px;
 		overflow: hidden;
+		height: 40px;
 	}
 	#nav ul a{
+		position: relative;
 		display: block;
 		width: 100vw;
 		height: 40px;
