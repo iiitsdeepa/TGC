@@ -130,8 +130,7 @@ html, body{
 		top: 5%;
 		right: 0;
 		width: 15%;
-		height: 90%;
-		background-color: orange;
+		height: 30px;
 		text-align: center;
 		font-size: 200%;
 		z-index: 5;
@@ -143,7 +142,6 @@ html, body{
 	#nav ul li{
 		position: relative;
 		overflow: hidden;
-		height: 40px;
 	}
 	#nav ul a{
 		position: relative;
@@ -151,19 +149,18 @@ html, body{
 		width: 100vw;
 		height: 40px;
 		line-height: 40px;
-		margin-bottom: 5px;
 		text-decoration: none;
 		font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 		font-weight: bold;
 		color: darkred;
 		text-align: center;
-		background-color: lavender;
 	}
 	#nav ul ul{
 		
 	}
 	#nav ul ul a{
-		background-color: lightblue;
+		font-size: 85%;
+		background-color: gainsboro;
 	}
 	#footer h4{
 		font-size: 22px;
@@ -201,8 +198,7 @@ html, body{
 		color: white;
 		z-index: 50;
 		text-align: center;
-		background-image: url("/images/blassyfabric.png");
-	    background-repeat: repeat;
+		background-color: #0E1C32;
 		border: solid 2px #122440;
 		font-family: 'Playball', cursive;
 		font-size: 115%;

@@ -7,7 +7,6 @@ function expandNav(){
 	    });
 	    $.scrollLock();
 }
-
 function collapseNav(i){
 	console.log(i)
 	h = -1 * $('nav_container').height()
@@ -20,28 +19,30 @@ function collapseNav(i){
     $.scrollLock();
 }
 function implode(){
-	$('.mexp').css('background-color','orange');
+	$('.mexp').html('>')
 	$('.nav_option').attr('value','contracted');
-	console.log('all contracted')
+	$('nav ul li').css('height', '40px')
 }
 function submarine(li, bt){
-	console.log(li + ' is ' + $('#'+li).attr('value'));
 	//expand the subnav
 	if ($('#'+li).attr('value') == 'contracted'){
 		implode();
-		$('#'+bt).css('background-color','red');
 		$('#'+li).attr('value', 'expanded');
-		console.log(li+' now expanded')
+		$('#'+bt).html('-')
+		$('#'+li).css('height','');
 	}
 	//contract the subnav
 	else{
-		console.log('in the else')
 		$('#'+li).attr('value', 'contracted');
 		implode();
 	}
 
 };
 
+$( document ).ready(function() {
+	implode();
+    $('#nav_expand').attr('onclick', 'expandNav()');
+});
 
 $.scrollLock = ( function scrollLockSimple(){
 	var locked   = false;
