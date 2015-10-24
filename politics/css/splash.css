@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	font-size: 60px;
+	font-size: 250px;
 	color: #162d50;
 	font-family: 'Playball', cursive;
 }
@@ -11,6 +11,7 @@
 	display: block;
 	margin: 0 auto;
 	width: 50vw;
+	width: 60%;
 }
 
 #morecontent{
@@ -29,10 +30,10 @@
 .dsell_box{
 	width: 5vw;
 	height: 15vw;
-	margin: 10px;
+	margin: 50px;
 	text-align: center;
 }
 .star{
 	position: relative;
-	width: 3vw;
+	width: 5vw;
 }

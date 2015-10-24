@@ -479,6 +479,9 @@ class Splash(BaseHandler):
     def get(self):
         self.render('splash.html')
 
+class About(BaseHandler):
+    def get(self):
+        self.render('about.html')
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
@@ -488,5 +491,6 @@ application = webapp2.WSGIApplication([
     ('/up', UploadHandler),
     ('/upload', Upload),
     ('/cards', Cards),
-    ('/test', Test)
+    ('/test', Test),
+    ('/about', About)
 ], debug=True)
