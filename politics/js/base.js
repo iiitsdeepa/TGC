@@ -8,7 +8,8 @@ function expandNav(){
 	    $.scrollLock();
 }
 
-function collapseNav(){
+function collapseNav(i){
+	console.log(i)
 	h = -1 * $('nav_container').height()
 	$('#nav_container').animate({
         top: '-100vh',
@@ -18,17 +19,29 @@ function collapseNav(){
     });
     $.scrollLock();
 }
-
-function submarine(){
-	console.log($(this).parent())
-
-}
-function hotair(){
-	
-}
 function implode(){
-	
+	$('.mexp').css('background-color','orange');
+	$('.nav_option').attr('value','contracted');
+	console.log('all contracted')
 }
+function submarine(li, bt){
+	console.log(li + ' is ' + $('#'+li).attr('value'));
+	//expand the subnav
+	if ($('#'+li).attr('value') == 'contracted'){
+		implode();
+		$('#'+bt).css('background-color','red');
+		$('#'+li).attr('value', 'expanded');
+		console.log(li+' now expanded')
+	}
+	//contract the subnav
+	else{
+		console.log('in the else')
+		$('#'+li).attr('value', 'contracted');
+		implode();
+	}
+
+};
+
 
 $.scrollLock = ( function scrollLockSimple(){
 	var locked   = false;
