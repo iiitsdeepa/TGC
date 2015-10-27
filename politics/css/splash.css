@@ -1,17 +1,4 @@
-#title{
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-size: 200px;
-	color: #162d50;
-	font-family: 'Playball', cursive;
-}
 
-#fullcap{
-	display: block;
-	margin: 0 auto;
-	width: 50vw;
-}
 
 #morecontent{
 	position: relative;
@@ -35,4 +22,40 @@
 .star{
 	position: relative;
 	width: 3vw;
+}
+
+/*Mobile nav*/
+@media screen and (max-width: 965px){
+	#title{
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		font-size: 45px;
+		color: #162d50;
+		font-family: 'Playball', cursive;
+	}
+
+	#fullcap{
+		display: block;
+		margin: 0 auto;
+		width: 80vw;
+	}
+}
+
+
+/*Desktop*/
+@media screen and (min-width: 966px){
+	#title{
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		font-size: 160px;
+		color: #162d50;
+		font-family: 'Playball', cursive;
+	}
+	#fullcap{
+		margin: 0 auto;
+		width: 60vw;
+		margin-left: 20vw;
+	}
 }
