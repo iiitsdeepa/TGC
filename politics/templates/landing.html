@@ -1,27 +1,37 @@
-<!DOCTYPE html>
-  <html>
-    <head>
-      <title>The Glass Capitol</title>
-      <link rel='stylesheet' href='css/base.css'/>
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
-      <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+{% extends "base.html" %}
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
-    </head>
+{% block content %}
 
-    <body>
-      <div id='titlebar'>The Glass Capitol (Under Construction and Coming Soon!!)</div>
+  <div id='form_container'>
+    <form method="post">
+      <table>
+        <tr>
+          <td class="label">
+            Username
+          </td>
+          <td>
+            <input type="text" name="username" value="{{username}}">
+          </td>
+          <td class="error">
+            {{error_username}}
+          </td>
+        </tr>
 
-      <div id='form_container'>
-        <form id='passform' action='/' method='post'>
-          Enter Passcode below to See The Progress!
-          <input type="text" name="passcode"><br><br>
-          <input type='submit'>
-        </form>
-      </div>
+        <tr>
+          <td class="label">
+            Password
+          </td>
+          <td>
+            <input type="password" name="password" value="">
+          </td>
+          <td class="error">
+            {{error_password}}
+          </td>
+        </tr>
+      </table>
 
-      <div id='footer'>Founded and Developed by Alexander Haynes | Ⓒ 2015 | its coming!</div>
-      <script type="text/javascript" src="/js/base.js"></script>
-    </body> 
+      <input type="submit">
+    </form>
+  </div>
+
+{% endblock %}

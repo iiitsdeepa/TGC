@@ -43,6 +43,10 @@ def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
 #---------------------------Input Validation Functions----------------------------
+USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
+def valid_username(username):
+    return username and USER_RE.match(username)
+
 EMAIL_RE  = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
 def valid_email(email):
     return email and EMAIL_RE.match(email)
@@ -385,13 +389,6 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_stat_csv(info)
         self.redirect("/")
 
-class Nav(BaseHandler):
-    def get(self):
-        self.render('dnav.html')
-
-    def post(self):
-        self.render('mnav.html')
-
 class Main(BaseHandler):
     def get(self):
         self.render('tmain.html')
@@ -461,32 +458,77 @@ class Cards(BaseHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render('splash.html')
+        self.render("landing.html")
 
     def post(self):
-        passcode = self.request.get('passcode')
-        logging.error(passcode)
-        if passcode == '1234':
-            self.redirect('/main')
+        have_error = False
+        username = self.request.get('username')
+        password = self.request.get('password')
+        verify = self.request.get('verify')
+        email = self.request.get('email')
+
+        params = dict(username = username,
+                      email = email)
+
+        if not valid_username(username):
+            params['error_username'] = "invalid username."
+            have_error = True
+
+        if not valid_password(password):
+            params['error_password'] = "invalid password."
+            have_error = True
+        elif password != verify:
+            params['error_verify'] = "non-matching passwords"
+            have_error = True
+
+        if not valid_email(email):
+            params['error_email'] = "invalid email"
+            have_error = True
+
+        if have_error:
+            self.render('landing.html', **params)
         else:
-            self.render('landing.html')
+            self.redirect('/splash' + username)
 
 class Test(BaseHandler):
     def get(self):
-        self.render('base.html')
+        self.initialize()
 
 class Splash(BaseHandler):
     def get(self):
         self.render('splash.html')
 
+class Mreps(BaseHandler):
+    def get(self):
+        self.render('mreps.html')
+
+class Pcomp(BaseHandler):
+    def get(self):
+        self.render('pcomp.html')
+
+class Ccomp(BaseHandler):
+    def get(self):
+        self.render('ccomp.html')
+
+class Lbranch(BaseHandler):
+    def get(self):
+        self.render('lbranch.html')
+
+class Jbranch(BaseHandler):
+    def get(self):
+        self.render('jbranch.html')
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
-    ('/nav', Nav),
     ('/splash', Splash),
     ('/main', Main),
     ('/up', UploadHandler),
     ('/upload', Upload),
     ('/cards', Cards),
-    ('/test', Test)
+    ('/test', Test),
+    ('/mreps', Mreps),
+    ('/pcomp', Pcomp),
+    ('/ccomp', Ccomp),
+    ('/lbranch', Lbranch),
+    ('/jbranch', Jbranch),
 ], debug=True)
