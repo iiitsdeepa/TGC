@@ -1,51 +1,23 @@
-html, body{
-	min-height: 100vh;
-	background-image: url('/images/capitol.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: 100%;
-}
-
-#titlebar{
+#alphalogin{
 	position: fixed;
-	top: 0;
-	width: 100vw;
-	height: 60px;
-	background-color: darkblue;
+	right: 0;
+	top:62px;
+	height: 50px;
+	background-color: #33CCFF;
 	color: white;
-	text-align: center;
-	font-size: 200%;
-	font-weight: bold;
-	line-height: 60px;
+	font-size: 16px;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight:700;
+	overflow: hidden;
 }
-
-#form_container{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -60%);
-	margin: 0 auto;
-	min-width: 30vw;
-	min-height: 20vw;
-	text-align: center;
-	background-color: lavender;
-	opacity: .7;
-	padding: 5%;
+#alphacall{
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px;
 }
-
-#passform{
-	text-align: center
+#alphacall:hover{
+	background-color: #5CD6FF;
 }
-
-
-#footer{
-	position: fixed;
-	bottom: 0;
-	width: 100vw;
-	height: 60px;
-	background-color: darkred;
-	color: white;
-	text-align: center;
-	line-height: 60px;
+#alogform{
+	padding: 20px;
 }
