@@ -518,6 +518,14 @@ class Jbranch(BaseHandler):
     def get(self):
         self.render('jbranch.html')
 
+class Public(BaseHandler):
+    def get(self):
+        self.render('landing1.html')
+
+class About(BaseHandler):
+    def get(self):
+        self.render('about.html')
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/splash', Splash),
@@ -531,4 +539,6 @@ application = webapp2.WSGIApplication([
     ('/ccomp', Ccomp),
     ('/lbranch', Lbranch),
     ('/jbranch', Jbranch),
+    ('/public', Public),
+    ('/about', About)
 ], debug=True)
