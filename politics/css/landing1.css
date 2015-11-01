@@ -1,0 +1,51 @@
+#opening{
+	position: relative;
+	height: 95vh;
+	padding-top: 100px;
+	padding-left: 50px;
+	background-color: gainsboro;
+	background-image: url("/images/flagswaving.png");
+	background-size: 100%;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+#centered{
+	position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 25%;
+    font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: bold;
+}
+#blogo_wrapper{
+	position: relative;
+	height: 50%;
+	text-align: center;
+}
+#blogo{
+	height: 100%;
+}
+#mission{
+
+	text-align: center;
+	padding: 20px;
+	color: #0E1C32;
+}
+#mbutton{
+	width: 40%;
+	height: 70px;
+	line-height: 70px;
+	border-radius: 10px;
+	margin-left: 30%;
+	background-color: darkred;
+	color: white;
+	text-align: center;
+}
+
+#wwa{
+	position: relative;
+	background-color: lightblue;
+	height: 40vh;
+}
