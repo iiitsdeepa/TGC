@@ -458,7 +458,7 @@ class Cards(BaseHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("landing.html")
+        self.render("landing1.html")
 
     def post(self):
         have_error = False
@@ -520,7 +520,7 @@ class Jbranch(BaseHandler):
 
 class Public(BaseHandler):
     def get(self):
-        self.render('landing1.html')
+        self.render('landing.html')
 
 class About(BaseHandler):
     def get(self):

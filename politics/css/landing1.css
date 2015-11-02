@@ -3,49 +3,88 @@
 	height: 95vh;
 	padding-top: 100px;
 	padding-left: 50px;
-	background-color: gainsboro;
-	background-image: url("/images/flagswaving.png");
-	background-size: 100%;
-	background-position: bottom;
-	background-repeat: no-repeat;
+	background-image: url("/images/stitched_wool.png");
+	background-repeat: repeat;
+	text-align: center;
+}
+#title{
+	margin: 0;
+	margin-right: 50px;
+	padding: 0;
+	text-align: center;
+	font-size: 160px;
+	color: #162d50;
+	font-family: 'Playball', cursive;
 }
 #centered{
 	position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 50%;
-    width: 25%;
+    max-width: 500px;
     font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: bold;
+	z-index: 5;
 }
 #blogo_wrapper{
 	position: relative;
-	height: 50%;
+	height: 65%;
 	text-align: center;
 }
 #blogo{
 	height: 100%;
 }
 #mission{
-
 	text-align: center;
 	padding: 20px;
-	color: #0E1C32;
+	color: #162d50;
+	font-size: 24px;
 }
 #mbutton{
 	width: 40%;
 	height: 70px;
 	line-height: 70px;
 	border-radius: 10px;
+	margin-top: 10px;
 	margin-left: 30%;
 	background-color: darkred;
 	color: white;
 	text-align: center;
 }
+#mbutton:hover{
+	background-color: #A23333;
+}
+#flagswaving{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+}
 
 #wwa{
 	position: relative;
-	background-color: lightblue;
+	background-color: #162d50;
 	height: 40vh;
+}
+
+/*Mobile nav*/
+@media screen and (max-width: 965px){
+	#opening{
+		padding: 100px 0 0 0;
+		height: 100vh;
+	}
+	#title{
+		font-size: 38px;
+		margin: 0;
+	}
+	#centered{
+		margin: 0;
+		position: relative;
+		width: 100%;
+		background-color: orange;
+		margin-right: 50px;
+	}
+	#mission{
+		font-size: 18px;
+	}
 }

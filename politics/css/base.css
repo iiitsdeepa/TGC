@@ -30,7 +30,7 @@ html, body{
 #content{
 	position: relative;
 	background-image: url("/images/stitched_wool.png");
-	background-repeat: ;
+	background-repeat: repeat;
 	z-index: 0;
 	width: 100%;
 	min-height: 80vh;

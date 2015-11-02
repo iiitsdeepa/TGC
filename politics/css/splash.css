@@ -1,5 +1,4 @@
 
-
 #morecontent{
 	position: relative;
 	height: 30vh;
@@ -24,7 +23,7 @@
 	width: 3vw;
 }
 
-/*Mobile nav*/
+/*Mobile*/
 @media screen and (max-width: 965px){
 	#title{
 		margin: 0;
