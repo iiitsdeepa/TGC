@@ -3,6 +3,7 @@ html, body{
 	padding: 0;
 	min-height: 100%;
 	width: 100%;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #nav_wrapper{
@@ -99,7 +100,7 @@ html, body{
 /*Mobile nav*/
 @media screen and (max-width: 965px){
 	#nav_wrapper{
-		font-size: 12px;
+		font-size: 14px;
 	}
 	#nav{
 		right: 100px;

@@ -1,64 +1,48 @@
 #opening{
 	position: relative;
-	height: 95vh;
-	padding-top: 100px;
-	padding-left: 50px;
+	height: 100vh;
+	padding-top: 50px;
 	background-image: url("/images/stitched_wool.png");
 	background-repeat: repeat;
-	text-align: center;
+	color: #162d50;
 }
 #title{
-	margin: 0;
-	margin-right: 50px;
-	padding: 0;
+	margin:0;
 	text-align: center;
-	font-size: 160px;
-	color: #162d50;
 	font-family: 'Playball', cursive;
-}
-#centered{
-	position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: bold;
-	z-index: 5;
-}
-#blogo_wrapper{
-	position: relative;
-	height: 65%;
-	text-align: center;
-}
-#blogo{
-	height: 100%;
+	z-index: 3;
 }
 #mission{
 	text-align: center;
-	padding: 20px;
-	color: #162d50;
-	font-size: 24px;
+	font-weight: bold;
+	z-index: 3;
+}
+#buttonpanel{
+	position: relative;
+	z-index: 3;
 }
 #mbutton{
-	width: 40%;
-	height: 70px;
-	line-height: 70px;
+	margin: 0 auto;
+	width: 200px;
+	padding: 15px 0;
 	border-radius: 10px;
-	margin-top: 10px;
-	margin-left: 30%;
+	text-align: center;
+	font-weight: bold;
 	background-color: darkred;
 	color: white;
-	text-align: center;
 }
 #mbutton:hover{
 	background-color: #A23333;
+}
+#mbutton:active{
+	background-color: #AE4D4D;
 }
 #flagswaving{
 	position: absolute;
 	width: 100%;
 	bottom: 0;
 	left: 0;
+	z-index: 0;
 }
 
 #wwa{
@@ -70,21 +54,34 @@
 /*Mobile nav*/
 @media screen and (max-width: 965px){
 	#opening{
-		padding: 100px 0 0 0;
 		height: 100vh;
 	}
 	#title{
+		margin: 35px 0 0 0;
 		font-size: 38px;
-		margin: 0;
-	}
-	#centered{
-		margin: 0;
-		position: relative;
-		width: 100%;
-		background-color: orange;
-		margin-right: 50px;
 	}
 	#mission{
+		margin-top: 30px;
 		font-size: 18px;
+	}
+	#buttonpanel{
+		margin-top: 30px;
+	}
+}
+
+/*Desktop*/
+@media screen and (min-width: 966px){
+	#title{
+		font-size: 100px;
+	}
+	#mission{
+		margin-top: 10px;
+		font-size: 20px;
+	}
+	#buttonpanel{
+		margin-top: 30px;
+	}
+	#mbutton{
+
 	}
 }

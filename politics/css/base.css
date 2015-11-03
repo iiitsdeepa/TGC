@@ -3,6 +3,7 @@ html, body{
 	padding: 0;
 	min-height: 100%;
 	width: 100%;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .z-index-1{
