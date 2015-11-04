@@ -1,3 +1,17 @@
+#baselayer{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #0E1C32;
+	z-index: 1;
+}
+#toplayer{
+	position: relative;
+	z-index: 2;
+}
+
 #opening{
 	position: relative;
 	height: 100vh;
@@ -83,6 +97,39 @@
 	z-index: 2;
 }
 
+#quote_wrapper{
+	position: relative;
+	height: 40vh;
+	color: white;
+	z-index: 1;
+	border-top: solid darkred 10px;
+	border-bottom: solid darkred 10px;
+}
+#quote{
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+	right: 150px;
+	width: 30%;
+	text-align: center;
+	font-weight: bold;
+}
+
+#demo_wrapper{
+	position relative;
+	padding-top: 5vh;
+	background-image: url("/images/stitched_wool.png");
+	background-repeat: repeat;
+	height: 40vh;
+}
+#demo_content{
+	margin: 0 auto;
+	width: 80vw;
+	height: 30vh;
+	text-align: center;
+	background-color: white;
+}
+
 /*Mobile nav*/
 @media screen and (max-width: 965px){
 	#opening{
@@ -115,5 +162,10 @@
 	}
 	#mbutton{
 
+	}
+	#monuments{
+		position: absolute;
+		top: 100px;
+		width: 100%;
 	}
 }

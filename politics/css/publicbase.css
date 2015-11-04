@@ -95,6 +95,7 @@ html, body{
 	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 	border-top: solid #EAEAEA 1px;
 	background-color: #0E1C32;
+	z-index: 3;
 }
 #footer ul{
 	list-style: none;
