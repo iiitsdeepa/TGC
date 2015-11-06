@@ -33,9 +33,9 @@
 }
 #buttonpanel{
 	position: relative;
-	z-index: 3;
+	z-index: 5;
 }
-#mbutton{
+.mbutton{
 	margin: 0 auto;
 	width: 200px;
 	padding: 15px 0;
@@ -45,11 +45,12 @@
 	background-color: darkred;
 	color: white;
 }
-#mbutton:hover{
-	background-color: #A23333;
-}
-#mbutton:active{
+
+.mbutton:active{
 	background-color: #AE4D4D;
+}
+#discoverbutton{
+	margin-bottom: 20px;
 }
 #flagswaving{
 	position: absolute;
@@ -63,8 +64,7 @@
 	position: relative;
 	background-image: url("/images/stitched_wool.png");
 	background-repeat: repeat;
-	height: 90vh;
-	padding-top: 30px;
+	padding: 20px 0;
 }
 #spacers{
 	position: absolute;
@@ -87,19 +87,10 @@
 	background-color: white;
 	height: 100px;
 }
-#wwa_content{
-	position: relative;
-	margin: 0 auto;
-	width: 80vw;
-	height: 90%;
-	text-align: center;
-	background-color: white;
-	z-index: 2;
-}
+
 
 #quote_wrapper{
 	position: relative;
-	height: 40vh;
 	color: white;
 	z-index: 1;
 	border-top: solid darkred 10px;
@@ -109,31 +100,22 @@
 	position: absolute;
     top: 50%;
     transform: translateY(-50%);
-	right: 150px;
-	width: 30%;
 	text-align: center;
 	font-weight: bold;
 }
 
 #demo_wrapper{
 	position relative;
-	padding-top: 5vh;
+	padding: 20px 0;
 	background-image: url("/images/stitched_wool.png");
 	background-repeat: repeat;
-	height: 40vh;
 }
-#demo_content{
-	margin: 0 auto;
-	width: 80vw;
-	height: 30vh;
-	text-align: center;
-	background-color: white;
-}
+
 
 /*Mobile nav*/
 @media screen and (max-width: 965px){
 	#opening{
-		height: 100vh;
+		height: 90vh !important;
 	}
 	#title{
 		margin: 35px 0 0 0;
@@ -142,9 +124,28 @@
 	#mission{
 		margin-top: 30px;
 		font-size: 18px;
+		padding: 0 20px;
 	}
 	#buttonpanel{
 		margin-top: 30px;
+	}
+	#wwa{
+		height: 145vw;
+	}
+	.content{
+		position: relative;
+		width: 95vw;
+		height: 100%;
+		margin: 0 auto;
+		z-index: 2;
+		background-color: white;
+	}
+	#quote_wrapper{
+		height: 80vw;
+		background-color: #0E1C32;
+	}
+	#demo_wrapper{
+		height: 145vw;
 	}
 }
 
@@ -160,12 +161,41 @@
 	#buttonpanel{
 		margin-top: 30px;
 	}
-	#mbutton{
-
+	.mbutton:hover{
+		background-color: #A23333;
 	}
 	#monuments{
 		position: absolute;
 		top: 100px;
 		width: 100%;
+	}
+	#wwa{
+		height: 90vh;
+	}
+	#wwa_content{
+		position: relative;
+		margin: 0 auto;
+		width: 80vw;
+		height: 90%;
+		text-align: center;
+		background-color: white;
+		z-index: 2;
+	}
+	#quote_wrapper{
+		height: 40vh;
+	}
+	#quote{
+		width: 30%;
+		right: 150px;
+	}
+	#demo_wrapper{
+		height: 90vh;
+	}
+	#demo_content{
+		margin: 0 auto;
+		width: 80vw;
+		height: 100%;
+		text-align: center;
+		background-color: white;
 	}
 }

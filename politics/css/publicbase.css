@@ -145,6 +145,17 @@ html, body{
 	#nav{
 		right: 100px;
 	}
+	#footbox_wrapper{
+		flex-wrap: wrap;
+	}
+	.footbox{
+		display: block;
+		width: 100%;
+		margin: 1px 0;
+	}
+	#fbox1{
+		margin-top: 0 !important;
+	}
 }
 
 /*Desktop*/
