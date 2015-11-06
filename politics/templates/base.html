@@ -81,13 +81,20 @@
         <div id='nav_close' onclick="javascript:collapseNav();return false;"></div>
       </div>
 
+      <div id='pagenav_expand'>
+        M
+      </div>
 
-      <script type="text/javascript" src="/js/base.js"></script>
+      <div id='pagenav'>
+        {% block pagenav %}
+        {% endblock %}
+      </div>
+
+
+    <script type="text/javascript" src="/js/base.js"></script>
     <div id='content'>
-    {% block content %}
-    
-    {% endblock %}
-      
+      {% block content %}
+      {% endblock %}
     </div>
 
     <div id='footer'>
