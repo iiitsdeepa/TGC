@@ -87,8 +87,22 @@
 	background-color: white;
 	height: 100px;
 }
-
-
+#wwa_content h2{
+	position: relative;
+	margin: 0 auto;
+	max-width: 80%;
+	text-align: center;
+}
+#abilitytriad{
+	display: flex;
+	justify-content: space-between;
+}
+.ability{
+	background-color: red;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+}
 #quote_wrapper{
 	position: relative;
 	color: white;
@@ -137,8 +151,30 @@
 		width: 95vw;
 		height: 100%;
 		margin: 0 auto;
+		padding-top: 10px;
 		z-index: 2;
 		background-color: white;
+	}
+
+	#abilitytriad{
+		position: relative;
+		width: 80%;
+		margin: 0 auto;
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+		margin-top: 10px;
+	}
+	.ability{
+		margin: 0 auto;
+		margin-top: 10px;
+		width: 100%;
+		height: 50px;
+	}
+	#abilitytext{
+		margin-top: 20px;
+		position: relative;
+		width: 80%;
+		margin: 0 auto;
 	}
 	#quote_wrapper{
 		height: 80vw;
@@ -177,9 +213,20 @@
 		margin: 0 auto;
 		width: 80vw;
 		height: 90%;
+		padding: 20px;
 		text-align: center;
 		background-color: white;
 		z-index: 2;
+	}
+	#abilitytriad{
+		margin-top: 50px;
+		height: 40%;
+	}
+	.ability{
+		width: 30%;
+	}
+	#abilitytext{
+		margin-top: 50px;
 	}
 	#quote_wrapper{
 		height: 40vh;
