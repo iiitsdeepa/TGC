@@ -48,10 +48,29 @@
 		<div id='demo_content' class='content z-index-1'>
 			<h2>Find Your Representatives</h2>
 			<div id='findform_wrapper'>
-			Where the form is
+				<div id='use_location' class='bluebutton' onclick='useLocation()'>Use Location Data</div>
+				<div>Or</div>
+				<form method='post' name='zip_form' id='zipform' onsubmit="javascript:handleZip();return false;">
+          			<input id='zip' type="text" name="zip" placeholder='Enter Address' style='text-align:center;'>
+          			<div id='zip_submit' class=' z-depth-1 zformbutton' onclick='handleZip()'>Submit</div>
+        		</form>
 			</div>
+
+			<h3>Your Representatives</h3>
 			<div id='stats_container'>
-			The stats themselves
+				<div id='stats_slider'>
+					<div id='' class='rep_wrapper'>
+					Your HR
+					</div>
+
+					<div id='' class='rep_wrapper'>
+					Your SS
+					</div>
+
+					<div id='' class='rep_wrapper'>
+					Your JS
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
