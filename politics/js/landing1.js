@@ -7,3 +7,8 @@ function scrollTo(id){
 	    }, 500);
 	}
 }
+
+function abText(id){
+	text = $("#"+id).html()
+	$('#abilitytext').html(text)
+}

@@ -143,6 +143,9 @@
 #stats_slider{
 	display: flex;
 }
+.abtext{
+	display: none;
+}
 
 
 /*Mobile nav*/
