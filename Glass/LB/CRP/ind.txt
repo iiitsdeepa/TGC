@@ -1,0 +1,106 @@
+{
+    "response": {
+        "industries": {
+            "@attributes": {
+                "cand_name": "John A. Yarmuth (D)", 
+                "cid": "N00028073", 
+                "cycle": "2014", 
+                "last_updated": "03/09/2015", 
+                "origin": "Center for Responsive Politics", 
+                "source": "http://www.opensecrets.org/politicians/industries.php?cid=N00028073&cycle=2014"
+            }, 
+            "industry": [
+                {
+                    "@attributes": {
+                        "indivs": "61500", 
+                        "industry_code": "W06", 
+                        "industry_name": "Retired", 
+                        "pacs": "0", 
+                        "total": "61500"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "0", 
+                        "industry_code": "P02", 
+                        "industry_name": "Industrial Unions", 
+                        "pacs": "54000", 
+                        "total": "54000"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "6000", 
+                        "industry_code": "H01", 
+                        "industry_name": "Health Professionals", 
+                        "pacs": "47500", 
+                        "total": "53500"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "0", 
+                        "industry_code": "P01", 
+                        "industry_name": "Building Trade Unions", 
+                        "pacs": "47500", 
+                        "total": "47500"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "250", 
+                        "industry_code": "P04", 
+                        "industry_name": "Public Sector Unions", 
+                        "pacs": "45000", 
+                        "total": "45250"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "12900", 
+                        "industry_code": "N02", 
+                        "industry_name": "Beer, Wine & Liquor", 
+                        "pacs": "29644", 
+                        "total": "42544"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "20350", 
+                        "industry_code": "K01", 
+                        "industry_name": "Lawyers/Law Firms", 
+                        "pacs": "12750", 
+                        "total": "33100"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "8750", 
+                        "industry_code": "F10", 
+                        "industry_name": "Real Estate", 
+                        "pacs": "16000", 
+                        "total": "24750"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "0", 
+                        "industry_code": "B09", 
+                        "industry_name": "Telecom Services", 
+                        "pacs": "22500", 
+                        "total": "22500"
+                    }
+                }, 
+                {
+                    "@attributes": {
+                        "indivs": "0", 
+                        "industry_code": "N15", 
+                        "industry_name": "Misc Manufacturing & Distributing", 
+                        "pacs": "22000", 
+                        "total": "22000"
+                    }
+                }
+            ]
+        }
+    }
+}
