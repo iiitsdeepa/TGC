@@ -526,6 +526,10 @@ class About(BaseHandler):
     def get(self):
         self.render('about.html')
 
+class NewsLetter(BaseHandler):
+    def get(self):
+        self.render('esf.html')
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/splash', Splash),
@@ -540,5 +544,6 @@ application = webapp2.WSGIApplication([
     ('/lbranch', Lbranch),
     ('/jbranch', Jbranch),
     ('/public', Public),
-    ('/about', About)
+    ('/about', About),
+    ('/newletter', NewsLetter)
 ], debug=True)

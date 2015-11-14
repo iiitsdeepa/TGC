@@ -1,3 +1,9 @@
+h2{
+	text-align: center;
+	font-family: 'Playball', cursive;
+	color: #0E1C32;
+}
+
 #baselayer{
 	position: fixed;
 	top: 0;
@@ -110,13 +116,21 @@
 }
 #abilitytriad{
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 }
 .ability{
-	background-color: red;
+	position: relative;
+	background-color: white;
 	color: black;
 	font-weight: bold;
 	text-align: center;
+	border: solid red 5px;
+}
+.abhead{
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 #quote_wrapper{
 	position: relative;
@@ -262,8 +276,10 @@
 		height: 40%;
 	}
 	.ability{
-		width: 30%;
-		height: 100px;
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		margin: 20px;
 	}
 	#abilitytext{
 		margin-top: 50px;
