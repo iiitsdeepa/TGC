@@ -20,6 +20,7 @@ from google.appengine.ext import db
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
+from google.appengine.api import mail
 
 #from oauth2client.client import flow_from_clientsecrets
 #from oauth2client.client import FlowExchangeError
@@ -75,15 +76,15 @@ def check_secure_val(secure_val):
 def make_salt(length = 5):
     return ''.join(random.choice(letters) for x in xrange(length))
 
-def make_pw_hash(email, pw, salt = None):
+def make_pw_hash(username, pw, salt = None):
     if not salt:
         salt = make_salt()
-    h = hashlib.sha256(email + pw + salt).hexdigest()
+    h = hashlib.sha256(username + pw + salt).hexdigest()
     return '%s,%s' % (salt, h)
 
-def h_valid_pw(email, password, h):
+def valid_pw(name, password, h):
     salt = h.split(',')[0]
-    return h == make_pw_hash(email, password, salt)
+    return h == make_pw_hash(name, password, salt)
 
 #------------------------File Processing----------------------------
 
@@ -139,6 +140,8 @@ class User(db.Model):
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()
+    created = db.DateTimeProperty(required = True, auto_now = True)
+    last_modified = db.DateTimeProperty(required = True, auto_now = True)
 
     @classmethod
     def by_id(cls, uid):
@@ -156,15 +159,15 @@ class User(db.Model):
 
     @classmethod
     def register(cls, username, email, pw):
-        pw_hash = make_pw_hash(email, pw)
+        pw_hash = make_pw_hash(username, pw)
         return cls( username = username,
                     email = email,
                     pw_hash = pw_hash)
 
     @classmethod
-    def login(cls, email, pw):
-        u = cls.by_email(email)
-        if u and h_valid_pw(email, pw, u.pw_hash):
+    def login(cls, username, pw):
+        u = cls.by_username(username)
+        if u and valid_pw(username, pw, u.pw_hash):
             return u
 
 class State(db.Model):
@@ -210,6 +213,15 @@ class Representative(db.Model):
     sponsored = db.IntegerProperty(required = True)
     cosponsored = db.IntegerProperty(required = True)
     li = db.IntegerProperty(required = True)
+
+class NewsLetterUser(db.Model):
+    created = db.DateTimeProperty(required = True, auto_now = True)
+    email = db.StringProperty(required = True)
+
+    @classmethod
+    def by_email(cls, email):
+        u = cls.all().filter('email =', email).get()
+        return u
 
 class DatastoreFile(db.Model):
   data = db.BlobProperty(required=True)
@@ -389,6 +401,45 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_stat_csv(info)
         self.redirect("/")
 
+class Admin(BaseHandler):
+    def get(self):
+        self.render('admin.html')
+
+class Signup(BaseHandler):
+    def post(self):
+        username = self.request.get('username')
+        email = self.request.get('email')
+        password = self.request.get('password')
+        have_error = False
+
+        #query the database to ensure the username, and email are unique
+        if username and email and password:
+            n = User.by_username(username)
+            e = User.by_email(email)
+            if n and not e: #username is traken
+                self.write('1')
+            elif e and not n: #email is taken
+                self.write('2')
+            elif n and e: #username and email are taken
+                self.write('3')
+            else:
+                self.write('success')
+                u = User.register(username, email, password)
+                u.put()
+                self.login(u)
+
+class Login(BaseHandler):
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+
+        u = User.login(username, password)
+        if u:
+            self.login(u)
+            self.write('in')
+        else:
+            self.write('invalid login')
+
 class Main(BaseHandler):
     def get(self):
         self.render('tmain.html')
@@ -435,7 +486,6 @@ class Cards(BaseHandler):
         state, dnum = district.split(':')
         #query the datastore to get the house representative
         msg = "SELECT name, party, fyio FROM Representative WHERE State=\'%s\' AND district=\'%d\'" %(state, int(dnum))
-        logging.error(msg)
         q = db.GqlQuery(msg)
 
     def get(self):
@@ -496,31 +546,52 @@ class Test(BaseHandler):
 
 class Splash(BaseHandler):
     def get(self):
-        self.render('splash.html')
+        if self.user:
+            self.render('splash.html')
+        else:
+            self.redirect('/')
 
 class Mreps(BaseHandler):
     def get(self):
-        self.render('mreps.html')
+        if self.user:
+            self.render('mreps.html')
+        else:
+            self.redirect('/')
 
 class Pcomp(BaseHandler):
     def get(self):
-        self.render('pcomp.html')
+        if self.user:
+            self.render('pcomp.html')
+        else:
+            self.redirect('/')
 
 class Ccomp(BaseHandler):
     def get(self):
-        self.render('ccomp.html')
+        if self.user:
+            self.render('ccomp.html')
+        else:
+            self.redirect('/')
 
 class Lbranch(BaseHandler):
     def get(self):
-        self.render('lbranch.html')
+        if self.user:
+            self.render('lbranch.html')
+        else:
+            self.redirect('/')
 
 class Jbranch(BaseHandler):
     def get(self):
-        self.render('jbranch.html')
+        if self.user:
+            self.render('jbranch.html')
+        else:
+            self.redirect('/')
 
 class Public(BaseHandler):
     def get(self):
-        self.render('landing.html')
+        if self.user:
+            self.render('landing.html')
+        else:
+            self.redirect('/')
 
 class About(BaseHandler):
     def get(self):
@@ -530,8 +601,34 @@ class NewsLetter(BaseHandler):
     def get(self):
         self.render('esf.html')
 
+    def post(self):
+        email = self.request.get('email')
+        error_message = 'none'
+        have_error = False
+        
+        if not valid_email(email):
+            error_message = "invalid email"
+            have_error = True
+
+        if have_error:
+            self.write(error_message)
+        else:
+            e = NewsLetterUser.by_email(email)
+            if e:
+                error_message='already on list'
+                self.write(error_message)
+            else:
+                potential_signee=NewsLetterUser(email=email)
+                potential_signee.put()
+                self.write('success')
+
+
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
+    ('/admin', Admin),
+    ('/signup', Signup),
+    ('/login', Login),
     ('/splash', Splash),
     ('/main', Main),
     ('/up', UploadHandler),
@@ -545,5 +642,5 @@ application = webapp2.WSGIApplication([
     ('/jbranch', Jbranch),
     ('/public', Public),
     ('/about', About),
-    ('/newletter', NewsLetter)
+    ('/newsletter', NewsLetter)
 ], debug=True)

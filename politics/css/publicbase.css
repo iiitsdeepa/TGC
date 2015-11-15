@@ -69,6 +69,7 @@ html, body{
 	font-weight:700;
 	overflow: hidden;
 	z-index: 2;
+	opacity: .9;
 }
 #alphacall{
 	height: 50px;

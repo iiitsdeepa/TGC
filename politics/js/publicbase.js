@@ -16,3 +16,14 @@ function alphaExpand(a, t){
   			});
 	}
 }
+
+function alphaLogin(){
+  document.getElementById("subbutton").disabled=true;
+  setTimeout('document.getElementById("subbutton").disabled=false;',1200);
+	username = document.getElementById('username').value;
+  password = document.getElementById("password").value;
+	$.post('/login', {username: username, password: password}, function(data){
+    console.log(data)
+  });
+
+}

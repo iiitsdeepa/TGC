@@ -12,6 +12,26 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
     </head>
 
-    <body>
-      
-    </body>
+<body>
+  <h1>The Glass Capitol</h1>
+  <h2>Something New Is Coming</h2>
+  <p>stay up to date with the glass capitol</p>
+  
+  <form method="post" name="signup" id='signup_form' onsubmit="javascript:submitSign();return false;">
+    Email:<br>
+    <input id='email' type="text" name="email">
+    <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
+  </form>
+
+  <script>
+    function submitSign() {
+      document.getElementById("subbutton").disabled=true;
+      setTimeout('document.getElementById("subbutton").disabled=false;',1200);
+      email = document.getElementById('email').value;
+      $.post('/newsletter', {email: email}, function(data){
+        console.log(data)
+      });
+    }
+  </script>
+  
+</body>
