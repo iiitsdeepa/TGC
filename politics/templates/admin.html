@@ -13,6 +13,14 @@
     </head>
 
   <body>
+    <div id='gate'>
+      <form method="post" name="signup" id='signup_form' onsubmit="javascript:gateway();return false;">
+        What's the Secret?
+        <input id='secret' type='text' name='secret'>
+        <input id='gatebutton' type='button' value='submit' onclick="javascript:gateway();return false;">
+      </form>
+    </div>
+
     <h1>The Glass Capitol: Administrators Only</h1>
     <h2>Create Your Administrator Account Here</h2>
     <form method="post" name="signup" id='signup_form' onsubmit="javascript:submitSign();return false;">
@@ -26,45 +34,6 @@
       <input id='confirmpass' type="text" name="confirmpass"><br>
       <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
     </form>
-
-    <script>
-      function submitSign() {
-        document.getElementById("subbutton").disabled=true;
-        setTimeout('document.getElementById("subbutton").disabled=false;',1200);
-        username = document.getElementById('username').value;
-        email = document.getElementById('email').value;
-        password = document.getElementById('password').value;
-        confirmpass = document.getElementById('confirmpass').value;
-        error = 0
-
-        if(username.length < 6){ //test username
-          unameerror = 'invalid username (> 6 characters)'
-          console.log(unameerror)
-          error = 1
-        }
-        if(!/(.+)@(.+){2,}\.(.+){2,}/.test(email)){ //test email
-          emailerror = 'invalid email'
-          console.log(emailerror)
-          error = 1
-        }
-        if(password.length < 6){ //test password length
-          pwerror = 'invalid password (> 6 characters)'
-          console.log(pwerror)
-          error = 1
-        }
-        if(password != confirmpass){ //test password match
-          pwerror = 'passwords don\'t match'
-          console.log(pwerror)
-          error = 1
-        }
-
-        if (error != 1){
-          $.post('/signup', {username: username, email: email, password: password}, function(data){
-            console.log(data)
-          });
-        }
-
-      }
-    </script>
-    
+   
+    <script type="text/javascript" src="/js/admin.js"></script>
   </body>

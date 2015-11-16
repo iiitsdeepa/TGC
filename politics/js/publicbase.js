@@ -23,7 +23,9 @@ function alphaLogin(){
 	username = document.getElementById('username').value;
   password = document.getElementById("password").value;
 	$.post('/login', {username: username, password: password}, function(data){
-    console.log(data)
+    if (data == 'in'){
+      
+    }
   });
 
 }

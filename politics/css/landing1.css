@@ -11,7 +11,9 @@
 	position: relative;
 	z-index: 2;
 }
-
+#tlogo{
+	height: 100%;
+}
 #opening{
 	position: relative;
 	min-height: 500px;
@@ -163,8 +165,12 @@
 		height: 90vh !important;
 	}
 	#title{
-		margin: 35px 0 0 0;
-		font-size: 38px;
+		margin: 15px 0 0 0;
+		font-size: 40px;
+		height: 50px;
+	}
+	#tlogo{
+		display: none;
 	}
 	#mission{
 		margin-top: 30px;
@@ -173,6 +179,16 @@
 	}
 	#buttonpanel{
 		margin-top: 30px;
+	}
+	#mfunctions{
+		margin: 0 auto;
+		margin-top: 15px;
+		text-align: center;
+		line-height: 30px;
+		font-weight: bold;
+	}
+	.mfun:active{
+		color: #33CCFF !important;
 	}
 	#wwa{
 		padding-bottom: 20px;
@@ -246,10 +262,11 @@
 		background-color: #004CEC;
 	}
 	#title{
-		font-size: 100px;
+		font-size: 90px;
+		height: 100px;
 	}
 	#mission{
-		margin-top: 10px;
+		margin-top: 20px;
 		font-size: 20px;
 	}
 	#buttonpanel{
@@ -257,6 +274,9 @@
 	}
 	.mbutton:hover{
 		background-color: #A23333;
+	}
+	#mfunctions{
+		display: none;
 	}
 	#monuments{
 		position: absolute;

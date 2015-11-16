@@ -17,6 +17,13 @@
         <div id='badge'>
           <img id='blogo'src='/images/gclogo_noback.png'>The Glass Capitol
         </div>
+        <div id='navletter'>
+          Be the first to know. Signup For Our Newsletter
+          <form method="post" name="signup" id='esform' onsubmit="javascript:submitSign();return false;">
+            <input id='email' type="text" name="email" disabled>
+            <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
+          </form>
+        </div>
         <div id='nav'>
           <a href='/'>Home</a>
           <a href='/about'>Philosophy</a>
@@ -24,7 +31,7 @@
       </div>
 
       <div id='alphalogin'>
-        <div id='alphacall' onclick="javascript:alphaExpand('alphalogin', this);return false;" value='contracted'>Already Part of the Alpha?Log In Here!</div>
+        <div id='alphacall' onclick="javascript:alphaExpand('alphalogin', this);return false;" value='contracted'>Already Part of the Alpha? Log In</div>
         <div id='alog_container'>
           <form id='alogform' method="post" onsubmit="javascript:alphaLogin();return false;">
             <table>
@@ -56,8 +63,6 @@
           </form>
         </div>
       </div>
-
- 
 
       <script type="text/javascript" src="/js/publicbase.js"></script>
       <div id='content'>

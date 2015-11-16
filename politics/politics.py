@@ -405,6 +405,11 @@ class Admin(BaseHandler):
     def get(self):
         self.render('admin.html')
 
+    def post(self):
+        secret = self.request.get('secret')
+        if secret == 'fire':
+            self.write('freedom')
+
 class Signup(BaseHandler):
     def post(self):
         username = self.request.get('username')

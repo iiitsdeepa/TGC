@@ -20,17 +20,17 @@ html, body{
 
 #nav_wrapper{
 	position: fixed;
-	background-color: #EAEAEA;
+	background-color: #0E1C32;
 	width: 100vw;
 	height: 50px;
 	line-height: 50px;
 	z-index: 1;
-	padding: 0 50px;
+	padding: 0 20px;
 	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: bold;
 	font-size: 18px;
-	color: #0E1C32;
-	opacity: .8;
+	color: #EAEAEA;
+	opacity: .9;
 	z-index: 8;
 }
 #blogo{
@@ -41,11 +41,12 @@ html, body{
 #nav{
 	position: absolute;
 	top: 0;
-	right: 170px;
+	right: 60px;
 }
 #nav a{
 	text-decoration: none;
 	margin: 0 10px;
+	color: #EAEAEA;
 }
 #nav a:hover{
 	text-decoration: underline;
@@ -53,15 +54,9 @@ html, body{
 #nav a:active{
 	color: #33CCFF !important;
 }
-#nav a:visited{
-	color: #0E1C32;
-}
+
 
 #alphalogin{
-	position: fixed;
-	left: 0;
-	top: 50px;
-	height: 50px;
 	background-color: #33CCFF;
 	color: white;
 	font-size: 16px;
@@ -140,11 +135,31 @@ html, body{
 
 /*Mobile nav*/
 @media screen and (max-width: 965px){
+	#nav a{
+		color: #0E1C32;
+	}
+	#nav a:visited{
+		color: #0E1C32;
+	}
 	#nav_wrapper{
 		font-size: 14px;
+		background-color: #EAEAEA;
+		color: #0E1C32;
+	}
+	#badge{
+		position: absolute;
+		top: 0;
+		left: 10px;
+		padding-left: 30px;
+	}
+	#navletter{
+		display: none;
 	}
 	#nav{
-		right: 100px;
+		right: 40px;
+	}
+	#alphalogin{
+		display: none;
 	}
 	#footbox_wrapper{
 		flex-wrap: wrap;
@@ -161,12 +176,28 @@ html, body{
 
 /*Desktop*/
 @media screen and (min-width: 966px){
+	#nav a{
+		color: #EAEAEA;
+	}
+	#nav a:visited{
+		color: #EAEAEA;
+	}
 	#badge{
-		position: absolute;
+		display: none;
+	}
+	#alphalogin{
+		position: fixed;
+		left: 0;
+		top: 50px;
+		height: 50px;
+	}
+	#esform{
+		position: fixed;
 		top: 0;
-		left: 50px;
-		height: 100%;
-		padding-left: 35px;
+		left: 450px;
+		display: block;
+		margin: 0 auto;
+		width: 400px;
 	}
 	#footer{
 		font-size: 12px; 
