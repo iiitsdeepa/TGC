@@ -78,8 +78,17 @@
       <div id='footer'>
         <div id='footbox_wrapper'>
           <div id='fbox1' class='footbox'>
-            <h4>Signup For Our Newsletter</h4>
-              do it and stuff here
+              Get Involved <b>Sign Up</b><br><br>
+              Be the First to Know:<br>
+              <ul>
+                <li>stay updated with development</li>
+                <li>leave feedback</li>
+                <li>get your issues heard</li>
+              </ul>
+              <form method="post" name="signup" id='esfoot' onsubmit="javascript:submitSign();return false;">
+                    <input id='email' type="text" name="email" disabled>
+                    <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
+                </form>
           </div>
           <div id='fbox2' class='footbox'>
             <h4>Donation Station</h4>
