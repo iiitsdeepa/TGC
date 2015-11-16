@@ -27,5 +27,15 @@ function alphaLogin(){
       
     }
   });
+}
 
+function showPopup(popupid){
+  $('#'+popupid).css('display', 'block');
+  $('#popuplayer').css('display', 'block');
+  //$("#popuplayer").attr("onclick", 'hidePopup(\'' + popupid + '\')');
+}
+
+function hidePopup(popupid){
+  $('#'+popupid).css('display', 'none');
+  $('#popuplayer').css('display', 'none');
 }

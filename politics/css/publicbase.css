@@ -135,6 +135,16 @@ html, body{
 
 /*Mobile nav*/
 @media screen and (max-width: 965px){
+	#popuplayer{
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: 100;
+		opacity: 1;
+	}
 	#nav a{
 		color: #0E1C32;
 	}

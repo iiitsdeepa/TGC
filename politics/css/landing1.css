@@ -254,10 +254,39 @@
 	#pdatanote{
 		padding: 10px;
 	}
+
+	.popclose{
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: lime;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.popform{
+		display: none;
+		position: absolute;
+  		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%, -50%);
+  		padding: 20px 0;
+  		width: 300px;
+  		background-color: #33CCFF;
+	}
+	#popesf{
+  		color: white;
+  		text-align: center
+	}
+	#popalpha{
+		height: 200px;
+	}
 }
 
 /*Desktop*/
 @media screen and (min-width: 966px){
+	#popuplayer{
+		display: none;
+	}
 	.bluebutton:hover{
 		background-color: #004CEC;
 	}

@@ -4,7 +4,7 @@
 <link rel='stylesheet' href='css/landing1.css'/>
 <div id='toplayer'>
 	<div id='opening'>
-		<div id='title'><img id='tlogo'src='/images/gclogo_noback.png'>The Glass Capitol</div>
+		<div id='title'><img id='tlogo'src='/images/gclogo_noback.png'><b>The Glass Capitol</b></div>
 		<div id='mission'>Together We Can Forge A More Responsive Government</div>
 		<div id='buttonpanel'>
 			<div id='discoverbutton' class='mbutton' onclick="javascript:scrollTo('wwa');return false;">Discover How</div>
@@ -12,8 +12,12 @@
 				Find Your Reps
 			</div>
 			<div id='mfunctions'>
-				<div id='malphalogin' class='mfun'>Already Part of the Alpha?</div>
-				<div id='mnewsletter' class='mfun'>Signup For Our Newsletter</div>
+				<div id='malphalogin' class='mfun' onclick="javascript:showPopup('popalpha');return false;">
+					Already Part of the Alpha?
+				</div>
+				<div id='mnewsletter' class='mfun' onclick="javascript:showPopup('popesf');return false;">
+					Signup For Our Newsletter
+				</div>
 			</div>
 		</div>
 		<img id='flagswaving'src='/images/flagswaving.png'>
@@ -97,5 +101,56 @@
 	</div>
 </div>
 <div id='baselayer'><img id='monuments'src='/images/monuments.png'></div>
+
 <script type="text/javascript" src="/js/landing1.js"></script>
+{% endblock %}
+
+{% block popup %}
+
+	<div id='popesf' class='popform'>
+		<div class='popclose' onclick="javascript:hidePopup('popesf');return false;">X</div>
+		Get Involved <b>Sign Up</b><br><br>
+		Be the First to Know:<br>
+		<ul>
+			<li>stay updated with development</li>
+			<li>leave feedback</li>
+			<li>get your issues heard</li>
+		</ul>
+		<form method="post" name="signup" id='esform' onsubmit="javascript:submitSign();return false;">
+	        <input id='email' type="text" name="email" disabled>
+	        <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
+	    </form>
+	</div>
+
+	<div id='popalpha' class='popform'>
+		<div class='popclose' onclick="javascript:hidePopup('popalpha');return false;">X</div>
+		<form id='alogform' method="post" onsubmit="javascript:alphaLogin();return false;">
+            <table>
+              <tr>
+                <td class="label">
+                  Username
+                </td>
+                <td>
+                  <input type="text" id='username' name="username" value="{{username}}">
+                </td>
+                <td class="error">
+                  {{error_username}}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="label">
+                  Password
+                </td>
+                <td>
+                  <input id='password' type="password" name="password" value="">
+                </td>
+                <td class="error">
+                  {{error_password}}
+                </td>
+              </tr>
+            </table>
+            <input id='subbutton' type='button' value='submit' onclick="javascript:alphaLogin();return false;">
+          </form>
+	</div>
 {% endblock %}
