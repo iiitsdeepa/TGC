@@ -39,3 +39,13 @@ function hidePopup(popupid){
   $('#'+popupid).css('display', 'none');
   $('#popuplayer').css('display', 'none');
 }
+
+function submitSign() {
+  document.getElementById("subbutton").disabled=true;
+  setTimeout('document.getElementById("subbutton").disabled=false;',1200);
+  email = document.getElementById('nemail').value;
+  console.log(email)
+  $.post('/newsletter', {email: email}, function(data){
+    console.log(data)
+  });
+}

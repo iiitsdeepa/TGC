@@ -610,7 +610,7 @@ class NewsLetter(BaseHandler):
         email = self.request.get('email')
         error_message = 'none'
         have_error = False
-        
+        logging.error(email)
         if not valid_email(email):
             error_message = "invalid email"
             have_error = True
@@ -622,10 +622,15 @@ class NewsLetter(BaseHandler):
             if e:
                 error_message='already on list'
                 self.write(error_message)
-            else:
+            else: #vetted email: add to db, send thankyou email, and success code to front end
                 potential_signee=NewsLetterUser(email=email)
                 potential_signee.put()
                 self.write('success')
+                #send thank you email
+                sender_address = "glasscapitol.com Mailing List <glasscapitol@gmail.com>"
+                subject = "Welcome to the NewsLetter!!"
+                body = 'congrats on becoming a boss'
+                mail.send_mail(sender_address, email, subject, body)
 
 
 
