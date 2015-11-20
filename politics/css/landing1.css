@@ -144,6 +144,26 @@
 	background-image: url("/images/stitched_wool.png");
 	background-repeat: repeat;
 }
+.districtentry{
+	position: relative;
+	background-color: lightblue;
+	width: 375px;
+	margin: 0 10px;
+	padding-bottom: 30px;
+}
+.dformbutton{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	background-color: darkred;
+	border: double #4d0000 5px;
+}
 #stats_slider{
 	display: flex;
 }
@@ -239,6 +259,7 @@
 	#demo_content h2{
 		text-align: center;
 	}
+
 	#stats_container{
 		overflow: auto;
 	}
@@ -342,21 +363,31 @@
 		width: 30%;
 		right: 150px;
 	}
-	#demo_wrapper{
+	#demo_wrapper h2{
+		margin: 0;
+		padding: 10px;
+		text-align: center;
 	}
 	#demo_content{
 		margin: 0 auto;
 		width: 80vw;
-		text-align: center;
 		background-color: white;
 	}
 	#findform_wrapper{
+		margin: 0 auto;
 		position: relative;
 		display: flex;
 		justify-content: center;
+		width: 80vw;
 	}
-	#zipform{
+	.formhead{
+		border-bottom: solid darkred 2px;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	#districtform{
 		margin: 0;
+		width: 100%;
 	}
 	#stats_container{
 		padding: 20px;

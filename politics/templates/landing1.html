@@ -70,17 +70,25 @@
 		</div> 
 	</div>
 	<div id='demo_wrapper'>
-		<div id='demo_content' class='content z-index-1'>
-			<h2>Find Your Representatives</h2>
-			<div id='findform_wrapper'>
-				<div id='use_location' class='bluebutton' onclick='useLocation()'>Use Location Data</div>
-				<div>Or</div>
-				<form method='post' name='zip_form' id='zipform' onsubmit="javascript:handleZip();return false;">
-          			<input id='zip' type="text" name="zip" placeholder='Enter Address' style='text-align:center;'>
-          			<div id='zip_submit' class=' z-depth-1 zformbutton' onclick='handleZip()'>Submit</div>
-        		</form>
-			</div>
 
+		<h2>Find Your Representatives</h2>
+		<div id='findform_wrapper'>
+			<div class='districtentry'>
+				<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+					<div class='formhead'>Enter Street Address</div>
+		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:100%'><br>
+		  			<input id='state' type="text" name="state" placeholder='State'>
+		  			<input id='city' type="text" name="city" placeholder='City'>
+		  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick='handleZip()'>Find With Street Address</div>
+				</form>
+			</div>
+			<div id='use_location' class='districtentry'>
+				*Privacy: We never save any location data. When you use this button it is single use to find your district
+				<div class="dformbutton" onclick='useLocation()'>Find With Location Data</div>
+			</div>
+		</div>
+
+		<div id='demo_content' class='content z-index-1'>
 			<h3>Your Representatives</h3>
 			<div id='stats_container'>
 				<div id='stats_slider'>
