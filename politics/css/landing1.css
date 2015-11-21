@@ -166,7 +166,7 @@
 .dformbutton:active{
 	background-color: #AE4D4D;
 }
-#rep_slider{
+#reps_slider{
 	display: flex;
 }
 .abtext{
@@ -408,25 +408,31 @@
 	}
 	#statdescription{
 		margin: 0 auto;
-		margin-top: 20px;
+		margin-top: 50px;
 		width: 80%;
 		height: 200px;
-		background-color: #EAEAEA;
+		background-color: #f2f2f2;
 		border: double #0E1C32 5px;
 	}
-	#rep_container{
+	#reps_container{
 		position: absolute;
 		top: 0;
 		right: 0;
 		width: 60%;
 		height: 300px;
 	}
-	#rep_slider{
+	#reps_container h3{
+		height: 50px;
+		line-height: 50px;
+		margin: 0;
+		text-align: center;
+	}
+	#reps_slider{
 		position: relative;
 		justify-content: space-between;
 		padding: 2px;
-		height: 100%;
-		background-color: #F2F2F2;
+		height: calc(100% - 30px);
+
 	}
 	.rep_wrapper{
 		width: 34%;
@@ -434,21 +440,38 @@
 		height: calc(100% - 4px);
 		text-align: center;
 	}
-	#reptable_wrapper{
+	.rep_wrapper h4{
+		margin: 0;
+		height: 30px;
+	}
+	.reppic_wrapper{
+		margin: 0 auto;
+		height: 115px;
+		width: 100px;
+		background-color: lavender;
+	}
+	.repname{
+		margin: 0 auto;
+		width: 150px;
+		height: 20px;
+		color: white;
+		font-weight: bold;
+		background-color: blue;
+	}
+	#repstable_wrapper{
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		width: 100%;
 		height: 200px;
 	}
-	#reptable{
+	#repstable{
 		height: 100%;
 		width: 100%;
 		text-align: center;
 	}
 	.sname{
 		width: 40%;
-		background-color: #EAEAEA;
 	}
 	.hrstat{
 	}
@@ -456,8 +479,14 @@
 	}
 	.jsstat{
 	}
-	.erow{
+	.orow{
 		background-color: #f2f2f2;
+	}
+	.orow:hover{
+		background-color: #d7e2f4;
+	}
+	.erow:hover{
+		background-color: #d7e2f4;
 	}
 	#pdatanote{
 		padding: 20px;
