@@ -1,4 +1,4 @@
-#baselayer{
+ #baselayer{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -146,16 +146,15 @@
 }
 .districtentry{
 	position: relative;
-	background-color: lightblue;
 	width: 375px;
 	margin: 0 10px;
-	padding-bottom: 30px;
+	padding-bottom: 40px;
 }
 .dformbutton{
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 100%;
+	width: calc(100% - 10px);
 	height: 25px;
 	line-height: 25px;
 	font-weight: bold;
@@ -164,15 +163,16 @@
 	background-color: darkred;
 	border: double #4d0000 5px;
 }
-#stats_slider{
+.dformbutton:active{
+	background-color: #AE4D4D;
+}
+#rep_slider{
 	display: flex;
 }
 .abtext{
 	display: none;
 }
 .rep_wrapper{
-	border: solid 1px #162d50;
-	background-color: #EAEAEA;
 }
 #pdatanote{
 	text-align: center;
@@ -311,6 +311,9 @@
 	.bluebutton:hover{
 		background-color: #004CEC;
 	}
+	.dformbutton:hover{
+		background-color: #A23333;
+	}
 	#title{
 		font-size: 90px;
 		height: 100px;
@@ -369,9 +372,12 @@
 		text-align: center;
 	}
 	#demo_content{
+		position: relative;
 		margin: 0 auto;
+		margin-top: 20px;
 		width: 80vw;
 		background-color: white;
+		height: 500px;
 	}
 	#findform_wrapper{
 		margin: 0 auto;
@@ -389,16 +395,69 @@
 		margin: 0;
 		width: 100%;
 	}
-	#stats_container{
-		padding: 20px;
-		background-color: white;
+	#statdata{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 40%;
+		height: 300px;
 	}
-	#stats_slider{
+	#statdata h4{
+		text-align: center;
+		margin-top: 25px;
+	}
+	#statdescription{
+		margin: 0 auto;
+		margin-top: 20px;
+		width: 80%;
+		height: 200px;
+		background-color: #EAEAEA;
+		border: double #0E1C32 5px;
+	}
+	#rep_container{
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60%;
+		height: 300px;
+	}
+	#rep_slider{
+		position: relative;
 		justify-content: space-between;
+		padding: 2px;
+		height: 100%;
+		background-color: #F2F2F2;
 	}
 	.rep_wrapper{
-		width: 31%;
-		height: 300px;
+		width: 34%;
+		margin: 0 1px;
+		height: calc(100% - 4px);
+		text-align: center;
+	}
+	#reptable_wrapper{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 200px;
+	}
+	#reptable{
+		height: 100%;
+		width: 100%;
+		text-align: center;
+	}
+	.sname{
+		width: 40%;
+		background-color: #EAEAEA;
+	}
+	.hrstat{
+	}
+	.ssstat{
+	}
+	.jsstat{
+	}
+	.erow{
+		background-color: #f2f2f2;
 	}
 	#pdatanote{
 		padding: 20px;

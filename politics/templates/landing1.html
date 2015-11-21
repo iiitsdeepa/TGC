@@ -76,22 +76,27 @@
 			<div class='districtentry'>
 				<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
 					<div class='formhead'>Enter Street Address</div>
-		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:100%'><br>
-		  			<input id='state' type="text" name="state" placeholder='State'>
-		  			<input id='city' type="text" name="city" placeholder='City'>
+		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+		  			<input id='state' type="text" name="state" placeholder='State' style='width:calc(50% - 7px)'>
+		  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
 		  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick='handleZip()'>Find With Street Address</div>
 				</form>
 			</div>
 			<div id='use_location' class='districtentry'>
-				*Privacy: We never save any location data. When you use this button it is single use to find your district
+				<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
 				<div class="dformbutton" onclick='useLocation()'>Find With Location Data</div>
 			</div>
 		</div>
 
 		<div id='demo_content' class='content z-index-1'>
-			<h3>Your Representatives</h3>
-			<div id='stats_container'>
-				<div id='stats_slider'>
+			<div id='statdata'>
+				<div id='statdescription'>
+					This is the stat description
+				</div>
+				<h4>Stats</h4>
+			</div>
+			<div id='rep_container'>
+				<div id='rep_slider'>
 					<div id='' class='rep_wrapper'>
 					Your HR
 					</div>
@@ -104,6 +109,40 @@
 					Your JS
 					</div>
 				</div>
+			</div>
+			<div id='reptable_wrapper'>
+				<table id='reptable'>
+					<tr id='stat1' class='orow'>
+						<td class='sname'>Stat 1 Name</td>
+						<td class='hrstat'>HR stat 1</td>
+						<td class='ssstat'>SS stat 1</td>
+						<td class='jsstat'>JS stat 1</td>
+					</tr>
+					<tr id='stat2' class='erow'>
+						<td class='sname'>Stat 2 Name</td>
+						<td class='hrstat'>HR stat 2</td>
+						<td class='ssstat'>SS stat 2</td>
+						<td class='jsstat'>JS stat 2</td>
+					</tr>
+					<tr id='stat3' class='orow'>
+						<td class='sname'>Stat 3 Name</td>
+						<td class='hrstat'>HR stat 3</td>
+						<td class='ssstat'>SS stat 3</td>
+						<td class='jsstat'>JS stat 3</td>
+					</tr>
+					<tr id='stat4' class='erow'>
+						<td class='sname'>Stat 4 Name</td>
+						<td class='hrstat'>HR stat 4</td>
+						<td class='ssstat'>SS stat 4</td>
+						<td class='jsstat'>JS stat 4</td>
+					</tr>
+					<tr id='stat5' class='orow'>
+						<td class='sname'>Stat 5 Name</td>
+						<td class='hrstat'>HR stat 5</td>
+						<td class='ssstat'>SS stat 5</td>
+						<td class='jsstat'>JS stat 5</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

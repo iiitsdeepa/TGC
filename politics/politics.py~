@@ -10,6 +10,7 @@ import logging
 import random, string
 from string import letters
 import csv
+import braintree
 
 import webapp2
 import jinja2
@@ -22,6 +23,10 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 
+braintree.Configuration.configure(braintree.Environment.Sandbox,
+                                  merchant_id="vzn4mjt9dc4bkkkb",
+                                  public_key="ry8vq4j2jyxdn2cd",
+                                  private_key="0ce9a2be11d4c91da92816e036365222")
 
 #from oauth2client.client import flow_from_clientsecrets
 #from oauth2client.client import FlowExchangeError
