@@ -435,7 +435,7 @@
 
 	}
 	.rep_wrapper{
-		width: 34%;
+		width: 50%;
 		margin: 0 1px;
 		height: calc(100% - 4px);
 		text-align: center;
@@ -448,7 +448,10 @@
 		margin: 0 auto;
 		height: 115px;
 		width: 100px;
-		background-color: lavender;
+		border-radius: 50%;
+	}
+	#js_wrapper{
+		display: none;
 	}
 	.repname{
 		margin: 0 auto;
@@ -473,11 +476,14 @@
 	.sname{
 		width: 40%;
 	}
+	#hrpic{
+	}
 	.hrstat{
 	}
 	.ssstat{
 	}
 	.jsstat{
+		display: none;
 	}
 	.orow{
 		background-color: #f2f2f2;

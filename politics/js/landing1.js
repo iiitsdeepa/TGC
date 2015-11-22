@@ -39,3 +39,23 @@ function rhover(id){
 	}
 
 }
+
+function inputRepData(data){
+	j = JSON.parse(data)
+	if ($('#reps_slider').attr('value') == 'leaders'){
+		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
+		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
+		$('.reppic_wrapper').css('background-size', '100%')
+		console.log('url:(/images/headshots/'+j.spthpic+')')
+	}
+
+	$('#ployalty .hrstat').html(j.hrployalty+'%')
+	$('#ployalty .ssstat').html(j.ssployalty+'%')
+	$('#ployalty .jsstat').html(j.jsployalty+'%')
+}
+
+$( document ).ready(function() {
+    $.post('/mreps', {demo: 'yes'}, function(data){
+  		inputRepData(data)
+    });
+});

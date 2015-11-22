@@ -319,6 +319,7 @@ class BaseHandler(webapp2.RequestHandler):
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Representative WHERE state=\'%s\' and district=%s' %(state, district)).get()
         hr = dict(hrbioguideid = rep.bioguide_id,
+                hrpic = state+'_'+district,
                 hrstate = rep.state,
                 hrdistrict = rep.district,
                 hrname = rep.name.replace('_', ' '),
@@ -374,6 +375,17 @@ class BaseHandler(webapp2.RequestHandler):
                 jsli = rep.li)
         return js
 
+    def getBig2(self):
+        #returns a json file with the basic info for the two most powerful people in congress
+        smj = self.getSs('KY:3')
+        sfth = self.getHr('WI:1')
+        big2 = smj.copy()
+        big2.update(sfth)
+        big2['smjlpic'] = 'KY_SS'
+        big2['spthpic'] = 'WI_1'
+        big2json = json.dumps(big2)
+        return big2json
+
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
@@ -400,8 +412,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
  
         #process_state_csv(info)
         #process_district_csv(info)
-        process_senator_csv(info)
-        #process_rep_csv(info)
+        #process_senator_csv(info)
+        process_rep_csv(info)
         #process_stat_csv(info)
         self.redirect("/")
 
@@ -566,6 +578,13 @@ class Mreps(BaseHandler):
             self.render('mreps.html')
         else:
             self.redirect('/')
+            params = self.getBig2
+
+    def post(self):
+        demo = self.request.get('demo')
+        if demo:
+            params = self.getBig2()
+            self.write(params)
 
 class Pcomp(BaseHandler):
     def get(self):
