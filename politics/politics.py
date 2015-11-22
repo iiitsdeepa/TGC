@@ -279,7 +279,7 @@ class BaseHandler(webapp2.RequestHandler):
         #converting to district
         latitude = j_geocode['results'][0]['geometry']['location']['lat']
         longitude = j_geocode['results'][0]['geometry']['location']['lng']
-        self.latlngToDistrict(latitude, longitude)
+        return self.latlngToDistrict(latitude, longitude)
 
     def latlngToDistrict(self, lat, lng):
         ll = 'latitude=%(lat)s&longitude=%(lng)s' % {'lat': lat, 'lng': lng}
@@ -340,6 +340,7 @@ class BaseHandler(webapp2.RequestHandler):
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Senator WHERE state=\'%s\' and rank=\'S\'' %(state)).get()
         ss = dict(ssbioguideid = rep.bioguide_id,
+                sspic = state+'_SS',
                 ssstate = rep.state,
                 ssrank = 'S',
                 ssname = rep.name.replace('_', ' '),
@@ -360,6 +361,7 @@ class BaseHandler(webapp2.RequestHandler):
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Senator WHERE state=\'%s\' and rank=\'J\'' %(state)).get()
         js = dict(jsbioguideid = rep.bioguide_id,
+                jspic = state+'_JS',
                 jsstate = rep.state,
                 jsrank = 'J',
                 jsname = rep.name.replace('_', ' '),
@@ -385,6 +387,17 @@ class BaseHandler(webapp2.RequestHandler):
         big2['spthpic'] = 'WI_1'
         big2json = json.dumps(big2)
         return big2json
+
+    def pullReps(self, district):
+        hr = self.getHr(district)
+        ss = self.getSs(district)
+        js = self.getJs(district)
+        reps = hr.copy()
+        reps.update(ss)
+        reps.update(js)
+        reps['district'] = district
+        repsjson = json.dumps(reps)
+        return repsjson
 
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
@@ -412,8 +425,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
  
         #process_state_csv(info)
         #process_district_csv(info)
-        #process_senator_csv(info)
-        process_rep_csv(info)
+        process_senator_csv(info)
+        #process_rep_csv(info)
         #process_stat_csv(info)
         self.redirect("/")
 
@@ -585,6 +598,21 @@ class Mreps(BaseHandler):
         if demo:
             params = self.getBig2()
             self.write(params)
+
+        address = self.request.get('address')
+        if address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+            
 
 class Pcomp(BaseHandler):
     def get(self):

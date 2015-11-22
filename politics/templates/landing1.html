@@ -77,14 +77,14 @@
 				<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
 					<div class='formhead'>Enter Street Address</div>
 		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
-		  			<input id='state' type="text" name="state" placeholder='State' style='width:calc(50% - 7px)'>
 		  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
-		  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick='handleZip()'>Find With Street Address</div>
+		  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+		  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
 				</form>
 			</div>
 			<div id='use_location' class='districtentry'>
 				<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
-				<div class="dformbutton" onclick='useLocation()'>Find With Location Data</div>
+				<div class="dformbutton" onclick="javascript:useLocation();return false;">Find With Location Data</div>
 			</div>
 		</div>
 
@@ -101,21 +101,21 @@
 					<div id='hr_wrapper' class='rep_wrapper'>
 						<h4>Speaker For The House</h4>
 						<div id='hrpic' class='reppic_wrapper'></div>
-						<div class='repname'>rep name</div>
+						<div id='hrname' class='repname'>rep name</div>
 						<div class='partypic_wrapper'></div>
 					</div>
 
 					<div id='ss_wrapper' class='rep_wrapper'>
 						<h4>Senate Majority Leader</h4>
 						<div id='sspic' class='reppic_wrapper'></div>
-						<div class='repname'>rep name</div>
+						<div id='ssname' class='repname'>rep name</div>
 						<div class='partypic_wrapper'></div>
 					</div>
 
 					<div id='js_wrapper' class='rep_wrapper'>
 						<h4>Junior Senator</h4>
 						<div id='jspic' class='reppic_wrapper'></div>
-						<div class='repname'>rep name</div>
+						<div id='jsname' class='repname'>rep name</div>
 						<div class='partypic_wrapper'></div>
 					</div>
 				</div>
