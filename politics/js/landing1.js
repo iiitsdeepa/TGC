@@ -83,7 +83,7 @@ function useAddress(){
     	j = JSON.parse(data)
     	$('#reps_slider').attr('value', j.district)
     	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'block')
+    	$('.jsstat').css('display', 'td')
         inputRepData(data)
     });
 }
