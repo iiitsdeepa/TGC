@@ -3,29 +3,28 @@
 #tlogo{height: 100%;}
 #opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/stitched_wool.png");background-repeat: repeat;color: #162d50;background-color: #EAEAEA;}
 #title{margin:0;text-align: center;font-family: 'Playball', cursive;z-index: 3;}
-#mission{font-family: 'Playball', cursive;text-align: center;font-weight: bold;z-index: 3;}
+#mission{font-family:'Playball',cursive;text-align:center;z-index: 3;}
 #buttonpanel{position: relative;z-index: 5;}
 .mbutton{margin: 0 auto;width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: darkred;color: white;}
-
 .mbutton:active{background-color: #AE4D4D;}
 .bluebutton{width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: #0042CD;color: white;}
 .bluebutton:active{background-color: #AE4D4D;}
-
 #discoverbutton{margin-bottom: 20px;}
 #flagswaving{position: absolute;width: 100%;bottom: 0;left: 0;z-index: 0;}
-
 #wwa{position: relative;background-image: url("/images/stitched_wool.png");background-repeat: repeat;padding: 20px 0;background-color: #EAEAEA;}
-#spacerposition: absoluttop: left: width: 100%;}
-.spaceposition: relative;}
-#spblubackground-color: #0E1C3height: 100px;}
-.sprebackground-color: darkreheight: 70px;}
+#spacers{position:absolute;top:0;left:0;width:100vw;}
+.spacer{position: relative;}
+#spblue{background-color: #0E1C32;height: 100px;}
+.spred{background-color: darkred;height: 70px;}
 #spwhite{background-color: white;height: 100px;}
-#wwa_content h2{position: relative;margin: 0 auto;max-width: 80%;text-align: center;}
-#abilitytriad{display: flex;justify-content: space-between;}
-.ability{color: #162d50;font-weight: bold;text-align: center;border: solid 1px #162d50;background-color: #EAEAEA;}
+
+#headline{position:relative;text-align:center;}
+#coresale{position:relative;margin:0 auto;width:600px;max-width:calc(100% - 20px);text-align: center;}
+#valueprop_bullets{position:relative;display:flex;justify-content:center;flex-wrap:wrap;border-top:solid darkred 2px;}
+.valueprop_bullet{margin:20px;width:calc(33.33% - 40px);min-width:250px;text-align:center;font-weight:bold;}
+
 #quote_wrapper{position: relative;color: white;z-index: 1;border-top: solid darkred 10px;border-bottom: solid darkred 10px;}
 #quote{position: absolute;top: 50%;transform: translateY(-50%);text-align: center;font-weight: bold;}
-
 #demo_wrapper{position relative;padding: 20px 0;background-color: #EAEAEA;background-image: url("/images/stitched_wool.png");background-repeat: repeat;}
 .districtentry{position: relative;width: 375px;margin: 0 10px;padding-bottom: 40px;}
 .dformbutton{position: absolute;bottom: 0;left: 0;width: calc(100% - 10px);height: 25px;line-height: 25px;font-weight: bold;text-align: center;color: white;background-color: darkred;border: double #4d0000 5px;}
@@ -41,17 +40,16 @@
 	#opening{height: 90vh !important;}
 	#title{margin: 15px 0 0 0;font-size: 40px;height: 50px;}
 	#tlogo{display: none;}
-	#mission{margin-top: 30px;font-size: 18px;padding: 0 20px;}
+	#mission{margin-top: 20px;font-size: 22px;padding: 0 20px;}
 	#buttonpanel{margin-top: 30px;}
 	#mfunctions{margin: 0 auto;margin-top: 15px;text-align: center;line-height: 30px;font-weight: bold;}
 	.mfun:active{color: #33CCFF !important;}
 	#wwa{padding-bottom: 20px;}
-	.content{position: relative;width: 95vw;margin: 0 auto;padding-top: 10px;z-index: 2;background-color: white;}
+	.content{position: relative;width: 95vw;margin: 0 auto;min-height:300px;padding-top: 10px;z-index: 2;background-color: white;}
+	
+	#headline{padding:0 10px;font-size:20px;}
+	#coresale{margin-bottom:20px;}
 
-	#abilitytriad{position: relative;width: 80%;margin: 0 auto;flex-wrap: wrap;margin-bottom: 20px;margin-top: 10px;}
-	.ability{margin: 0 auto;margin-top: 10px;width: 100%;height: 50px;line-height: 50px;}
-	#abilitytext{margin-top: 20px;position: relative;width: 80%;margin: 0 auto;}
-	#needed_wrapper{display: none;}
 	#quote_wrapper{height: 300px;background-color: #0E1C32;}
 	#demo_wrapper{overflow: auto;}
 	#demo_content{overflow: auto;}
@@ -74,15 +72,18 @@
 	.bluebutton:hover{background-color: #004CEC;}
 	.dformbutton:hover{background-color: #A23333;}
 	#title{font-size: 90px;height: 100px;}
-	#mission{font-size:24;margin-top: 20px;font-size: 20px;}
+	#mission{font-size:32px;margin-top: 20px;}
 	#buttonpanel{margin-top: 30px;}
 	.mbutton:hover{background-color: #A23333;}
 	#mfunctions{display: none;}
 	#monuments{position: absolute;top: 100px;width: 100%;}
-	#wwa_content{position: relative;margin: 0 auto;width: 80vw;padding: 20px;text-align: center;background-color: white;z-index: 2;}
-	#abilitytriad{margin-top: 50px;height: 40%;}
-	.ability{width: 30%;height: 50px;line-height: 50px;}
-	#abilitytext{margin-top: 50px;}
+	.content{position:relative;margin: 0 auto;padding:20px;width:80vw;max-width:1200px;min-height:500px;}
+	
+	#wwa_content{text-align: center;background-color: white;z-index: 2;}
+	#headline{margin:100px 0 50px 0;}
+	#coresale{margin-bottom:50px;}
+	#valueprop_bullets{margin-bottom:100px;}
+
 	#quote_wrapper{height: 400px;}
 	#quote{width: 30%;right: 150px;}
 	#demo_wrapper h2{margin: 0;padding: 10px;text-align: center;}
@@ -90,37 +91,25 @@
 	#findform_wrapper{margin: 0 auto;position: relative;display: flex;justify-content: center;width: 80vw;}
 	.formhead{border-bottom: solid darkred 2px;margin-bottom: 5px;font-weight: bold;}
 	#districtform{margin: 0;width: 100%;}
-	#statdata{position: absolute;top: 0;left: 0;width: 40%;height: 300px;
-	#statdata h4{text-align: center;margin-top: 25px;
-	#statdescription{margin: 0 auto;margin-top: 50px;width: 80%;height: 200px;background-color: #f2f2f2;border: double #0E1C32 5px;
-	#reps_container{position: absolute;top: 0;right: 0;width: 60%;height: 300px;
-	#reps_container h3{height: 50px;line-height: 50px;margin: 0;text-align: center;
-	#reps_slider{position: relative;justify-content: space-between;padding: 2px;height: calc(100% - 30px);
-	.rep_wrapper{width: 50%;margin: 0 1px;height: calc(100% - 4px);text-align: center;
-	.rep_wrapper h4{margin: 0;height: 30px;
-	.reppic_wrapper{margin: 0 auto;height: 115px;width: 100px;border-radius: 50%;
-	#js_wrapper{display: none;
-	.repname{margin: 0 auto;width: 150px;height: 20px;color: white;font-weight: bold;background-color: blue;
-	#repstable_wrapper{position: absolute;bottom: 0;left: 0;width: 100%;height: 200px;
+	#statdata{position: absolute;top: 0;left: 0;width: 40%;height: 300px;}
+	#statdata h4{text-align: center;margin-top: 25px;}
+	#statdescription{margin: 0 auto;margin-top: 50px;width: 80%;height: 200px;background-color: #f2f2f2;border: double #0E1C32 5px;}
+	#reps_container{position: absolute;top: 0;right: 0;width: 60%;height: 300px;}
+	#reps_container h3{height: 50px;line-height: 50px;margin: 0;text-align: center;}
+	#reps_slider{position: relative;justify-content: space-between;padding: 2px;height: calc(100% - 30px);}
+	.rep_wrapper{width: 50%;margin: 0 1px;height: calc(100% - 4px);text-align: center;}
+	.rep_wrapper h4{margin: 0;height: 30px;}
+	.reppic_wrapper{margin: 0 auto;height: 115px;width: 100px;border-radius: 50%;}
+	#js_wrapper{display: none;}
+	.repname{margin: 0 auto;width: 150px;height: 20px;color: white;font-weight: bold;background-color: blue;}
+	#repstable_wrapper{position: absolute;bottom: 0;left: 0;width: 100%;height: 200px;}
 	#repstable{height: 100%;width: 100%;text-align: center;}
-	.sname{width: 40%;)
-	.hrstat{
-	}
-	.ssstat{
-	}
-	.jsstat{
-		display: none;
-	}
-	.orow{
-		background-color: #f2f2f2;
-	}
-	.orow:hover{
-		background-color: #d7e2f4;
-	}
-	.erow:hover{
-		background-color: #d7e2f4;
-	}
-	#pdatanote{
-		padding: 20px;
-	}
+	.sname{width: 40%;}
+	.hrstat{}
+	.ssstat{}
+	.jsstat{display: none;}
+	.orow{background-color: #f2f2f2;}
+	.orow:hover{background-color: #d7e2f4;}
+	.erow:hover{background-color: #d7e2f4;}
+	#pdatanote{padding: 20px;}
 }
