@@ -3,7 +3,7 @@
 #tlogo{height: 100%;}
 #opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/stitched_wool.png");background-repeat: repeat;color: #162d50;background-color: #EAEAEA;}
 #title{margin:0;text-align: center;font-family: 'Playball', cursive;z-index: 3;}
-#mission{font-family:'Playball',cursive;text-align:center;z-index: 3;}
+#mission{text-align:center;z-index: 3;font-weight:bold;}
 #buttonpanel{position: relative;z-index: 5;}
 .mbutton{margin: 0 auto;width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: darkred;color: white;}
 .mbutton:active{background-color: #AE4D4D;}
@@ -12,59 +12,32 @@
 #discoverbutton{margin-bottom: 20px;}
 #flagswaving{position: absolute;width: 100%;bottom: 0;left: 0;z-index: 0;}
 #wwa{position: relative;background-image: url("/images/stitched_wool.png");background-repeat: repeat;padding: 20px 0;background-color: #EAEAEA;}
-#spacers{position:absolute;top:0;left:0;width:100vw;}
+#spacers{position:absolute;top:0;left:0;width:100%;}
 .spacer{position: relative;}
 #spblue{background-color: #0E1C32;height: 100px;}
 .spred{background-color: darkred;height: 70px;}
 #spwhite{background-color: white;height: 100px;}
-
 #headline{position:relative;text-align:center;}
 #coresale{position:relative;margin:0 auto;width:600px;max-width:calc(100% - 20px);text-align: center;}
 #valueprop_bullets{position:relative;display:flex;justify-content:center;flex-wrap:wrap;border-top:solid darkred 2px;}
 .valueprop_bullet{margin:20px;width:calc(33.33% - 40px);min-width:250px;text-align:center;font-weight:bold;}
-
 #quote_wrapper{position: relative;color: white;z-index: 1;border-top: solid darkred 10px;border-bottom: solid darkred 10px;}
 #quote{position: absolute;top: 50%;transform: translateY(-50%);text-align: center;font-weight: bold;}
 #demo_wrapper{position relative;padding: 20px 0;background-color: #EAEAEA;background-image: url("/images/stitched_wool.png");background-repeat: repeat;}
-.districtentry{position: relative;width: 375px;margin: 0 10px;padding-bottom: 40px;}
+#demo_wrapper h2{margin: 0;padding: 10px;text-align: center;}
+#findform_wrapper{margin: 0 auto;position:relative;display:flex;flex-wrap:wrap;width:800px;max-width:95vw;}
+.districtentry{position: relative;width: 375px;max-width:95vw;margin: 0 auto;margin-top:20px;padding-bottom: 40px;}
 .dformbutton{position: absolute;bottom: 0;left: 0;width: calc(100% - 10px);height: 25px;line-height: 25px;font-weight: bold;text-align: center;color: white;background-color: darkred;border: double #4d0000 5px;}
 .dformbutton:active{background-color: #AE4D4D;}
+#demo_content{position: relative;margin: 0 auto;margin-top: 20px;width: 80vw;min-width:960px;background-color: white;height: 500px;}
+
 #reps_slider{display: flex;}
 .abtext{display: none;}
 .rep_wrapper{}
+.mobrep_spacer{display:none;}
+.mobrep_info{display:none;}
 #pdatanote{text-align: center;}
 
-
-/*Mobile nav*/
-@media screen and (max-width: 965px){
-	#opening{height: 90vh !important;}
-	#title{margin: 15px 0 0 0;font-size: 40px;height: 50px;}
-	#tlogo{display: none;}
-	#mission{margin-top: 20px;font-size: 22px;padding: 0 20px;}
-	#buttonpanel{margin-top: 30px;}
-	#mfunctions{margin: 0 auto;margin-top: 15px;text-align: center;line-height: 30px;font-weight: bold;}
-	.mfun:active{color: #33CCFF !important;}
-	#wwa{padding-bottom: 20px;}
-	.content{position: relative;width: 95vw;margin: 0 auto;min-height:300px;padding-top: 10px;z-index: 2;background-color: white;}
-	
-	#headline{padding:0 10px;font-size:20px;}
-	#coresale{margin-bottom:20px;}
-
-	#quote_wrapper{height: 300px;background-color: #0E1C32;}
-	#demo_wrapper{overflow: auto;}
-	#demo_content{overflow: auto;}
-	#demo_content h2{text-align: center;}
-
-	#stats_container{overflow: auto;}
-	#stats_slider{overflow: auto;width: 1000px;}
-	.rep_wrapper{width: 300px;height: 300px;margin: 10px;}
-	#pdatanote{padding: 10px;}
-
-	.popclose{position: absolute;top: 0;right: 0;background-color: lime;font-size: 20px;font-weight: bold;}
-	.popform{display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 20px 0;width: 300px;background-color: #33CCFF;}
-	#pope{color: white;text-align: center}
-	#popalpha{height: 200px;}
-}
 
 /*Desktop*/
 @media screen and (min-width: 966px){
@@ -86,9 +59,6 @@
 
 	#quote_wrapper{height: 400px;}
 	#quote{width: 30%;right: 150px;}
-	#demo_wrapper h2{margin: 0;padding: 10px;text-align: center;}
-	#demo_content{position: relative;margin: 0 auto;margin-top: 20px;width: 80vw;background-color: white;height: 500px;}
-	#findform_wrapper{margin: 0 auto;position: relative;display: flex;justify-content: center;width: 80vw;}
 	.formhead{border-bottom: solid darkred 2px;margin-bottom: 5px;font-weight: bold;}
 	#districtform{margin: 0;width: 100%;}
 	#statdata{position: absolute;top: 0;left: 0;width: 40%;height: 300px;}
@@ -113,3 +83,46 @@
 	.erow:hover{background-color: #d7e2f4;}
 	#pdatanote{padding: 20px;}
 }
+
+/*Tablet and Phone*/
+@media screen and (max-width: 965px){
+	#opening{height: 90vh !important;}
+	#title{margin: 15px 0 0 0;font-size: 40px;height: 50px;}
+	#tlogo{display: none;}
+	#mission{margin-top: 20px;font-size: 22px;padding: 0 20px;}
+	#buttonpanel{margin-top: 30px;}
+	#mfunctions{margin: 0 auto;margin-top: 15px;text-align: center;line-height: 30px;font-weight: bold;}
+	.mfun:active{color: #33CCFF !important;}
+	#wwa{padding-bottom: 20px;}
+	.content{position: relative;width: 95vw;margin: 0 auto;min-height:300px;padding-top: 10px;z-index: 2;background-color: white;}
+	
+	#headline{padding:0 10px;font-size:20px;}
+	#coresale{margin-bottom:20px;}
+	#valueprop_bullets{border:none;}
+
+	#quote_wrapper{height: 300px;background-color: #0E1C32;}
+	#pdatanote{padding: 10px;}
+
+	#demo_content{margin-top:40px;width:100vw;min-width:100px;height:auto;padding:0;overflow:auto;background-color: white;}
+	#demo_content h2{text-align: center;}
+	#statdata{display:none;}
+	#repstable_wrapper{display:none;}
+	#reps_container{position:relative;width:100vw;}
+	#reps_container h3{display:none;}
+	#reps_slider{position:relative;width:300vw;max-width:calc(42vw + 1200px);background-color:white;}
+	.rep_wrapper{width:86vw;max-width:400px;min-width:200px;height:auto;margin:10px 7vw;padding:20px 0;border-radius:5px;text-align:center;background-color:blue;color:white;}
+	.rep_wrapper h4{margin:0 0 20px 0;}
+	.reppic_wrapper{float:left;margin-left:20px;background-color:white;height:30vw;width:25vw;max-width:40%;max-height:200px;border-radius:50%;}
+	.basic_info{float:right;margin-right:20px;padding:5px;width:calc(50% - 30px);height:calc(30vw - 10px);max-height:200px;text-align:left;}
+	.mobrep_spacer{position:relative;height:45vw;max-height:220px;}
+	.mobrep_info{position:relative;display:block;margin-top:20px;padding:0 20px;}
+	.mobrep_info table{position:relative;width:100%;}
+	.mtrow{background:darkblue;}
+	.mobrep_info td{width:50%;}
+
+	.popclose{position: absolute;top: 0;right: 0;background-color: lime;font-size: 20px;font-weight: bold;}
+	.popform{display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 20px 0;width: 300px;background-color: #33CCFF;}
+	#pope{color: white;text-align: center}
+	#popalpha{height: 200px;}
+}
+
