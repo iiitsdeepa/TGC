@@ -1,4 +1,4 @@
-#baselayer{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background-color: #0E1C32;z-index: 1;}
+#baselayer{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background-color:#0E1C32;z-index: 1;}
 #toplayer{position: relative;z-index: 2;}
 #tlogo{height: 100%;}
 #opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/stitched_wool.png");background-repeat: repeat;color: #162d50;background-color: #EAEAEA;}
@@ -30,13 +30,13 @@
 .dformbutton{position: absolute;bottom: 0;left: 0;width: calc(100% - 10px);height: 25px;line-height: 25px;font-weight: bold;text-align: center;color: white;background-color: darkred;border: double #4d0000 5px;}
 .dformbutton:active{background-color: #AE4D4D;}
 #demo_content{position: relative;margin: 0 auto;margin-top: 20px;width: 80vw;min-width:960px;background-color: white;height: 500px;}
-
 #reps_slider{display: flex;}
 .abtext{display: none;}
 .rep_wrapper{}
 .mobrep_spacer{display:none;}
 .mobrep_info{display:none;}
 #pdatanote{text-align: center;}
+#personalmessage{background:white;color:darkred;padding:50px 20vw;}
 
 
 /*Desktop*/
