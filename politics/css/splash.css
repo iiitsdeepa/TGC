@@ -1,60 +1,16 @@
-
-#morecontent{
-	position: relative;
-	height: 30vh;
-	text-align: center;
-}
-
-#desktop_sell{
-	margin: 0 auto;
-	padding-top: 40px;
-	position: relative;
-	display: flex;
-	justify-content: center;
-}
-.dsell_box{
-	width: 5vw;
-	height: 15vw;
-	margin: 10px;
-	text-align: center;
-}
-.star{
-	position: relative;
-	width: 3vw;
-}
+#morecontent{position: relative;height: 30vh;text-align: center;}
+#desktop_sell{margin: 0 auto;padding-top: 40px;position: relative;display: flex;justify-content: center;}
+.dsell_box{width: 5vw;height: 15vw;margin: 10px;text-align: center;}
+.star{position: relative;width: 3vw;}
 
 /*Mobile*/
 @media screen and (max-width: 965px){
-	#title{
-		margin: 0;
-		padding: 0;
-		text-align: center;
-		font-size: 45px;
-		color: #162d50;
-		font-family: 'Playball', cursive;
-	}
-
-	#fullcap{
-		display: block;
-		margin: 0 auto;
-		width: 80vw;
-	}
+	#title{margin: 0;padding: 0;text-align: center;font-size: 45px;color: #162d50;font-family: 'Playball', cursive;}
+	#fullcap{display: block;margin: 0 auto;width: 80vw;}
 }
-
 
 /*Desktop*/
 @media screen and (min-width: 966px){
-	#title{
-		margin: 0;
-		padding: 0;
-		text-align: center;
-		font-size: 160px;
-		color: #162d50;
-		font-family: 'Playball', cursive;
-	}
-	#fullcap{
-		margin: 0 auto;
-		width: 60vw;
-		margin-left: 20vw;
-	}
+	#title{margin: 0;padding: 0;text-align: center;font-size: 160px;color: #162d50;font-family: 'Playball', cursive;}
+	#fullcap{margin: 0 auto;width: 60vw;margin-left: 20vw;}
 }

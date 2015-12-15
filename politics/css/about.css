@@ -1,101 +1,18 @@
-#title{
-	margin:0;
-	padding-top:65px;
-	text-align: center;
-}
-#introtext{
-	padding: 10px 75px;
-	position: relative;
-	width: 80vw;
-	margin: 0 auto;
-	text-align: justify;
-	line-height: 25px;
+/*#about{background-image:url("/images/fullglasscapitol.png");background-size:80%;background-repeat:no-repeat;background-position:center;background-attachment:fixed;}
+*/
+#about h1{text-align:center}
+#about h2{text-align:center}
+#about h3{margin-bottom:5px;}
+#usnutshell{margin:0 auto;width:40vw;padding:100px;}
+#ourgoals{width:70vw;margin:0 auto;}
+#corebeliefs{width:70vw;margin:0 auto;}
+#ourdata{width:70vw;margin:0 auto;}
+#thecode{width:70vw;margin:0 auto;}
+#codetenants{background:#EAEAEA;}
 
-}
-#quotewrapper{
-	padding: 10px 75px;
-	position: relative;
-	width: 60vw;
-	margin: 0 auto;
-	line-height: 25px;
-}
-#mlkquoteimg{
-	width: 100%;
-}
-#quoteimg{
-	width: 20%;
-
-}
-#quotetext{
-	position: absolute;
-	top: 30%;
-	right: 35px;
-	width: 60%;
-}
-#wwah{
-	width: 80vw;
-	margin: 0 auto;
-	left: 20px;
-}
-#wwah h2{
-	text-align: center;
-	text-decoration: underline;
-}
-#tcsmpg{
-	display: inline-block;
-	float: left;
-	margin-bottom: 25px;
-}
-#tcs{
-	width: 60%;
-	float: left;
-}
-#tcs h3{
-	text-align: center;
-}
-#mpgimg{
-	width: 40%;
-	float: left;
-}
-#dot{
-
-}
-#patch{
-
-}
-#patch h3{
-	text-align: center
-}
-#bwnyh{
-	width: 80vw;
-	margin: 0 auto;
-}
-#bwnyh h2{
-	text-align: center;
-}
-#opeeps{
-
-	margin: 0 auto;
-	margin-bottom: 10px;
-	width: 80vw;
-}
-#opeeps h3{
-	text-align: center;
-}
-.peeps{
-
-	margin: 10px 0;
-	width: 80%;
-	margin: 0 auto;
-	margin-bottom: 10px;
-}
-.pimg{
-
-	width: 40%;
-	float: left;
-}
-.ptext{
-
-	width: 60%;
-
-}
+#opeeps{width:80vw;margin:0 auto;display:flex;flex-wrap:wrap;}
+#opeeps h2{width:100%;}
+.pimg{background:pink;width:100px;height:100px;float:left;}
+.ptext{background:lavender;}
+#founder{background-color:#EAEAEA;width:100%;padding:50px 10vh;}
+.peep{width:calc(50% - 40px);padding:25px 20px;}

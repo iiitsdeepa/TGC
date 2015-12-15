@@ -17,7 +17,7 @@ html, body{margin: 0;padding: 0;min-height: 100%;width: 100%;font-family:"Helvet
 #alphacall:hover{background-color: #5CD6FF;}
 #alogform{padding: 20px;}
 
-#content{position: relative;min-height: 95vh;z-index: 1;}
+#content{position:relative;min-height: 95vh;z-index: 1;padding-top:50px;}
 #footer{position:relative;display:flex;flex-wrap:wrap;color:#EAEAEA;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #0E1C32;z-index: 3;border-top:solid 1px #0B1628;}
 #footer h2{color:#ff3333;}
 #footer h3{color:#ff3333;margin-bottom:5px;}

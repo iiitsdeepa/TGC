@@ -1,17 +1,17 @@
 #baselayer{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background-color:#0E1C32;z-index: 1;}
 #toplayer{position: relative;z-index: 2;}
 #tlogo{height: 100%;}
-#opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/stitched_wool.png");background-repeat: repeat;color: #162d50;background-color: #EAEAEA;}
+#opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/paper.png");background-repeat:repeat;color: #162d50;background-color: #EAEAEA;}
 #title{margin:0;text-align: center;font-family: 'Playball', cursive;z-index: 3;}
 #mission{text-align:center;z-index: 3;font-weight:bold;}
 #buttonpanel{position: relative;z-index: 5;}
-.mbutton{margin: 0 auto;width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: darkred;color: white;}
+.mbutton{cursor:pointer;margin: 0 auto;width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: darkred;color: white;}
 .mbutton:active{background-color: #AE4D4D;}
 .bluebutton{width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: #0042CD;color: white;}
 .bluebutton:active{background-color: #AE4D4D;}
 #discoverbutton{margin-bottom: 20px;}
 #flagswaving{position: absolute;width: 100%;bottom: 0;left: 0;z-index: 0;}
-#wwa{position: relative;background-image: url("/images/stitched_wool.png");background-repeat: repeat;padding: 20px 0;background-color: #EAEAEA;}
+#wwa{position: relative;background-image: url("/images/paper.png");background-repeat: repeat;padding: 20px 0;background-color: #EAEAEA;}
 #spacers{position:absolute;top:0;left:0;width:100%;}
 .spacer{position: relative;}
 #spblue{background-color: #0E1C32;height: 100px;}
@@ -19,11 +19,9 @@
 #spwhite{background-color: white;height: 100px;}
 #headline{position:relative;text-align:center;}
 #coresale{position:relative;margin:0 auto;width:600px;max-width:calc(100% - 20px);text-align: center;}
-#valueprop_bullets{position:relative;display:flex;justify-content:center;flex-wrap:wrap;border-top:solid darkred 2px;}
-.valueprop_bullet{margin:20px;width:calc(33.33% - 40px);min-width:250px;text-align:center;font-weight:bold;}
 #quote_wrapper{position: relative;color: white;z-index: 1;border-top: solid darkred 10px;border-bottom: solid darkred 10px;}
 #quote{position: absolute;top: 50%;transform: translateY(-50%);text-align: center;font-weight: bold;}
-#demo_wrapper{position relative;padding: 20px 0;background-color: #EAEAEA;background-image: url("/images/stitched_wool.png");background-repeat: repeat;}
+#demo_wrapper{position relative;padding: 20px 0;background-color: #EAEAEA;background-image: url("/images/paper.png");background-repeat: repeat;}
 #demo_wrapper h2{margin: 0;padding: 10px;text-align: center;}
 #findform_wrapper{margin: 0 auto;position:relative;display:flex;flex-wrap:wrap;width:800px;max-width:95vw;}
 .districtentry{position: relative;width: 375px;max-width:95vw;margin: 0 auto;margin-top:20px;padding-bottom: 40px;}
@@ -55,8 +53,6 @@
 	#wwa_content{text-align: center;background-color: white;z-index: 2;}
 	#headline{margin:100px 0 50px 0;}
 	#coresale{margin-bottom:50px;}
-	#valueprop_bullets{margin-bottom:100px;}
-
 	#quote_wrapper{height: 400px;}
 	#quote{width: 30%;right: 150px;}
 	.formhead{border-bottom: solid darkred 2px;margin-bottom: 5px;font-weight: bold;}
@@ -98,7 +94,6 @@
 	
 	#headline{padding:0 10px;font-size:20px;}
 	#coresale{margin-bottom:20px;}
-	#valueprop_bullets{border:none;}
 
 	#quote_wrapper{height: 300px;background-color: #0E1C32;}
 	#pdatanote{padding: 10px;}
