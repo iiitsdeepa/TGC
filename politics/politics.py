@@ -642,16 +642,13 @@ class Jbranch(BaseHandler):
         else:
             self.redirect('/')
 
-class Public(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('landing.html')
-        else:
-            self.redirect('/')
-
 class About(BaseHandler):
     def get(self):
         self.render('about.html')
+
+class Sources(BaseHandler):
+    def get(self):
+        self.render('sources.html')
 
 class NewsLetter(BaseHandler):
     def get(self):
@@ -701,7 +698,7 @@ application = webapp2.WSGIApplication([
     ('/ccomp', Ccomp),
     ('/lbranch', Lbranch),
     ('/jbranch', Jbranch),
-    ('/public', Public),
     ('/about', About),
-    ('/newsletter', NewsLetter)
+    ('/newsletter', NewsLetter),
+    ('/sources', Sources)
 ], debug=True)

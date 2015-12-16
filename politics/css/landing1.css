@@ -49,7 +49,6 @@
 	#mfunctions{display: none;}
 	#monuments{position: absolute;top: 100px;width: 100%;}
 	.content{position:relative;margin: 0 auto;padding:20px;width:80vw;max-width:1200px;min-height:500px;}
-	
 	#wwa_content{text-align: center;background-color: white;z-index: 2;}
 	#headline{margin:100px 0 50px 0;}
 	#coresale{margin-bottom:50px;}
@@ -91,13 +90,10 @@
 	.mfun:active{color: #33CCFF !important;}
 	#wwa{padding-bottom: 20px;}
 	.content{position: relative;width: 95vw;margin: 0 auto;min-height:300px;padding-top: 10px;z-index: 2;background-color: white;}
-	
 	#headline{padding:0 10px;font-size:20px;}
 	#coresale{margin-bottom:20px;}
-
 	#quote_wrapper{height: 300px;background-color: #0E1C32;}
 	#pdatanote{padding: 10px;}
-
 	#demo_content{margin-top:40px;width:100vw;min-width:100px;height:auto;padding:0;overflow:auto;background-color: white;}
 	#demo_content h2{text-align: center;}
 	#statdata{display:none;}
@@ -114,7 +110,6 @@
 	.mobrep_info table{position:relative;width:100%;}
 	.mtrow{background:darkblue;}
 	.mobrep_info td{width:50%;}
-
 	.popclose{position: absolute;top: 0;right: 0;background-color: lime;font-size: 20px;font-weight: bold;}
 	.popform{display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 20px 0;width: 300px;background-color: #33CCFF;}
 	#pope{color: white;text-align: center}
