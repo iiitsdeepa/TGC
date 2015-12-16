@@ -51,20 +51,35 @@ h3{margin-bottom:5px;}
 #founder{background-color:#EAEAEA;width:100%;padding:50px 10vh;}
 .peep{width:calc(50% - 40px);padding:25px 20px;}
 /*Sources Styles*/
-#sources{background:#0E1C32;color:white;min-height:95vh;padding-top:100px;font-size:90%;z-index:1;}
-#sources h2, h3, h4, h4{color:red;text-align:left}
+#sources{background:#0E1C32;color:white;padding:100px 200px 50px 5vw;font-size:90%;z-index:1;}
+#sources h2, h3, h4, h4{color:#ff3333;text-align:left}
 #sources_nav{position:fixed;right:0;font-weight:bold;color:gainsboro;z-index:2;background:#0E1C32;}
 #sources_nav ul{text-decoration:none;padding:0;margin:0;}
 #sources_nav li{display:block;padding:5px;margin:2px;}
 #sources_nav li:hover{text-decoration:underline;}
-#sources top{}
+.source_section{position:relative;padding:50px 0;}
+#sources .blurb{width:700px;max-width:100%;margin-bottom:50px;}
+#sources .blurb h2,h3{margin-bottom:5px;}
+#sourceimg_wrapper{position:relative;width:800px;max-width:100%;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;}
+#sourceimg{background:#162D50;margin:0 auto;width:150px;height:150px;}
+#sourceimgtext{width:50%;min-width:275px;margin:0 auto;}
+#ourdatatypes{display:flex;flex-wrap:wrap;justify-content:space-between;}
+.ourdatatype{width:40%;min-width:275px;margin:20px auto;}
+#sources .quote{padding:50px 100px;}
+#citationintro{padding-bottom:50px;border-bottom:solid #214478 1px;}
+.citation{padding:25px 0;border-bottom:solid #214478 1px;font-size:80%;}
+.citation h3{color:white;}
+
 
 /*Mobile only*/
-@media screen and (max-width: 420px){
+@media screen and (max-width: 520px){
 	.footsociocon{width:40px;height:40px;margin:5px;}
 	#footcontributions{width:100%;}
 	.footcontribution{width:95vw;min-width:0!important;margin:0;}
 
+	/*Sources Styles*/
+	#sources{padding:100px 5vw 50px 5vw;}
+	#sourceimgtext{width:80%;}
 }
 
 /*Mobile and Tablet*/
@@ -97,5 +112,4 @@ h3{margin-bottom:5px;}
 	.foottext{width:40%;margin-right:50%;margin-bottom:20px;}
 	/*About Styles*/
 	/*Sources Styles*/
-	#sources{padding:100px 200px 0 5vw;}
 }
