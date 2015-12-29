@@ -1,3 +1,12 @@
+function expandGlobalNav(){
+  //expand
+  if ($('#expandnav').attr('value') == 'contracted'){
+    $('#nav_wrapper').animate({left:"-100vw"}, 200, function(){$('#expandnav').attr('value','expanded')})
+  } else{ //contract
+    $('#nav_wrapper').animate({left:"0px"}, 200, function(){$('#expandnav').attr('value','expanded')})
+  }
+}
+
 function alphaExpand(a, t){
 	//expand it
 	if ($(t).attr('value') == 'contracted'){
@@ -59,3 +68,5 @@ function scrollTo(id){
       }, 500);
   }
 }
+
+

@@ -1,0 +1,20 @@
+#opening{position:relative;padding:170px 5vw 50px 5vw;min-height:calc(90vh - 220px);}
+#opening h1{text-align:left;}
+#centerpiece{position:absolute;bottom:50px;right:5vw;width:50%;}
+.wrapper{padding:100px 5vw;}
+#facts_wrapper{display:flex;flex-wrap:wrap;justify-content:space-between;}
+.vpoint{width:450px;max-width:calc(100vw - 10px);}
+.vpoint h2{text-align:left;}
+#partycomp{width:600px;}
+#partycomp h4{text-align:center;}
+#pcomptable{border-spacing:0;width:100%;}
+#pcomptitles{padding:5px;}
+.dem{background:blue;}
+.repub{background:red;}
+#connection_wrapper{display:flex;flex-wrap:wrap;justify-content:space-between;}
+#connectionblurb{}
+#findreps{background:#EAEAEA;height:500px;padding:20px;width:50%;}
+#investigateblurb{float:right;}
+#effectiveness{}
+#freedomblurb{float:right;}
+.graphimg{width:50%;}

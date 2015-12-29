@@ -680,6 +680,20 @@ class NewsLetter(BaseHandler):
                 body = 'congrats on becoming a boss'
                 mail.send_mail(sender_address, email, subject, body)
 
+class Testimonial(BaseHandler):
+    def get(self):
+        self.render('testimonial.html')
+
+    def post(self):
+        self.render('testimonial.html')
+
+class Nlanding(BaseHandler):
+    def get(self):
+        self.render('nlanding.html')
+
+    def post(self):
+        self.render('nlanding.html')
+
 
 
 application = webapp2.WSGIApplication([
@@ -700,5 +714,7 @@ application = webapp2.WSGIApplication([
     ('/jbranch', Jbranch),
     ('/about', About),
     ('/newsletter', NewsLetter),
-    ('/sources', Sources)
+    ('/sources', Sources),
+    ('/testimonials', Testimonial),
+    ('/nlanding', Nlanding)
 ], debug=True)

@@ -1,15 +1,11 @@
-#baselayer{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background-color:#0E1C32;z-index: 1;}
-#toplayer{position: relative;z-index: 2;}
-#tlogo{height: 100%;}
-#opening{position: relative;min-height: 500px;height: 100vh;padding-top: 50px;background-image: url("/images/paper.png");background-repeat:repeat;color: #162d50;background-color: #EAEAEA;}
-#title{margin:0;text-align: center;font-family: 'Playball', cursive;z-index: 3;}
-#mission{text-align:center;z-index: 3;font-weight:bold;}
-#buttonpanel{position: relative;z-index: 5;}
-.mbutton{cursor:pointer;margin: 0 auto;width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: darkred;color: white;}
-.mbutton:active{background-color: #AE4D4D;}
-.bluebutton{width: 200px;padding: 15px 0;border-radius: 10px;text-align: center;font-weight: bold;background-color: #0042CD;color: white;}
-.bluebutton:active{background-color: #AE4D4D;}
-#discoverbutton{margin-bottom: 20px;}
+#baselayer{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#0E1C32;z-index:1;}
+#toplayer{position:relative;z-index: 2;}
+#tlogo{height:100%;}
+#opening{position:relative;min-height:500px;height:100vh;padding-top:40px;background-image:url("/images/paper.png");background-repeat:repeat;color:#162d50;background-color:#EAEAEA;}
+#title{margin:0;font-family:'Playball', cursive;z-index: 3;}
+.bluebutton{width:200px;padding:15px 0;border-radius:10px;text-align:center;font-weight:bold;background-color: #0042CD;color: white;}
+.bluebutton:active{background-color:#AE4D4D;}
+#discoverbutton{margin-bottom:20px;}
 #flagswaving{position: absolute;width: 100%;bottom: 0;left: 0;z-index: 0;}
 #wwa{position: relative;background-image: url("/images/paper.png");background-repeat: repeat;padding: 20px 0;background-color: #EAEAEA;}
 #spacers{position:absolute;top:0;left:0;width:100%;}
@@ -27,7 +23,7 @@
 .districtentry{position: relative;width: 375px;max-width:95vw;margin: 0 auto;margin-top:20px;padding-bottom: 40px;}
 .dformbutton{position: absolute;bottom: 0;left: 0;width: calc(100% - 10px);height: 25px;line-height: 25px;font-weight: bold;text-align: center;color: white;background-color: darkred;border: double #4d0000 5px;}
 .dformbutton:active{background-color: #AE4D4D;}
-#demo_content{position: relative;margin: 0 auto;margin-top: 20px;width: 80vw;min-width:960px;background-color: white;height: 500px;}
+#demo_content{position:relative;margin:0 auto;margin-top:20px;width:80vw;min-width:920px;background-color:white;height:500px;}
 #reps_slider{display: flex;}
 .abtext{display: none;}
 .rep_wrapper{}
@@ -42,10 +38,7 @@
 	#popuplayer{display: none;}
 	.bluebutton:hover{background-color: #004CEC;}
 	.dformbutton:hover{background-color: #A23333;}
-	#title{font-size: 90px;height: 100px;}
-	#mission{font-size:32px;margin-top: 20px;}
-	#buttonpanel{margin-top: 30px;}
-	.mbutton:hover{background-color: #A23333;}
+	#title{font-size:70px;height:70px;}
 	#mfunctions{display: none;}
 	#monuments{position: absolute;top: 100px;width: 100%;}
 	.content{position:relative;margin: 0 auto;padding:20px;width:80vw;max-width:1200px;min-height:500px;}
@@ -81,11 +74,9 @@
 
 /*Tablet and Phone*/
 @media screen and (max-width: 965px){
-	#opening{height: 90vh !important;}
+	#opening{height: 95vh !important;padding-top:50px;}
 	#title{margin: 15px 0 0 0;font-size: 40px;height: 50px;}
 	#tlogo{display: none;}
-	#mission{margin-top: 20px;font-size: 22px;padding: 0 20px;}
-	#buttonpanel{margin-top: 30px;}
 	#mfunctions{margin: 0 auto;margin-top: 15px;text-align: center;line-height: 30px;font-weight: bold;}
 	.mfun:active{color: #33CCFF !important;}
 	#wwa{padding-bottom: 20px;}
@@ -94,7 +85,7 @@
 	#coresale{margin-bottom:20px;}
 	#quote_wrapper{height: 300px;background-color: #0E1C32;}
 	#pdatanote{padding: 10px;}
-	#demo_content{margin-top:40px;width:100vw;min-width:100px;height:auto;padding:0;overflow:auto;background-color: white;}
+	#demo_content{margin-top:40px;width:100%;min-width:100px;height:auto;padding:0;overflow:auto;background-color: white;}
 	#demo_content h2{text-align: center;}
 	#statdata{display:none;}
 	#repstable_wrapper{display:none;}

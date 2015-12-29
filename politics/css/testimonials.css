@@ -1,0 +1,47 @@
+html, body{margin: 0;padding: 0;min-height: 100vh;width: 100%;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;color:#0E1C32;background:url('/images/brickwall.png');font-size:95%;}
+h3, h2{text-align:center;}
+.z-index-1{-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
+.z-index-2{-moz-box-shadow: 0px 0px 15px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 15px rgba(0,0,0,1);box-shadow: 0px 0px 15px rgba(0,0,0,1);}
+.forminput{width:90%;padding:10px;border:solid 2px #0E1C32;border-radius:5px;}
+#nav_wrapper{background:white;height:50px;line-height:50px;padding-right:20px;}
+#nav_wrapper ul{margin:0;padding:0;float:right;}
+#nav_wrapper li{display:inline;}
+#badge{position:relative;float:left;top:0;margin-left:20px;height:100%;padding-left:30px;width:50%;font-size:120%;font-weight:bold;}
+#badge img{position:absolute;left:0;height:100%;}
+#content{position:relative;}
+#communitysayings{background:white;padding:10px;width:auto;}
+.communitysaying{margin:20px 0;}
+#teamprofile{background:white;}
+#maincolumn{margin:0 auto;padding:1px;}
+.profilepic{float:left;height:75px;width:75px;border-radius:50%;background:pink;}
+.teammember{display:none;}
+#construction{margin:0;padding:10px;background:yellow;border:dotted 5px #0E1C32;}
+#valueprop{text-align:center;border-bottom:solid 1px gray;padding-bottom:20px;}
+.rightlink{display:block;float:right;text-decoration:none;color:#ff3333;}
+.rightlink:hover{text-decoration:underline;}
+
+
+/*Mobile only*/
+@media screen and (max-width: 520px){
+	#nav_wrapper ul{display:none;}
+	#communitysayings{}
+}
+
+/*Mobile and Tablet*/
+@media screen and (max-width: 965px){
+	#construction, #valueprop{background:#0E1C32;color:white;}
+	#valueprop{padding:50px 10px;}
+	#construction{width:500px;max-width:calc(100% - 50px);margin:50px auto 0 auto;}
+	#communitysayings{display:flex;flex-wrap:wrap;}
+	.communitysaying{max-width:95vw;width:300px;}
+
+}
+
+/*Desktop*/
+@media screen and (min-width: 966px){
+	#content{min-height:calc(100vh - 70px);padding-top:20px;}
+	#teamprofile{position:absolute;padding:10px;top:20px;height:200px;width:calc(25vw - 20px);}
+	#communitysayings{position:absolute;padding:10px;top:20px;right:0;width:25vw;min-height:calc(100% - 40px);font-size:85%;}
+	#maincolumn{width:calc(35vw - 40px);}
+	#wwedo{position:absolute;top:240px;width:calc(25vw - 20px);padding:10px;}
+}
