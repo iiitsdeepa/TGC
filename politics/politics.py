@@ -430,224 +430,22 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_stat_csv(info)
         self.redirect("/")
 
-class Admin(BaseHandler):
-    def get(self):
-        self.render('admin.html')
-
-    def post(self):
-        secret = self.request.get('secret')
-        if secret == 'fire':
-            self.write('freedom')
-
-class Signup(BaseHandler):
-    def post(self):
-        username = self.request.get('username')
-        email = self.request.get('email')
-        password = self.request.get('password')
-        have_error = False
-
-        #query the database to ensure the username, and email are unique
-        if username and email and password:
-            n = User.by_username(username)
-            e = User.by_email(email)
-            if n and not e: #username is traken
-                self.write('1')
-            elif e and not n: #email is taken
-                self.write('2')
-            elif n and e: #username and email are taken
-                self.write('3')
-            else:
-                self.write('success')
-                u = User.register(username, email, password)
-                u.put()
-                self.login(u)
-
-class Login(BaseHandler):
-    def post(self):
-        username = self.request.get('username')
-        password = self.request.get('password')
-
-        u = User.login(username, password)
-        if u:
-            self.login(u)
-            self.write('in')
-        else:
-            self.write('invalid login')
-
-class Main(BaseHandler):
-    def get(self):
-        self.render('tmain.html')
-
-    def post(self):
-        username = self.request.get('username')
-        email = self.request.get('email')
-        password = self.request.get('password')
-
-        #query the database to ensure the username, and email are unique
-        if username and email and password:
-            n = User.by_username(username)
-            e = User.by_email(email)
-            if n and not e: #username is traken
-                self.write('2')
-            elif e and not n: #email is taken
-                self.write('3')
-            elif n and e: #username and email are taken
-                self.write('4')
-            else:
-                self.write('1')
-                u = User.register(username, email, password)
-                u.put()
-                self.login(u)
-
-        zip = self.request.get('zip')
-        if zip: #a zip code is given
-            zip_json = self.zip_to_district(zip)
-            self.write(zip_json)
-
-        address = self.request.get('address')
-        if address:
-            district = self.address_to_district(address)
-            self.write(district)
-
-        lat = self.request.get('lat')
-        lng = self.request.get('lng')
-        if lat and lng:
-            district = self.latlngToDistrict(lat, lng)
-            self.write(district)
-
-class Cards(BaseHandler):
-    def get_legislators(self, district):
-        state, dnum = district.split(':')
-        #query the datastore to get the house representative
-        msg = "SELECT name, party, fyio FROM Representative WHERE State=\'%s\' AND district=\'%d\'" %(state, int(dnum))
-        q = db.GqlQuery(msg)
-
-    def get(self):
-        self.render('big3.html')
-
-    def post(self):
-        district = self.request.get('district')
-        if district: #pull legislator data, and render cards with data
-            self.get_legislators(district)
-            hrparams = self.getHr(district)
-            ssparams = self.getSs(district)
-            jsparams = self.getJs(district)
-            params = dict(district = district)
-            params.update(hrparams)
-            params.update(ssparams)
-            params.update(jsparams)
-            self.render('cards.html', **params)
-        else:
-            self.render('big3.html')
-
 class Landing(BaseHandler):
     def get(self):
-        self.render("landing1.html")
-
+        self.render("simplesignup.html")
     def post(self):
-        have_error = False
-        username = self.request.get('username')
-        password = self.request.get('password')
-        verify = self.request.get('verify')
-        email = self.request.get('email')
-
-        params = dict(username = username,
-                      email = email)
-
-        if not valid_username(username):
-            params['error_username'] = "invalid username."
-            have_error = True
-
-        if not valid_password(password):
-            params['error_password'] = "invalid password."
-            have_error = True
-        elif password != verify:
-            params['error_verify'] = "non-matching passwords"
-            have_error = True
-
-        if not valid_email(email):
-            params['error_email'] = "invalid email"
-            have_error = True
-
-        if have_error:
-            self.render('landing.html', **params)
-        else:
-            self.redirect('/splash' + username)
-
-class Test(BaseHandler):
-    def get(self):
-        self.initialize()
-
-class Splash(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('splash.html')
-        else:
-            self.redirect('/')
-
-class Mreps(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('mreps.html')
-        else:
-            self.redirect('/')
-            params = self.getBig2
-
-    def post(self):
-        demo = self.request.get('demo')
-        if demo:
-            params = self.getBig2()
-            self.write(params)
-
-        address = self.request.get('address')
-        if address:
-            district = self.address_to_district(address)
-            logging.error(district)
-            repjson = self.pullReps(district)
-            self.write(repjson)
-
-        lat = self.request.get('lat')
-        lng = self.request.get('lng')
-        if lat and lng:
-            district = self.latlngToDistrict(lat, lng)
-            repjson = self.pullReps(district)
-            self.write(repjson)
-            
-
-class Pcomp(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('pcomp.html')
-        else:
-            self.redirect('/')
-
-class Ccomp(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('ccomp.html')
-        else:
-            self.redirect('/')
-
-class Lbranch(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('lbranch.html')
-        else:
-            self.redirect('/')
-
-class Jbranch(BaseHandler):
-    def get(self):
-        if self.user:
-            self.render('jbranch.html')
-        else:
-            self.redirect('/')
+        self.render('simplesignup.html')
 
 class About(BaseHandler):
     def get(self):
         self.render('about.html')
+    def post(self):
+        self.render('about.html')
 
 class Sources(BaseHandler):
     def get(self):
+        self.render('sources.html')
+    def post(self):
         self.render('sources.html')
 
 class NewsLetter(BaseHandler):
@@ -680,14 +478,13 @@ class NewsLetter(BaseHandler):
                 body = 'congrats on becoming a boss'
                 mail.send_mail(sender_address, email, subject, body)
 
-class Testimonial(BaseHandler):
+class Feedback(BaseHandler):
     def get(self):
         self.render('testimonial.html')
-
     def post(self):
         self.render('testimonial.html')
 
-class Nlanding(BaseHandler):
+class Vprop(BaseHandler):
     def get(self):
         self.render('nlanding.html')
 
@@ -698,23 +495,11 @@ class Nlanding(BaseHandler):
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
-    ('/admin', Admin),
-    ('/signup', Signup),
-    ('/login', Login),
-    ('/splash', Splash),
-    ('/main', Main),
     ('/up', UploadHandler),
     ('/upload', Upload),
-    ('/cards', Cards),
-    ('/test', Test),
-    ('/mreps', Mreps),
-    ('/pcomp', Pcomp),
-    ('/ccomp', Ccomp),
-    ('/lbranch', Lbranch),
-    ('/jbranch', Jbranch),
     ('/about', About),
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
-    ('/testimonials', Testimonial),
-    ('/nlanding', Nlanding)
+    ('/feedback', Feedback),
+    ('/prop', Vprop)
 ], debug=True)
