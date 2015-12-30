@@ -8,6 +8,7 @@
 #partycomp{width:600px;}
 #partycomp h4{text-align:center;}
 #pcomptable{border-spacing:0;width:100%;}
+#pcomptable img{height:50px;}
 #pcomptitles{padding:5px;}
 .dem{background:blue;}
 .repub{background:red;}
