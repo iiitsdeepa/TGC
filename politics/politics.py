@@ -251,6 +251,7 @@ class NationalRepublicanPrimary(db.Model):
     trump = db.IntegerProperty(reuqired=False)
     cruz = db.IntegerProperty(reuqired=False)
     rubio = db.IntegerProperty(reuqired=False)
+    kasich = db.IntegerProperty(reuqired=False)
     carson = db.IntegerProperty(reuqired=False)
     bush = db.IntegerProperty(reuqired=False)
     christie = db.IntegerProperty(reuqired=False)
