@@ -228,6 +228,45 @@ class DatastoreFile(db.Model):
   data = db.BlobProperty(required=True)
   mimetype = db.StringProperty(required=True)
 
+class NationalDemocraticPrimary(db.Model):
+    pollster = db.StringProperty(required=True)
+    start_date = db.DateProperty(required=True)
+    end_date = db.DateProperty(required=True)
+    entry_date = db.DateTimeProperty(required=True)
+    popsize = db.IntegerProperty(required=True)
+    hill = db.IntegerProperty(reuqired=False)
+    sanders = db.IntegerProperty(reuqired=False)
+    omalley = db.IntegerProperty(reuqired=False)
+    chafee = db.IntegerProperty(reuqired=False)
+    webb = db.IntegerProperty(reuqired=False)
+    biden = db.IntegerProperty(reuqired=False)
+    undecided = db.IntegerProperty(reuqired=False)
+
+class NationalRepublicanPrimary(db.Model):
+    pollster = db.StringProperty(required=True)
+    start_date = db.DateProperty(required=True)
+    end_date = db.DateProperty(required=True)
+    entry_date = db.DateTimeProperty(required=True)
+    popsize = db.IntegerProperty(required=True)
+    trump = db.IntegerProperty(reuqired=False)
+    cruz = db.IntegerProperty(reuqired=False)
+    rubio = db.IntegerProperty(reuqired=False)
+    carson = db.IntegerProperty(reuqired=False)
+    bush = db.IntegerProperty(reuqired=False)
+    christie = db.IntegerProperty(reuqired=False)
+    paul = db.IntegerProperty(reuqired=False)
+    fiorina = db.IntegerProperty(reuqired=False)
+    huckabee = db.IntegerProperty(reuqired=False)
+    santorum = db.IntegerProperty(reuqired=False)
+    gilmore = db.IntegerProperty(reuqired=False)
+    gram = db.IntegerProperty(reuqired=False)
+    jindal = db.IntegerProperty(reuqired=False)
+    pataki = db.IntegerProperty(reuqired=False)
+    perry = db.IntegerProperty(reuqired=False)
+    walker = db.IntegerProperty(reuqired=False)
+    undecided = db.IntegerProperty(reuqired=False)
+
+
 #--------------------------Pages----------------------------------------
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
@@ -492,8 +531,11 @@ class Vprop(BaseHandler):
         self.render('nlanding.html')
 
 class ElectionData(BaseHandler):
-    def post(self):
+    def getNatioalPolls(self):
         #do the stuff
+
+    def get(self):
+        self.getNatioalPolls()
 
 
 
