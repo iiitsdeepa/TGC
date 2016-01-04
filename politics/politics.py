@@ -491,6 +491,10 @@ class Vprop(BaseHandler):
     def post(self):
         self.render('nlanding.html')
 
+class ElectionData(BaseHandler):
+    def post(self):
+        #do the stuff
+
 
 
 application = webapp2.WSGIApplication([
