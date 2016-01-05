@@ -15,6 +15,7 @@ import webapp2
 import jinja2
 import cgi
 from google.appengine.ext.webapp.util import run_wsgi_app
+from datetime import datetime, date, time
 
 from google.appengine.ext import db
 from google.appengine.ext import blobstore
@@ -551,11 +552,95 @@ class Vprop(BaseHandler):
 class ElectionData(BaseHandler):
     def getNatioalPolls(self):
         #make api call to get most recent batch of poll data
-        logging.error('whats up')
+        #logging.error('whats up')
         #compare api data to most recent data from datastore IF !=, append db with data
         #(datastore classes are (NationalDemocraticPrimary, NationalRepuclicanPrimary)
 
         #return two csv strings of polling data formatted for graph only
+
+        dem_url = 'http://elections.huffingtonpost.com/pollster/api/polls.json?topic=2016-president-dem-primary'
+        gop_url = 'http://elections.huffingtonpost.com/pollster/api/polls.json?topic=2016-president-gop-primary'
+
+        dem = urllib2.urlopen(dem_url)
+        gop = urllib2.urlopen(gop_url)
+        demo = dem.read()
+        repu = gop.read()
+        demdata = json.loads(demo)
+        gopdata = json.loads(repu)
+        tru, sant, rub, pau, pat, kas, bus, huc, fio, cru, chri, car, gil, gra, jin, per, wal, rundec = -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+        todaydate = datetime.today()
+        topdaterep = datetime.min
+        topdatedem = datetime.min
+        demteststring = ""
+        gopteststring = ""
+        #topdaterep = GqlQuery("SELECT entry_date FROM NationalRepublicanPrimary ORDER BY entry_date DESC")
+        #topdatedem = GqlQuery("SELECT entry_date FROM NationalDemocraticPrimary ORDER BY entry_date DESC")
+        for i in gopdata:
+            polls = i["pollster"]
+            end = i["end_date"]
+            start = i["start_date"]
+            method = i["method"]
+            sourceurl = i["source"]
+            for j in i["questions"]:
+                tru, sant, rub, pau, pat, kas, bus, huc, fio, cru, chri, car, gil, gra, jin, per, wal, rundec = -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                if (str(j["topic"]) == "2016-president-gop-primary"):
+                    pop = j["subpopulations"][0]["observations"]
+                    poptype = j["subpopulations"][0]["name"]
+                    for k in j["subpopulations"][0]["responses"]:
+                        if (k["choice"] == "Trump"):
+                            tru = int(k["value"])
+                        if (k["choice"] == "Santorum"):
+                            sant = int(k["value"])
+                        if (k["choice"] == "Rubio"):
+                            rub = int(k["value"])
+                        if (k["choice"] == "Rand Paul" or k["choice"] == "Paul"):
+                            pau = int(k["value"])
+                        if (k["choice"] == "Pataki"):
+                            pat = int(k["value"])
+                        if (k["choice"] == "Kasich"):
+                            kas = int(k["value"])
+                        if (k["choice"] == "Jeb Bush" or k["choice"] == "Bush"):
+                            bus = int(k["value"])
+                        if (k["choice"] == "Huckabee"):
+                            huc = int(k["value"])
+                        if (k["choice"] == "Fiorina"):
+                            fio = int(k["value"])
+                        if (k["choice"] == "Cruz"):
+                            cru = int(k["value"])
+                        if (k["choice"] == "Christie"):
+                            chri = int(k["value"])
+                        if (k["choice"] == "Carson"):
+                            car = int(k["value"])
+                    gopteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(tru) + "," + str(cru) + "," + str(rub) + "," + str(kas) + "," + str(car) + "," + str(bus) + "," + str(chri) + "," + str(pau) + "," + str(fio) + "," + str(huc) + "," + str(sant) + "," + str(gil) + "," + str(gra) + "," + str(jin) + "," + str(pat) + "," + str(per) + "," + str(wal) + "," + str(rundec)
+                    logging.error(gopteststring)
+                    if (todaydate > topdaterep):str(
+                        entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop,, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
+                        entry.put()
+                            
+        cli, sand, omal, cha, web, bid, dundec = -1, -1, -1, -1, -1, -1, -1
+        for i in demdata:
+            polls = i["pollster"]
+            end = i["end_date"]
+            start = i["start_date"]
+            method = i["method"]
+            sourceurl = i["source"]
+            for j in i["questions"]:
+                cli, sand, omal, cha, web, bid, dundec = -1, -1, -1, -1, -1, -1, -1
+                if (str(j["topic"]) == "2016-president-dem-primary"):
+                    pop = j["subpopulations"][0]["observations"]
+                    poptype = j["subpopulations"][0]["name"]
+                    for k in j["subpopulations"][0]["responses"]:
+                        if (k["choice"] == "Clinton"):
+                            cli = int(k["value"])
+                        if (k["choice"] == "Sanders"):
+                            sand = int(k["value"])
+                        if (k["choice"] == "O'Malley"):
+                            omal = int(k["value"])
+                    demteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(cli) + "," + str(sand) + "," + str(omal) + "," + str(cha) + "," + str(web) + "," + str(bid) + "," + str(dundec)
+                    logging.error(demteststring)
+                    if (todaydate > topdatedem):
+                        entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
+                        entry.put()
     def get(self):
         self.getNatioalPolls()
 
