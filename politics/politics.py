@@ -133,6 +133,16 @@ def process_stat_csv(blob_info):
         id, total_votes, votes_wp, party_loyalty, sponsored_bills, cosponsored_bills = row_str.split(',')
         entry = Stat(bioguide_id=id, total_votes=int(total_votes), votes_wp=int(votes_wp), party_loyalty=float(party_loyalty), sponsored_bills=int(sponsored_bills), cosponsored_bills=int(cosponsored_bills))
         entry.put()
+
+def process_nationalpolls(blob_info, party):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        if party == 'D':
+            pollster, start_date, end_date, entry_date, popsize, poptype, mode, hill, sanders, omalley, biden, chafee, lessig, webb, undecided = row_str.split(',')
+            entry = NationalDemocraticPrimary(pollster=pollster, start_date=start_date, end_date=end_date, entry_date=entry_date, popsize=popsize, poptype=poptype, mode=mode, hill=int(hill), sanders=int(sanders), omalley=int(omalley), biden=int(biden), chafee=int(chafee), lessig=int(lessig), webb=int(webb), undecided=int(undecided))
+            entry.put()
 #-------------------------Database Classes------------------------------
 class User(db.Model):
     username = db.StringProperty(required = True)
@@ -243,6 +253,7 @@ class NationalDemocraticPrimary(db.Model):
     webb = db.IntegerProperty(required=False)
     biden = db.IntegerProperty(required=False)
     undecided = db.IntegerProperty(required=False)
+    url = db.StringProperty(required=True)
 
 class NationalRepublicanPrimary(db.Model):
     pollster = db.StringProperty(required=True)
@@ -270,6 +281,7 @@ class NationalRepublicanPrimary(db.Model):
     perry = db.IntegerProperty(required=False)
     walker = db.IntegerProperty(required=False)
     undecided = db.IntegerProperty(required=False)
+    url = db.StringProperty(required=True)
 
 
 #--------------------------Pages----------------------------------------
@@ -469,9 +481,10 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
  
         #process_state_csv(info)
         #process_district_csv(info)
-        process_senator_csv(info)
+        #process_senator_csv(info)
         #process_rep_csv(info)
         #process_stat_csv(info)
+        process_nationalpolls(info, 'D')
         self.redirect("/")
 
 class Landing(BaseHandler):
