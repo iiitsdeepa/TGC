@@ -534,12 +534,11 @@ class Vprop(BaseHandler):
 class ElectionData(BaseHandler):
     def getNatioalPolls(self):
         #make api call to get most recent batch of poll data
-
+        logging.error('whats up')
         #compare api data to most recent data from datastore IF !=, append db with data
         #(datastore classes are (NationalDemocraticPrimary, NationalRepuclicanPrimary)
 
         #return two csv strings of polling data formatted for graph only
-
     def get(self):
         self.getNatioalPolls()
 
@@ -553,5 +552,6 @@ application = webapp2.WSGIApplication([
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
     ('/feedback', Feedback),
-    ('/prop', Vprop)
+    ('/prop', Vprop),
+    ('/datatest', ElectionData)
 ], debug=True)
