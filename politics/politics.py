@@ -10,6 +10,7 @@ import logging
 import random, string
 from string import letters
 import csv
+import datetime
 
 import webapp2
 import jinja2
@@ -135,13 +136,27 @@ def process_stat_csv(blob_info):
         entry.put()
 
 def process_nationalpolls(blob_info, party):
+    logging.error('THE FUNCTION RUNS')
+    logging.error(party)
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
         row_str = row[0]
         if party == 'D':
             d = row_str.split(',')
-            entry = NationalDemocraticPrimary(pollster=d[0], start_date=d[1], end_date=d[2], entry_date=d[3], popsize=d[4], poptype=d[5], mode=d[6], hill=int(d[7]), sanders=int(d[8]), omalley=int(d[9]), biden=int(d[10]), chafee=int(d[11]), lessig=int(d[12]), webb=int(d[13]), undecided=int(d[14]), url=d[15])
+            a = d[3].split(' UTC')
+            startupdate = datetime.datetime.strptime(d[1], '%Y-%m-%d')
+            endupdate = datetime.datetime.strptime(d[2], '%Y-%m-%d')
+            update = datetime.datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
+            entry = NationalDemocraticPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5], mode=d[6], hill=int(d[7]), sanders=int(d[8]), omalley=int(d[9]), biden=int(d[10]), chafee=int(d[11]), lessig=int(d[12]), webb=int(d[13]), undecided=int(d[14]), url=d[15])
+            entry.put()
+        if party == 'R':
+            d = row_str.split(',')
+            a = d[3].split(' UTC')
+            startupdate = datetime.datetime.strptime(d[1], '%Y-%m-%d')
+            endupdate = datetime.datetime.strptime(d[2], '%Y-%m-%d')
+            update = datetime.datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
+            entry = NationalRepublicanPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5],mode=d[6],trump=int(d[7]),cruz=int(d[8]),rubio=int(d[9]),carson=int(d[10]),bush=int(d[11]),christie=int(d[12]),paul=int(d[13]),fiorina=int(d[14]),huckabee=int(d[15]),kasich=int(d[16]),santorum=int(d[17]),gilmore=int(d[18]),gram=int(d[19]),jindal=int(d[20]),pataki=int(d[21]),perry=int(d[22]),walker=int(d[23]),undecided=int(d[24]),url=d[25])
             entry.put()
 #-------------------------Database Classes------------------------------
 class User(db.Model):
@@ -240,8 +255,8 @@ class DatastoreFile(db.Model):
 
 class NationalDemocraticPrimary(db.Model):
     pollster = db.StringProperty(required=True)
-    start_date = db.DateProperty(required=True)
-    end_date = db.DateProperty(required=True)
+    start_date = db.DateTimeProperty(required=True)
+    end_date = db.DateTimeProperty(required=True)
     entry_date = db.DateTimeProperty(required=True)
     popsize = db.IntegerProperty(required=True)
     poptype = db.StringProperty(required=True)
@@ -257,8 +272,8 @@ class NationalDemocraticPrimary(db.Model):
 
 class NationalRepublicanPrimary(db.Model):
     pollster = db.StringProperty(required=True)
-    start_date = db.DateProperty(required=True)
-    end_date = db.DateProperty(required=True)
+    start_date = db.DateTimeProperty(required=True)
+    end_date = db.DateTimeProperty(required=True)
     entry_date = db.DateTimeProperty(required=True)
     popsize = db.IntegerProperty(required=True)
     poptype = db.StringProperty(required=True)
@@ -266,13 +281,13 @@ class NationalRepublicanPrimary(db.Model):
     trump = db.IntegerProperty(required=False)
     cruz = db.IntegerProperty(required=False)
     rubio = db.IntegerProperty(required=False)
-    kasich = db.IntegerProperty(required=False)
     carson = db.IntegerProperty(required=False)
     bush = db.IntegerProperty(required=False)
     christie = db.IntegerProperty(required=False)
     paul = db.IntegerProperty(required=False)
     fiorina = db.IntegerProperty(required=False)
     huckabee = db.IntegerProperty(required=False)
+    kasich = db.IntegerProperty(required=False)
     santorum = db.IntegerProperty(required=False)
     gilmore = db.IntegerProperty(required=False)
     gram = db.IntegerProperty(required=False)
@@ -484,7 +499,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_senator_csv(info)
         #process_rep_csv(info)
         #process_stat_csv(info)
-        process_nationalpolls(info, 'D')
+        process_nationalpolls(info, 'R')
         self.redirect("/")
 
 class Landing(BaseHandler):
