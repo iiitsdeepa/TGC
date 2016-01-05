@@ -1,7 +1,7 @@
 #this program converts the raw txt files of congressional members, and converts them to CSV files of just first and last name
 
-f = open('2016-national-gop-primary.csv')
-n = open('111membs.csv', 'w')
+f = open('nationaldemprimary_noheaders.csv')
+n = open('san_nationaldemprimary_noheaders.csv', 'w')
 #n = open('111membs.csv', 'w')
 linenum = 0
 for l in iter(f):

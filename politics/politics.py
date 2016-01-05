@@ -140,8 +140,8 @@ def process_nationalpolls(blob_info, party):
     for row in reader:
         row_str = row[0]
         if party == 'D':
-            pollster, start_date, end_date, entry_date, popsize, poptype, mode, hill, sanders, omalley, biden, chafee, lessig, webb, undecided = row_str.split(',')
-            entry = NationalDemocraticPrimary(pollster=pollster, start_date=start_date, end_date=end_date, entry_date=entry_date, popsize=popsize, poptype=poptype, mode=mode, hill=int(hill), sanders=int(sanders), omalley=int(omalley), biden=int(biden), chafee=int(chafee), lessig=int(lessig), webb=int(webb), undecided=int(undecided))
+            d = row_str.split(',')
+            entry = NationalDemocraticPrimary(pollster=d[0], start_date=d[1], end_date=d[2], entry_date=d[3], popsize=d[4], poptype=d[5], mode=d[6], hill=int(d[7]), sanders=int(d[8]), omalley=int(d[9]), biden=int(d[10]), chafee=int(d[11]), lessig=int(d[12]), webb=int(d[13]), undecided=int(d[14]), url=d[15])
             entry.put()
 #-------------------------Database Classes------------------------------
 class User(db.Model):
