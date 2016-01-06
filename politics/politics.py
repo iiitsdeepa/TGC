@@ -584,17 +584,19 @@ class ElectionData(BaseHandler):
         gopdata = json.loads(repu)
         tru, sant, rub, pau, pat, kas, bus, huc, fio, cru, chri, car, gil, gra, jin, per, wal, rundec = -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
         todaydate = datetime.today()
-        topdaterep = datetime.min
+        topdategop = datetime.min
         topdatedem = datetime.min
-        demteststring = ""
-        gopteststring = ""
-        #topdaterep = GqlQuery("SELECT entry_date FROM NationalRepublicanPrimary ORDER BY entry_date DESC")
-        #topdatedem = GqlQuery("SELECT entry_date FROM NationalDemocraticPrimary ORDER BY entry_date DESC")
+        tempgopdate = GqlQuery("SELECT * FROM NationalRepublicanPrimary ORDER BY end_date DESC").get()
+        tempdemdate = GqlQuery("SELECT * FROM NationalDemocraticPrimary ORDER BY end_date DESC").get()
+        topdategop = tempgopdate.end_date
+        topdatedem = tempdemdate.end_date
         for i in gopdata:
             polls = i["pollster"]
-            end = i["end_date"]
-            start = i["start_date"]
+            notend = i["end_date"]
+            notstart = i["start_date"]
             method = i["method"]
+            start = datetime.strptime(notstart, '%Y-%m-%d')
+            end = datetime.strptime(notend, '%Y-%m-%d')
             sourceurl = i["source"]
             for j in i["questions"]:
                 tru, sant, rub, pau, pat, kas, bus, huc, fio, cru, chri, car, gil, gra, jin, per, wal, rundec = -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
@@ -626,17 +628,17 @@ class ElectionData(BaseHandler):
                             chri = int(k["value"])
                         if (k["choice"] == "Carson"):
                             car = int(k["value"])
-                    gopteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(tru) + "," + str(cru) + "," + str(rub) + "," + str(kas) + "," + str(car) + "," + str(bus) + "," + str(chri) + "," + str(pau) + "," + str(fio) + "," + str(huc) + "," + str(sant) + "," + str(gil) + "," + str(gra) + "," + str(jin) + "," + str(pat) + "," + str(per) + "," + str(wal) + "," + str(rundec)
-                    logging.error(gopteststring)
-                    #if (todaydate > topdaterep):str(
-                        #entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop,, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
-                        #entry.put()
+                    if (end > topdategop):
+                        entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
+                        entry.put()
                             
         cli, sand, omal, cha, web, bid, dundec = -1, -1, -1, -1, -1, -1, -1
         for i in demdata:
             polls = i["pollster"]
-            end = i["end_date"]
-            start = i["start_date"]
+            notend = i["end_date"]
+            notstart = i["start_date"]
+            start = datetime.strptime(notstart, '%Y-%m-%d')
+            end = datetime.strptime(notend, '%Y-%m-%d')
             method = i["method"]
             sourceurl = i["source"]
             for j in i["questions"]:
@@ -651,11 +653,9 @@ class ElectionData(BaseHandler):
                             sand = int(k["value"])
                         if (k["choice"] == "O'Malley"):
                             omal = int(k["value"])
-                    demteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(cli) + "," + str(sand) + "," + str(omal) + "," + str(cha) + "," + str(web) + "," + str(bid) + "," + str(dundec)
-                    logging.error(demteststring)
-                    #if (todaydate > topdatedem):
-                        #entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
-                        #entry.put()
+                    if (end > topdatedem):
+                        entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
+                        entry.put()
     def get(self):
         self.getNationalPolls()
 
