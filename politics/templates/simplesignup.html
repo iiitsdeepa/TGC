@@ -13,15 +13,30 @@
     </head>
 
 <body>
-  <h1>The Glass Capitol</h1>
-  <h2>Government Transparency At Its Finest</h2>
   <div id='construction'>Coming Early 2016!</div>
-  
-  <form method="post" name="signup" id='signup_form' onsubmit="javascript:submitSign();return false;">
-    Email:
-    <input id='email' type="text" name="email">
-    <input id='subbutton' type='button' value='submit' onclick="javascript:submitSign();return false;">
-  </form>
+  <div id='stuff'>
+    <div id='logo'><img src='/images/gclogo_noback.png' alt='...'></div>
+    <h1>The Glass Capitol</h1>
+    <h3>The way we interact with our politicians and media is about to change forever. Its time our politics entered the new digital age.</h3>
+  </div>
+
+  <style>
+    html, body{margin:0;color:white;text-align:center;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;height:100%;
+    }
+    body{
+      background:#0E1C32;
+      background: -webkit-linear-gradient(left top,#0E1C32,#162d50); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(bottom right,#0E1C32,#162d50); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(bottom right,#0E1C32,#162d50); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(to bottom right,#0E1C32,#162d50); /* Standard syntax */
+    }
+    #construction{padding:10px;background:yellow;font-size:150%;color:black;font-weight:bold;border-top:dashed black 5px;border-bottom:dashed black 5px;}
+    #stuff{position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);}
+    h1{font-size:450%;font-weight:bold;}
+    h3{color:#ff3333;}
+    #logo img{height:100px;}
+    input{text-align:center;padding:10px;font-size:150%;}
+  </style>
 
   <script>
     function submitSign() {

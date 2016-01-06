@@ -1,3 +1,19 @@
+function partySelect(party){
+    console.log('selectingparty')
+    if(party=='D'){
+        $('#dem_select').addClass('partyselected');
+        $('#repub_select').removeClass('partyselected');
+        $('#dempollgraph').css('display','block')
+        $('#repubpollgraph').css('display','none')
+    }
+    else if (party=='R'){
+        $('#repub_select').addClass('partyselected');
+        $('#dem_select').removeClass('partyselected');
+        $('#dempollgraph').css('display','none')
+        $('#repubpollgraph').css('display','block')
+    }
+}
+
 function InitChart() {
     var data = [{
         "sale": "202",
@@ -82,11 +98,22 @@ function InitChart() {
         .attr('fill', 'none');
 }
 
-function pullData(){
-    topull = $('#dataref').val()
-    $.post('/datatest', {topull:topull}, function(data){
-        console.log(data)
-    });
+function pullData(route,dataname){
+    $.post(route, {dataname:dataname}, function(data){handleData(data,dataname)});
+}
+
+function organizedDownload(){
+    input = $('#dataref').val().split(',')
+    i = input.length - 1
+    while (i > 0){
+        pullData(input[0],input[i])
+        i --;
+    }
+}
+
+function handleData(data,dataname){
+    console.log(dataname)
+    //console.log(data)
 }
 
 
@@ -94,5 +121,6 @@ function pullData(){
 $( document ).ready(function() {
     console.log( "ready!" );
     InitChart();
-    pullData();
+    organizedDownload();
+    partySelect('D');
 });

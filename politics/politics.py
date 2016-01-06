@@ -500,7 +500,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_senator_csv(info)
         #process_rep_csv(info)
         #process_stat_csv(info)
-        process_nationalpolls(info, 'D')
+        process_nationalpolls(info, 'R')
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -564,7 +564,29 @@ class Vprop(BaseHandler):
     def post(self):
         self.render('nlanding.html')
 
-class ElectionData(BaseHandler):
+class PollServer(BaseHandler):
+    def get(self):
+        self.redirect('/')
+
+    def post(self):
+        dataname = self.request.get('dataname')
+        #pull that data associated with dataname, package it, and return it
+        data = ''
+        if dataname == 'repub_national':
+            data = 'entry_date,trump,cruz,rubio,carson,bush,christie,paul,fiorina,huckabee,kasich,santorum,gilmore,gram,jindal,pataki,perry,walker,undecided\n'
+            for e in GqlQuery("SELECT entry_date,trump,cruz,rubio,carson,bush,christie,paul,fiorina,huckabee,kasich,santorum,gilmore,gram,jindal,pataki,perry,walker,undecided FROM NationalRepublicanPrimary ORDER BY entry_date DESC"):
+                line = str(e.entry_date)+','+str(e.trump)+','+str(e.cruz)+','+str(e.rubio)+','+str(e.carson)+','+str(e.bush)+','+str(e.christie)+','+str(e.paul)+','+str(e.fiorina)+','+str(e.huckabee)+','+str(e.kasich)+','+str(e.santorum)+','+str(e.gilmore)+','+str(e.gram)+','+str(e.jindal)+','+str(e.pataki)+','+str(e.perry)+','+str(e.walker)+','+str(e.undecided)+'\n'
+                data += line
+        elif dataname == 'dem_national':
+            data = 'entry_date,hill,sanders,omalley,chafee,webb,biden,undecided,url'
+            for e in GqlQuery("SELECT entry_date,hill,sanders,omalley,chafee,webb,biden,undecided FROM NationalDemocraticPrimary ORDER BY entry_date DESC"):
+                line = str(e.entry_date)+','+str(e.hill)+','+str(e.sanders)+','+str(e.omalley)+','+str(e.chafee)+','+str(e.webb)+','+str(e.biden)+','+str(e.undecided)+'\n'
+                data += line
+        
+        self.response.out.write(data)
+
+
+class Update(BaseHandler):
     def getNationalPolls(self):
         #make api call to get most recent batch of poll data
         #logging.error('whats up')
@@ -658,20 +680,11 @@ class ElectionData(BaseHandler):
                         entry.put()
     def get(self):
         self.getNationalPolls()
+        self.redirect('/')
 
     def post(self):
         #get type of data to pull
-        topull = self.request.get('topull')
-
-        #pull that data, package, and return
-        data = ''
-        for e in GqlQuery("SELECT entry_date,trump,cruz,rubio,carson,bush,christie,paul,fiorina,huckabee,kasich,santorum,gilmore,gram,jindal,pataki,perry,walker,undecided FROM NationalRepublicanPrimary ORDER BY entry_date DESC"):
-            line = str(e.entry_date)+','+str(e.trump)+','+str(e.cruz)+','+str(e.rubio)+','+str(e.carson)+','+str(e.bush)+','+str(e.christie)+','+str(e.paul)+','+str(e.fiorina)+','+str(e.huckabee)+','+str(e.kasich)+','+str(e.santorum)+','+str(e.gilmore)+','+str(e.gram)+','+str(e.jindal)+','+str(e.pataki)+','+str(e.perry)+','+str(e.walker)+','+str(e.undecided)+'\n'
-            data += line
-
-        logging.error(data)
-        self.response.out.write(data)
-
+        self.redirect('/')
 
 
 
@@ -684,5 +697,6 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/feedback', Feedback),
     ('/prop', Vprop),
-    ('/datatest', ElectionData)
+    ('/pull/polldata', PollServer),
+    ('/updateship', Update)
 ], debug=True)

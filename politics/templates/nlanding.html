@@ -102,8 +102,14 @@
 			<h4>Wave goodbye to the clamour and inherent bias of traditional media.</h4>
 		</div>
 		<div id='current_standings' class='leftpane'>
-			<input id='dataref' value='nationalpolls' type='hidden'>
-			<div class='graphback'></div>
+			<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
+			<h3 class='visualtitle'>Current National Standings</h3>
+			<div id='partyselector'>
+				<div id='dem_select' class='partyselect dem' onclick="javascript:partySelect('D');return false;">Democrats</div>
+				<div id='repub_select' class='partyselect repub' onclick="javascript:partySelect('R');return false;">Republicans</div>				
+			</div>
+			<div id='dempollgraph' class='graphback'></div>
+			<div id='repubpollgraph' class='graphback'></div>
 			<div id='tableback'></div>
 		</div>
 	</div>

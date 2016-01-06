@@ -10,6 +10,44 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: NationalDemocraticPrimary
+  properties:
+  - name: entry_date
+    direction: desc
+  - name: biden
+  - name: chafee
+  - name: hill
+  - name: omalley
+  - name: sanders
+  - name: undecided
+  - name: url
+  - name: webb
+
+- kind: NationalDemocraticPrimary
+  properties:
+  - name: entry_date
+    direction: desc
+  - name: biden
+  - name: chafee
+  - name: hill
+  - name: omalley
+  - name: sanders
+  - name: undecided
+  - name: webb
+
+- kind: NationalRepublicanPrimary
+  properties:
+  - name: entry_date
+    direction: desc
+  - name: biden
+  - name: chafee
+  - name: hill
+  - name: omalley
+  - name: sanders
+  - name: undecided
+  - name: url
+  - name: webb
+
 - kind: NationalRepublicanPrimary
   properties:
   - name: entry_date

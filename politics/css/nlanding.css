@@ -7,6 +7,9 @@
 .vpoint h2{text-align:left;}
 .leftpane{float:left;}
 .rightpane{float:right;position:relative;}
+.visualtitle{text-align:center}
+.dem{background:blue;}
+.repub{background:red;}
 #partycomp{width:600px;}
 #partycomp h4{text-align:center;}
 #pcomptable{border-spacing:0;width:100%;}
@@ -18,5 +21,10 @@
 #connectionblurb{}
 #findreps{background:#EAEAEA;height:500px;padding:20px;width:50%;}
 .graphimg{width:50%;}
+#partyselector{display:flex;margin:10px 0;}
+.partyselect{padding:10px;width:50%;text-align:center;cursor:pointer;}
+.partyselected{font-weight:bold;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 #currenntpolls{max-width:100vw;}
-.graphback{background:purple;width:500px;height:350px;}
+.graphback{display:none;width:500px;height:350px;}
+#dempollgraph{background:lightblue;}
+#repubpollgraph{background:lightcoral;}
