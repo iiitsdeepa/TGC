@@ -146,17 +146,17 @@ def process_nationalpolls(blob_info, party):
         if party == 'D':
             d = row_str.split(',')
             a = d[3].split(' UTC')
-            startupdate = datetime.datetime.strptime(d[1], '%Y-%m-%d')
-            endupdate = datetime.datetime.strptime(d[2], '%Y-%m-%d')
-            update = datetime.datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
+            startupdate = datetime.strptime(d[1], '%Y-%m-%d')
+            endupdate = datetime.strptime(d[2], '%Y-%m-%d')
+            update = datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
             entry = NationalDemocraticPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5], mode=d[6], hill=int(d[7]), sanders=int(d[8]), omalley=int(d[9]), biden=int(d[10]), chafee=int(d[11]), lessig=int(d[12]), webb=int(d[13]), undecided=int(d[14]), url=d[15])
             entry.put()
         if party == 'R':
             d = row_str.split(',')
             a = d[3].split(' UTC')
-            startupdate = datetime.datetime.strptime(d[1], '%Y-%m-%d')
-            endupdate = datetime.datetime.strptime(d[2], '%Y-%m-%d')
-            update = datetime.datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
+            startupdate = datetime.strptime(d[1], '%Y-%m-%d')
+            endupdate = datetime.strptime(d[2], '%Y-%m-%d')
+            update = datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
             entry = NationalRepublicanPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5],mode=d[6],trump=int(d[7]),cruz=int(d[8]),rubio=int(d[9]),carson=int(d[10]),bush=int(d[11]),christie=int(d[12]),paul=int(d[13]),fiorina=int(d[14]),huckabee=int(d[15]),kasich=int(d[16]),santorum=int(d[17]),gilmore=int(d[18]),gram=int(d[19]),jindal=int(d[20]),pataki=int(d[21]),perry=int(d[22]),walker=int(d[23]),undecided=int(d[24]),url=d[25])
             entry.put()
 #-------------------------Database Classes------------------------------
@@ -565,7 +565,7 @@ class Vprop(BaseHandler):
         self.render('nlanding.html')
 
 class ElectionData(BaseHandler):
-    def getNatioalPolls(self):
+    def getNationalPolls(self):
         #make api call to get most recent batch of poll data
         #logging.error('whats up')
         #compare api data to most recent data from datastore IF !=, append db with data
@@ -628,9 +628,9 @@ class ElectionData(BaseHandler):
                             car = int(k["value"])
                     gopteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(tru) + "," + str(cru) + "," + str(rub) + "," + str(kas) + "," + str(car) + "," + str(bus) + "," + str(chri) + "," + str(pau) + "," + str(fio) + "," + str(huc) + "," + str(sant) + "," + str(gil) + "," + str(gra) + "," + str(jin) + "," + str(pat) + "," + str(per) + "," + str(wal) + "," + str(rundec)
                     logging.error(gopteststring)
-                    if (todaydate > topdaterep):str(
-                        entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop,, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
-                        entry.put()
+                    #if (todaydate > topdaterep):str(
+                        #entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop,, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
+                        #entry.put()
                             
         cli, sand, omal, cha, web, bid, dundec = -1, -1, -1, -1, -1, -1, -1
         for i in demdata:
@@ -653,11 +653,11 @@ class ElectionData(BaseHandler):
                             omal = int(k["value"])
                     demteststring = str(polls) + "," + str(start) + "," + str(end) + "," + str(todaydate) + "," + str(pop) + "," + str(cli) + "," + str(sand) + "," + str(omal) + "," + str(cha) + "," + str(web) + "," + str(bid) + "," + str(dundec)
                     logging.error(demteststring)
-                    if (todaydate > topdatedem):
-                        entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
-                        entry.put()
+                    #if (todaydate > topdatedem):
+                        #entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
+                        #entry.put()
     def get(self):
-        self.getNatioalPolls()
+        self.getNationalPolls()
 
 
 

@@ -82,11 +82,15 @@ function InitChart() {
         .attr('fill', 'none');
 }
 
-
+function pullData(){
+    topull = #('#dataref').attr('value')
+    console.log(topull)
+}
 
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
     console.log( "ready!" );
     InitChart();
+    pullData();
 });
