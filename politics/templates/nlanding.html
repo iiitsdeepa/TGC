@@ -2,18 +2,20 @@
 
 {% block content %}
 	<link rel='stylesheet' href='css/nlanding.css'/>
+	<script type="text/javascript" src="/js/vprop.js"></script>
 	<div id='opening'>
 		<h1>Government Transparency At Its Finest</h1>
 		<h3>All the facts to inform us, and a network to unite us</h3>
 		<img id='centerpiece' src='/images/fullglasscapitol.png' alt='...'>
 	</div>
 
-	<div id='facts_wrapper' class='wrapper'>
-		<div id='factsblurb' class='vpoint'>
+	<div class='section'>
+		<div id='factsblurb' class='vpoint leftpane'>
 			<h2>Just The Facts, All The Facts</h2>
 			<h4>A single place where you can find all government related data properly sourced and un-opinionated so that you can make decisions for yourself.</h4>
 		</div>
-		<div id='partycomp'>
+		
+		<div id='partycomp' class='rightpane'>
 			<h4>The Party Platforms</h4>
 			<table id='pcomptable'>
 				<tr id='pcomptitles'>
@@ -72,38 +74,38 @@
 		</div>
 	</div>
 
-	<div id='investigate_wrapper' class='wrapper'>
-		<div id='investigateblurb' class='vpoint'>
+	<div class='section'>
+		<div id='investigateblurb' class='vpoint rightpane'>
 			<h2>Make Your Own Conclusions</h2>
 			<h4>When we can all see and discuss our government's record clearly we can make the best decisions at the voting booths.</h4>
 		</div>
-		<div id='effectiveness'>
-			this will be a graph of congressional effectiveness
-			<img class='graphimg' src='/images/graph1.png' alt='... not graphtastic'>
+		<div id='effectiveness' class='leftpane'>
+			<svg class="currentpolls" width="600" height="500"></svg>
 		</div>
 	</div>
 
-	<div id='connection_wrapper' class='wrapper'>
-		<div id='connectionblurb' class='vpoint'>
+	<div class='section'>
+		<div id='connectionblurb' class='vpoint leftpane'>
 			<h2>Personalize Your Connection To Government</h2>
 			<h4>Your representative's voting record for you to judge with issues you care about front and center.</h4>
 		</div>
-		<div id='findreps'>
+		<div id='findreps' class='rightpane'>
 			<h4>These are the the leaders of congress</h4>
 			<h3>Find Your Representatives, see what they're doing</h3>
 			this will be a showcase of the two current leaders of congress. Speaker for the House and Senate Majority Leader. It includes a "use location button" to develop a more personal view of the users own representatives.
 		</div>
 	</div>
 
-	<div id='freedom_wrapper' class='wrapper'>
-		<div id='freedomblurb' class='vpoint'>
+	<div class='section'>
+		<div id='freedomblurb' class='vpoint rightpane'>
 			<h2>Free Yourself From Traditional Media</h2>
 			<h4>Wave goodbye to the clamour and inherent bias of traditional media.</h4>
 		</div>
-		<div id='current standings'>
-			<input id='dataref' type="hidden" value='nationalpolls'>
-			This is will be a graph of current presidential standings
-			<img class='graphimg' src='/images/graph1.png' alt='... not graphtastic'>
+		<div id='current_standings' class='leftpane'>
+			<input id='dataref' value='nationalpolls' type='hidden'>
+			<div class='graphback'></div>
+			<div id='tableback'></div>
 		</div>
 	</div>
+
 {% endblock %}

@@ -83,8 +83,10 @@ function InitChart() {
 }
 
 function pullData(){
-    topull = #('#dataref').attr('value')
-    console.log(topull)
+    topull = $('#dataref').val()
+    $.post('/datatest', {topull:topull}, function(data){
+        console.log(data)
+    });
 }
 
 

@@ -500,7 +500,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_senator_csv(info)
         #process_rep_csv(info)
         #process_stat_csv(info)
-        process_nationalpolls(info, 'R')
+        process_nationalpolls(info, 'D')
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -658,6 +658,20 @@ class ElectionData(BaseHandler):
                         #entry.put()
     def get(self):
         self.getNationalPolls()
+
+    def post(self):
+        #get type of data to pull
+        topull = self.request.get('topull')
+
+        #pull that data, package, and return
+        data = ''
+        for e in GqlQuery("SELECT entry_date,trump,cruz,rubio,carson,bush,christie,paul,fiorina,huckabee,kasich,santorum,gilmore,gram,jindal,pataki,perry,walker,undecided FROM NationalRepublicanPrimary ORDER BY entry_date DESC"):
+            line = str(e.entry_date)+','+str(e.trump)+','+str(e.cruz)+','+str(e.rubio)+','+str(e.carson)+','+str(e.bush)+','+str(e.christie)+','+str(e.paul)+','+str(e.fiorina)+','+str(e.huckabee)+','+str(e.kasich)+','+str(e.santorum)+','+str(e.gilmore)+','+str(e.gram)+','+str(e.jindal)+','+str(e.pataki)+','+str(e.perry)+','+str(e.walker)+','+str(e.undecided)+'\n'
+            data += line
+
+        logging.error(data)
+        self.response.out.write(data)
+
 
 
 
