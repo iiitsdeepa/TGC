@@ -13,56 +13,7 @@ function partySelect(party){
     }
 }
 
-function initChart(dataarray,svgid,domain) {
-    console.log(svgid)
-    domains = domain.split(',')
-    console.log(domains[0])
-    console.log(domains[1])
-    var vis = d3.select('#'+svgid),
-        WIDTH = 600,
-        HEIGHT = 400,
-        MARGINS = {
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 50
-        },
-        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([2000, 2010]),
-        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([134, 215]),
-        xAxis = d3.svg.axis()
-        .scale(xScale),
-        yAxis = d3.svg.axis()
-        .scale(yScale)
-        .orient("left");
-    
-    vis.append("svg:g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-        .call(xAxis);
-    vis.append("svg:g")
-        .attr("class", "y axis")
-        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-        .call(yAxis);
-    var lineGen = d3.svg.line()
-        .x(function(d) {
-            return xScale(d.year);
-        })
-        .y(function(d) {
-            return yScale(d.sale);
-        })
-        .interpolate("basis");
-    vis.append('svg:path')
-        .attr('d', lineGen(dataarray[0]))
-        .attr('stroke', 'green')
-        .attr('stroke-width', 2)
-        .attr('fill', 'none');
-    vis.append('svg:path')
-        .attr('d', lineGen(dataarray[1]))
-        .attr('stroke', 'blue')
-        .attr('stroke-width', 2)
-        .attr('fill', 'none');
-    
-}
+
 
 function pullData(route,dataname){
     $.post(route, {dataname:dataname}, function(data){handleData(data,dataname)});
@@ -70,21 +21,31 @@ function pullData(route,dataname){
 
 function organizedDownload(){
     input = $('#dataref').val().split(',')
-    i = input.length - 1
-    while (i > 0){
+    for (i=input.length - 1;i > 0;i--){
         pullData(input[0],input[i])
-        i --;
     }
+}
+
+//helper function for parseVar
+function validateLine(line,index){
+    var ret = 0
+    date = new Date(line[0])
+    pos = parseInt(line[index])
+    if(pos >= 0){
+        ret = [date,pos]
+    }
+    return ret
 }
 
 function parseVar(data, index){
     var polldata = {pollarray:[]};
     for(i=1;i<data.length;i++){
         line = data[i].split(',')
-        if(line[index] != '-1'){
+        validated = validateLine(line,index)
+        if(validated != 0){
             polldata.pollarray.push({
-                "position" : parseInt(line[index]),
-                "date" : line[0]
+                "date" : validated[0],
+                "position" : validated[1],
             });
         }
     }
@@ -98,16 +59,59 @@ function handleData(data,dataname){
     for(j=1;j<column_names.length;j++){
         parseddata[j-1] = parseVar(datarows,j)
     }
-    edomain = datarows[1].split(',')[0]
-    sdomain = datarows[datarows.length - 2].split(',')[0]
-    domain = sdomain+','+edomain
+    edomain = new Date(datarows[1].split(',')[0].split(' ')[0])
+    sdomain = new Date(datarows[datarows.length - 2].split(',')[0].split(' ')[0])
+    domain = [sdomain,edomain]
     initChart(parseddata,dataname,domain)
+}
+
+function initChart(dataarray,svgid,domain) {
+
+    var vis = d3.select('#'+svgid),
+        WIDTH = 500,
+        HEIGHT = 350,
+        MARGINS = {
+            top: 50,
+            right: 50,
+            bottom: 50,
+            left: 50
+        },
+        xScale = d3.time.scale().range([MARGINS.left, WIDTH - MARGINS.right]).domain([domain[0],domain[1]]),
+        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 100]),
+        xAxis = d3.svg.axis().scale(xScale).ticks(10).tickFormat(d3.time.format("%b %Y")),
+        yAxis = d3.svg.axis().scale(yScale).orient("left");
+    
+    vis.append("svg:g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+        .call(xAxis)
+        .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)")
+    vis.append("svg:g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+        .call(yAxis);
+    var lineGen = d3.svg.line()
+        .x(function(d) {
+            return xScale(d.date);
+        })
+        .y(function(d) {
+            return yScale(d.position);
+        })
+        .interpolate("basis");
+    vis.append('svg:path')
+        .attr('d', lineGen(dataarray[0]))
+        .attr('stroke', 'red')
+        .attr('stroke-width', 2)
+        .attr('fill', 'none');
 }
 
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
-    console.log( "ready!" );
     organizedDownload();
     partySelect('D');
 });
