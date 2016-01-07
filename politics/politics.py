@@ -578,7 +578,7 @@ class PollServer(BaseHandler):
                 line = str(e.entry_date)+','+str(e.trump)+','+str(e.cruz)+','+str(e.rubio)+','+str(e.carson)+','+str(e.bush)+','+str(e.christie)+','+str(e.paul)+','+str(e.fiorina)+','+str(e.huckabee)+','+str(e.kasich)+','+str(e.santorum)+','+str(e.gilmore)+','+str(e.gram)+','+str(e.jindal)+','+str(e.pataki)+','+str(e.perry)+','+str(e.walker)+','+str(e.undecided)+'\n'
                 data += line
         elif dataname == 'dem_national':
-            data = 'entry_date,hill,sanders,omalley,chafee,webb,biden,undecided,url'
+            data = 'entry_date,hill,sanders,omalley,chafee,webb,biden,undecided\n'
             for e in GqlQuery("SELECT entry_date,hill,sanders,omalley,chafee,webb,biden,undecided FROM NationalDemocraticPrimary ORDER BY entry_date DESC"):
                 line = str(e.entry_date)+','+str(e.hill)+','+str(e.sanders)+','+str(e.omalley)+','+str(e.chafee)+','+str(e.webb)+','+str(e.biden)+','+str(e.undecided)+'\n'
                 data += line

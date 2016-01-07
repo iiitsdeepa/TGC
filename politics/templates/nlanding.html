@@ -80,7 +80,7 @@
 			<h4>When we can all see and discuss our government's record clearly we can make the best decisions at the voting booths.</h4>
 		</div>
 		<div id='effectiveness' class='leftpane'>
-			<svg class="currentpolls" width="600" height="500"></svg>
+			
 		</div>
 	</div>
 
@@ -108,8 +108,12 @@
 				<div id='dem_select' class='partyselect dem' onclick="javascript:partySelect('D');return false;">Democrats</div>
 				<div id='repub_select' class='partyselect repub' onclick="javascript:partySelect('R');return false;">Republicans</div>				
 			</div>
-			<div id='dempollgraph' class='graphback'></div>
-			<div id='repubpollgraph' class='graphback'></div>
+			<div id='dempollgraph' class='graphback'>
+				<svg id="dem_national" width="600" height="500"></svg>
+			</div>
+			<div id='repubpollgraph' class='graphback'>
+				<svg id="repub_national" width="600" height="500"></svg>
+			</div>
 			<div id='tableback'></div>
 		</div>
 	</div>

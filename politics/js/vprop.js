@@ -1,5 +1,4 @@
 function partySelect(party){
-    console.log('selectingparty')
     if(party=='D'){
         $('#dem_select').addClass('partyselected');
         $('#repub_select').removeClass('partyselected');
@@ -14,46 +13,12 @@ function partySelect(party){
     }
 }
 
-function InitChart() {
-    var data = [{
-        "sale": "202",
-        "year": "2000"
-    }, {
-        "sale": "215",
-        "year": "2002"
-    }, {
-        "sale": "179",
-        "year": "2004"
-    }, {
-        "sale": "199",
-        "year": "2006"
-    }, {
-        "sale": "134",
-        "year": "2008"
-    }, {
-        "sale": "176",
-        "year": "2010"
-    }];
-    var data2 = [{
-        "sale": "152",
-        "year": "2000"
-    }, {
-        "sale": "189",
-        "year": "2002"
-    }, {
-        "sale": "179",
-        "year": "2004"
-    }, {
-        "sale": "199",
-        "year": "2006"
-    }, {
-        "sale": "134",
-        "year": "2008"
-    }, {
-        "sale": "176",
-        "year": "2010"
-    }];
-    var vis = d3.select(".currentpolls"),
+function initChart(dataarray,svgid,domain) {
+    console.log(svgid)
+    domains = domain.split(',')
+    console.log(domains[0])
+    console.log(domains[1])
+    var vis = d3.select('#'+svgid),
         WIDTH = 600,
         HEIGHT = 400,
         MARGINS = {
@@ -87,15 +52,16 @@ function InitChart() {
         })
         .interpolate("basis");
     vis.append('svg:path')
-        .attr('d', lineGen(data))
+        .attr('d', lineGen(dataarray[0]))
         .attr('stroke', 'green')
         .attr('stroke-width', 2)
         .attr('fill', 'none');
     vis.append('svg:path')
-        .attr('d', lineGen(data2))
+        .attr('d', lineGen(dataarray[1]))
         .attr('stroke', 'blue')
         .attr('stroke-width', 2)
         .attr('fill', 'none');
+    
 }
 
 function pullData(route,dataname){
@@ -111,16 +77,37 @@ function organizedDownload(){
     }
 }
 
+function parseVar(data, index){
+    var polldata = {pollarray:[]};
+    for(i=1;i<data.length;i++){
+        line = data[i].split(',')
+        if(line[index] != '-1'){
+            polldata.pollarray.push({
+                "position" : parseInt(line[index]),
+                "date" : line[0]
+            });
+        }
+    }
+    return (polldata.pollarray)
+}
+
 function handleData(data,dataname){
-    console.log(dataname)
-    //console.log(data)
+    datarows = data.split('\n');
+    column_names = datarows[0].split(',');
+    var parseddata = new Array()
+    for(j=1;j<column_names.length;j++){
+        parseddata[j-1] = parseVar(datarows,j)
+    }
+    edomain = datarows[1].split(',')[0]
+    sdomain = datarows[datarows.length - 2].split(',')[0]
+    domain = sdomain+','+edomain
+    initChart(parseddata,dataname,domain)
 }
 
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
     console.log( "ready!" );
-    InitChart();
     organizedDownload();
     partySelect('D');
 });
