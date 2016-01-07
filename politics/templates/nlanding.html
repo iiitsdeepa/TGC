@@ -15,8 +15,8 @@
 			<h4>A single place where you can find all government related data properly sourced and un-opinionated so that you can make decisions for yourself.</h4>
 		</div>
 		
-		<div id='partycomp' class='rightpane'>
-			<h4>The Party Platforms</h4>
+		<div id='partycomp' class='visual rightpane'>
+			<h4 class='visualtitle'>The Party Platforms</h4>
 			<table id='pcomptable'>
 				<tr id='pcomptitles'>
 					<td></td>
@@ -79,8 +79,8 @@
 			<h2>Make Your Own Conclusions</h2>
 			<h4>When we can all see and discuss our government's record clearly we can make the best decisions at the voting booths.</h4>
 		</div>
-		<div id='effectiveness' class='leftpane'>
-			
+		<div id='effectiveness' class='visual leftpane'>
+			this will be an interactive section to help people develop their positions on different issues or policies. It's goal is to show users where their hidden bias and be a way to mitigate it
 		</div>
 	</div>
 
@@ -89,10 +89,8 @@
 			<h2>Personalize Your Connection To Government</h2>
 			<h4>Your representative's voting record for you to judge with issues you care about front and center.</h4>
 		</div>
-		<div id='findreps' class='rightpane'>
-			<h4>These are the the leaders of congress</h4>
-			<h3>Find Your Representatives, see what they're doing</h3>
-			this will be a showcase of the two current leaders of congress. Speaker for the House and Senate Majority Leader. It includes a "use location button" to develop a more personal view of the users own representatives.
+		<div id='findreps' class='visual rightpane'>
+			this section is where people can either use location data or enter an address to see a basic analysis of their congress people. Initially it'll show the leaders of the current congress, Paul Ryan, and Mitch McConnel
 		</div>
 	</div>
 
@@ -101,7 +99,7 @@
 			<h2>Free Yourself From Traditional Media</h2>
 			<h4>Wave goodbye to the clamour and inherent bias of traditional media.</h4>
 		</div>
-		<div id='current_standings' class='leftpane'>
+		<div id='current_standings' class='visual leftpane'>
 			<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
 			<h3 class='visualtitle'>Current National Standings</h3>
 			<div id='partyselector'>
@@ -109,10 +107,10 @@
 				<div id='repub_select' class='partyselect repub' onclick="javascript:partySelect('R');return false;">Republicans</div>				
 			</div>
 			<div id='dempollgraph' class='graphback'>
-				<svg id="dem_national" width="600" height="500"></svg>
+				<svg id="dem_national" class='svgvisual' width="600" height="500"></svg>
 			</div>
 			<div id='repubpollgraph' class='graphback'>
-				<svg id="repub_national" width="600" height="500"></svg>
+				<svg id="repub_national" class='svgvisual' width="600" height="500"></svg>
 			</div>
 			<div id='tableback'></div>
 		</div>

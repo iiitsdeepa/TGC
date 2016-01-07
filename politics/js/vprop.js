@@ -68,7 +68,7 @@ function handleData(data,dataname){
 function initChart(dataarray,svgid,domain) {
 
     var vis = d3.select('#'+svgid),
-        WIDTH = 500,
+        WIDTH = 600,
         HEIGHT = 350,
         MARGINS = {
             top: 50,
@@ -102,16 +102,26 @@ function initChart(dataarray,svgid,domain) {
             return yScale(d.position);
         })
         .interpolate("basis");
-    vis.append('svg:path')
-        .attr('d', lineGen(dataarray[0]))
-        .attr('stroke', 'red')
-        .attr('stroke-width', 2)
-        .attr('fill', 'none');
+
+    for(i=0;i<dataarray.length;i++){
+        vis.append('svg:path')
+            .attr('d', lineGen(dataarray[i]))
+            .attr('stroke', 'red')
+            .attr('stroke-width', 2)
+            .attr('fill', 'none');
+    }
 }
 
 
-// A $( document ).ready() block.
+//on page load
 $( document ).ready(function() {
     organizedDownload();
     partySelect('D');
 });
+
+//on window resize (makes the svgs responsive)
+$(window).on("resize", function() {
+  var targetWidth = $('.visual').width();
+  the_chart.attr("width", targetWidth);
+  the_chart.attr("height", Math.round(targetWidth / aspect));
+}).trigger("resize");
