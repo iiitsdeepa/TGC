@@ -2,14 +2,14 @@ function partySelect(party){
     if(party=='D'){
         $('#dem_select').addClass('partyselected');
         $('#repub_select').removeClass('partyselected');
-        $('#dempollgraph').css('display','block')
-        $('#repubpollgraph').css('display','none')
+        $('#dem_national').css('display','block')
+        $('#repub_national').css('display','none')
     }
     else if (party=='R'){
         $('#repub_select').addClass('partyselected');
         $('#dem_select').removeClass('partyselected');
-        $('#dempollgraph').css('display','none')
-        $('#repubpollgraph').css('display','block')
+        $('#dem_national').css('display','none')
+        $('#repub_national').css('display','block')
     }
 }
 
@@ -66,33 +66,43 @@ function handleData(data,dataname){
 }
 
 function initChart(dataarray,svgid,domain) {
-
-    var vis = d3.select('#'+svgid),
-        WIDTH = 600,
-        HEIGHT = 350,
-        MARGINS = {
-            top: 50,
-            right: 50,
-            bottom: 50,
-            left: 50
-        },
-        xScale = d3.time.scale().range([MARGINS.left, WIDTH - MARGINS.right]).domain([domain[0],domain[1]]),
-        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 100]),
-        xAxis = d3.svg.axis().scale(xScale).ticks(10).tickFormat(d3.time.format("%b %Y")),
-        yAxis = d3.svg.axis().scale(yScale).orient("left");
+    var margin = {top: 0, right: 20, bottom: 80, left: 20}
+    width = 600 - margin.left - margin.right;
+    height = 400 - margin.top - margin.bottom;
     
-    vis.append("svg:g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+    var xScale = d3.time.scale().range([margin.left, width - margin.right]).domain([domain[0],domain[1]]);
+    var yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([0, 100]);
+
+    var chart = d3.select('#'+svgid)
+        .append('svg:svg')
+        .attr('width', width + margin.right + margin.left)
+        .attr('height', height + margin.top + margin.bottom)
+        .attr('id', svgid+'_chart')
+        .attr('class', 'chart')
+        .attr('viewBox', '0 0 600 400');
+
+    var main = chart.append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('class', 'main');
+
+    var xAxis = d3.svg.axis().scale(xScale).ticks(10).tickFormat(d3.time.format("%b %Y"));
+    var yAxis = d3.svg.axis().scale(yScale).orient("left");
+    
+    main.append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .attr('class', 'x axis')
         .call(xAxis)
         .selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
-            .attr("transform", "rotate(-65)")
-    vis.append("svg:g")
+            .attr("transform", "rotate(-65)");
+
+    main.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+        .attr("transform", "translate(" + (margin.left) + ",0)")
         .call(yAxis);
     var lineGen = d3.svg.line()
         .x(function(d) {
@@ -104,7 +114,7 @@ function initChart(dataarray,svgid,domain) {
         .interpolate("basis");
 
     for(i=0;i<dataarray.length;i++){
-        vis.append('svg:path')
+        main.append('g:path')
             .attr('d', lineGen(dataarray[i]))
             .attr('stroke', 'red')
             .attr('stroke-width', 2)
@@ -122,6 +132,6 @@ $( document ).ready(function() {
 //on window resize (makes the svgs responsive)
 $(window).on("resize", function() {
   var targetWidth = $('.visual').width();
-  the_chart.attr("width", targetWidth);
-  the_chart.attr("height", Math.round(targetWidth / aspect));
+  //the_chart.attr("width", targetWidth);
+  //the_chart.attr("height", Math.round(targetWidth / aspect));
 }).trigger("resize");
