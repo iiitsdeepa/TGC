@@ -66,7 +66,7 @@ function handleData(data,dataname){
 }
 
 function initChart(dataarray,svgid,domain) {
-    var margin = {top: 0, right: 20, bottom: 80, left: 20}
+    var margin = {top: 20, right: 20, bottom: 50, left: 20}
     width = 600 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
     
@@ -91,7 +91,7 @@ function initChart(dataarray,svgid,domain) {
     var yAxis = d3.svg.axis().scale(yScale).orient("left");
     
     main.append('g')
-        .attr('transform', 'translate(0,' + height + ')')
+        .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
         .attr('class', 'x axis')
         .call(xAxis)
         .selectAll("text")
@@ -102,7 +102,7 @@ function initChart(dataarray,svgid,domain) {
 
     main.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(" + (margin.left) + ",0)")
+        .attr("transform", "translate(" + (margin.left) + ","+(margin.top-margin.bottom)+")")
         .call(yAxis);
     var lineGen = d3.svg.line()
         .x(function(d) {
@@ -115,23 +115,26 @@ function initChart(dataarray,svgid,domain) {
 
     for(i=0;i<dataarray.length;i++){
         main.append('g:path')
+            .attr("transform", "translate(0,"+(margin.top-margin.bottom)+")")
             .attr('d', lineGen(dataarray[i]))
             .attr('stroke', 'red')
             .attr('stroke-width', 2)
             .attr('fill', 'none');
     }
+    var targetWidth = $('.visual').width();
+    $('.chart').attr("width", targetWidth);
 }
 
 
 //on page load
-$( document ).ready(function() {
+$( document ).ready(function(){
     organizedDownload();
     partySelect('D');
 });
 
+
 //on window resize (makes the svgs responsive)
 $(window).on("resize", function() {
   var targetWidth = $('.visual').width();
-  //the_chart.attr("width", targetWidth);
-  //the_chart.attr("height", Math.round(targetWidth / aspect));
+  $('.chart').attr("width", targetWidth);
 }).trigger("resize");

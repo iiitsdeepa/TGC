@@ -89,7 +89,7 @@ h3{margin-bottom:5px;}
 /*Mobile and Tablet*/
 @media screen and (max-width: 965px){
 	#popuplayer{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;opacity:1;}
-	#nav_wrapper{width:100%;font-size:14px;}
+	#nav_wrapper{font-size:14px;}
 	#badge{display:none;position:absolute;top: 0;left: 10px;padding-left: 30px;}
 	#navletter{display: none;}
 	#nav{right: 40px;}
