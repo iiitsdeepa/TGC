@@ -1,8 +1,8 @@
 
-#opening{position:relative;padding:170px 5vw 50px 5vw;min-height:calc(90vh - 220px);}
-#opening h1{text-align:left;}
+#opening{position:relative;padding:100px 5vw;min-height:calc(90vh - 220px);}
+#opening h1,h3{text-align:center;}
 .section{position:relative;width:calc(100% - 10vw);padding:50px 5vw;display:inline-block;}
-#centerpiece{position:absolute;bottom:50px;right:5vw;width:50%;}
+#centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
 .vpoint h2,h4{display:block;text-align:left;}
 .leftpane{float:left;}
@@ -32,9 +32,7 @@
 
 /*Mobile and Tablet*/
 @media screen and (max-width: 965px){
-	#opening h1,h3{text-align:center;}
 	.vpoint h2{text-align:center;}
-	#centerpiece{display:block;position:relative;margin:100px auto;width:80vw;}
 	.leftpane{position:relative;float:none;margin:0 auto;}
 	.rightpane{position:relative;float:none;margin:0 auto;}
 }
