@@ -1,4 +1,4 @@
 cron:
 - description: daily summary job
-  url: /datatest
+  url: /updateship
   schedule: every day 07:00
