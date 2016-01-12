@@ -1,0 +1,4 @@
+cron:
+- description: daily summary job
+  url: /datatest
+  schedule: every day 07:00
