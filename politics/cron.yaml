@@ -1,0 +1,4 @@
+cron:
+- description: daily summary job
+  url: /updateship
+  schedule: every day 07:00
