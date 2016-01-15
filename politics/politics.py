@@ -585,7 +585,6 @@ class PollServer(BaseHandler):
         
         self.response.out.write(data)
 
-
 class Update(BaseHandler):
     def getNationalPolls(self):
         #make api call to get most recent batch of poll data
@@ -686,7 +685,29 @@ class Update(BaseHandler):
         #get type of data to pull
         self.redirect('/')
 
+class Demo(BaseHandler):
+    def get(self):
+        self.render('demo.html')
 
+    def post(self):
+        demo = self.request.get('demo')
+        if demo:
+            params = self.getBig2()
+            self.write(params)
+
+        address = self.request.get('address')
+        if address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            repjson = self.pullReps(district)
+            self.write(repjson)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
