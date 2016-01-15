@@ -585,7 +585,6 @@ class PollServer(BaseHandler):
         
         self.response.out.write(data)
 
-
 class Update(BaseHandler):
     def getNationalPolls(self):
         #make api call to get most recent batch of poll data
@@ -686,7 +685,12 @@ class Update(BaseHandler):
         #get type of data to pull
         self.redirect('/')
 
+class Demo(BaseHandler):
+    def get(self):
+        self.render('demo.html')
 
+    def post(self):
+        self.render('demo.html')
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
@@ -697,6 +701,7 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/feedback', Feedback),
     ('/prop', Vprop),
+    ('/demo', Demo),
     ('/pull/polldata', PollServer),
     ('/updateship', Update)
 ], debug=True)
