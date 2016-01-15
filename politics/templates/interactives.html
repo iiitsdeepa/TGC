@@ -1,7 +1,6 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
-	<link rel='stylesheet' href='css/nlanding.css'/>
 	<script type="text/javascript" src="/js/vprop.js"></script>
 	<div id='opening'>
 		<img id='centerpiece' src='/images/fullglasscapitol.png' alt='...'>
@@ -114,4 +113,50 @@
 		</div>
 	</div>
 
+<style>
+
+#opening{position:relative;padding:100px 5vw;min-height:calc(90vh - 220px);}
+#opening h1,h3{text-align:center;}
+.section{position:relative;width:calc(100% - 10vw);padding:50px 5vw;display:inline-block;}
+#centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
+.vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
+.vpoint h2,h4{display:block;text-align:left;}
+.leftpane{float:left;}
+.rightpane{float:right;position:relative;}
+.visual{background:#EAEAEA;width:600px;min-height:500px;max-width:90vw;}
+.visualtitle{text-align:center;}
+.dem{background:blue;}
+.repub{background:red;}
+#pcomptable{border-spacing:0;width:100%;}
+#pcomptable img{height:50px;}
+#pcomptable td{height:50px;}
+#pcomptitles{padding:5px;}
+.dem{background:blue;}
+.repub{background:red;}
+.graphimg{width:50%;}
+#partyselector{display:flex;margin:10px 0;}
+.partyselect{padding:10px;width:50%;text-align:center;cursor:pointer;}
+.partyselected{font-weight:bold;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
+#current_standings{}
+.graphback{display:none;width:600px;height:400px;max-width:90vw}
+
+
+/*Mobile only*/
+@media screen and (max-width: 520px){
+	#opening{padding:100px 5vw 0 5vw;}
+}
+
+/*Mobile and Tablet*/
+@media screen and (max-width: 965px){
+	.vpoint h2{text-align:center;}
+	.leftpane{position:relative;float:none;margin:0 auto;}
+	.rightpane{position:relative;float:none;margin:0 auto;}
+}
+
+/*Large Desktop*/
+@media screen and (min-width: 1281px){
+	.visual{width:55%;}
+}
+
+</style>
 {% endblock %}

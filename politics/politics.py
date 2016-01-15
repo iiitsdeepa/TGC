@@ -505,9 +505,9 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("simplesignup.html")
+        self.render("vprop.html")
     def post(self):
-        self.render('simplesignup.html')
+        self.render('vprop.html')
 
 class About(BaseHandler):
     def get(self):
@@ -553,16 +553,16 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('testimonial.html')
+        self.render('feedback.html')
     def post(self):
-        self.render('testimonial.html')
+        self.render('feedback.html')
 
 class Vprop(BaseHandler):
     def get(self):
-        self.render('nlanding.html')
+        self.render('interactives.html')
 
     def post(self):
-        self.render('nlanding.html')
+        self.render('interactives.html')
 
 class PollServer(BaseHandler):
     def get(self):
@@ -690,13 +690,13 @@ class Update(BaseHandler):
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
-    ('/up', UploadHandler),
-    ('/upload', Upload),
+    ('/prop', Vprop),
+    ('/feedback', Feedback),
     ('/about', About),
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
-    ('/feedback', Feedback),
-    ('/prop', Vprop),
     ('/pull/polldata', PollServer),
-    ('/updateship', Update)
+    ('/updateship', Update),
+    ('/up', UploadHandler),
+    ('/upload', Upload),
 ], debug=True)
