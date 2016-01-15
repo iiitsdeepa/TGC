@@ -713,6 +713,7 @@ application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/prop', Vprop),
     ('/feedback', Feedback),
+    ('/demo', Demo),
     ('/about', About),
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
