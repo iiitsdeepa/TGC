@@ -66,7 +66,7 @@ function useLocation() {
 function gotGPS(position) {
     lat = position.coords.latitude;
     lng = position.coords.longitude;
-    $.post('/mreps', {lat: lat, lng: lng}, function(data){
+    $.post('/demo', {lat: lat, lng: lng}, function(data){
     	j = JSON.parse(data)
     	$('#reps_slider').attr('value', j.district)
     	$('#js_wrapper').css('display', 'block')
@@ -79,7 +79,7 @@ function useAddress(){
 	state = document.getElementById('state').value;
 	city = document.getElementById('city').value;
 	address = street+' '+city+' '+state
-	$.post('/mreps', {address: address}, function(data){
+	$.post('/demo', {address: address}, function(data){
     	j = JSON.parse(data)
     	$('#reps_slider').attr('value', j.district)
     	$('#js_wrapper').css('display', 'block')
@@ -89,7 +89,7 @@ function useAddress(){
 }
 
 $( document ).ready(function() {
-    $.post('/mreps', {demo: 'yes'}, function(data){
+    $.post('/demo', {demo: 'yes'}, function(data){
   		inputRepData(data)
     });
 });

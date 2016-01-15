@@ -690,7 +690,24 @@ class Demo(BaseHandler):
         self.render('demo.html')
 
     def post(self):
-        self.render('demo.html')
+        demo = self.request.get('demo')
+        if demo:
+            params = self.getBig2()
+            self.write(params)
+
+        address = self.request.get('address')
+        if address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            repjson = self.pullReps(district)
+            self.write(repjson)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
