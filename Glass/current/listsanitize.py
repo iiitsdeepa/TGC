@@ -50,6 +50,7 @@ def nameParse(a):
 for l in namelist_unsanitized:
 	s = atLarge(l.split(' '))
 	names = nameParse(s)
+	district = clipper(s[len(s)-1]
 	#sanitize line (consolidate 2 part names, make districts numbers, remove spaces, and make legit csv line)
 	if len(s) == 4:
 		lname = clipper(s[0],'rando')
@@ -57,7 +58,7 @@ for l in namelist_unsanitized:
 		district = clipper(s[3],'district')
 		nline = lname+','+fname+','+s[2]+','+district
 		#print nline
-	print names
+	print names,district
 
 namelist_unsanitized.close()
 namelist.close()
