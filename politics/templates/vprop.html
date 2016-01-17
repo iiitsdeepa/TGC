@@ -1,18 +1,21 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
-  <div id='construction'>Coming Early 2016!</div>
-  <div id='stuff'>
-    <div id='logo'><img src='/images/gclogo_noback.png' alt='...'></div>
-    <h1>The Glass Capitol</h1>
-    <h3>The way we interact with our politicians and media is about to change forever. Its time our politics entered the new digital age.</h3>
+  <div id='vprop'>
+    <div id='stuff'>
+      <h1>The Glass Capitol</h1>
+      <h3>The way we interact with our politicians and media is about to change forever. Its time our politics entered the new digital age.</h3>
+    </div>
+    <div id='colorizer'></div>
+    <img src='/images/flagswaving.png' style='position:absolute;bottom:0;left:0;width:100%;'>
   </div>
 
   <style>
-    html, body{margin:0;color:#0E1C32;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;height:100%;
-    }
+    html, body{color:#0E1C32;}
+    #vprop{height:90vh;padding-top:10vh;background-image: url("/images/basearial.png");background-size:100%;}
+    #colorizer{position:absolute;top:0;left:0;width:100%;height:95vh;background:#0E1C32;opacity:.0;}
     #construction{padding:10px;background:yellow;font-size:150%;color:black;font-weight:bold;border-top:dashed black 5px;border-bottom:dashed black 5px;}
-    #stuff{position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);}
+    #stuff{position:relative;margin:0 auto;width:600px;max-width:90vw;z-index:3}
     h1{font-size:450%;font-weight:bold;}
     h3{color:#ff3333;}
     #logo img{height:100px;}
