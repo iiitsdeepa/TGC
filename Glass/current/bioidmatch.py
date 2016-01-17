@@ -57,10 +57,12 @@ def getCongress(cnum):
 
 getCongress(113)
 
+#for the 112th
 #B001228,Bono Mack,Mary
 #B001276,Buerkle,Ann Marie
 #C001072,Carson,Andre
 #D000355,Dingell,John
+#D000533,Duncan,John
 #E000172,Emerson,Jo Ann
 #G000551,Grijalva,Raul
 #G000535,Gutierrez,Luis
@@ -81,4 +83,31 @@ getCongress(113)
 #V000081,Velazquez,Nydia
 #W000797,Wasserman Schultz,Debbie
 #Y000031,Young,C.
+#M000639,Menendez,Robert
+
+#for the 113th
+#C001097,Cardenas,Tony
+#C001072,Carson,Andre
+#D000355,Dingell,John
+#D000533,Duncan,John
+#G000551,Grijalva,Raul
+#G000535,Gutierrez,Luis
+#H001056,Herrera Beutler,Jaime
+#H000636,Hinojosa,Ruben
+#H001048,Hunter,Duncan
+#J000032,Jackson Lee,Sheila
+#J000255,Walter,Jones
+#K000379,Kennedy,Joseph
+#L000573,Labrador,Raul
+#L000570,Lujan,Ben
+#L000580,Lujan Grisham,Michelle
+#M001159,McMorris Rodgers,Cathy
+#M000725,Miller,George
+#N000187,Negrete McLeod,Gloria
+#P000604,Payne,Donald
+#S001156,Sanchez,Linda
+#S000248,Serrano,Jose
+#V000128,Van Hollen,Chris
+#V000081,Velazquez,Nydia
+#W000797,Wasserman Schultz,Debbie
 #M000639,Menendez,Robert
