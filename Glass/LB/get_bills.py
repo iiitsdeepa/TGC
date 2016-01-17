@@ -3,7 +3,9 @@ import json
 from time import sleep
 
 #opening log file
-csv = open('bills112.csv', 'w')
+billscsv = open('bills112.csv', 'w')
+cosponsors = open('cosponsors112.csv', 'w')
+keywords = open('keywords112.csv', 'w')
 
 congress = 112
 chambers=['hr','s']
