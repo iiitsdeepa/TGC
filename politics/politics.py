@@ -141,15 +141,10 @@ def process_politician_csv(blob_info):
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
         row_str = row[0]
-        count = 0
         temp = row_str.split(',')
         bioidquery = GqlQuery("SELECT * FROM Politician WHERE bioguide_id = :1", temp[9])
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
-            count = 0
-        else:
-            count = 1
-        if (count == 0):
             entry = Politician(in_office=temp[0],party=temp[1],gender=temp[2],state=temp[3],state_name=temp[4],distrank=temp[5],chamber=temp[6],birthday=temp[7],fyio=int(temp[8]),bioguide_id=temp[9],crp_id=temp[10],fec_ids=temp[11],name=temp[12],phone=temp[13],website=temp[14],contact_form=temp[15],twitter_id=temp[16],youtube_id=temp[17],facebook_id=temp[18])
             entry.put()
 
