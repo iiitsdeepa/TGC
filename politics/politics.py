@@ -505,9 +505,9 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("simplesignup.html")
+        self.render("vprop.html")
     def post(self):
-        self.render('simplesignup.html')
+        self.render('vprop.html')
 
 class About(BaseHandler):
     def get(self):
@@ -553,16 +553,16 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('testimonial.html')
+        self.render('feedback.html')
     def post(self):
-        self.render('testimonial.html')
+        self.render('feedback.html')
 
 class Vprop(BaseHandler):
     def get(self):
-        self.render('nlanding.html')
+        self.render('interactives.html')
 
     def post(self):
-        self.render('nlanding.html')
+        self.render('interactives.html')
 
 class PollServer(BaseHandler):
     def get(self):
@@ -584,7 +584,6 @@ class PollServer(BaseHandler):
                 data += line
         
         self.response.out.write(data)
-
 
 class Update(BaseHandler):
     def getNationalPolls(self):
@@ -686,17 +685,40 @@ class Update(BaseHandler):
         #get type of data to pull
         self.redirect('/')
 
+class Demo(BaseHandler):
+    def get(self):
+        self.render('demo.html')
 
+    def post(self):
+        demo = self.request.get('demo')
+        if demo:
+            params = self.getBig2()
+            self.write(params)
+
+        address = self.request.get('address')
+        if address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            repjson = self.pullReps(district)
+            self.write(repjson)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
-    ('/up', UploadHandler),
-    ('/upload', Upload),
+    ('/prop', Vprop),
+    ('/feedback', Feedback),
+    ('/demo', Demo),
     ('/about', About),
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
-    ('/feedback', Feedback),
-    ('/prop', Vprop),
     ('/pull/polldata', PollServer),
-    ('/updateship', Update)
+    ('/updateship', Update),
+    ('/up', UploadHandler),
+    ('/upload', Upload),
 ], debug=True)
