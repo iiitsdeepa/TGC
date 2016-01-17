@@ -3,9 +3,11 @@ import json
 from time import sleep
 
 #opening log file
-csv = open('bills112.csv', 'w')
+congress = 114
+billscsv = open('bills'+str(congress)+'.csv', 'w')
+cosponsorscsv = open('cosponsors'+str(congress)+'.csv', 'w')
+keywordscsv = open('keywords'+str(congress)+'.csv', 'w')
 
-congress = 112
 chambers=['hr','s']
 bill_url = 'https://congress.api.sunlightfoundation.com/bills?fields=bill_id,official_title,popular_title,short_title,nicknames,keywords,summary_short,urls,history.active,history.vetoed,history.vetoed_at,history.enacted,history.enacted_at,sponsor_id,cosponsor_ids,cosponsor_count,keywords&congress=%s&bill_type=%s&per_page=50&%sapikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
@@ -47,25 +49,34 @@ for c in chambers:
 				nicknames = '$$$'.join(nicknamesa)
 			except:
 		   		nicknames = 'None'
-		   	try:
-				keywordsa = r["keywords"].encode('utf-8')
-				keywords = '$$$'.join(keywordsa)
-				#keywords = "$$$".join(keywords)
-			except:
-		   		keywords = 'Nonel'
 		   	url = r["urls"]["congress"].encode('utf-8')
 		   	active = str(r["history"]["active"])
 		   	vetoed = str(r["history"]["vetoed"])
 		   	enacted = str(r["history"]["enacted"])
 		   	sponsor = r["sponsor_id"].encode('utf-8')
+		   	
+		   	#parse for cosponsorscsv and keyowrdscsv
 		   	try:
-				cosponsorsa = r["cosponsor_ids"].encode('utf-8')
-				cosponsors = '$$$'.join(cosponsorsa)
+				keywordsa = r["keywords"]
+				for k in iter(keywordsa):
+					line = bid+','+k.encode('utf-8')+'\n'
+					keywordscsv.write(line)
+			except:
+		   		keywords = 'None'
+		   	try:
+				cosponsorsa = r["cosponsor_ids"]
+				for c in iter(cosponsorsa):
+					line = bid+','+c.encode('utf-8')+'\n'
+					cosponsorscsv.write(line)
 			except:
 		   		cosponsors = 'None'
-		   	line = bid+','+official_title+','+popular_title+','+short_title+','+nicknames+','+url+','+active+','+vetoed+','+enacted+','+sponsor+','+cosponsors+','+keywords+'\n'
-			csv.write(line)
+		   	line = bid+','+official_title+','+popular_title+','+short_title+','+nicknames+','+url+','+active+','+vetoed+','+enacted+','+sponsor+'\n'
+			billscsv.write(line)
 		sleep(1.00)
 
 
 print total_count
+
+billscsv.close()
+cosponsorscsv.close()
+keywordscsv.close()
