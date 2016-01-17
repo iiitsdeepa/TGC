@@ -69,8 +69,8 @@ h3{margin-bottom:5px;}
 #citationintro{padding-bottom:50px;border-bottom:solid #214478 1px;}
 .citation{padding:25px 0;border-bottom:solid #214478 1px;font-size:80%;}
 .citation h3{color:white;}
-/*Comments Styles*/
-#comments_page{padding:100px 5vw;}
+/*Feedback Styles*/
+#feedback{padding:100px 0 0 0;}
 
 
 /*Mobile only*/
