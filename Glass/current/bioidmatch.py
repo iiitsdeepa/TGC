@@ -2,12 +2,12 @@ import urllib2
 import json
 from time import sleep
 
-namelist = open('112namelist.csv', 'r')
+namelist = open('113namelist.csv', 'r')
 
 def getCongress(cnum):
 	clog_fname = str(cnum) + '_bid_member.csv'
 	clog = open(clog_fname, 'w')
-	errlog = open('112errlog.txt', 'w')
+	errlog = open('113errlog.txt', 'w')
 	url = 'https://congress.api.sunlightfoundation.com/legislators?all_legislators=true&last_name=%s&first_name=%s&state=%s&fields=bioguide_id,govtrack_id,crp_id,first_name,last_name,gender,birthday,terms.start,terms.end,state,district,state_rank,chamber,party,twitter_id,facebook_id,phone,website,contact_form,fax&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 	namelist = str(cnum) + 'namelist.csv'
 	nl = open(namelist)
@@ -55,7 +55,7 @@ def getCongress(cnum):
 	clog.close()
 
 
-getCongress(112)
+getCongress(113)
 
 #B001228,Bono Mack,Mary
 #B001276,Buerkle,Ann Marie
