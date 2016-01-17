@@ -1,1 +1,23 @@
 This is where all of the data is going to be placed for the executive branch stats.
+
+Categories included:
+
+monetary policy (Fed)
+interest rates - Fed_Funds_Rate
+money supply - M1_M2_Money_supply
+fiscal policy (budget)
+budget over time - 45069-2015-08-BudgetDataProjections && 45249-2015-01-HistoricalBudgetData2
+debt - 45069-2015-08-BudgetDataProjections && 45249-2015-01-HistoricalBudgetData2
+spending by category - 45069-2015-08-BudgetDataProjections && 45249-2015-01-HistoricalBudgetData2
+imports/exports: a money/numbers and/or qualitative analysis - Balance_of_Trade/Imports/Exports
+GDP over time - 45249-2015-01-HistoricalBudgetData2 && 45066-2015-08-EconomicProjections
+income stats: purchasing power, wealth distribution over time - Found
+Unemployment Data - Employment_Data_11_20_15
+real and nominal tax rates
+rate of economic turnover, or economic growth - Found?
+cost of education - College_Prices_Overtime
+cost of basic goods - Both Econ data projections files
+foreign policy
+views on social issues (Will mainly come from the president’s party’s platform)
+The weekly address, and/or any speeches made that week.
+recent and prominent executive orders: summaries, and links to full text
