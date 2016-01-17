@@ -14,54 +14,54 @@ def yearsInOffice(terms):
 	return fyio
 
 #trys to parse all social media links from the json
-def socialMedia(pol):
+def socialMedia(pol, j):
 	try:
-		fbid = pol['results'][0]['facebook_id']
+		fbid = pol['results'][j]['facebook_id']
 	except:
 		fbid = 'None'
 	try:
-		twid = pol['results'][0]['twitter_id']
+		twid = pol['results'][j]['twitter_id']
 	except:
 		twid = 'None'
 	try:
-		ywid = pol['results'][0]['youtube_id']
+		ywid = pol['results'][j]['youtube_id']
 	except:
 		ywid = 'None'
 	return str(fbid), str(ywid), str(twid)
 
 #sets the chamber, and then district or rank of a member of congress
-def districtOrRank(pol):
-	if pol['results'][0]['chamber'] == 'house':
+def districtOrRank(pol, j):
+	if pol['results'][j]['chamber'] == 'house':
 		chamber = 'H'
-		distrank = int(pol['results'][0]['district'])
+		distrank = int(pol['results'][j]['district'])
 	else:
 		chamber = 'S'
 		distrank = 'None'
-		if ('True' == str(pol['results'][0]['in_office'])):
-			rank = pol['results'][0]['state_rank']
+		if ('True' == str(pol['results'][j]['in_office'])):
+			rank = pol['results'][j]['state_rank']
 			distrank = rank[0]
 	return str(chamber), str(distrank)
 
 #Tests to see what names this person has, filling in None for any wrong values
-def convName(pol):
+def convName(pol, j):
 	try:
-		last = str(pol['results'][0]['last_name'])
+		last = str(pol['results'][j]['last_name'])
 	except:
 		last = 'None'
 	try:
-		first = str(pol['results'][0]['first_name'])
+		first = str(pol['results'][j]['first_name'])
 	except:
 		first = 'None'
 	try:
-		middle = str(pol['results'][0]['middle_name'])
+		middle = str(pol['results'][j]['middle_name'])
 	except:
 		middle = 'None'
 	try:
-		suffix = str(pol['results'][0]['name_suffix'])
+		suffix = str(pol['results'][j]['name_suffix'])
 	except:
 		suffix = 'None'
 	try:
-		nickname = str(pol['results'][0]['nickname'])
+		nickname = str(pol['results'][j]['nickname'])
 	except:
 		nickname = 'None'
 	return str(last + "_" + first + "_" + middle + "_" + suffix + "_" + nickname)
@@ -74,24 +74,48 @@ def fecConv(ids):
 	return temp
 
 #assigns values to each parameter and write it to the csv
-def assignValues(pols, clog):
-	in_office = str(pols["results"][0]["in_office"])
-	party = str(pols["results"][0]["party"])
-	gender = str(pols["results"][0]["gender"])
-	state = str(pols["results"][0]["state"])
-	state_name = str(pols["results"][0]["state_name"])
-	chamber, distrank = districtOrRank(pols)
-	birthday = str(pols["results"][0]["birthday"])
-	fyio = yearsInOffice(pols["results"][0]["terms"])
-	bioguide_id = str(pols["results"][0]["bioguide_id"])
-	crp_id = str(pols["results"][0]["crp_id"])
-	fec_ids = fecConv(pols["results"][0]["fec_ids"])
-	name = convName(pols)
-	phone = str(pols["results"][0]["phone"])
-	website = str(pols["results"][0]["website"])
-	contact_form = str(pols["results"][0]["contact_form"])
-	facebook_id, youtube_id, twitter_id = socialMedia(pols)
+def assignValues(pols, clog, j):
+	in_office = str(pols["results"][j]["in_office"])
+	party = str(pols["results"][j]["party"])
+	gender = str(pols["results"][j]["gender"])
+	state = str(pols["results"][j]["state"])
+	state_name = str(pols["results"][j]["state_name"])
+	chamber, distrank = districtOrRank(pols, j)
+	birthday = str(pols["results"][j]["birthday"])
+	fyio = yearsInOffice(pols["results"][j]["terms"])
+	bioguide_id = str(pols["results"][j]["bioguide_id"])
+	crp_id = str(pols["results"][j]["crp_id"])
+	fec_ids = fecConv(pols["results"][j]["fec_ids"])
+	name = convName(pols, j)
+	phone = str(pols["results"][j]["phone"])
+	website = str(pols["results"][j]["website"])
+	contact_form = str(pols["results"][j]["contact_form"])
+	facebook_id, youtube_id, twitter_id = socialMedia(pols, j)
 	clog.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % (in_office,party,gender,state,state_name,distrank,chamber,birthday,fyio,bioguide_id,crp_id,fec_ids,name,phone,website,contact_form,twitter_id,youtube_id,facebook_id))
+
+#gets all current members of congress
+def getCurrent(congress):
+	clog_fname = str(congress) + 'Politicians.csv'
+	clog = open(clog_fname, 'w')
+	i = 1
+	numpages = 1
+	num_pols = 0
+	url = 'https://congress.api.sunlightfoundation.com/legislators?page=%s&per_page=50&fields=in_office,party,gender,state,state_name,district,chamber,state_rank,birthday,terms.start,bioguide_id,crp_id,fec_ids,last_name,first_name,middle_name,nickname,name_suffix,phone,website,contact_form,twitter_id,youtube_id,facebook_id,&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+	while i <= numpages+1:
+		upols = urllib2.urlopen(url % i)
+		pols = upols.read()
+		jpols = json.loads(pols)
+		totalpols = jpols['count']
+		perpage = 50
+		numpages = totalpols / 50
+		polarray = jpols['results']
+		j = 0
+		for pol in polarray:
+			assignValues(jpols, clog, j)
+			j += 1
+		i+=1
+		sleep(1.00)
+		print i, totalpols
 
 #gets members of congress from set congress number using csv files
 def getCongress(cnum):
@@ -108,10 +132,11 @@ def getCongress(cnum):
 		pols = upols.read()
 		jpols = json.loads(pols)
 		print num_pols
-		assignValues(jpols, clog)
+		assignValues(jpols, clog, 0)
 		sleep(1.00)
 		num_pols += 1
 	clog.close()
 
 
-getCongress(113)
+getCurrent(114)
+#getCongress(113)

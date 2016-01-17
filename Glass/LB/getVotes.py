@@ -1,13 +1,15 @@
 import urllib2
 import json
 from time import sleep
+import datetime
 
 #opening log file
-csv = open('bills112.csv', 'w')
-
 congress = 112
+clog_fname = str(congress) + 'Votes.csv'
+csv = open(clog_fname, 'w')
+
 chambers=['house','senate']
-bill_url = 'https://congress.api.sunlightfoundation.com/bills?congress=%s&chamber=%s&per_page=50&%s&fields=bill_id,official_title,popular_title,short_title,nicknames,keywords,summary_short,urls,history.active,history.vetoed,history.vetoed_at,history.enacted,history.enacted_at,sponsor_id,cosponsor_ids,cosponsor_count,keywords&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+bill_url = 'https://congress.api.sunlightfoundation.com/votes?congress=%s&chamber=%s&per_page=50&%s&fields=bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
 for c in chambers:
 	u = urllib2.urlopen(bill_url % (congress, c,'page=1'))
@@ -34,37 +36,25 @@ for c in chambers:
 				rid = r["roll_id"].encode('utf-8')
 			except:
 				rid = '-1'
-			"""try:
-				official_title = r["official_title"].encode('utf-8')
-			except:
-				official_title = 'None'
-			try:
-				popular_title = r["popular_title"].encode('utf-8')
-			except:
-				popular_title = 'None'
-			try:
-				short_title = r["short_title"].encode('utf-8')
-			except:
-				short_title = 'None'
-			try:
-				nicknamesa = r["nicknames"].encode('utf-8')
-				nicknames = '$$$'.join(nicknamesa)
-			except:
-		   		nicknames = 'None'
-		   	try:
-				keywordsa = r["keywords"].encode('utf-8')
-				keywords = '$$$'.join(keywordsa)
-				#keywords = "$$$".join(keywords)
-			except:
-		   		keywords = 'None'
-		   	"""
-		    
-		   	line = bid+','+rid+','+'\n'
+			congress = r["congress"]
+			voted_at = r["voted_at"]
+			vote_type = r["vote_type"]
+			roll_type = r["roll_type"]
+			question = r["question"]
+			required = r["required"]
+			result = r["result"]
+			source = r["source"]
+			breakdown = str(r["breakdown"]["total"]["Yea"])+"_"+str(r["breakdown"]["total"]["Nay"])+"_"+str(r["breakdown"]["total"]["Not Voting"])+"_"+str(r["breakdown"]["total"]["Present"])
+			break_gop = str(r["breakdown"]["R"]["Yea"])+"_"+str(r["breakdown"]["R"]["Nay"])+"_"+str(r["breakdown"]["R"]["Not Voting"])+"_"+str(r["breakdown"]["R"]["Present"])
+			break_dem = str(r["breakdown"]["D"]["Yea"])+"_"+str(r["breakdown"]["D"]["Nay"])+"_"+str(r["breakdown"]["D"]["Not Voting"])+"_"+str(r["breakdown"]["D"]["Present"])
+			break_ind = str(r["breakdown"]["I"]["Yea"])+"_"+str(r["breakdown"]["I"]["Nay"])+"_"+str(r["breakdown"]["I"]["Not Voting"])+"_"+str(r["breakdown"]["I"]["Present"])
+			line = bid+','+rid+','+congress+','+voted_at+','+vote_type+','+roll_type+','+question+','+required+','+result+','+source+','+breakdown+','+break_gop+','+break_dem+','+break_ind+'\n'
 			csv.write(line)
 		sleep(1.00)
 
 
 print total_count
+bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown
 
 #"bill_id": "hr41-113", (link to Bills table)
 #"roll_id": "h7-2013",
@@ -76,10 +66,10 @@ print total_count
 #"required": "2/3",
 #"result": "Passed",
 #"source": "http://clerk.house.gov/evs/2013/roll007.xml"
-#“breakdown”: [yea_nay_pres_not]
-#“break_gop”:[yea_nay_pres_not]
-#“break_dem”:[yea_nay_pres_not]
-#“break_ind”:[yea_nay_pres_not]
+#'breakdown': [yea_nay_pres_not]
+#'break_gop':[yea_nay_pres_not]
+#'break_dem':[yea_nay_pres_not]
+#'break_ind':[yea_nay_pres_not]
 
 #second table: Ind_Votes
 #bill_id
