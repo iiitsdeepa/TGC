@@ -85,11 +85,179 @@
 
 	<div class='section'>
 		<div id='connectionblurb' class='vpoint leftpane'>
-			<h2>Personalize Your Connection To Government</h2>
+			<h2>Personalized Connection To Government</h2>
 			<h4>Your representative's voting record for you to judge with issues you care about front and center.</h4>
+
+			<h3>Find Your Representatives</h3>
+			<div id='findform_wrapper'>
+				<div id='use_address' class='districtentry'>
+					<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+						<div class='formhead'>Enter Street Address</div>
+			  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+			  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
+			  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+			  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
+					</form>
+				</div>
+				<div id='use_location' class='districtentry'>
+					<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
+					<div class="dformbutton" onclick="javascript:useLocation();return false;">Find With Location Data</div>
+				</div>
+			</div>
 		</div>
-		<div id='findreps' class='visual rightpane'>
-			this section is where people can either use location data or enter an address to see a basic analysis of their congress people. Initially it'll show the leaders of the current congress, Paul Ryan, and Mitch McConnel
+		
+		<div class='visual rightpane'>
+			<div id='demo_content' class='content z-index-1'>
+				<div id='statdata'>
+					<h4>Stats</h4>
+				</div>
+				<div id='reps_container'>
+					<h3>Your Representatives</h3>
+					<div id='reps_slider' value='leaders'>
+						<div id='hr_wrapper' class='rep_wrapper'>
+							<h4>Speaker For The House</h4>
+							<div id='hrpic' class='reppic_wrapper'></div>
+							<div class='basic_info'>
+								<div id='hrname' class='repname'>rep name</div>
+								<div id='hrparty' class='repparty'>rep party</div>
+								<div id='hryears' class='repyears'>years in office</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+							<div class='mobrep_spacer'></div>
+							<div class='mobrep_info'>
+								<table>
+									<tr class='mtrow'>
+										<td class='msname'>Party Loyalty</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 2 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 3 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 4 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 5 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<div id='ss_wrapper' class='rep_wrapper'>
+							<h4>Senate Majority Leader</h4>
+							<div id='sspic' class='reppic_wrapper'></div>
+							<div class='basic_info'>
+								<div id='ssname' class='repname'>rep name</div>
+								<div id='ssparty' class='repparty'>rep party</div>
+								<div id='ssyears' class='repyears'>years in office</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+							<div class='mobrep_spacer'></div>
+							<div class='mobrep_info'>
+								<table>
+									<tr class='mtrow'>
+										<td class='msname'>Party Loyalty</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 2 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 3 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 4 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 5 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<div id='js_wrapper' class='rep_wrapper'>
+							<h4>Junior Senator</h4>
+							<div id='jspic' class='reppic_wrapper'></div>
+							<div class='basic_info'>
+								<div id='jsname' class='repname'>rep name</div>
+								<div id='jsparty' class='repparty'>rep party</div>
+								<div id='jsyears' class='repyears'>years in office</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+							<div class='mobrep_spacer'></div>
+							<div class='mobrep_info'>
+								<table>
+									<tr class='mtrow'>
+										<td class='msname'>Party Loyalty</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 2 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 3 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 4 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+									<tr class='mtrow'>
+										<td class='msname'>Stat 5 Name</td>
+										<td class ='mrepstat'>X%</td> 
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='repstable_wrapper'>
+					<table id='repstable'>
+						<tr id='ployalty' class='orow plrow' onmouseover="javascript:rhover('stat1');return false;">
+							<td class='sname'>Party Loyalty</td>
+							<td class='hrstat'>X%</td>
+							<td class='ssstat'>X%</td>
+							<td class='jsstat'>X%</td>
+						</tr>
+						<tr id='sponsored' class='erow sporow' onmouseover="javascript:rhover('stat2');return false;">
+							<td class='sname'>Stat 2 Name</td>
+							<td class='hrstat'>HR stat 2</td>
+							<td class='ssstat'>SS stat 2</td>
+							<td class='jsstat'>JS stat 2</td>
+						</tr>
+						<tr id='stat3' class='orow' onmouseover="javascript:rhover('stat3');return false;">
+							<td class='sname'>Stat 3 Name</td>
+							<td class='hrstat'>HR stat 3</td>
+							<td class='ssstat'>SS stat 3</td>
+							<td class='jsstat'>JS stat 3</td>
+						</tr>
+						<tr id='stat4' class='erow' onmouseover="javascript:rhover('stat4');return false;">
+							<td class='sname'>Stat 4 Name</td>
+							<td class='hrstat'>HR stat 4</td>
+							<td class='ssstat'>SS stat 4</td>
+							<td class='jsstat'>JS stat 4</td>
+						</tr>
+						<tr id='stat5' class='orow' onmouseover="javascript:rhover('stat5');return false;">
+							<td class='sname'>Stat 5 Name</td>
+							<td class='hrstat'>HR stat 5</td>
+							<td class='ssstat'>SS stat 5</td>
+							<td class='jsstat'>JS stat 5</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
