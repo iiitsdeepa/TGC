@@ -5,9 +5,9 @@ import datetime
 
 #opening log file
 congress = 114
-clog_fname = str(congress) + 'Votes.csv'
+clog_fname = 'votes' + str(congress) + '.csv'
 clog = open(clog_fname, 'w')
-clog_lname = str(congress) + 'Ind_Votes.csv'
+clog_lname = 'ind_votes' + str(congress) + '.csv'
 cilog = open(clog_lname, 'w')
 
 chambers=['house','senate']
@@ -54,7 +54,9 @@ for c in chambers:
 			voted_at = str(r["voted_at"])
 			vote_type = str(r["vote_type"])
 			roll_type = str(r["roll_type"])
+			roll_type = roll_type.replace(',', '')
 			question = str(r["question"])
+			question = question.replace(',', '')
 			required = str(r["required"])
 			result = str(r["result"])
 			source = str(r["source"])
@@ -72,23 +74,3 @@ for c in chambers:
 print total_count
 clog.close()
 cilog.close()
-
-#"bill_id": "hr41-113", (link to Bills table)
-#"roll_id": "h7-2013",
-#"congress": 113,
-#"voted_at": "2013-01-04T16:22:00Z", (date-time type)
-#"vote_type": "passage",
-#"roll_type": "On Motion to Suspend the Rules and Pass",
-#"question": "On Motion to Suspend the Rules and Pass -- H.R. 41 -- To temporarily increase the borrowing authority of the Federal Emergency Management Agency for carrying out the National Flood Insurance Program",
-#"required": "2/3",
-#"result": "Passed",
-#"source": "http://clerk.house.gov/evs/2013/roll007.xml"
-#'breakdown': [yea_nay_pres_not]
-#'break_gop':[yea_nay_pres_not]
-#'break_dem':[yea_nay_pres_not]
-#'break_ind':[yea_nay_pres_not]
-
-#second table: Ind_Votes
-#bill_id
-#bioguide_id (voter)
-#vote: (Y,N,P,NV,O) votes are either yea, nay, present, not voting, or other
