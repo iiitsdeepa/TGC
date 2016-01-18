@@ -4,12 +4,14 @@ from time import sleep
 import datetime
 
 #opening log file
-congress = 112
+congress = 114
 clog_fname = str(congress) + 'Votes.csv'
-csv = open(clog_fname, 'w')
+clog = open(clog_fname, 'w')
+clog_lname = str(congress) + 'Ind_Votes.csv'
+cilog = open(clog_lname, 'w')
 
 chambers=['house','senate']
-bill_url = 'https://congress.api.sunlightfoundation.com/votes?congress=%s&chamber=%s&per_page=50&%s&fields=bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+bill_url = 'https://congress.api.sunlightfoundation.com/votes?congress=%s&chamber=%s&per_page=50&%s&fields=voter_ids,bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
 for c in chambers:
 	u = urllib2.urlopen(bill_url % (congress, c,'page=1'))
@@ -19,7 +21,7 @@ for c in chambers:
 	total_count += int(j["count"])
 	per_page = int(j["page"]["per_page"])
 	num_pages = int(j["count"])/per_page
-	print total_count,per_page,num_pages
+	print j["count"],per_page,num_pages
 	for x in range(1,num_pages+1):
 		page = 'page='+str(x)
 		u = urllib2.urlopen(bill_url % (congress, c, page))
@@ -29,32 +31,47 @@ for c in chambers:
 		print 'page '+str(x)
 		for r in ra:
 			try:
-				bid = r["bill_id"].encode('utf-8')
+				bid = str(r["bill_id"])
 			except:
-				bid = '-1'
+				continue
+			for bioguide_id, vote in r['voter_ids'].items():
+				if (vote == 'Yea'):
+					vote = 'Y'
+				elif (vote == 'Nay'):
+					vote = 'N'
+				elif (vote == 'Not Voting'):
+					vote = 'NV'
+				elif (vote == 'Present'):
+					vote = 'P'
+				else:
+					vote = 'O'
+				cilog.write('%s,%s,%s\n' % (bid, bioguide_id, vote))
 			try:
-				rid = r["roll_id"].encode('utf-8')
+				rid = str(r["roll_id"])
 			except:
-				rid = '-1'
-			congress = r["congress"]
-			voted_at = r["voted_at"]
-			vote_type = r["vote_type"]
-			roll_type = r["roll_type"]
-			question = r["question"]
-			required = r["required"]
-			result = r["result"]
-			source = r["source"]
+				rid = 'None'
+			congress = str(r["congress"])
+			voted_at = str(r["voted_at"])
+			vote_type = str(r["vote_type"])
+			roll_type = str(r["roll_type"])
+			question = str(r["question"])
+			required = str(r["required"])
+			result = str(r["result"])
+			source = str(r["source"])
 			breakdown = str(r["breakdown"]["total"]["Yea"])+"_"+str(r["breakdown"]["total"]["Nay"])+"_"+str(r["breakdown"]["total"]["Not Voting"])+"_"+str(r["breakdown"]["total"]["Present"])
-			break_gop = str(r["breakdown"]["R"]["Yea"])+"_"+str(r["breakdown"]["R"]["Nay"])+"_"+str(r["breakdown"]["R"]["Not Voting"])+"_"+str(r["breakdown"]["R"]["Present"])
-			break_dem = str(r["breakdown"]["D"]["Yea"])+"_"+str(r["breakdown"]["D"]["Nay"])+"_"+str(r["breakdown"]["D"]["Not Voting"])+"_"+str(r["breakdown"]["D"]["Present"])
-			break_ind = str(r["breakdown"]["I"]["Yea"])+"_"+str(r["breakdown"]["I"]["Nay"])+"_"+str(r["breakdown"]["I"]["Not Voting"])+"_"+str(r["breakdown"]["I"]["Present"])
-			line = bid+','+rid+','+congress+','+voted_at+','+vote_type+','+roll_type+','+question+','+required+','+result+','+source+','+breakdown+','+break_gop+','+break_dem+','+break_ind+'\n'
-			csv.write(line)
+			break_gop = str(r["breakdown"]["party"]["R"]["Yea"])+"_"+str(r["breakdown"]["party"]["R"]["Nay"])+"_"+str(r["breakdown"]["party"]["R"]["Not Voting"])+"_"+str(r["breakdown"]["party"]["R"]["Present"])
+			break_dem = str(r["breakdown"]["party"]["D"]["Yea"])+"_"+str(r["breakdown"]["party"]["D"]["Nay"])+"_"+str(r["breakdown"]["party"]["D"]["Not Voting"])+"_"+str(r["breakdown"]["party"]["D"]["Present"])
+			try:
+				break_ind = str(r["breakdown"]["party"]["I"]["Yea"])+"_"+str(r["breakdown"]["party"]["I"]["Nay"])+"_"+str(r["breakdown"]["party"]["I"]["Not Voting"])+"_"+str(r["breakdown"]["party"]["I"]["Present"])
+			except:
+				break_ind = 'None'
+			clog.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % (bid,rid,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown,break_gop,break_dem,break_ind))
 		sleep(1.00)
 
 
 print total_count
-bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown
+clog.close()
+cilog.close()
 
 #"bill_id": "hr41-113", (link to Bills table)
 #"roll_id": "h7-2013",
