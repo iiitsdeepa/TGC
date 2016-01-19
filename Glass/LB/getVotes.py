@@ -4,7 +4,7 @@ from time import sleep
 import datetime
 
 #opening log file
-congress = 114
+congress = 112
 clog_fname = 'votes' + str(congress) + '.csv'
 clog = open(clog_fname, 'w')
 clog_lname = 'ind_votes' + str(congress) + '.csv'
@@ -34,6 +34,10 @@ for c in chambers:
 				bid = str(r["bill_id"])
 			except:
 				continue
+			try:
+				rid = str(r["roll_id"])
+			except:
+				rid = 'None'
 			for bioguide_id, vote in r['voter_ids'].items():
 				if (vote == 'Yea'):
 					vote = 'Y'
@@ -45,11 +49,7 @@ for c in chambers:
 					vote = 'P'
 				else:
 					vote = 'O'
-				cilog.write('%s,%s,%s\n' % (bid, bioguide_id, vote))
-			try:
-				rid = str(r["roll_id"])
-			except:
-				rid = 'None'
+				cilog.write('%s,%s,%s,%s\n' % (bid, rid, bioguide_id, vote))
 			congress = str(r["congress"])
 			voted_at = str(r["voted_at"])
 			vote_type = str(r["vote_type"])
