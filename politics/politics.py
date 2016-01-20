@@ -148,12 +148,17 @@ def process_politician_csv(blob_info):
             entry = Politician(in_office=temp[0],party=temp[1],gender=temp[2],state=temp[3],state_name=temp[4],distrank=temp[5],chamber=temp[6],birthday=temp[7],fyio=int(temp[8]),bioguide_id=temp[9],crp_id=temp[10],fec_ids=temp[11],name=temp[12],phone=temp[13],website=temp[14],contact_form=temp[15],twitter_id=temp[16],youtube_id=temp[17],facebook_id=temp[18])
             entry.put()
 
+<<<<<<< HEAD
 def process_votes_csv(blob_info):
+=======
+def process_bill_csv(blob_info):
+>>>>>>> lbdb-a
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
         row_str = row[0]
         temp = row_str.split(',')
+<<<<<<< HEAD
         entry = Votes(bill_id=temp[0],rid=temp[1],congress=temp[2],voted_at=temp[3],vote_type=temp[4],roll_type=temp[5],question=temp[6],required=temp[7],result=temp[8],source=temp[9],breakdown=temp[10],break_gop=temp[11],break_dem=temp[12],break_ind=temp[13])
         entry.put()
 
@@ -876,6 +881,14 @@ def process_ind_votes_csv(blob_info):
         entry.put()
         if (count%25 == 0):
             break
+=======
+        bioidquery = GqlQuery("SELECT * FROM Bill WHERE bioguide_id = :1", temp[9])
+        tempqueryrow = bioidquery.get()
+        if tempqueryrow is None:
+            logging.error(row)
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9])
+            entry.put()
+>>>>>>> lbdb-a
 
 def process_nationalpolls(blob_info, party):
     logging.error('THE FUNCTION RUNS')
@@ -1789,6 +1802,18 @@ class Politician(db.Model):
     youtube_id = db.StringProperty(required = True)
     facebook_id = db.StringProperty(required = True)
 
+class Bill(db.Model):
+    bill_id = db.StringProperty(required = True)
+    official_title = db.StringProperty(required = True)
+    popular_title = db.StringProperty(required = True)
+    short_title = db.StringProperty(required = True)
+    nicknames = db.StringProperty(required = True)
+    url = db.StringProperty(required = True)
+    active = db.StringProperty(required = True)
+    vetoed = db.StringProperty(required = True)
+    enacted = db.StringProperty(required = True)
+    sponsor_id = db.StringProperty(required = True)
+
 
 #--------------------------Pages----------------------------------------
 class BaseHandler(webapp2.RequestHandler):
@@ -1993,7 +2018,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_votes_csv(info)
-        process_ind_votes_csv(info)
+        #process_ind_votes_csv(info)
+        #process_bill_csv(info)
         self.redirect("/")
 
 class Landing(BaseHandler):
