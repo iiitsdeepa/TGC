@@ -73,7 +73,7 @@ for c in chambers:
 					cosponsorscsv.write(line)
 			except:
 		   		cosponsors = 'None'
-		   	line = bid+','+official_title+','+popular_title+','+short_title+','+nicknames+','+url+','+active+','+vetoed+','+enacted+','+sponsor+'\n'
+		   	line = bid+'$$$'+official_title+'$$$'+popular_title+'$$$'+short_title+'$$$'+nicknames+'$$$'+url+'$$$'+active+'$$$'+vetoed+'$$$'+enacted+'$$$'+sponsor+'\n'
 			billscsv.write(line)
 		sleep(1.00)
 
