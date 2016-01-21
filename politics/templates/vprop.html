@@ -42,18 +42,20 @@
         </div>
     </div>
     
-    <img id='redarialart' src='/images/basearial.png' alt='...'>
+    <div id='vpropspacer'><img id='redarialart' src='/images/basearial.png' alt='...'></div>
     
     <div id='vpropfooter'>
       <img id='flagswaving' src='/images/flagswaving.png'>
-      <div id='footfoot'>
-        <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
-      </div>
+    </div>
+    <div id='footfoot'>
+      <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
     </div>
   </div>
 
+
+
   <style>
-    html, body{color:#0E1C32;}
+    html, body{background:#0E1C32;}
     #badge{padding:0 10px !important;}
     .opacity-background{position:absolute;top:0;left:0;height:100%;width:100%;background:white;opacity:.7;z-index:0;}
     .opacity-foreground{position:relative;z-index:10;}
@@ -75,11 +77,26 @@
     h1{font-size:450%;font-weight:bold;}
     #logo img{height:100px;}
     input{text-align:center;padding:10px;font-size:150%;}
-    #redarialart{width:100%;}
+    #redarialart{position:absolute;bottom:0;left:0;width:100%;}
     #footer{display:none;}
-
+    #footfoot{color:white;}
     #vpropfooter{position:relative;background:#0E1C32;min-height:10vw;color:white;}
     #flagswaving{position:absolute;top:-40vw;width:100%;opacity:1}
+    #vpropspacer{position:relative;height:60vw;min-height:60vh;background:white;}
+
+    /*Mobile and Tablet*/
+    @media screen and (max-width: 965px){
+      #perma{width:650px;max-width:95vw;left:50%;transform:translate(-50%,0);min-width:100px;}
+      #permatitle h1{font-size:275%;}
+      #redarialart{width:130%;}
+      .flex-columns{flex-wrap:wrap;}
+
+    }
+
+    /*Mobile only*/
+    @media screen and (max-width: 520px){
+
+    }
   </style>
 
   <script>
