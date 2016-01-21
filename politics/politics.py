@@ -23,6 +23,7 @@ from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
+from updateVotes import *
 
 
 #from oauth2client.client import flow_from_clientsecrets
@@ -176,6 +177,9 @@ def process_ind_votes_csv(blob_info):
     count = 0
     for row in reader:
         count += 1
+        if (count%100 == 0):
+            break
+            #logging.error(count)
         row_str = row[0]
         temp = row_str.split(',')
         entry = Ind_Votes(bill_id = temp[0], roll_id = temp[1])
@@ -887,8 +891,6 @@ def process_ind_votes_csv(blob_info):
         entry.Z000017 = temp[707]
         entry.Z000018 = temp[708]
         entry.put()
-        if (count%25 == 0):
-            break
 
 def process_nationalpolls(blob_info, party):
     logging.error('THE FUNCTION RUNS')
@@ -2018,7 +2020,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_votes_csv(info)
-        #process_ind_votes_csv(info)
+        process_ind_votes_csv(info)
         #process_bill_csv(info)
         self.redirect("/")
 
@@ -2196,8 +2198,18 @@ class Update(BaseHandler):
                     if (end > topdatedem):
                         entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
                         entry.put()
+
     def get(self):
         self.getNationalPolls()
+        self.redirect('/')
+
+    def post(self):
+        #get type of data to pull
+        self.redirect('/')
+
+class updateVotes(BaseHandler):
+    def get(self):
+        getUpdate()
         self.redirect('/')
 
     def post(self):
@@ -2238,6 +2250,7 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateship', Update),
+    ('/updatevotes', updateVotes),
     ('/up', UploadHandler),
     ('/upload', Upload),
 ], debug=True)
