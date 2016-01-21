@@ -724,8 +724,6 @@ def process_ind_votes_csv(blob_info):
         entry.Z000017 = temp[707]
         entry.Z000018 = temp[708]
         entry.put()
-        if (count%25 == 0):
-            break
 
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)
