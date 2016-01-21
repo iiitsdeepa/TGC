@@ -15,6 +15,7 @@ import datetime
 import webapp2
 import jinja2
 import cgi
+from time import sleep
 from google.appengine.ext.webapp.util import run_wsgi_app
 from datetime import datetime, date, time
 
@@ -150,11 +151,28 @@ def process_politician_csv(blob_info):
             entry.put()
 
 def process_bill_csv(blob_info):
+<<<<<<< HEAD
+=======
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split('$$$')
+        bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
+        tempqueryrow = bioidquery.get()
+        if tempqueryrow is None:
+            logging.error(row_str)
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9])
+            entry.put()
+
+def process_votes_csv(blob_info):
+>>>>>>> lbdb
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
         row_str = row[0]
         temp = row_str.split(',')
+<<<<<<< HEAD
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bioguide_id = :1", temp[9])
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
@@ -168,6 +186,8 @@ def process_votes_csv(blob_info):
     for row in reader:
         row_str = row[0]
         temp = row_str.split(',')
+=======
+>>>>>>> lbdb
         entry = Votes(bill_id=temp[0],rid=temp[1],congress=temp[2],voted_at=temp[3],vote_type=temp[4],roll_type=temp[5],question=temp[6],required=temp[7],result=temp[8],source=temp[9],breakdown=temp[10],break_gop=temp[11],break_dem=temp[12],break_ind=temp[13])
         entry.put()
 
@@ -1681,50 +1701,6 @@ class Ind_Votes(db.Model):
     Z000018 = db.StringProperty(required = False)
 
 
-class State(db.Model):
-    name = db.StringProperty(required = True)
-    abbreviation = db.StringProperty(required = True)
-    num_districts = db.IntegerProperty(required = True)
-    senior_senator = db.StringProperty(required = True)
-    junior_senator = db.StringProperty(required = True)
-
-class District(db.Model):
-	state = db.StringProperty(required = True)
-	num = db.IntegerProperty(required = True)
-	representative = db.StringProperty(required = True)
-
-class Senator(db.Model):
-    bioguide_id = db.StringProperty(required = True)
-    state = db.StringProperty(required = True)
-    rank = db.StringProperty(required = True)
-    name = db.StringProperty(required = True)
-    gender = db.StringProperty(required = True)
-    party = db.StringProperty(required = True)
-    fyio = db.IntegerProperty(required = True)
-    fbid = db.StringProperty(required = True)
-    twid = db.StringProperty(required = True)
-    ployalty = db.IntegerProperty(required = True)
-    enacted = db.IntegerProperty(required = True)
-    sponsored = db.IntegerProperty(required = True)
-    cosponsored = db.IntegerProperty(required = True)
-    li = db.IntegerProperty(required = True)
-
-class Representative(db.Model):
-    bioguide_id = db.StringProperty(required = True)
-    state = db.StringProperty(required = True)
-    district = db.IntegerProperty(required = True)
-    name = db.StringProperty(required = True)
-    gender = db.StringProperty(required = True)
-    party = db.StringProperty(required = True)
-    fyio = db.IntegerProperty(required = True)
-    fbid = db.StringProperty(required = True)
-    twid = db.StringProperty(required = True)
-    ployalty = db.IntegerProperty(required = True)
-    enacted = db.IntegerProperty(required = True)
-    sponsored = db.IntegerProperty(required = True)
-    cosponsored = db.IntegerProperty(required = True)
-    li = db.IntegerProperty(required = True)
-
 class NewsLetterUser(db.Model):
     created = db.DateTimeProperty(required = True, auto_now = True)
     email = db.StringProperty(required = True)
@@ -2020,8 +1996,13 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_votes_csv(info)
+<<<<<<< HEAD
         process_ind_votes_csv(info)
         #process_bill_csv(info)
+=======
+        #process_ind_votes_csv(info)
+        process_bill_csv(info)
+>>>>>>> lbdb
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -2240,6 +2221,19 @@ class Demo(BaseHandler):
             repjson = self.pullReps(district)
             self.write(repjson)
 
+class bulkdelete(BaseHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        try:
+            while True:
+                q = db.GqlQuery("SELECT __key__ FROM Bill")
+                assert q.count()
+                db.delete(q.fetch(200))
+                sleep(0.5)
+        except Exception, e:
+            self.response.out.write(repr(e)+'\n')
+            pass
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/prop', Vprop),
@@ -2252,5 +2246,5 @@ application = webapp2.WSGIApplication([
     ('/updateship', Update),
     ('/updatevotes', updateVotes),
     ('/up', UploadHandler),
-    ('/upload', Upload),
+    ('/upload', Upload)
 ], debug=True)
