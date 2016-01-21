@@ -1,5 +1,5 @@
 
-splittee = 'bills113.csv'
+splittee = 'bills112.csv'
 
 csv = open(splittee, 'r')
 
