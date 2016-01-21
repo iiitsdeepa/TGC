@@ -151,8 +151,6 @@ def process_politician_csv(blob_info):
             entry.put()
 
 def process_bill_csv(blob_info):
-<<<<<<< HEAD
-=======
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
@@ -166,28 +164,11 @@ def process_bill_csv(blob_info):
             entry.put()
 
 def process_votes_csv(blob_info):
->>>>>>> lbdb
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     for row in reader:
         row_str = row[0]
         temp = row_str.split(',')
-<<<<<<< HEAD
-        bioidquery = GqlQuery("SELECT * FROM Bill WHERE bioguide_id = :1", temp[9])
-        tempqueryrow = bioidquery.get()
-        if tempqueryrow is None:
-            logging.error(row)
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9])
-            entry.put()
-
-def process_votes_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        temp = row_str.split(',')
-=======
->>>>>>> lbdb
         entry = Votes(bill_id=temp[0],rid=temp[1],congress=temp[2],voted_at=temp[3],vote_type=temp[4],roll_type=temp[5],question=temp[6],required=temp[7],result=temp[8],source=temp[9],breakdown=temp[10],break_gop=temp[11],break_dem=temp[12],break_ind=temp[13])
         entry.put()
 
@@ -1996,13 +1977,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_votes_csv(info)
-<<<<<<< HEAD
         process_ind_votes_csv(info)
         #process_bill_csv(info)
-=======
-        #process_ind_votes_csv(info)
-        process_bill_csv(info)
->>>>>>> lbdb
         self.redirect("/")
 
 class Landing(BaseHandler):
