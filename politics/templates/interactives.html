@@ -1,14 +1,21 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
+<div id='interactivesnav'>
+	<div id='top-option' class='inav-option'>Top</div>
+	<div id='personalize-option' class='inav-option'>Personalized Connection</div>
+	<div id='partycomp-option' class='inav-option'>Party Comparison</div>
+	<div id='currentpolls-option' class='inav-option'>Current Polls</div>
+</div>
+
 	<script type="text/javascript" src="/js/vprop.js"></script>
 	<div id='opening'>
 		<img id='centerpiece' src='/images/fullglasscapitol.png' alt='...'>
 		<h1>Government Transparency At Its Finest</h1>
-		<h3>All the facts to inform us and a network to unite us</h3>
+		<h2>All the facts to inform us and a network to unite us</h2>
 	</div>
 
-	<div class='section'>
+	<div id='partystuff' class='section'>
 		<div id='factsblurb' class='vpoint leftpane'>
 			<h2>Just The Facts, All The Facts</h2>
 			<h4>A single place where you can find all government related data properly sourced and un-opinionated so that you can make decisions for yourself.</h4>
@@ -74,7 +81,7 @@
 	</div>
 
 	<div id='myreps_wrapper'>
-		<h1>Personalized Connection To Government</h1>
+		<h1>A More Personalized Connection</h1>
 		<h2>Analyse your legislator's voting record on issues and metrics you care about</h2>
 		<div id='myreps_ui'>
 			<div id='mreps_r1'>
@@ -137,9 +144,11 @@
 	</div>
 
 <style>
-
+#partystuff{display:none;}
+#interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;}
+.inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;}
 #opening{position:relative;padding:100px 5vw;min-height:calc(90vh - 220px);}
-#opening h1,h3{text-align:center;}
+#opening{text-align:center;}
 .section{position:relative;width:calc(100% - 10vw);padding:50px 5vw;display:inline-block;}
 #centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
