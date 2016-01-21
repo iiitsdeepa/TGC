@@ -2207,6 +2207,5 @@ application = webapp2.WSGIApplication([
     ('/pull/polldata', PollServer),
     ('/updateship', Update),
     ('/up', UploadHandler),
-    ('/upload', Upload),
-    ('/deletebills', bulkdelete)
+    ('/upload', Upload)
 ], debug=True)
