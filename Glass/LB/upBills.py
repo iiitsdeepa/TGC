@@ -7,7 +7,7 @@ def process_bill_csv(blob_info):
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9])
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=temp[10], last_action=temp[11], last_updated=datetime.today())
             entry.put()
 
 class Bill(db.Model):
@@ -21,5 +21,7 @@ class Bill(db.Model):
     vetoed = db.StringProperty(required = True)
     enacted = db.StringProperty(required = True)
     sponsor_id = db.StringProperty(required = True)
+    introduced = db.DateTimeProperty(required = True)
+    last_action = db.DateTimeProperty(required = True)
+    last_updated = db.DateTimeProperty(required = True)
 
-#bid,official_title,popular_title,short_title,nicknames,url,active,vetoed,enacted,sponsor_id

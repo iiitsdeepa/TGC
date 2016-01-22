@@ -27,7 +27,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 from politics import *
-from updateVotes import *
+from updatevotes import *
 
 def indVoteUpdate(voteinput):
 	bioids = []

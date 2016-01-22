@@ -18,6 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import webapp2
 import jinja2
 import cgi
+from time import sleep
 from google.appengine.ext.webapp.util import run_wsgi_app
 from datetime import datetime, date, time
 
@@ -27,9 +28,9 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 import politics
-from indVoteUpdate import *
+from indvoteupdate import *
 
-def getUpdate():
+def getVotesUpdate():
 	#opening log file
 	congress = 114
 	topdate = datetime.min

@@ -24,7 +24,8 @@ from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
-from updateVotes import *
+from updatevotes import *
+from updatebills import *
 
 
 #from oauth2client.client import flow_from_clientsecrets
@@ -159,8 +160,7 @@ def process_bill_csv(blob_info):
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
-            logging.error(row_str)
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9])
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=temp[10], last_action=temp[11], last_updated=datetime.today())
             entry.put()
 
 def process_votes_csv(blob_info):
@@ -1772,6 +1772,9 @@ class Bill(db.Model):
     vetoed = db.StringProperty(required = True)
     enacted = db.StringProperty(required = True)
     sponsor_id = db.StringProperty(required = True)
+    introduced = db.DateTimeProperty(required = True)
+    last_action = db.DateTimeProperty(required = True)
+    last_updated = db.DateTimeProperty(required = True)
 
 
 #--------------------------Pages----------------------------------------
@@ -2164,9 +2167,18 @@ class Update(BaseHandler):
         #get type of data to pull
         self.redirect('/')
 
-class updateVotes(BaseHandler):
+class UpdateVotes(BaseHandler):
     def get(self):
-        getUpdate()
+        getVotesUpdate()
+        self.redirect('/')
+
+    def post(self):
+        #get type of data to pull
+        self.redirect('/')
+
+class UpdateBills(BaseHandler):
+    def get(self):
+        getBillsUpdate()
         self.redirect('/')
 
     def post(self):
@@ -2220,7 +2232,8 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateship', Update),
-    ('/updatevotes', updateVotes),
+    ('/updatevotes', UpdateVotes),
+    ('/updatebills', UpdateBills),
     ('/up', UploadHandler),
     ('/upload', Upload)
 ], debug=True)
