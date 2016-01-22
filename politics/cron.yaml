@@ -4,7 +4,7 @@ cron:
   schedule: every day 07:00
 
 - description: daily summary job
-  url: /updateevotes
+  url: /updatevotes
   schedule: every day 07:15
 
 - description: daily summary job
