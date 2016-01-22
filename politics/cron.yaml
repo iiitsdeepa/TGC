@@ -2,3 +2,11 @@ cron:
 - description: daily summary job
   url: /updateship
   schedule: every day 07:00
+
+- description: daily summary job
+  url: /updateevotes
+  schedule: every day 07:15
+
+- description: daily summary job
+  url: /updatebills
+  schedule: every day 07:30
