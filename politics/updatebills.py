@@ -34,7 +34,9 @@ def getBillsUpdate():
 	tempdate = GqlQuery("SELECT last_action FROM Bill ORDER BY last_action DESC").get()
 	try:
 		topdate = tempdate.last_action
+		logging.error('topdate')
 	except:
+		logging.error('datetime.min')
 		topdate = datetime.min
 	congress = 114
 	chambers=['hr','s']
@@ -94,18 +96,13 @@ def getBillsUpdate():
 					introduced = datetime.strptime(r["introduced_on"], '%Y-%m-%d')
 				except:
 					introduced = datetime.strptime(r["introduced_on"], '%Y-%m-%dT%H:%M:%SZ')
-
-				repeat = GqlQuery("SELECT Key, last_action FROM Bill WHERE bill_id = :1", bid).get()
 				try:
-					logging.error(str(repeat.key))
-					repeatbill = repeat.last_action
-					if (repeatbill < last_action):
-						todelete = db.Key.from_path('Bill', str(repeat.Key))
-						db.delete(todelete)
+					repeatedbill = politics.Bill.gql("WHERE bill_id = :1", str(bid)).get()
+					repeatedbill.delete()
 				except:
 					repeatbill = 0
 				entry = politics.Bill(bill_id=bid,official_title=official_title,popular_title=popular_title,short_title=short_title,nicknames=nicknames,url=url,active=active,vetoed=vetoed,enacted=enacted,sponsor_id=sponsor, introduced=introduced, last_action=last_action, last_updated=datetime.today())
-				#entry.put()
+				entry.put()
 			sleep(1.00)
 			if (breakvar == True):
 				break
