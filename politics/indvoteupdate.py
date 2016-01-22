@@ -29,20 +29,32 @@ from google.appengine.api import mail
 from politics import *
 from updatevotes import *
 
+"""
+This class updates the Ind_Votes table to the most recent voting records. 
+It is called by the updateVotes method, and a list of each inidividual politician's votes is included.
+A 2-D array that replicates the Ind_Votes table is used as a temporary holder for the values needed to be inserted.
+After this 2-D array is created, the first dimension is looped through, inputting all of the data included in the second dimension as a new entity.
+"""
+
 def indVoteUpdate(voteinput):
+	#first a list of all bioguide_ids are needed to see how many columns are needed. This list is pulled from the Politician table
 	bioids = []
 	for bioid in db.GqlQuery("SELECT bioguide_id FROM Politician ORDER BY bioguide_id ASC"):
 		bioids.append(str(bioid.bioguide_id))
+	#initialize the temp 2-D array (votestable) with all of the bioguide_ids in the first row. These will be used in comparisons later on.
 	votestable = [[i for i in bioids]]
-	votestable[0].insert(0,'bill_id')
+	votestable[0].insert(0,'bill_id')#first two columns are always bill_id then roll_id
 	votestable[0].insert(1,'roll_id')
+	#for loop goes through the input list, with each row representing 1 politician's vote
 	for row in voteinput:
-		tempbioid = row[2]
-		tempbillid = row[0]
-		temprollid = row[1]
-		tempvote = row[3]
+		tempbioid = row[2]#bioguide_id
+		tempbillid = row[0]#bill_id
+		temprollid = row[1]#roll_id
+		tempvote = row[3]#vote
 		i = 0
 		j = 2
+		#this for loop goes through each row in the temp 2-D array to determine where to insert the individual vote. This is stored in the 'i' variable
+		#if no row exists that matches the roll_id, a new row is appended to the end of the 2-D array
 		for row in votestable:
 			if (row[0] == tempbillid and row[1] == temprollid):
 				break
@@ -53,13 +65,15 @@ def indVoteUpdate(voteinput):
 			votestable.append(temprow)
 			votestable[i].insert(0,tempbillid)
 			votestable[i].insert(1,temprollid)
+		#this for loop jumps through the list of bioguide_ids to find what column to insert the inidividual vote. This is stored in the 'j' variable
 		for bioid in bioids:
 			if (bioid == tempbioid):
 				break
 			else:
 				j += 1
-		votestable[i][j] = tempvote
-	votestable = votestable[1:]
+		votestable[i][j] = tempvote#this assigns the individual vote to a (i, j) position in the temp 2-D array
+	votestable = votestable[1:]#this removes the first row from the temp 2-D array, keeping the list of bioguide_ids from being inserted each time the method is run
+	#this for loop goes through each row in the temp 2-D array inserting each row as a new entity in the Ind_Votes table
 	for temp in votestable:
 		entry = politics.Ind_Votes(bill_id = temp[0], roll_id = temp[1])
 		entry.A000022 = temp[2]
