@@ -15,75 +15,10 @@
 		<h2>All the facts to inform us and a network to unite us</h2>
 	</div>
 
-	<div id='partystuff' class='section'>
-		<div id='factsblurb' class='vpoint leftpane'>
-			<h2>Just The Facts, All The Facts</h2>
-			<h4>A single place where you can find all government related data properly sourced and un-opinionated so that you can make decisions for yourself.</h4>
-		</div>
-		
-		<div id='partycomp' class='visual rightpane'>
-			<h4 class='visualtitle'>The Party Platforms</h4>
-			<table id='pcomptable'>
-				<tr id='pcomptitles'>
-					<td></td>
-					<td class='dem'>Democrats</td><td>VS</td>
-					<td class='repub'>Republicans</td>
-				</tr>
-				<tr>
-					<td></td><td class='dem'>
-						<img src='/images/hillary_headshot.png'>
-						<img src='/images/bernie_headshot.png'>
-						<img src='/images/martin_headshot.png'>
-					</td>
-					<td></td><td class='repub'>
-						<img src='/images/trump_headshot.png'>
-						<img src='/images/cruz_headshot.png'>
-						<img src='/images/rubio_headshot.png'>
-					</td>
-				</tr>
-				<tr>
-					<td class='issue'>The Economy</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Environment & Science</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Criminal Justice</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Health Care</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Privacy & Data Security</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Education</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-				<tr>
-					<td class='issue'>Religion & Social Issues</td>
-					<td class='dem'>XXXX</td><td></td>
-					<td class='repub'>XXXX</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
-	<div id='myreps_wrapper'>
+	<div id='myreps_wrapper' class='section'>
 		<h1>A More Personalized Connection</h1>
 		<h2>Analyse your legislator's voting record on issues and metrics you care about</h2>
-		<div id='myreps_ui'>
+		<div id='myreps_ui' class='interactive-ui'>
 			<div id='mreps_r1'>
 				<div id='mreps_r1-left'>
 					<div class='ribbon-header'>See The Leaders of Congress</div>
@@ -123,12 +58,69 @@
 		</div>
 	</div>
 
-	<div class='section'>
-		<div id='freedomblurb' class='vpoint rightpane'>
+	<div id='partystuff' class='section'>
+		<h1>Democrats Vs. Republicans</h1>
+		<h2>Which party stands for your values?</h2>
+		
+		<div id='pcomp-ui' class='interactive-ui'>
+			<div id='pcomp-search'>Search Issue</div>
+			<div id='pcomp-suggestions'>
+				<h4>Popular Issues</h4>
+				issue 1<br>
+				issue 2<br>
+				issue 3<br>
+				issue 4<br>
+				issue 5<br>
+			</div>
+			<div id='pcomp-display'>
+				<div id='pcomp-party-headers'>
+					<div id='dem-header' class='party-header pcomp-table-dem'>
+						The Democrats
+					</div>
+					<div id='repub-header' class='party-header pcomp-table-repub'>
+						The Republicans
+					</div>					
+				</div>
+				<table id='pcomp-table'>
+					<tr>
+						<td class='pcomp-table-issue'>Issue 1</td>
+						<td class='pcomp-table-dem'>Yea</td>
+						<td class='pcomp-table-repub'>Nay</td>
+					</tr>
+					<tr>
+						<td class='pcomp-table-issue'>Issue 1</td>
+						<td class='pcomp-table-dem'>Yea</td>
+						<td class='pcomp-table-repub'>Nay</td>
+					</tr>
+					<tr>
+						<td class='pcomp-table-issue'>Issue 1</td>
+						<td class='pcomp-table-dem'>Yea</td>
+						<td class='pcomp-table-repub'>Nay</td>
+					</tr>
+					<tr>
+						<td class='pcomp-table-issue'>Issue 1</td>
+						<td class='pcomp-table-dem'>Yea</td>
+						<td class='pcomp-table-repub'>Nay</td>
+					</tr>
+					<tr>
+						<td class='pcomp-table-issue'>Issue 1</td>
+						<td class='pcomp-table-dem'>Yea</td>
+						<td class='pcomp-table-repub'>Nay</td>
+					</tr>					
+				</table>
+			</div>
+			<div id='pcomp-social'>
+				<h2>Share This Table</h2>
+			</div>
+		</div>
+	</div>
+
+	<div id='fixer' class='section'>
+		<div id='freedomblurb' class='vpoint'>
 			<h2>Free Yourself From Traditional Media</h2>
 			<h4>Wave goodbye to the clamour and inherent bias of traditional media.</h4>
 		</div>
-		<div id='current_standings' class='visual leftpane'>
+		<div id='current_standings' class='visual'>
 			<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
 			<h3 class='visualtitle'>Current National Standings</h3>
 			<div id='partyselector'>
@@ -144,12 +136,42 @@
 	</div>
 
 <style>
-#partystuff{display:none;}
-#interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;}
+/*Desktop*/
+@media screen and (min-width: 966px){
+	.section{position:relative;padding:50px 5vw 50px 5vw;}
+	.interactive-ui{position:relative;margin:50px 0;width:90vw;height:70vh;}
+	.interactive-ui h1, h2, h3, h4{margin:0;}
+	#mreps_r1{position:relative;height:47.1%;}
+	#mreps_r1-left{float:left;width:38.2%;height:100%;}
+	.ribbon-header{height:50px;margin:30px 0 0 0;line-height:50px;background:darkred;color:white;font-weight:bold;text-align:center;}
+	#addressform_wrapper{margin: 0 0 30px 0;}
+	#districtform{position:relative;margin:0 auto; width:80%;background:white;}
+	#mreps_r2{position:relative;height:29.4%;}
+	#mreps_r2-1{float:left;height:100%;width:21.3vw;}
+	#mreps_r2-2{float:left;width:26.2vw;height:100%;}
+	.issuebox{position:relative;text-align:center;height:20%;}
+	#repdisplay{background:#EAEAEA;position:absolute;top:0;right:14.5%;height:100%;width:32.7%;z-index: 5;}
+	#mreps_r3{position:relative;height:23.6%;padding-top:5%;}
+
+	#pcomp-search{position:relative;width:23.6%;height:50px;line-height:50px;text-align:center;color:white;background:darkred;z-index:5}
+	#pcomp-suggestions{position:absolute;left:0;bottom:14.5%;width:18.2%;height:52.9%;}
+	#pcomp-display{position:absolute;top:0;right:14.5%;width:67.3%;height:85.5%;z-index: 1;}
+	#pcomp-party-headers{margin-left:29.7%;width:70.3%;height:27.6%;}
+	.party-header{float:left;width:calc(50% - 2px);margin:1px;height:calc(100% - 2px);text-align:center;}
+	#pcomp-table{position:absolute;width:100%;height:72.4%;text-align:center;}
+	.pcomp-table-issue{width:29.7%;}
+	.pcomp-table-dem{background:blue;}
+	.pcomp-table-repub{background:red;}
+	#pcomp-social{position:absolute;bottom:0;left:0;width:85.5%;height:10%;padding-top:4.5%;}
+
+}
+
+#fixer{padding:100px;}
+
+#interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;z-index:10;}
 .inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;}
 #opening{position:relative;padding:100px 5vw;min-height:calc(90vh - 220px);}
 #opening{text-align:center;}
-.section{position:relative;width:calc(100% - 10vw);padding:50px 5vw;display:inline-block;}
 #centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
 .vpoint h2,h4{display:block;text-align:left;}
@@ -193,23 +215,7 @@
 	.mobrep_info td{width:50%;}
 }
 
-/*Desktop*/
-@media screen and (min-width: 966px){
-	#myreps_wrapper{position:relative;padding:50px 5vw 50px 5vw;}
-	#myreps_ui{position:relative;margin:50px 0;width:90vw;height:70vh;}
-	#mreps_ui h1, h2, h3, h4{margin:0;}
-	#repdisplay{background:#EAEAEA;position:absolute;top:0;right:14.5%;height:100%;width:32.7%;z-index: 5;}
-	#mreps_r1{position:relative;height:47.1%;}
-	#mreps_r1-left{float:left;width:38.2%;height:100%;}
-	.ribbon-header{height:50px;margin:30px 0 0 0;line-height:50px;background:darkred;color:white;font-weight:bold;text-align:center;}
-	#addressform_wrapper{margin: 0 0 30px 0;}
-	#districtform{position:relative;margin:0 auto; width:80%;background:white;}
-	#mreps_r2{position:relative;height:29.4%;}
-	#mreps_r2-1{float:left;height:100%;width:21.3vw;}
-	#mreps_r2-2{float:left;width:26.2vw;height:100%;}
-	.issuebox{position:relative;text-align:center;height:20%;}
-	#mreps_r3{position:relative;height:23.6%;padding-top:5%;}
-}
+
 
 /*Large Desktop*/
 @media screen and (min-width: 1281px){
