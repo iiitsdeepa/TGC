@@ -25,6 +25,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 import politics
+from databaseclasses import *
 
 def getNationalPolls():
     #make api call to get most recent batch of poll data
@@ -100,7 +101,7 @@ def getNationalPolls():
                         if (k["choice"] == "Carson"):
                             car = int(k["value"])
                     if (end > topdategop):
-                        entry = politics.NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
+                        entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
                         entry.put()
         if (breakvar == True):
             break
@@ -151,7 +152,7 @@ def getNationalPolls():
                         if (k["choice"] == "O'Malley"):
                             omal = int(k["value"])
                     if (end > topdatedem):
-                        entry = politics.NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
+                        entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
                         entry.put()
         if (breakvar == True):
             break

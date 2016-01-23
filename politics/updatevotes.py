@@ -29,6 +29,7 @@ from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 import politics
 from indvoteupdate import *
+from databaseclasses import *
 
 """
 This method updates the Votes table with the latest information from the sunlight foundation adding them to the Votes table in the database.
@@ -121,7 +122,7 @@ def getVotesUpdate():
 				except:
 					break_ind = 'None'
 				#place the votes entity into the Votes table
-				entry = politics.Votes(bill_id=bid,rid=rid,congress=congress,voted_at=voted_at,vote_type=vote_type,roll_type=roll_type,question=question,required=required,result=result,source=source,breakdown=breakdown,break_gop=break_gop,break_dem=break_dem,break_ind=break_ind)
+				entry = Votes(bill_id=bid,rid=rid,congress=congress,voted_at=voted_at,vote_type=vote_type,roll_type=roll_type,question=question,required=required,result=result,source=source,breakdown=breakdown,break_gop=break_gop,break_dem=break_dem,break_ind=break_ind)
 				entry.put()
 			if (breakvar == True):
 				break

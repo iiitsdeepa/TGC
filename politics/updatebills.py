@@ -28,6 +28,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 import politics
+from databaseclasses import *
 
 """
 The point behind this method is to pull the latest bills data from the sunlight foundation, adding them to the Bill table in the database.
@@ -117,12 +118,12 @@ def getBillsUpdate():
 				#this last try-except statement tests to see if the bill_id already exists in the table.
 				#if true the older existing bill will be deleted
 				try:
-					repeatedbill = politics.Bill.gql("WHERE bill_id = :1", str(bid)).get()
+					repeatedbill = Bill.gql("WHERE bill_id = :1", str(bid)).get()
 					repeatedbill.delete()
 				except:
 					repeatbill = 0
 				#place the bill entity into the Bill table
-				entry = politics.Bill(bill_id=bid,official_title=official_title,popular_title=popular_title,short_title=short_title,nicknames=nicknames,url=url,active=active,vetoed=vetoed,enacted=enacted,sponsor_id=sponsor, introduced=introduced, last_action=last_action, last_updated=datetime.today())
+				entry = Bill(bill_id=bid,official_title=official_title,popular_title=popular_title,short_title=short_title,nicknames=nicknames,url=url,active=active,vetoed=vetoed,enacted=enacted,sponsor_id=sponsor, introduced=introduced, last_action=last_action, last_updated=datetime.today())
 				entry.put()
 			sleep(1.00)#always sleep for 1 second to be a nice citizen to the sunlight api and not DOS their servers :)
 			if (breakvar == True):
