@@ -1,6 +1,25 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
+<div id='propsections'>
+  <div id='vp1'>
+    Impartial, Interactive Data Personalized To Your Preferences
+    All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.
+  </div>
+  <div id='vp2'>
+    Personalized Government Experience 
+    Documentation and historicity of major national issues and our government’s standing, so you can choose to follow what matters most to you.
+  </div>
+  <div id='vp3'>
+    Political Accountability 
+    Objective analysis of the credibility and effectiveness of your representatives and our government, so you can put your vote where it counts.  
+  </div>
+  <div id='vp4'>
+    Elevated Social Platform  
+    A network to discuss, share, and see multiple interpretations of the data so you can raise the standard of the political debate and come together to make well-informed changes. 
+  </div>
+</div>
+
   <div id='vprop'>
     <div id='perma'>
         <div id='permatitle'>
@@ -56,6 +75,7 @@
 
   <style>
     html, body{background:#0E1C32;}
+    #propsections{display:none;}
     #badge{padding:0 10px !important;}
     .opacity-background{position:absolute;top:0;left:0;height:100%;width:100%;background:white;opacity:.7;z-index:0;}
     .opacity-foreground{position:relative;z-index:10;}
@@ -111,5 +131,5 @@
     $('#badge').html("<img src='/images/awlogo.png' alt='...' style='height:100%'>")
   </script>
 
-  {% endblock %}
+{% endblock %}
   
