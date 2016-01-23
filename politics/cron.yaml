@@ -1,12 +1,12 @@
 cron:
-- description: daily summary job
+- description: daily poll updater
   url: /updateship
-  schedule: every day 07:00
+  schedule: every day 09:00
 
-- description: daily summary job
+- description: daily Votes and Ind_Votes updater
   url: /updatevotes
-  schedule: every day 07:15
+  schedule: every day 09:05
 
-- description: daily summary job
+- description: daily Bill updater
   url: /updatebills
-  schedule: every day 07:30
+  schedule: every day 09:10

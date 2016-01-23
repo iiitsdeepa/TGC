@@ -62,9 +62,11 @@ def getVotesUpdate():
 		per_page = int(j["page"]["per_page"])
 		num_pages = int(j["count"])/per_page
 		breakvar = False
+		logging.error(str(total_count)+" "+str(num_pages))
 		#this for loop goes through each page in the api database, starting at page = 1 (most recent) and going to the end (earliest)
 		for x in range(1,num_pages+1):
 			page = 'page='+str(x)
+			logging.error(str(page))
 			u = urllib2.urlopen(bill_url % (congress, c, page))
 			b = u.read()
 			j = json.loads(b)
