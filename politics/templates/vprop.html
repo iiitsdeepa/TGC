@@ -1,7 +1,7 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
-<div id='propsections' value='0'>
+<div id='propsections' value='40'>
   <div id='vp0'>
     <h2>Impartial, Interactive Data Personalized To Your Preferences</h2>
     <h3>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</h3>
@@ -126,6 +126,7 @@
       else{newd = current + 1}
       $('#propsections').attr('value', newd)
       c = newd % 4
+      console.log(c)
       h = $('#vp'+c).html()
       $('#vprop-msg').html(h)
     }
