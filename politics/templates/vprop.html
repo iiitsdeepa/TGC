@@ -1,6 +1,25 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
+<div id='propsections' value='40'>
+  <div id='vp0'>
+    <h2>Impartial, Interactive Data Personalized To Your Preferences</h2>
+    <h3>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</h3>
+  </div>
+  <div id='vp1'>
+    <h2>Personalized Government Experience</h2> 
+    <h3>Documentation and historicity of major national issues and our government’s standing, so you can choose to follow what matters most to you.</h3>
+  </div>
+  <div id='vp2'>
+    <h2>Political Accountability</h2> 
+    <h3>Objective analysis of the credibility and effectiveness of your representatives and our government, so you can put your vote where it counts.</h3>  
+  </div>
+  <div id='vp3'>
+    <h2>Elevated Social Platform</h2>  
+    <h3>A network to discuss, share, and see multiple interpretations of the data so you can raise the standard of the political debate and come together to make well-informed changes.</h3> 
+  </div>
+</div>
+
   <div id='vprop'>
     <div id='perma'>
         <div id='permatitle'>
@@ -18,14 +37,14 @@
             </ul>
           </div>
           <div id='vpropslide_wrapper' class='flex-columns'>
-            <div id='left-arrow' class='arrow'>
+            <div id='left-arrow' class='arrow' onclick="javascript:propScroll('left');return false;">
               <div class='arrblock'></div>
             </div>
             <div id='vprop-msg'>
               <h2>Impartial and Interactive Data</h2>
               <h3>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</h3>
             </div>
-            <div id='right-arrow' class='arrow'>
+            <div id='right-arrow' class='arrow' onclick="javascript:propScroll('right');return false;">
               <div class='arrblock'></div>
             </div>
           </div>
@@ -56,6 +75,7 @@
 
   <style>
     html, body{background:#0E1C32;}
+    #propsections{display:none;}
     #badge{padding:0 10px !important;}
     .opacity-background{position:absolute;top:0;left:0;height:100%;width:100%;background:white;opacity:.7;z-index:0;}
     .opacity-foreground{position:relative;z-index:10;}
@@ -100,6 +120,17 @@
   </style>
 
   <script>
+    function propScroll(direction){
+      current = Math.abs($('#propsections').attr('value'))
+      if(direction == 'left'){newd = current - 1;}
+      else{newd = current + 1}
+      $('#propsections').attr('value', newd)
+      c = newd % 4
+      console.log(c)
+      h = $('#vp'+c).html()
+      $('#vprop-msg').html(h)
+    }
+
     function submitSign() {
       document.getElementById("subbutton").disabled=true;
       setTimeout('document.getElementById("subbutton").disabled=false;',1200);
@@ -111,5 +142,5 @@
     $('#badge').html("<img src='/images/awlogo.png' alt='...' style='height:100%'>")
   </script>
 
-  {% endblock %}
+{% endblock %}
   
