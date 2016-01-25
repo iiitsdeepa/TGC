@@ -98,8 +98,8 @@ function submitSign() {
 
 function scrollTo(id){
   if (id){
-    scrollpos = $("#"+id).offset().top - 100;
-    console.log($("#"+id).offset().top)
+    if(id=='top'){scrollpos = 0}else{
+    scrollpos = $("#"+id).offset().top - 20;}
     $('html, body').animate({
           scrollTop: scrollpos
       }, 500);

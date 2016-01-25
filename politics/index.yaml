@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Bill
+  properties:
+  - name: bill_id
+  - name: Key
+  - name: last_action
+
 - kind: NationalDemocraticPrimary
   properties:
   - name: entry_date

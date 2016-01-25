@@ -27,6 +27,8 @@ handlers:
   script: politics.application
 - url: /csv
   static_dir: csv
+- url: /update
+  static_dir: update
   application_readable: true
 
 builtins:
