@@ -851,3 +851,17 @@ def process_nationalpolls(blob_info, party):
             update = datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
             entry = NationalRepublicanPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5],mode=d[6],trump=int(d[7]),cruz=int(d[8]),rubio=int(d[9]),carson=int(d[10]),bush=int(d[11]),christie=int(d[12]),paul=int(d[13]),fiorina=int(d[14]),huckabee=int(d[15]),kasich=int(d[16]),santorum=int(d[17]),gilmore=int(d[18]),gram=int(d[19]),jindal=int(d[20]),pataki=int(d[21]),perry=int(d[22]),walker=int(d[23]),undecided=int(d[24]),url=d[25])
             entry.put()
+
+
+def process_bill_csv(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split('$$$')
+        bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
+        tempqueryrow = bioidquery.get()
+        if tempqueryrow is None:
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=temp[10], last_action=temp[11], last_updated=datetime.today())
+            entry.put()
+

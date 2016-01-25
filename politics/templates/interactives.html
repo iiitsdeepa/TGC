@@ -21,7 +21,7 @@
 		<div id='myreps-ui' class='interactive-ui'>
 			<div class='interactive-controlpanel'>
 				<div class='interactive-controlpanel-1'>
-					<div class='ribbon-header'>See The Leaders of Congress</div>
+					<div class='ribbon-header' onclick="javascript:showCongressionalLeaders();return false;">See The Leaders of Congress</div>
 					<div id='addressform_wrapper'>
 						<div class='ribbon-header'>See My Representatives</div>
 						<form method='post' name='districtform' id='districtform'>
@@ -245,6 +245,15 @@
 		</div>
 	</div>
 
+<script>
+function showCongressionalLeaders(){
+
+}
+//finds the district, pulls the rep data, and displays it
+function findReps(){
+
+}
+</script>
 
 <style>
 /*Desktop*/
@@ -350,6 +359,7 @@
 /*Large Desktop*/
 @media screen and (min-width: 1281px){
 	.visual{width:55%;}
+	body{background:lime;}
 }
 
 </style>
