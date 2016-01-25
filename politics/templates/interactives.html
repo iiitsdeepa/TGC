@@ -133,6 +133,92 @@
 						</div>
 						<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
 					</div>
+					<div id='mreps-house'>
+						<div id='my-hr' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Speaker For The House</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id='my-ss' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Senate Majority Leader</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id='my-js' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Senate Majority Leader</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 
 			</div>
@@ -281,6 +367,10 @@ function mrepsControl(changeaddress){
 function inputRepData(data){
 	console.log(data)
 	j = JSON.parse(data)
+	if(j.district){
+		$('#hasdistrict').attr('value',j.district)
+		$('#address-form-wrapper').css('display','none')
+	}
 	if ($('#reps_slider').attr('value') == 'leaders'){
 		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
 		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
@@ -387,7 +477,9 @@ $( document ).ready(function() {
 	.rep-stats td{background:gray;min-width:100px;}
 	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:91.2%;}
 	.rep-wrapper{width:50%;height:100%;}
-	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;background:white;}
+	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;background:white;z-index:3}
+	#mreps-house{display:flex;z-index:2;height:91.2%;width:100%;}
+	.mrep-wrapper{width:33.3%;height:100%;}
 }
 
 .redbutton{background:darkred;color:white;font-weight:bold;text-align:center;cursor:pointer;border:double 3px #660000;}
