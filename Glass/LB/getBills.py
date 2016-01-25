@@ -10,7 +10,7 @@ cosponsorscsv = open('cosponsors'+str(congress)+'.csv', 'w')
 keywordscsv = open('keywords'+str(congress)+'.csv', 'w')
 
 chambers=['hr','s']
-bill_url = 'https://congress.api.sunlightfoundation.com/bills?%s&fields=bill_id,official_title,popular_title,short_title,nicknames,urls,active,vetoed,enacted,sponsor_id,introduced_on,history,last_action_at&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+bill_url = 'https://congress.api.sunlightfoundation.com/bills?%s&fields=bill_id,cosponsors,keywords,official_title,popular_title,short_title,nicknames,urls,active,vetoed,enacted,sponsor_id,introduced_on,history,last_action_at&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
 for c in chambers:
 	bill_method = 'congress=%d&bill_type=%s&per_page=20&page=%d' % (congress,c, 1)
