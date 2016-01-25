@@ -4,7 +4,7 @@ from datetime import datetime
 from time import sleep
 
 #opening log file
-congress = 113
+congress = 112
 billscsv = open('bills'+str(congress)+'.csv', 'w')
 cosponsorscsv = open('cosponsors'+str(congress)+'.csv', 'w')
 keywordscsv = open('keywords'+str(congress)+'.csv', 'w')

@@ -5,9 +5,17 @@ def process_bill_csv(blob_info):
         row_str = row[0]
         temp = row_str.split('$$$')
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
+        try:
+            last_action = datetime.strptime(temp[11], '%Y-%m-%d')
+        except:
+            last_action = datetime.strptime(temp[11], '%Y-%m-%dT%H:%M:%SZ')
+        try:
+            introduced = datetime.strptime(temp[10], '%Y-%m-%d')
+        except:
+            introduced = datetime.strptime(temp[10], '%Y-%m-%dT%H:%M:%SZ')
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=temp[10], last_action=temp[11], last_updated=datetime.today())
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=introduced, last_action=last_action, last_updated=datetime.today())
             entry.put()
 
 class Bill(db.Model):
