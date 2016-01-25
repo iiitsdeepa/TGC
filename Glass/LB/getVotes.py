@@ -4,7 +4,7 @@ from time import sleep
 import datetime
 
 #opening log file
-congress = 112
+congress = 114
 clog_fname = 'votes' + str(congress) + '.csv'
 clog = open(clog_fname, 'w')
 clog_lname = 'ind_votes' + str(congress) + '.csv'
