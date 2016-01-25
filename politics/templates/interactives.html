@@ -61,6 +61,67 @@
 				</table>
 			</div>
 			<div class='interactive-display'>
+				<h2 class='id-title'>These are the leaders of congress</h2>
+
+				<div id='congressional-leaders'>
+					<div id='spthouse' class='rep-wrapper'>
+						<div class='rep-header-wrapper'>
+							<h4>Speaker For The House</h4>
+							<div class='rep-header'>
+								<div class='rep-pic'></div>
+								<div class='rep-title'>Paul Ryan</div>
+							</div>
+						</div>
+						<div class='rep-stats'>
+							<table>
+								<tr>
+									<td>Stat 1</td>
+								</tr>
+								<tr>
+									<td>Stat 2</td>
+								</tr>
+								<tr>
+									<td>Stat 3</td>
+								</tr>
+								<tr>
+									<td>Stat 4</td>
+								</tr>
+								<tr>
+									<td>Stat 5</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id='smjleader' class='rep-wrapper'>
+						<div class='rep-header-wrapper'>
+							<h4>Senate Majority Leader</h4>
+							<div class='rep-header'>
+								<div class='rep-pic'></div>
+								<div class='rep-title'>Mitch McConnell</div>
+							</div>
+						</div>
+						<div class='rep-stats'>
+							<table>
+								<tr>
+									<td>Stat 1</td>
+								</tr>
+								<tr>
+									<td>Stat 2</td>
+								</tr>
+								<tr>
+									<td>Stat 3</td>
+								</tr>
+								<tr>
+									<td>Stat 4</td>
+								</tr>
+								<tr>
+									<td>Stat 5</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
 			</div>
 			<div class='interactive-share'>
 				<h2>Share</h2>
@@ -198,7 +259,8 @@
 	.interactive-display-legend{position:absolute;top:47%;left:23.6%;height:29.4%;width:14.5%;}
 	.idl-table{height:100%;width:100%;text-align:center;}
 	#pcomp-idl{top:23.5%;height:67.7%;}
-	.interactive-display{background:#EAEAEA;position:absolute;width:47.3%;height:100%;top:0;left:38.2%;}
+	.interactive-display{background:#EAEAEA;position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;}
+	.id-title{height:8.8%;line-height:100%;}
 	.interactive-share{position:absolute;bottom:0;left:23.6%;width:76.4%;height:8.8%;background:#0E1C32;color:white;opacity:.5}
 	#mreps_r1{position:relative;height:47.1%;}
 	#mreps_r1-left{float:left;width:38.2%;height:100%;}
@@ -222,7 +284,16 @@
 	.pcomp-table-dem{background:blue;}
 	.pcomp-table-repub{background:red;}
 	#pcomp-social{position:absolute;bottom:0;left:0;width:85.5%;height:10%;padding-top:4.5%;}
-
+	.rep-header-wrapper{position:relative;height:46.4%;}
+	.rep-header-wrapper h4{width:100%;text-align:center;}
+	.rep-header{position:absolute;height:70%;top:50%;left:50%;transform:translate(-50%,-50%);min-width:50%;}
+	.rep-pic{position:relative;margin:0 auto;background:blue;height:80%;width:70%;border-radius:50%;}
+	.rep-title{position:relative;background:red;padding:5px 10px;}
+	.rep-stats{height:35.7%;}
+	.rep-stats table{height:100%;margin:0 auto;}
+	.rep-stats td{background:gray;min-width:100px;}
+	#congressional-leaders{position:relative;display:flex;width:100%;height:82.4%;}
+	.rep-wrapper{width:50%;height:100%;}
 }
 
 #fixer{padding:100px;}
