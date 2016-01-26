@@ -27,6 +27,7 @@ from google.appengine.api import mail
 from updatevotes import *
 from updatebills import *
 from updatepolls import *
+from updatecosponsors import *
 import databaseclasses
 from csvprocessing import *
 
@@ -293,7 +294,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
-        process_bill_csv(info)
+        #process_bill_csv(info)
+        process_cosponsor_csv(info)
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -395,37 +397,22 @@ class PollServer(BaseHandler):
         
         self.response.out.write(data)
 
-class UpdatePolls(BaseHandler):
+class UpdateAll(BaseHandler):
     def get(self):
+        logging.error('National Polls')
         getNationalPolls()
-        self.redirect('/')
-        self.response.set_status(200)
-
-    def post(self):
-        #get type of data to pull
-        self.redirect('/')
-
-class UpdateVotes(BaseHandler):
-    def get(self):
+        logging.error('Votes')
         getVotesUpdate()
-        self.redirect('/')
-        self.response.set_status(200)
-
-    def post(self):
-        #get type of data to pull
-        self.redirect('/')
-
-class UpdateBills(BaseHandler):
-    def get(self):
+        logging.error('Bills')
         getBillsUpdate()
+        logging.error('Cosponsors')
+        getCosponsorsUpdate()
         self.redirect('/')
         self.response.set_status(200)
 
     def post(self):
         #get type of data to pull
         self.redirect('/')
-
-
 
 class bulkdelete(BaseHandler):
     def get(self):
@@ -448,9 +435,7 @@ application = webapp2.WSGIApplication([
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
-    ('/updateship', UpdatePolls),
-    ('/updatevotes', UpdateVotes),
-    ('/updatebills', UpdateBills),
+    ('/updateall', UpdateAll),
     ('/up', UploadHandler),
     ('/upload', Upload),
     ('/delete', bulkdelete)

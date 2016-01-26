@@ -11,10 +11,10 @@ clog_lname = 'ind_votes' + str(congress) + '.csv'
 cilog = open(clog_lname, 'w')
 
 chambers=['house','senate']
-bill_url = 'https://congress.api.sunlightfoundation.com/votes?congress=%s&chamber=%s&per_page=50&%s&fields=voter_ids,bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+vote_url = 'https://congress.api.sunlightfoundation.com/votes?congress=%s&chamber=%s&per_page=50&%s&fields=voter_ids,bill_id,roll_id,congress,voted_at,vote_type,roll_type,question,required,result,source,breakdown&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
 for c in chambers:
-	u = urllib2.urlopen(bill_url % (congress, c,'page=1'))
+	u = urllib2.urlopen(vote_url % (congress, c,'page=1'))
 	b = u.read()
 	j = json.loads(b)
 
@@ -24,7 +24,7 @@ for c in chambers:
 	print j["count"],per_page,num_pages
 	for x in range(1,num_pages+1):
 		page = 'page='+str(x)
-		u = urllib2.urlopen(bill_url % (congress, c, page))
+		u = urllib2.urlopen(vote_url % (congress, c, page))
 		b = u.read()
 		j = json.loads(b)
 		ra = j["results"]

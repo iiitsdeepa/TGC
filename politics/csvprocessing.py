@@ -86,6 +86,22 @@ def process_politician_csv(blob_info):
             entry = Politician(in_office=temp[0],party=temp[1],gender=temp[2],state=temp[3],state_name=temp[4],distrank=temp[5],chamber=temp[6],birthday=temp[7],fyio=int(temp[8]),bioguide_id=temp[9],crp_id=temp[10],fec_ids=temp[11],name=temp[12],phone=temp[13],website=temp[14],contact_form=temp[15],twitter_id=temp[16],youtube_id=temp[17],facebook_id=temp[18])
             entry.put()
 
+def process_cosponsor_csv(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    count = 0
+    for row in reader:
+        count += 1
+        if (count%1000 == 0):
+            logging.error(str(count))
+        row_str = row[0]
+        temp = row_str.split(',')
+        #bioidquery = GqlQuery("SELECT * FROM Cosponsor WHERE bill_id = :1 AND bioguide_id = :2", temp[0], temp[1])
+        #tempqueryrow = bioidquery.get()
+        #if tempqueryrow is None:
+        entry = Cosponsor(bill_id=temp[0],bioguide_id=temp[1])
+        entry.put()
+
 def process_bill_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
@@ -93,9 +109,17 @@ def process_bill_csv(blob_info):
         row_str = row[0]
         temp = row_str.split('$$$')
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
+        try:
+            last_action = datetime.strptime(temp[11], '%Y-%m-%d')
+        except:
+            last_action = datetime.strptime(temp[11], '%Y-%m-%dT%H:%M:%SZ')
+        try:
+            introduced = datetime.strptime(temp[10], '%Y-%m-%d')
+        except:
+            introduced = datetime.strptime(temp[10], '%Y-%m-%dT%H:%M:%SZ')
         tempqueryrow = bioidquery.get()
         if tempqueryrow is None:
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=temp[10], last_action=temp[11], last_updated=datetime.today())
+            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=introduced, last_action=last_action, last_updated=datetime.today())
             entry.put()
 
 def process_votes_csv(blob_info):
@@ -850,25 +874,4 @@ def process_nationalpolls(blob_info, party):
             endupdate = datetime.strptime(d[2], '%Y-%m-%d')
             update = datetime.strptime(a[0], '%Y-%m-%d %H:%M:%S')
             entry = NationalRepublicanPrimary(pollster=d[0], start_date=startupdate, end_date=endupdate, entry_date=update, popsize=int(d[4]), poptype=d[5],mode=d[6],trump=int(d[7]),cruz=int(d[8]),rubio=int(d[9]),carson=int(d[10]),bush=int(d[11]),christie=int(d[12]),paul=int(d[13]),fiorina=int(d[14]),huckabee=int(d[15]),kasich=int(d[16]),santorum=int(d[17]),gilmore=int(d[18]),gram=int(d[19]),jindal=int(d[20]),pataki=int(d[21]),perry=int(d[22]),walker=int(d[23]),undecided=int(d[24]),url=d[25])
-            entry.put()
-
-
-def process_bill_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        temp = row_str.split('$$$')
-        bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
-        try:
-            last_action = datetime.strptime(temp[11], '%Y-%m-%d')
-        except:
-            last_action = datetime.strptime(temp[11], '%Y-%m-%dT%H:%M:%SZ')
-        try:
-            introduced = datetime.strptime(temp[10], '%Y-%m-%d')
-        except:
-            introduced = datetime.strptime(temp[10], '%Y-%m-%dT%H:%M:%SZ')
-        tempqueryrow = bioidquery.get()
-        if tempqueryrow is None:
-            entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=introduced, last_action=last_action, last_updated=datetime.today())
             entry.put()
