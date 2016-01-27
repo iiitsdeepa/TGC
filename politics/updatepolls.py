@@ -42,11 +42,12 @@ def getNationalPolls():
         topdategop = tempgopdate.end_date
     except:
         topdategop = datetime.min
+    logging.error(str(topdategop))
     todaydate = datetime.today()
     breakvar = False
     #this for loop goes through each page in the api database, starting at page = 1 (most recent) and going to the end (earliest)
     for x in range(1,100):
-        logging.error('page: '+str(x))
+        logging.error('GOP page: '+str(x))
         bill_method = 'sort=updated&page=%d&' % (x)
         try:
             gop = urllib2.urlopen(gop_url % bill_method)
@@ -60,9 +61,11 @@ def getNationalPolls():
             notend = i["end_date"]
             notstart = i["start_date"]
             method = i["method"]
+            logging.error(str(polls)+" "+str(notend))
             start = datetime.strptime(notstart, '%Y-%m-%d')
             end = datetime.strptime(notend, '%Y-%m-%d')
-            if (end <= topdategop):
+            if (end < topdategop):
+                logging.error('breaking at '+str(polls))
                 breakvar = True
                 break
             sourceurl = i["source"]
@@ -103,6 +106,7 @@ def getNationalPolls():
                     if (end > topdategop):
                         entry = NationalRepublicanPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, trump=tru, cruz=cru, rubio=rub, kasich=kas, carson=car, bush=bus, christie=chri, paul=pau, fiorina=fio, huckabee=huc, santorum=sant, gilmore=gil, gram=gra, jindal=jin, pataki=pat, perry=per, walker=wal, undecided=rundec, url=sourceurl)
                         entry.put()
+                        logging.error('put entry: '+" "+str(polls))
         if (breakvar == True):
             break
         sleep(1.00)
@@ -113,9 +117,10 @@ def getNationalPolls():
         topdatedem = tempdemdate.end_date       
     except:
         topdatedem = datetime.min 
+    logging.error(str(topdatedem))
     breakvar = False
     for x in range(1,100):
-        logging.error('page: '+str(x))
+        logging.error('DEM page: '+str(x))
         bill_method = 'sort=updated&page=%d&' % (x)
         try:
             dem = urllib2.urlopen(dem_url % bill_method)
@@ -128,9 +133,11 @@ def getNationalPolls():
             polls = i["pollster"]
             notend = i["end_date"]
             notstart = i["start_date"]
+            logging.error(str(polls)+" "+str(notend))
             start = datetime.strptime(notstart, '%Y-%m-%d')
             end = datetime.strptime(notend, '%Y-%m-%d')
-            if (end <= topdatedem):
+            if (end < topdatedem):
+                logging.error('breaking at '+str(polls))
                 breakvar = True
                 break
             method = i["method"]
@@ -154,6 +161,7 @@ def getNationalPolls():
                     if (end > topdatedem):
                         entry = NationalDemocraticPrimary(pollster=polls, start_date=start, end_date=end, entry_date=todaydate, popsize=pop, poptype=poptype, mode=method, hill=cli, sanders=sand, omalley=omal, chafee=cha, webb=web, biden=bid, undecided=dundec, url=sourceurl)
                         entry.put()
+                        logging.error('put entry: '+" "+str(polls))
         if (breakvar == True):
             break
         sleep(1.00)
