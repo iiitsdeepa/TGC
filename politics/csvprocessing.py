@@ -90,6 +90,7 @@ def process_cosponsor_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
     count = 0
+    entry = []
     for row in reader:
         count += 1
         if (count%1000 == 0):
@@ -99,8 +100,8 @@ def process_cosponsor_csv(blob_info):
         #bioidquery = GqlQuery("SELECT * FROM Cosponsor WHERE bill_id = :1 AND bioguide_id = :2", temp[0], temp[1])
         #tempqueryrow = bioidquery.get()
         #if tempqueryrow is None:
-        entry = Cosponsor(bill_id=temp[0],bioguide_id=temp[1])
-        entry.put()
+        entry.append(Cosponsor(bill_id=temp[0],bioguide_id=temp[1]))
+    db.put(entry)
 
 def process_bill_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
