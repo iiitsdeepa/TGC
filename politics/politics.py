@@ -293,9 +293,9 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_votes_csv(info)
-        process_ind_votes_csv(info)
+        #process_ind_votes_csv(info)
         #process_bill_csv(info)
-        #process_cosponsor_csv(info)
+        process_cosponsor_csv(info)
         self.redirect("/")
 
 class Landing(BaseHandler):
