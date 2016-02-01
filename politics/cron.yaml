@@ -1,12 +1,4 @@
 cron:
-- description: daily poll updater
-  url: /updateship
+- description: Updates the LBDB database daily
+  url: /updateall
   schedule: every day 09:00
-
-- description: daily Votes and Ind_Votes updater
-  url: /updatevotes
-  schedule: every day 09:05
-
-- description: daily Bill updater
-  url: /updatebills
-  schedule: every day 09:10

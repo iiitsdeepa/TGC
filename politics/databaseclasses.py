@@ -885,3 +885,7 @@ class Bill(db.Model):
     introduced = db.DateTimeProperty(required = True)
     last_action = db.DateTimeProperty(required = True)
     last_updated = db.DateTimeProperty(required = True)
+
+class Cosponsor(db.Model):
+    bill_id = db.StringProperty(required = True)
+    bioguide_id = db.StringProperty(required = True)

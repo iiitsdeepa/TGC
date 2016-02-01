@@ -19,15 +19,10 @@
 		<h1>A More Personalized Connection</h1>
 		<h2>Analyse your legislator's voting record on issues and metrics you care about</h2>
 		<div id='myreps-ui' class='interactive-ui'>
+			<input type='hidden' id='hasdistrict' value='none'>
 			<div class='interactive-controlpanel'>
 				<div class='interactive-controlpanel-1'>
-					<div class='ribbon-header'>See The Leaders of Congress</div>
-					<div id='addressform_wrapper'>
-						<div class='ribbon-header'>See My Representatives</div>
-						<form method='post' name='districtform' id='districtform'>
-							<input type='checkbox' id='uselocation' name='uselocation'>Use Location Data
-						</form>
-					</div>
+					<div id='repstoggle' class='redbutton' onclick="javascript:mrepsControl();return false;" value='seereps'>See My Representatives</div>
 				</div>
 				<div class='interactive-controlpanel-2'>
 			  		<h2 class='icp2-title'>Choose Your Own Stats</h2>
@@ -61,9 +56,9 @@
 				</table>
 			</div>
 			<div class='interactive-display'>
-				<h2 class='id-title'>These are the leaders of congress</h2>
 
-				<div id='congressional-leaders'>
+				<div id='congressional-leaders' class='reps-wrapper'>
+					<h2 class='id-title'>These are the leaders of congress</h2>
 					<div id='spthouse' class='rep-wrapper'>
 						<div class='rep-header-wrapper'>
 							<h4>Speaker For The House</h4>
@@ -118,6 +113,110 @@
 									<td>Stat 5</td>
 								</tr>
 							</table>
+						</div>
+					</div>
+				</div>
+
+				<div id='district-reps' class='reps-wrapper'>
+					<h2 class='id-title'>The Representatives for Kentucky:3</h2>
+					<div id='address-form-wrapper'>
+						<h2>We Need To Find Your District First</h2>
+						<div id='uselocation' class='redbutton' onclick="javascript:useLocation();return false;">Use Location Data</div>
+						Or<br>
+						<div id='useaddress'>
+							<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+					  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+					  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
+					  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+					  			<div id='address-submit' class='redbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
+							</form>
+						</div>
+						<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
+					</div>
+					<div id='mreps-house'>
+						<div id='my-hr' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Speaker For The House</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id='my-ss' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Senate Majority Leader</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id='my-js' class='mrep-wrapper'>
+							<div class='rep-header-wrapper'>
+								<h4>Senate Majority Leader</h4>
+								<div class='rep-header'>
+									<div class='rep-pic'></div>
+									<div class='rep-title'></div>
+								</div>
+							</div>
+							<div class='rep-stats'>
+								<table>
+									<tr>
+										<td>Stat 1</td>
+									</tr>
+									<tr>
+										<td>Stat 2</td>
+									</tr>
+									<tr>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>Stat 4</td>
+									</tr>
+									<tr>
+										<td>Stat 5</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -245,10 +344,94 @@
 		</div>
 	</div>
 
+<script>
+function mrepsControl(changeaddress){
+	toggle = $('#repstoggle').attr('value')
+	if(toggle == 'seereps'){ //switch to the representatives
+		district = $('#hasdistrict').attr('value')
+		if(district == 'none'){ //display address form
+			$('address-form-wrapper').css('display','block')
+		}
+		$('#district-reps').css('display','flex')
+		$('#congressional-leaders').css('display','none')
+		$('#repstoggle').attr('value','seeleaders')
+		$('#repstoggle').html('See The Leaders of Congress')
+	}else{ //switch to leaders of congress
+		$('#district-reps').css('display','none')
+		$('#congressional-leaders').css('display','flex')
+		$('#repstoggle').attr('value','seereps')
+		$('#repstoggle').html('See My Representatives')
+	}
+}
+
+function inputRepData(data){
+	console.log(data)
+	j = JSON.parse(data)
+	if(j.district){
+		$('#hasdistrict').attr('value',j.district)
+		$('#address-form-wrapper').css('display','none')
+	}
+	if ($('#reps_slider').attr('value') == 'leaders'){
+		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
+		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
+		$('.reppic_wrapper').css('background-size', '100%')
+	}
+	else {
+		$('#hrpic').css('background', 'url(/images/headshots/'+j.hrpic+'.png)')
+		$('#sspic').css('background', 'url(/images/headshots/'+j.sspic+'.png)')
+		$('#jspic').css('background', 'url(/images/headshots/'+j.jspic+'.png)')
+		$('.reppic_wrapper').css('background-size', '100%')
+	}
+	//update names
+	$('#hrname').html(j.hrname)
+	$('#ssname').html(j.ssname)
+	$('#jsname').html(j.jsname)
+	//update ployalty
+	$('#ployalty .hrstat').html(j.hrployalty+'%')
+	$('#ployalty .ssstat').html(j.ssployalty+'%')
+	$('#ployalty .jsstat').html(j.jsployalty+'%')
+}
+function useLocation() {
+	console.log('using location')
+    navigator.geolocation.getCurrentPosition(gotGPS);
+}
+function gotGPS(position) {
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    $.post('/prop', {lat: lat, lng: lng}, function(data){
+    	j = JSON.parse(data)
+    	$('#reps_slider').attr('value', j.district)
+    	$('#js_wrapper').css('display', 'block')
+    	$('.jsstat').css('display', 'block')
+        inputRepData(data)
+    });
+}
+function useAddress(){
+	street = document.getElementById('address').value;
+	state = document.getElementById('state').value;
+	city = document.getElementById('city').value;
+	address = street+' '+city+' '+state
+	$.post('/prop', {address: address}, function(data){
+    	j = JSON.parse(data)
+    	$('#reps_slider').attr('value', j.district)
+    	$('#js_wrapper').css('display', 'block')
+    	$('.jsstat').css('display', 'td')
+        inputRepData(data)
+    });
+}
+
+$( document ).ready(function() {
+    $.post('/prop', {demo: 'yes'}, function(data){
+  		inputRepData(data)
+    });
+});
+
+</script>
 
 <style>
 /*Desktop*/
 @media screen and (min-width: 966px){
+
 	.section{position:relative;padding:50px 5vw 50px 5vw;}
 	.interactive-ui{position:relative;margin:50px 0;width:90vw;height:70vh;}
 	.interactive-ui h1, h2, h3, h4{margin:0;}
@@ -260,13 +443,13 @@
 	.idl-table{height:100%;width:100%;text-align:center;}
 	#pcomp-idl{top:23.5%;height:67.7%;}
 	.interactive-display{background:#EAEAEA;position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;}
-	.id-title{height:8.8%;line-height:100%;}
+	.id-title{height:8.8%;line-height:100%;width:100%;}
 	.interactive-share{position:absolute;bottom:0;left:23.6%;width:76.4%;height:8.8%;background:#0E1C32;color:white;opacity:.5}
 	#mreps_r1{position:relative;height:47.1%;}
 	#mreps_r1-left{float:left;width:38.2%;height:100%;}
 	.ribbon-header{height:30px;line-height:30px;background:darkred;color:white;font-weight:bold;text-align:center;}
 	#addressform_wrapper{margin:30px 0;}
-	#districtform{position:relative;margin:0 auto; width:80%;background:white;}
+	#districtform{position:relative;margin:0 auto; width:80%;}
 	#mreps_r2{position:relative;height:29.4%;}
 	#mreps_r2-1{float:left;height:100%;width:21.3vw;}
 	#mreps_r2-2{float:left;width:26.2vw;height:100%;}
@@ -292,11 +475,15 @@
 	.rep-stats{height:35.7%;}
 	.rep-stats table{height:100%;margin:0 auto;}
 	.rep-stats td{background:gray;min-width:100px;}
-	#congressional-leaders{position:relative;display:flex;width:100%;height:82.4%;}
+	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:91.2%;}
 	.rep-wrapper{width:50%;height:100%;}
+	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;background:white;z-index:3}
+	#mreps-house{display:flex;z-index:2;height:91.2%;width:100%;}
+	.mrep-wrapper{width:33.3%;height:100%;}
 }
 
-#fixer{padding:100px;}
+.redbutton{background:darkred;color:white;font-weight:bold;text-align:center;cursor:pointer;border:double 3px #660000;}
+.redbutton:hover{background:#A23333;}
 
 #interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;z-index:10;}
 .inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;}
@@ -325,6 +512,11 @@
 .graphback{display:none;width:600px;height:400px;max-width:90vw}
 #reps_slider{display:flex;flex-wrap:none;background:lavender;}
 
+#repstoggle{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:80%;padding:15% 10px;}
+#district-reps{display:none;}
+#uselocation{position:relative;margin:10%;padding:5% 0;width:80%;}
+#address-submit{padding:5% 0;margin:20px 0 10% 0;}
+
 
 /*Mobile only*/
 @media screen and (max-width: 520px){
@@ -345,12 +537,6 @@
 	.mobrep_info td{width:50%;}
 }
 
-
-
-/*Large Desktop*/
-@media screen and (min-width: 1281px){
-	.visual{width:55%;}
-}
 
 </style>
 {% endblock %}

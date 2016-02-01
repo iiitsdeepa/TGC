@@ -25,6 +25,7 @@ from google.appengine.api import mail
 from updatevotes import *
 from updatebills import *
 from updatepolls import *
+from updatecosponsors import *
 import databaseclasses
 from csvprocessing import *
 
@@ -181,64 +182,58 @@ class BaseHandler(webapp2.RequestHandler):
     def getHr(self, dist):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Representative WHERE state=\'%s\' and district=%s' %(state, district)).get()
+        logging.error(state)
+        logging.error(district)
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
+        name = rep.name.replace('None', '')
         hr = dict(hrbioguideid = rep.bioguide_id,
                 hrpic = state+'_'+district,
                 hrstate = rep.state,
-                hrdistrict = rep.district,
-                hrname = rep.name.replace('_', ' '),
+                hrdistrict = rep.distrank,
+                hrname = name.replace('_', ' '),
                 hrgender = rep.gender,
                 hrparty = rep.party,
                 hrfyio = rep.fyio,
-                hrfbid = rep.fbid,
-                hrtwid = rep.twid,
-                hrployalty = rep.ployalty,
-                hrenacted = rep.enacted,
-                hrsponsored = rep.sponsored,
-                hrcosponsored = rep.cosponsored,
-                hrli = rep.li)
+                hrfbid = rep.facebook_id,
+                hrtwid = rep.twitter_id,)
         return hr
 
     def getSs(self, dist):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Senator WHERE state=\'%s\' and rank=\'S\'' %(state)).get()
+        msg = 'SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'S\'' %(state)
+        logging.error(msg)
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
+        name = rep.name.replace('None', '')
         ss = dict(ssbioguideid = rep.bioguide_id,
                 sspic = state+'_SS',
                 ssstate = rep.state,
                 ssrank = 'S',
-                ssname = rep.name.replace('_', ' '),
+                ssname = name.replace('_', ' '),
                 ssgender = rep.gender,
                 ssparty = rep.party,
                 ssfyio = rep.fyio,
-                ssfbid = rep.fbid,
-                sstwid = rep.twid,
-                ssployalty = rep.ployalty,
-                ssenacted = rep.enacted,
-                sssponsored = rep.sponsored,
-                sscosponsored = rep.cosponsored,
-                ssli = rep.li)
+                ssfbid = rep.facebook_id,
+                sstwid = rep.twitter_id,
+                )
         return ss
 
     def getJs(self, dist):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Senator WHERE state=\'%s\' and rank=\'J\'' %(state)).get()
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
+        name = rep.name.replace('None', '')
         js = dict(jsbioguideid = rep.bioguide_id,
                 jspic = state+'_JS',
                 jsstate = rep.state,
                 jsrank = 'J',
-                jsname = rep.name.replace('_', ' '),
+                jsname = name.replace('_', ' '),
                 jsgender = rep.gender,
                 jsparty = rep.party,
                 jsfyio = rep.fyio,
-                jsfbid = rep.fbid,
-                jstwid = rep.twid,
-                jsployalty = rep.ployalty,
-                jsenacted = rep.enacted,
-                jssponsored = rep.sponsored,
-                jscosponsored = rep.cosponsored,
-                jsli = rep.li)
+                jsfbid = rep.facebook_id,
+                jstwid = rep.twitter_id,
+                )
         return js
 
     def getBig2(self):
@@ -293,9 +288,14 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'R')
-        process_politician_csv(info)
+        #process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
+<<<<<<< HEAD
+=======
+        #process_bill_csv(info)
+        process_cosponsor_csv(info)
+>>>>>>> lbdb
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -357,7 +357,24 @@ class Vprop(BaseHandler):
         self.render('interactives.html')
 
     def post(self):
-        self.render('interactives.html')
+        demo = self.request.get('demo')
+        if demo:
+            params = self.getBig2()
+            self.write(params)
+
+        address = self.request.get('address')
+        if address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            repjson = self.pullReps(district)
+            self.write(repjson)
+
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            repjson = self.pullReps(district)
+            self.write(repjson)
 
 class PollServer(BaseHandler):
     def get(self):
@@ -380,59 +397,22 @@ class PollServer(BaseHandler):
         
         self.response.out.write(data)
 
-class UpdatePolls(BaseHandler):
+class UpdateAll(BaseHandler):
     def get(self):
+        logging.error('National Polls')
         getNationalPolls()
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
+        #logging.error('Cosponsors')
+        #getCosponsorsUpdate()
         self.redirect('/')
         self.response.set_status(200)
 
     def post(self):
         #get type of data to pull
         self.redirect('/')
-
-class UpdateVotes(BaseHandler):
-    def get(self):
-        getVotesUpdate()
-        self.redirect('/')
-        self.response.set_status(200)
-
-    def post(self):
-        #get type of data to pull
-        self.redirect('/')
-
-class UpdateBills(BaseHandler):
-    def get(self):
-        getBillsUpdate()
-        self.redirect('/')
-        self.response.set_status(200)
-
-    def post(self):
-        #get type of data to pull
-        self.redirect('/')
-
-class Demo(BaseHandler):
-    def get(self):
-        self.render('demo.html')
-
-    def post(self):
-        demo = self.request.get('demo')
-        if demo:
-            params = self.getBig2()
-            self.write(params)
-
-        address = self.request.get('address')
-        if address:
-            district = self.address_to_district(address)
-            logging.error(district)
-            repjson = self.pullReps(district)
-            self.write(repjson)
-
-        lat = self.request.get('lat')
-        lng = self.request.get('lng')
-        if lat and lng:
-            district = self.latlngToDistrict(lat, lng)
-            repjson = self.pullReps(district)
-            self.write(repjson)
 
 class bulkdelete(BaseHandler):
     def get(self):
@@ -451,14 +431,12 @@ application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/prop', Vprop),
     ('/feedback', Feedback),
-    ('/demo', Demo),
     ('/about', About),
     ('/newsletter', NewsLetter),
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
-    ('/updateship', UpdatePolls),
-    ('/updatevotes', UpdateVotes),
-    ('/updatebills', UpdateBills),
-    ('/up', UploadHandler),
-    ('/upload', Upload)
+    ('/updateall', UpdateAll),
+    #('/up', UploadHandler),
+    #('/upload', Upload),
+    ('/delete', bulkdelete)
 ], debug=True)

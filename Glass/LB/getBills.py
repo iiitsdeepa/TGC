@@ -1,5 +1,6 @@
 import urllib2
 import json
+from datetime import datetime
 from time import sleep
 
 #opening log file
@@ -9,7 +10,7 @@ cosponsorscsv = open('cosponsors'+str(congress)+'.csv', 'w')
 keywordscsv = open('keywords'+str(congress)+'.csv', 'w')
 
 chambers=['hr','s']
-bill_url = 'https://congress.api.sunlightfoundation.com/bills?fields=bill_id,official_title,popular_title,short_title,nicknames,keywords,summary_short,urls,history.active,history.vetoed,history.vetoed_at,history.enacted,history.enacted_at,sponsor_id,cosponsor_ids,cosponsor_count,keywords&%s&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+bill_url = 'https://congress.api.sunlightfoundation.com/bills?%s&fields=bill_id,cosponsor_ids,keywords,official_title,popular_title,short_title,nicknames,urls,active,vetoed,enacted,sponsor_id,introduced_on,history,last_action_at&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 total_count = 0
 for c in chambers:
 	bill_method = 'congress=%d&bill_type=%s&per_page=20&page=%d' % (congress,c, 1)
@@ -29,12 +30,11 @@ for c in chambers:
 		#print json.dumps(j, indent=4)
 		ra = j["results"]
 		print 'page '+str(x)
-		print bill_method
 		for r in ra:
 			try:
 				bid = r["bill_id"].encode('utf-8')
 			except:
-				bid = '-1'
+				bid = 'None'
 			try:
 				official_title = r["official_title"].encode('utf-8')
 			except:
@@ -57,8 +57,10 @@ for c in chambers:
 		   	vetoed = str(r["history"]["vetoed"])
 		   	enacted = str(r["history"]["enacted"])
 		   	sponsor = r["sponsor_id"].encode('utf-8')
-		   	
+			last_action = r["last_action_at"]
+			introduced = r["introduced_on"]
 		   	#parse for cosponsorscsv and keyowrdscsv
+		   	
 		   	try:
 				keywordsa = r["keywords"]
 				for k in iter(keywordsa):
@@ -73,7 +75,7 @@ for c in chambers:
 					cosponsorscsv.write(line)
 			except:
 		   		cosponsors = 'None'
-		   	line = bid+'$$$'+official_title+'$$$'+popular_title+'$$$'+short_title+'$$$'+nicknames+'$$$'+url+'$$$'+active+'$$$'+vetoed+'$$$'+enacted+'$$$'+sponsor+'\n'
+		   	line = bid+'$$$'+official_title+'$$$'+popular_title+'$$$'+short_title+'$$$'+nicknames+'$$$'+url+'$$$'+active+'$$$'+vetoed+'$$$'+enacted+'$$$'+sponsor+'$$$'+introduced+'$$$'+last_action+'\n'
 			billscsv.write(line)
 		sleep(1.00)
 

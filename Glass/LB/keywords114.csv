@@ -1,5 +1,6 @@
 hr4392-114,Government operations and politics
 hr4391-114,Immigration
+hr4389-114,Energy
 hr4388-114,Health
 hr4386-114,Education
 hr4385-114,Education
@@ -10,6 +11,7 @@ hr4380-114,International affairs
 hr4379-114,Crime and law enforcement
 hr4378-114,Health
 hr4377-114,Taxation
+hr4376-114,Labor and employment
 hr4375-114,Transportation and public works
 hr4374-114,Health
 hr4373-114,Transportation and public works
@@ -695,6 +697,10 @@ hr3988-114,Veterans' education, employment, rehabilitation
 hr3987-114,Immigration
 hr3986-114,Sports and recreation
 hr3985-114,Education
+hr3985-114,Employment and training programs
+hr3985-114,Higher education
+hr3985-114,Student aid and college costs
+hr3985-114,Vocational and technical education
 hr3984-114,Economics and public finance
 hr3983-114,Science, technology, communications
 hr3982-114,Taxation
@@ -918,7 +924,10 @@ hr3819-114,Transportation safety and security
 hr3817-114,Agriculture and food
 hr3816-114,Crime and law enforcement
 hr3815-114,Crime and law enforcement
+hr3814-114,Foreign labor
 hr3814-114,Immigration
+hr3814-114,Immigration status and procedures
+hr3814-114,Refugees, asylum, displaced persons
 hr3813-114,Crime and law enforcement
 hr3812-114,Taxation
 hr3811-114,Business records
@@ -1430,7 +1439,11 @@ hr3643-114,Public contracts and procurement
 hr3643-114,Radioactive wastes and releases
 hr3643-114,User charges and fees
 hr3642-114,Social welfare
+hr3641-114,Adoption and foster care
+hr3641-114,Child health
+hr3641-114,Child safety and welfare
 hr3641-114,Health
+hr3641-114,Medicaid
 hr3640-114,Health
 hr3639-114,Health
 hr3638-114,Administrative law and regulatory procedures
@@ -1754,7 +1767,16 @@ hr3545-114,Housing and community development funding
 hr3545-114,Income tax credits
 hr3545-114,Residential rehabilitation and home repair
 hr3545-114,Taxation
+hr3544-114,Administrative law and regulatory procedures
 hr3544-114,Crime and law enforcement
+hr3544-114,Employee leave
+hr3544-114,Government employee pay, benefits, personnel management
+hr3544-114,Law enforcement administration and funding
+hr3544-114,Law enforcement officers
+hr3544-114,Office of Personnel Management (OPM)
+hr3544-114,Performance measurement
+hr3544-114,Photography and imaging
+hr3544-114,Violent crime
 hr3543-114,Crime and law enforcement
 hr3542-114,Education
 hr3541-114,Finance and financial sector
@@ -1887,7 +1909,16 @@ hr3504-114,Legal fees and court costs
 hr3504-114,Medical ethics
 hr3504-114,Violent crime
 hr3503-114,Emergency management
+hr3502-114,Adult day care
+hr3502-114,Child care and development
 hr3502-114,Education
+hr3502-114,Elementary and secondary education
+hr3502-114,Federal-Indian relations
+hr3502-114,Food assistance and relief
+hr3502-114,Indian social and development programs
+hr3502-114,Intergovernmental relations
+hr3502-114,Nutrition and diet
+hr3502-114,State and local government operations
 hr3501-114,Transportation and public works
 hr3500-114,Labor and employment
 hr3499-114,Social welfare
@@ -2061,6 +2092,9 @@ hr3447-114,Federal Energy Regulatory Commission (FERC)
 hr3447-114,Licensing and registrations
 hr3447-114,North Carolina
 hr3446-114,Education
+hr3446-114,Higher education
+hr3446-114,Student aid and college costs
+hr3446-114,Tax administration and collection, taxpayers
 hr3445-114,International affairs
 hr3444-114,Health
 hr3443-114,Congressional oversight
@@ -2094,7 +2128,16 @@ hr3439-114,Monuments and memorials
 hr3439-114,Veterans' organizations and recognition
 hr3439-114,Vietnam
 hr3438-114,Government operations and politics
+hr3437-114,Border security and unlawful immigration
+hr3437-114,Civil actions and liability
+hr3437-114,Criminal procedure and sentencing
+hr3437-114,Detention of persons
 hr3437-114,Immigration
+hr3437-114,Immigration status and procedures
+hr3437-114,Intergovernmental relations
+hr3437-114,Law enforcement administration and funding
+hr3437-114,Law enforcement officers
+hr3437-114,State and local government operations
 hr3436-114,Border security and unlawful immigration
 hr3436-114,Child safety and welfare
 hr3436-114,Crimes against women
@@ -2150,7 +2193,18 @@ hr3428-114,Government information and archives
 hr3428-114,Health
 hr3428-114,Health programs administration and funding
 hr3428-114,Public contracts and procurement
+hr3427-114,Administrative law and regulatory procedures
+hr3427-114,Department of Labor
+hr3427-114,Employment discrimination and employee rights
+hr3427-114,Government information and archives
+hr3427-114,Government studies and investigations
 hr3427-114,Labor and employment
+hr3427-114,Labor standards
+hr3427-114,Performance measurement
+hr3427-114,Personnel records
+hr3427-114,Tax administration and collection, taxpayers
+hr3427-114,Unemployment
+hr3427-114,Wages and earnings
 hr3426-114,Administrative law and regulatory procedures
 hr3426-114,Alternative and renewable resources
 hr3426-114,Climate change and greenhouse gases
@@ -6678,15 +6732,17 @@ hr2914-114,Health facilities and institutions
 hr2914-114,Veterans' medical care
 hr2913-114,Administrative law and regulatory procedures
 hr2913-114,Bank accounts, deposits, capital
+hr2913-114,Banking and financial institutions regulation
 hr2913-114,Budget deficits and national debt
 hr2913-114,Congressional oversight
 hr2913-114,Consumer Financial Protection Bureau
-hr2913-114,Consumer affairs
+hr2913-114,Consumer credit
 hr2913-114,Credit and credit markets
 hr2913-114,Economic performance and conditions
 hr2913-114,Economics and public finance
 hr2913-114,Executive agency funding and structure
 hr2913-114,Federal Reserve System
+hr2913-114,Financial crises and stabilization
 hr2913-114,Government information and archives
 hr2913-114,Government trust funds
 hr2913-114,Inflation and prices
@@ -8416,6 +8472,7 @@ hr2721-114,Interest, dividends, interest rates
 hr2721-114,Labor standards
 hr2721-114,Legislative rules and procedure
 hr2721-114,Low- and moderate-income housing
+hr2721-114,Nutrition and diet
 hr2721-114,Performance measurement
 hr2721-114,Poverty and welfare assistance
 hr2721-114,Preschool education
@@ -8924,6 +8981,7 @@ hr2670-114,Government studies and investigations
 hr2670-114,Minority and disadvantaged businesses
 hr2670-114,Small Business Administration
 hr2670-114,Small business
+hr2670-114,Veterans' education, employment, rehabilitation
 hr2670-114,Women in business
 hr2669-114,Administrative law and regulatory procedures
 hr2669-114,Consumer affairs
@@ -13396,14 +13454,17 @@ hr2153-114,Health programs administration and funding
 hr2153-114,Law enforcement administration and funding
 hr2153-114,Mental health
 hr2153-114,U.S. Sentencing Commission
+hr2152-114,Adult day care
 hr2152-114,Agricultural trade
 hr2152-114,Asia
+hr2152-114,Child care and development
 hr2152-114,Child health
 hr2152-114,China
 hr2152-114,Education
 hr2152-114,Elementary and secondary education
 hr2152-114,Food assistance and relief
 hr2152-114,Meat
+hr2152-114,Nutrition and diet
 hr2151-114,Accounting and auditing
 hr2151-114,Government information and archives
 hr2151-114,Government studies and investigations
@@ -18332,6 +18393,7 @@ hr1677-114,Health care coverage and access
 hr1676-114,Education
 hr1676-114,Elementary and secondary education
 hr1676-114,Food assistance and relief
+hr1676-114,Nutrition and diet
 hr1676-114,Poverty and welfare assistance
 hr1675-114,Administrative law and regulatory procedures
 hr1675-114,Employee benefits and pensions
@@ -23629,10 +23691,12 @@ hr1074-114,Hawaii
 hr1074-114,Transportation and public works
 hr1074-114,Transportation safety and security
 hr1074-114,User charges and fees
+hr1073-114,Astronomy
 hr1073-114,Congressional oversight
 hr1073-114,Electric power generation and transmission
 hr1073-114,Emergency management
 hr1073-114,Emergency planning and evacuation
+hr1073-114,Government studies and investigations
 hr1073-114,Homeland security
 hr1073-114,Natural disasters
 hr1073-114,Research and development
@@ -23733,6 +23797,7 @@ hr1061-114,Elementary and secondary education
 hr1061-114,Food assistance and relief
 hr1061-114,Higher education
 hr1061-114,Indian social and development programs
+hr1061-114,Nutrition and diet
 hr1061-114,Public contracts and procurement
 hr1061-114,Seafood
 hr1060-114,California
@@ -32932,8 +32997,18 @@ hr22-114,Visas and passports
 hr22-114,Water resources funding
 hr22-114,Water use and supply
 hr22-114,Wildlife conservation and habitat protection
+s2461-114,Science, technology, communications
+s2457-114,Taxation
+s2453-114,Government operations and politics
+s2450-114,Government operations and politics
+s2448-114,Law
+s2447-114,International affairs
+s2445-114,Agriculture and food
+s2444-114,Crime and law enforcement
 s2443-114,Health
+s2442-114,Transportation and public works
 s2441-114,Immigration
+s2440-114,Transportation and public works
 s2439-114,Taxation
 s2437-114,Armed forces and national security
 s2436-114,Government operations and politics
@@ -34656,7 +34731,16 @@ s1938-114,Licensing and registrations
 s1938-114,Student aid and college costs
 s1938-114,Teaching, teachers, curricula
 s1938-114,Veterans' education, employment, rehabilitation
+s1937-114,Adult day care
+s1937-114,Child care and development
 s1937-114,Education
+s1937-114,Elementary and secondary education
+s1937-114,Federal-Indian relations
+s1937-114,Food assistance and relief
+s1937-114,Indian social and development programs
+s1937-114,Intergovernmental relations
+s1937-114,Nutrition and diet
+s1937-114,State and local government operations
 s1936-114,Water resources development
 s1935-114,Commerce
 s1934-114,Commerce
@@ -34881,9 +34965,20 @@ s1903-114,Health promotion and preventive care
 s1903-114,Medical research
 s1903-114,Minority health
 s1902-114,Labor and employment
+s1901-114,Appropriations
+s1901-114,Business investment and capital
 s1901-114,Commerce
+s1901-114,Small business
+s1901-114,State and local finance
 s1900-114,Education
+s1900-114,Employment and training programs
+s1900-114,Higher education
+s1900-114,Student aid and college costs
+s1900-114,Vocational and technical education
+s1899-114,Foreign labor
 s1899-114,Immigration
+s1899-114,Immigration status and procedures
+s1899-114,Refugees, asylum, displaced persons
 s1898-114,Administrative law and regulatory procedures
 s1898-114,Animal and plant health
 s1898-114,Animal protection and human-animal relationships
@@ -34891,8 +34986,28 @@ s1898-114,Animals
 s1898-114,Department of Health and Human Services
 s1898-114,Mammals
 s1898-114,Trade restrictions
+s1897-114,Administrative law and regulatory procedures
 s1897-114,Crime and law enforcement
+s1897-114,Employee leave
+s1897-114,Government employee pay, benefits, personnel management
+s1897-114,Law enforcement administration and funding
+s1897-114,Law enforcement officers
+s1897-114,Office of Personnel Management (OPM)
+s1897-114,Performance measurement
+s1897-114,Photography and imaging
+s1897-114,Violent crime
+s1896-114,Administrative law and regulatory procedures
+s1896-114,Department of Labor
+s1896-114,Employment discrimination and employee rights
+s1896-114,Government information and archives
+s1896-114,Government studies and investigations
 s1896-114,Labor and employment
+s1896-114,Labor standards
+s1896-114,Performance measurement
+s1896-114,Personnel records
+s1896-114,Tax administration and collection, taxpayers
+s1896-114,Unemployment
+s1896-114,Wages and earnings
 s1895-114,Arizona
 s1895-114,Cancer
 s1895-114,Cardiovascular and respiratory health
@@ -35067,8 +35182,26 @@ s1887-114,Smithsonian Institution
 s1887-114,Smuggling and trafficking
 s1887-114,Syria
 s1887-114,Trade restrictions
+s1886-114,Advisory bodies
+s1886-114,Atmospheric science and weather
+s1886-114,Civil actions and liability
+s1886-114,Congressional oversight
+s1886-114,Environmental assessment, monitoring, research
+s1886-114,Geography
+s1886-114,Government information and archives
+s1886-114,Great Lakes
+s1886-114,Marine and coastal resources, fisheries
+s1886-114,Marine and inland water transportation
+s1886-114,Marine pollution
 s1886-114,Public lands and natural resources
+s1886-114,Transportation safety and security
 s1885-114,Armed forces and national security
+s1885-114,Homelessness and emergency shelter
+s1885-114,Low- and moderate-income housing
+s1885-114,Performance measurement
+s1885-114,Veterans' education, employment, rehabilitation
+s1885-114,Veterans' loans, housing, homeless programs
+s1885-114,Veterans' medical care
 s1884-114,Administrative remedies
 s1884-114,Department of Health and Human Services
 s1884-114,Health
@@ -35133,6 +35266,11 @@ s1880-114,Health care costs and insurance
 s1880-114,Income tax deductions
 s1880-114,Taxation
 s1880-114,Veterans' medical care
+s1879-114,Economic performance and conditions
+s1879-114,Federal-Indian relations
+s1879-114,Indian lands and resources rights
+s1879-114,Judicial review and appeals
+s1879-114,Land transfers
 s1879-114,Native Americans
 s1878-114,Blood and blood diseases
 s1878-114,Cancer
@@ -35150,6 +35288,10 @@ s1877-114,Criminal investigation, prosecution, interrogation
 s1877-114,Health facilities and institutions
 s1877-114,Health programs administration and funding
 s1877-114,Organ and tissue donation and transplantation
+s1876-114,Department of State
+s1876-114,Executive agency funding and structure
+s1876-114,Federal officials
+s1876-114,Human trafficking
 s1876-114,International affairs
 s1875-114,Afghanistan
 s1875-114,Asia
@@ -35190,6 +35332,9 @@ s1873-114,Immigration
 s1873-114,Public contracts and procurement
 s1873-114,Technology assessment
 s1872-114,Education
+s1872-114,Higher education
+s1872-114,Student aid and college costs
+s1872-114,Tax administration and collection, taxpayers
 s1871-114,Computer security and identity theft
 s1871-114,Congressional oversight
 s1871-114,Fraud offenses and financial crimes
@@ -35201,14 +35346,35 @@ s1870-114,Commerce
 s1870-114,Retail and wholesale trades
 s1870-114,Small business
 s1870-114,Veterans' education, employment, rehabilitation
+s1869-114,Civil actions and liability
+s1869-114,Computer security and identity theft
+s1869-114,Congressional oversight
+s1869-114,Government information and archives
 s1869-114,Government operations and politics
+s1869-114,Government studies and investigations
+s1869-114,Performance measurement
+s1869-114,Technology assessment
 s1868-114,Business records
 s1868-114,Census and government statistics
 s1868-114,Commerce
 s1868-114,Corporate finance and management
 s1868-114,Economic performance and conditions
 s1868-114,Government information and archives
-s1867-114,Crime and law enforcement
+s1867-114,Administrative law and regulatory procedures
+s1867-114,Crimes against children
+s1867-114,Criminal investigation, prosecution, interrogation
+s1867-114,Criminal justice information and records
+s1867-114,Department of Homeland Security
+s1867-114,Department of State
+s1867-114,Domestic violence and child abuse
+s1867-114,Executive agency funding and structure
+s1867-114,Immigration status and procedures
+s1867-114,International affairs
+s1867-114,International law and treaties
+s1867-114,International organizations and cooperation
+s1867-114,Sex offenses
+s1867-114,Travel and tourism
+s1867-114,Visas and passports
 s1866-114,Business education
 s1866-114,Business investment and capital
 s1866-114,Commerce
@@ -35260,7 +35426,14 @@ s1863-114,Disability and health-based discrimination
 s1863-114,Disability and paralysis
 s1863-114,Education
 s1863-114,Veterans' education, employment, rehabilitation
+s1862-114,Appropriations
+s1862-114,Business education
 s1862-114,Commerce
+s1862-114,Executive agency funding and structure
+s1862-114,Retail and wholesale trades
+s1862-114,Small Business Administration
+s1862-114,Small business
+s1862-114,Veterans' education, employment, rehabilitation
 s1861-114,Abortion
 s1861-114,Family planning and birth control
 s1861-114,Health
@@ -35307,14 +35480,78 @@ s1858-114,Religion
 s1858-114,Retail and wholesale trades
 s1858-114,Sex, gender, sexual orientation discrimination
 s1858-114,Sports and recreation facilities
+s1857-114,Administrative law and regulatory procedures
 s1857-114,Commerce
+s1857-114,Congressional oversight
+s1857-114,Credit and credit markets
+s1857-114,Government lending and loan guarantees
+s1857-114,Government studies and investigations
+s1857-114,Minority and disadvantaged businesses
+s1857-114,Small Business Administration
+s1857-114,Small business
+s1857-114,Veterans' education, employment, rehabilitation
+s1857-114,Women in business
+s1856-114,Administrative remedies
 s1856-114,Armed forces and national security
+s1856-114,Congressional oversight
+s1856-114,Department of Veterans Affairs
+s1856-114,Employee performance
+s1856-114,Federal officials
+s1856-114,Government employee pay, benefits, personnel management
+s1856-114,Government ethics and transparency, public corruption
+s1856-114,Government studies and investigations
+s1856-114,Public contracts and procurement
+s1856-114,Wages and earnings
+s1855-114,Asia
 s1855-114,International affairs
+s1855-114,Military assistance, sales, and agreements
+s1855-114,Philippines
+s1854-114,Alcoholic beverages
+s1854-114,Bank accounts, deposits, capital
+s1854-114,Climate change and greenhouse gases
+s1854-114,Congressional oversight
+s1854-114,Elections, voting, political campaign regulation
+s1854-114,Emergency communications systems
+s1854-114,Energy efficiency and conservation
 s1854-114,Government operations and politics
+s1854-114,Government studies and investigations
+s1854-114,Internet and video services
+s1854-114,Motor vehicles
+s1854-114,Oil and gas
+s1854-114,Postal service
+s1854-114,Public contracts and procurement
+s1854-114,Public-private cooperation
+s1854-114,Rural conditions and development
+s1854-114,Telephone and wireless communication
+s1854-114,Transportation safety and security
+s1854-114,U.S. Postal Service
+s1854-114,Visas and passports
+s1853-114,Appropriations
 s1853-114,International affairs
+s1853-114,Iran
+s1853-114,Middle East
+s1853-114,Military assistance, sales, and agreements
+s1853-114,Trade restrictions
+s1853-114,United Nations
+s1852-114,Adoption and foster care
+s1852-114,Child health
+s1852-114,Child safety and welfare
 s1852-114,Health
+s1852-114,Medicaid
+s1851-114,Child safety and welfare
+s1851-114,Correctional facilities and imprisonment
 s1851-114,Crime and law enforcement
+s1851-114,Detention of persons
+s1851-114,Juvenile crime and gang violence
+s1851-114,Law enforcement administration and funding
+s1851-114,Women's health
+s1851-114,Women's rights
+s1850-114,Child safety and welfare
+s1850-114,Correctional facilities and imprisonment
 s1850-114,Crime and law enforcement
+s1850-114,Criminal procedure and sentencing
+s1850-114,Detention of persons
+s1850-114,Juvenile crime and gang violence
 s1849-114,Contracts and agency
 s1849-114,Federal preemption
 s1849-114,Health
@@ -35323,9 +35560,48 @@ s1849-114,Health care coverage and access
 s1849-114,Health personnel
 s1849-114,Medicare
 s1849-114,State and local government operations
+s1848-114,Administrative law and regulatory procedures
+s1848-114,Bank accounts, deposits, capital
+s1848-114,Banking and financial institutions regulation
+s1848-114,Budget deficits and national debt
+s1848-114,Congressional oversight
+s1848-114,Consumer Financial Protection Bureau
+s1848-114,Consumer credit
+s1848-114,Credit and credit markets
+s1848-114,Economic performance and conditions
 s1848-114,Economics and public finance
+s1848-114,Executive agency funding and structure
+s1848-114,Federal Reserve System
+s1848-114,Financial crises and stabilization
+s1848-114,Government information and archives
+s1848-114,Government trust funds
+s1848-114,Inflation and prices
+s1848-114,International monetary system and foreign exchange
+s1848-114,Monetary policy
+s1848-114,Securities
+s1848-114,Unemployment
+s1847-114,Administrative law and regulatory procedures
+s1847-114,Child safety and welfare
+s1847-114,Civil actions and liability
+s1847-114,Congressional oversight
+s1847-114,Consumer Financial Protection Bureau
+s1847-114,Consumer credit
 s1847-114,Finance and financial sector
+s1847-114,Government information and archives
+s1847-114,Government studies and investigations
+s1847-114,Legal fees and court costs
+s1846-114,Astronomy
+s1846-114,Congressional oversight
+s1846-114,Electric power generation and transmission
 s1846-114,Emergency management
+s1846-114,Emergency planning and evacuation
+s1846-114,Government studies and investigations
+s1846-114,Homeland security
+s1846-114,Natural disasters
+s1846-114,Nuclear weapons
+s1846-114,Public utilities and utility rates
+s1846-114,Research and development
+s1846-114,Terrorism
 s1845-114,Federal-Indian relations
 s1845-114,Indian lands and resources rights
 s1845-114,Intergovernmental relations
@@ -35337,17 +35613,56 @@ s1844-114,Agricultural marketing and promotion
 s1844-114,Agricultural trade
 s1844-114,Agriculture and food
 s1844-114,Meat
+s1843-114,Border security and unlawful immigration
+s1843-114,Civil actions and liability
+s1843-114,Congressional oversight
+s1843-114,Criminal justice information and records
+s1843-114,Detention of persons
+s1843-114,Government information and archives
 s1843-114,Immigration
+s1843-114,Immigration status and procedures
+s1843-114,Law enforcement administration and funding
+s1842-114,Border security and unlawful immigration
+s1842-114,Civil actions and liability
+s1842-114,Criminal procedure and sentencing
+s1842-114,Detention of persons
 s1842-114,Immigration
+s1842-114,Immigration status and procedures
+s1842-114,Intergovernmental relations
+s1842-114,Law enforcement administration and funding
+s1842-114,Law enforcement officers
+s1842-114,State and local government operations
+s1841-114,Banking and financial institutions regulation
+s1841-114,Bankruptcy
+s1841-114,Contracts and agency
+s1841-114,Corporate finance and management
 s1841-114,Finance and financial sector
+s1841-114,Judges
+s1841-114,Licensing and registrations
+s1841-114,Securities
+s1840-114,Administrative law and regulatory procedures
+s1840-114,Banking and financial institutions regulation
+s1840-114,Bankruptcy
+s1840-114,Contracts and agency
+s1840-114,Corporate finance and management
+s1840-114,Federal Deposit Insurance Corporation (FDIC)
 s1840-114,Finance and financial sector
+s1840-114,Judges
+s1840-114,Judicial review and appeals
+s1840-114,Licensing and registrations
+s1840-114,Securities
 s1839-114,Administrative law and regulatory procedures
 s1839-114,Armed forces and national security
 s1839-114,Department of Defense
 s1839-114,Firearms and explosives
 s1839-114,Military facilities and property
 s1839-114,Military personnel and dependents
+s1838-114,Civil actions and liability
+s1838-114,Congressional elections
+s1838-114,Elections, voting, political campaign regulation
 s1838-114,Government operations and politics
+s1838-114,Political advertising
+s1838-114,Tax-exempt organizations
 s1837-114,Advanced technology and technological innovations
 s1837-114,Aquatic ecology
 s1837-114,Dams and canals
@@ -35400,8 +35715,23 @@ s1835-114,Law enforcement officers
 s1835-114,Military facilities and property
 s1835-114,Military personnel and dependents
 s1835-114,National Guard and reserves
+s1834-114,Assault and harassment offenses
 s1834-114,Crime and law enforcement
+s1834-114,Domestic violence and child abuse
+s1834-114,Evidence and witnesses
+s1834-114,Firearms and explosives
+s1833-114,Administrative law and regulatory procedures
+s1833-114,Adult day care
+s1833-114,Child care and development
+s1833-114,Child health
+s1833-114,Congressional oversight
 s1833-114,Education
+s1833-114,Education of the disadvantaged
+s1833-114,Food assistance and relief
+s1833-114,Government information and archives
+s1833-114,Government studies and investigations
+s1833-114,Nutrition and diet
+s1833-114,Physical fitness and lifestyle
 s1832-114,Government information and archives
 s1832-114,Labor and employment
 s1832-114,Labor standards
@@ -35411,6 +35741,12 @@ s1831-114,Animal protection and human-animal relationships
 s1831-114,Crime and law enforcement
 s1831-114,Crimes against animals and natural resources
 s1830-114,Health
+s1830-114,Health care coverage and access
+s1830-114,Health facilities and institutions
+s1830-114,Long-term, rehabilitative, and terminal care
+s1830-114,Medicare
+s1830-114,Mental health
+s1830-114,Rural conditions and development
 s1829-114,Government studies and investigations
 s1829-114,Nuclear power
 s1829-114,Science, technology, communications
@@ -35463,25 +35799,94 @@ s1825-114,Intergovernmental relations
 s1825-114,Nuclear power
 s1825-114,Radioactive wastes and releases
 s1825-114,State and local government operations
+s1824-114,Government studies and investigations
+s1824-114,Historic sites and heritage areas
+s1824-114,Lakes and rivers
+s1824-114,New York State
 s1824-114,Public lands and natural resources
+s1823-114,Administrative law and regulatory procedures
 s1823-114,Armed forces and national security
+s1823-114,Department of Defense
+s1823-114,Firearms and explosives
+s1823-114,Military command and structure
+s1823-114,Military facilities and property
+s1823-114,Military personnel and dependents
+s1823-114,National Guard and reserves
 s1822-114,California
 s1822-114,Forests, forestry, trees
 s1822-114,Indian lands and resources rights
 s1822-114,Land transfers
 s1822-114,Native Americans
+s1821-114,Administrative law and regulatory procedures
 s1821-114,Armed forces and national security
+s1821-114,Department of Defense
+s1821-114,Firearms and explosives
+s1821-114,Military command and structure
+s1821-114,Military facilities and property
+s1821-114,Military personnel and dependents
+s1821-114,National Guard and reserves
+s1820-114,Administrative law and regulatory procedures
+s1820-114,Business investment and capital
+s1820-114,Competition and antitrust
+s1820-114,Competitiveness, trade promotion, trade deficits
+s1820-114,Consumer affairs
+s1820-114,Economic performance and conditions
+s1820-114,Government information and archives
 s1820-114,Government operations and politics
+s1820-114,Inflation and prices
 s1819-114,Armed forces and national security
 s1819-114,Firearms and explosives
 s1819-114,Military facilities and property
 s1819-114,Military personnel and dependents
+s1818-114,Administrative law and regulatory procedures
+s1818-114,Economic performance and conditions
+s1818-114,Federal-Indian relations
 s1818-114,Government operations and politics
+s1818-114,Intergovernmental relations
+s1818-114,Performance measurement
+s1818-114,Public participation and lobbying
+s1818-114,State and local government operations
+s1817-114,Administrative law and regulatory procedures
+s1817-114,Advanced technology and technological innovations
+s1817-114,Business investment and capital
+s1817-114,Competition and antitrust
+s1817-114,Competitiveness, trade promotion, trade deficits
+s1817-114,Consumer affairs
+s1817-114,Economic performance and conditions
+s1817-114,Government information and archives
 s1817-114,Government operations and politics
+s1817-114,Inflation and prices
+s1817-114,Office of Management and Budget (OMB)
+s1817-114,Performance measurement
+s1816-114,Administrative law and regulatory procedures
+s1816-114,Bank accounts, deposits, capital
+s1816-114,Department of the Treasury
+s1816-114,Federal Deposit Insurance Corporation (FDIC)
+s1816-114,Federal Reserve System
 s1816-114,Finance and financial sector
+s1816-114,Securities
+s1816-114,Securities and Exchange Commission (SEC)
 s1815-114,Armed forces and national security
+s1815-114,Firearms and explosives
+s1815-114,Military command and structure
+s1815-114,Military facilities and property
+s1815-114,Military personnel and dependents
+s1814-114,Border security and unlawful immigration
+s1814-114,Citizenship and naturalization
+s1814-114,Detention of persons
 s1814-114,Immigration
+s1814-114,Immigration status and procedures
+s1814-114,Intergovernmental relations
+s1814-114,Law enforcement administration and funding
+s1814-114,State and local finance
+s1814-114,State and local government operations
+s1813-114,Government trust funds
+s1813-114,Motor vehicles
+s1813-114,Public transit
+s1813-114,Roads and highways
 s1813-114,Transportation and public works
+s1813-114,Transportation programs funding
+s1813-114,Transportation safety and security
 s1812-114,Border security and unlawful immigration
 s1812-114,Criminal procedure and sentencing
 s1812-114,Detention of persons
@@ -35503,7 +35908,14 @@ s1811-114,New York State
 s1811-114,Residential rehabilitation and home repair
 s1811-114,Rhode Island
 s1811-114,Small business
-s1810-114,Health
+s1810-114,Executive Office of the President
+s1810-114,Federal officials
+s1810-114,Government employee pay, benefits, personnel management
+s1810-114,Government operations and politics
+s1810-114,Health care costs and insurance
+s1810-114,Health care coverage and access
+s1810-114,Members of Congress
+s1810-114,Presidents and presidential powers, Vice Presidents
 s1809-114,Comprehensive health care
 s1809-114,Employee benefits and pensions
 s1809-114,Health care costs and insurance
@@ -35530,8 +35942,22 @@ s1807-114,Administrative law and regulatory procedures
 s1807-114,Economic performance and conditions
 s1807-114,Government information and archives
 s1807-114,Government operations and politics
+s1806-114,Administrative law and regulatory procedures
+s1806-114,Civil actions and liability
+s1806-114,Computer security and identity theft
+s1806-114,Consumer affairs
+s1806-114,Department of Transportation
+s1806-114,Energy efficiency and conservation
+s1806-114,Federal Trade Commission (FTC)
+s1806-114,Marketing and advertising
+s1806-114,Motor fuels
+s1806-114,Motor vehicles
+s1806-114,Right of privacy
 s1806-114,Transportation and public works
+s1806-114,Transportation safety and security
 s1805-114,Education
+s1805-114,Elementary and secondary education
+s1805-114,Food assistance and relief
 s1804-114,Banking and financial institutions regulation
 s1804-114,Consumer Financial Protection Bureau
 s1804-114,Consumer affairs
@@ -35591,6 +36017,7 @@ s1800-114,Government lending and loan guarantees
 s1800-114,Grain
 s1800-114,Hazardous wastes and toxic substances
 s1800-114,Housing and community development funding
+s1800-114,Nutrition and diet
 s1800-114,Rural conditions and development
 s1800-114,Solid waste and recycling
 s1800-114,User charges and fees
@@ -47460,6 +47887,7 @@ s614-114,State and local government operations
 s613-114,Agriculture and food
 s613-114,Elementary and secondary education
 s613-114,Food assistance and relief
+s613-114,Nutrition and diet
 s613-114,Poverty and welfare assistance
 s613-114,Public-private cooperation
 s612-114,Congressional tributes
@@ -52927,8 +53355,3 @@ s25-114,Small business
 s25-114,State and local government operations
 s25-114,Trade restrictions
 s25-114,Travel and tourism
-s24-114,Conflicts and wars
-s24-114,Crime and law enforcement
-s24-114,Criminal procedure and sentencing
-s24-114,Detention of persons
-s24-114,War and emergency powers
