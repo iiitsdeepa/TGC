@@ -436,7 +436,7 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateall', UpdateAll),
-    ('/up', UploadHandler),
-    ('/upload', Upload),
+    #('/up', UploadHandler),
+    #('/upload', Upload),
     ('/delete', bulkdelete)
 ], debug=True)

@@ -11,6 +11,7 @@
       <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 
     <body>
@@ -102,33 +103,32 @@
         <div id='footcontributions'>
           <div id='footcontact' class='footcontribution'>
             <h3>Help Us Improve</h3>
-            Join Our Email List For
-            <ul>
-              <li>first access to stats and insights</li>
-              <li>participate in surveys</li>
-              <li>ensure your issues are featured</li>
-            </ul>
             <form>
+              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Comments'></textarea>
               <input id='footemail' name='footemail' class='footcontactinput' type='text' placeholder='Enter Email'></br>
-              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Tell Us What You Think'></textarea>
+              <div class="g-recaptcha" data-sitekey="6Lcz-BYTAAAAAJqQBmRlbPETj64hWA9fIK1AvLVt"></div>
+              <input type='button' id='footformbutton' value='Submit'>
             </form>
           </div>
           <div id='footdonate' class='footcontribution'>
-            <h3>Keep Us Pure</h3>
-            We want to ensure that The Glass Capitol is free of bias, and advertisement free. That is why we are relying on individual donations to fund this website. We really appreciate anything you can spare! Every pennny helps.
+            <h3>Donation Station</h3>
+            We want to ensure that The Glass Capitol is free of bias or influencing advertisements. That is why we are relying on individual donations.
             <h4>Contribute Today!</h4>
+            <h4>Donate (via PayPal) **Comming Soon**</h4>
             <div id='footdonatebutton'></div>
           </div>
         </div>
         <div id='footabout' class='foottext'>
           <h3>About Us</h3>
-          We are a group of individuals passionate about improving America. Some of us are still college students, while others are just starting their careers in engineering, or pursuing medical school or law school. We don't have an office or physical location. Only our computers and the drive to do something for our country.
-          <a class='foottextlink' href='/about'>Learn More About Our Team -></a>
+          We are a small team of college students and pre-professionals passionate about improving America. All of us want to improve our nation and help others do the same!
+          <a class='foottextlink' href='/about'>Learn More -></a>
         </div>
         <div id='footsources' class='foottext'>
           <h3>Our Sources</h3>
-          We are committed to being the most trustworthy, unbiased, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources. Our data comes directly from the government or from other open data sources that distribute data directly from the government.
-          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
+          We are committed to being the most trustworthy, non-partisan, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources, either directly from the government or from other open data sources that distribute data directly from the government.          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
+        </div>
+        <div id='footquote'>
+          “The essence of Government is power; and power, lodged as it must be in human hands, will ever be liable to abuse.” - James Madison
         </div>
         <div id='footfoot'>
             <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
