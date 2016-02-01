@@ -2,165 +2,67 @@
 
 {% block content %}
 <div id='feedback'>
-        <div id='maincolumn'>
-          <div id='valueprop'>
-            <h3 id='construction'>Comming Early 2016</h3>
-            <h2>Government Transparency At Its Finest</h2>
-            <i style='font-size:125%'>All of the facts to inform us, a network to unite us</i>
-            <a href='/nlanding' class='rightlink'>Learn More -></a>
-          </div>
+  <h1>Help Us Improve</h1>
+  <h2>We want you to get the most possible out of our site</h2>
 
-          <form id='tform' name='tform' method='post' action='/testimonials'>
-              <h4>Enter Email For Exclusive First Access</h3>
-              <input type="text" id="email" name="email" class="forminput" placeholder="Enter Email">
-              <h4>We Want Your Input</h3>
-              <textarea id="message" name="message" class="forminput" placeholder="Any Improvements  we could make?"></textarea>
-              <h3>Help Us Focus On Issues That Matter To You</h3>
-              <input type="checkbox" name="issue" value="economy">The Economy<br>
-              <input type="checkbox" name="issue" value="environment" checked>Environment & Science<br>
-              <input type="checkbox" name="issue" value="criminaljustice">Criminal Justice<br>
-              <input type="checkbox" name="issue" value="healthcare">Health Care<br>
-              <input type="checkbox" name="issue" value="privacy">Privacy & Data Security<br>
-              <input type="checkbox" name="issue" value="education">Education<br>
-              <input type="checkbox" name="issue" value="social">Religion & Social Issues<br>
-            </form>
-
-        </div>
-
-        <div id='communitysayings'>
-          <h3>What Other People Are Saying</h3>
-            <div class='communitysaying'>
-              <div class='profilepic'></div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-
-            <div class='communitysaying'>
-              <div class='profilepic'></div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-
-            <div class='communitysaying'>
-              <div class='profilepic'></div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-
-            <div class='communitysaying'>
-              <div class='profilepic'></div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-
-            <div class='communitysaying'>
-              <div class='profilepic'></div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-        </div>
-
-        <div id='teamprofile'>
-          <div id='amth'>
-            <div class='profilepic'></div>
-            <h4>Alex Haynes</br>Founder & Lead Developer</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-          <div id='ss' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Steven Schweinhart</br>Database Architect & Data Acquisition</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-
-          <div id='js' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Jordan Smith</br>Marketing & Business Liason</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-
-          <div id='da' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Daniel Altman</br>Legal Consultant & Editor</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-
-          <div id='aw' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Aaron Wiggen</br>Video Production</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-
-          <div id='kk' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Kshma Kulkarni</br>Editor in Cheif</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-
-          <div id='tc' class='teammember'>
-            <div class='profilepic'></div>
-            <h4>Travis Cook</br>Data Analyst & Designer</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
-        </div>
-
-        <div id='wwedo'>
-          <h3>Why We Are Doing This</h3>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
+  <div id='feedbackform-wrapper' class='z-index-1' value='500'>
+    <div id='formdisplay'style='height:400px'>
+      <form id='feedback-form'>
+      <input type='button' value='submit' id='esfsubmit' class='z-depth-1 dformbutton' onclick="javascript:submitFeedback();return false;">
+      </form>
+    </div>
+    <div id='formcontrols'>
+      <div id='form-left-button' class='form-direction' onclick="javascript:feedbackScroll('left');return false;">Previous</div>
+      <div id='form-position-indicator'>
+        <div id='fpi-0' class='fpi' onclick="javascript:feedbackScroll('n','0');return false;"style='background:#0E1C32'></div>
+        <div id='fpi-1' class='fpi' onclick="javascript:feedbackScroll('n','1');return false;"></div>
+        <div id='fpi-2' class='fpi' onclick="javascript:feedbackScroll('n','2');return false;"></div>
+        <div id='fpi-3' class='fpi' onclick="javascript:feedbackScroll('n','3');return false;"></div>
+        <div id='fpi-4' class='fpi' onclick="javascript:feedbackScroll('n','4');return false;"></div>
+      </div>
+      <div id='form-left-button' class='form-direction' onclick="javascript:feedbackScroll('right');return false;">Next/Skip</div>
+    </div>
+  </div>
+        
 </div>
 
-      <style>
-        html, body{margin: 0;padding: 0;min-height: 100vh;width: 100%;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;color:#0E1C32;background:url('/images/brickwall.png');font-size:95%;}
-        .forminput{width:90%;padding:10px;border:solid 2px #0E1C32;border-radius:5px;}
-        #content{position:relative;}
-        #communitysayings{background:white;padding:10px;width:auto;}
-        .communitysaying{margin:100px 0;}
-        #teamprofile{background:white;}
-        #maincolumn{margin:0 auto;padding:1px;}
-        .profilepic{float:left;height:75px;width:75px;border-radius:50%;background:pink;}
-        .teammember{display:none;}
-        #construction{margin:0;padding:10px;background:yellow;border:dotted 5px #0E1C32;}
-        #valueprop{text-align:center;border-bottom:solid 1px gray;padding-bottom:20px;}
-        .rightlink{display:block;float:right;text-decoration:none;color:#ff3333;}
-        .rightlink:hover{text-decoration:underline;}
-
-
-        /*Mobile only*/
-        @media screen and (max-width: 520px){
-          #nav_wrapper ul{display:none;}
-          #communitysayings{}
-        }
-
-        /*Mobile and Tablet*/
-        @media screen and (max-width: 965px){
-          #construction, #valueprop{background:#0E1C32;color:white;}
-          #valueprop{padding:50px 10px;}
-          #construction{width:500px;max-width:calc(100% - 50px);margin:50px auto 0 auto;}
-          #communitysayings{display:flex;flex-wrap:wrap;}
-          .communitysaying{max-width:95vw;width:300px;}
-
-        }
-
-        /*Desktop*/
-        @media screen and (min-width: 966px){
-          #content{min-height:calc(100vh - 70px);padding-top:20px;}
-          #teamprofile{position:absolute;padding:10px;top:20px;height:200px;width:calc(25vw - 20px);}
-          #communitysayings{position:absolute;padding:10px;top:20px;right:0;width:25vw;min-height:calc(100% - 40px);font-size:85%;}
-          #maincolumn{width:calc(35vw - 40px);}
-          #wwedo{position:absolute;top:240px;width:calc(25vw - 20px);padding:10px;}
-        }
-      </style>
+<style>
+  #feedback{text-align:center;}
+  #feedbackform-wrapper{margin:50px auto;width:1000px;max-width:80vw;background:white;}
+  #formcontrols{position:relative;display:flex;justify-content:space-between;border-top:solid 1px #0E1C32;}
+  .form-direction{background:#0E1C32;color:white;padding:20px;width:100px;font-weight:bold;cursor:pointer;}
+  .form-direction:hover{background:#162D50;}
+  #form-position-indicator{margin:0 auto;}
+  .fpi{position:relative;display:inline-block;height:19px;width:19px;border-radius:50%;border:solid 2px #0E1C32;margin:20px 20px 0 20px;}
+</style>
 
 <script>
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-// A $( document ).ready() block.
-$( document ).ready(function() {
-    tm = getParameterByName('tm')
-    if (tm=='ss'||tm=='js'||tm=='da'||tm=='aw'||tm=='kk'||tm=='tc'){
-    $('#amth').css('display','none')
-    $('#'+tm).css('display','block')
+  //helper function to reset all position indicators
+  function indicatorColor(i){
+    $('.fpi').each(function(index){$(this).css('background','white')})
+    $('#fpi-'+i).css('background','#0E1C32')
   }
-});
+  function feedbackScroll(direction, newpos){
+    if(newpos){
+      console.log(newpos);
+      $('#feedbackform-wrapper').attr('value', newpos+500)
+      indicatorColor(newpos)
+
+    }else{
+      current = Math.abs($('#feedbackform-wrapper').attr('value'))
+      if(direction == 'left'){newd = current - 1;}
+      else{newd = current + 1}
+      $('#feedbackform-wrapper').attr('value', newd)
+      c = newd % 5
+      console.log(c)
+      indicatorColor(c)
+    }
+  }
+
+  function submitFeedback(){
+    console.log('submitting feedback')
+  }
 </script>
+
+
 {% endblock %}
