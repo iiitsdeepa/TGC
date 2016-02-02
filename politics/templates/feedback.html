@@ -27,7 +27,7 @@
 </div>
 
 <style>
-  #feedback{text-align:center;}
+  #feedback{text-align:center;padding-top:80px;}
   #feedbackform-wrapper{margin:50px auto;width:1000px;max-width:80vw;background:white;}
   #formcontrols{position:relative;display:flex;justify-content:space-between;border-top:solid 1px #0E1C32;}
   .form-direction{background:#0E1C32;color:white;padding:20px;width:100px;font-weight:bold;cursor:pointer;}
@@ -44,8 +44,8 @@
   }
   function feedbackScroll(direction, newpos){
     if(newpos){
-      console.log(newpos);
-      $('#feedbackform-wrapper').attr('value', newpos+500)
+      np = parseInt(newpos) + 500
+      $('#feedbackform-wrapper').attr('value', np)
       indicatorColor(newpos)
 
     }else{
