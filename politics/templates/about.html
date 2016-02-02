@@ -2,133 +2,99 @@
 
 {% block content %}
 <div id='about'>
-	<h1 id='title'>About Us</h1>
-
-	<h3 id='usnutshell'>Started in 2015, we are a 6 person startup trying to fundamentally change our relationship with government</h3>
-	<div id='ourgoals'>
-		<h2>Our Goals</h2>
-		We want to elevate the political debate in America and give anyone the power to affect national policy. Like most Americans, everyone on our team has at some point felt disenfranchised by our current politics. We’ve all seen issues we care about go unnoticed. We’ve all had moments where we couldn’t believe some of the things our political leaders say or think.  That is why all of us dedicated our skill, time, and passion to this project.
+	<div id='about-nav-wrapper'>
+		<div class='about-nav-option' onclick="javascript:scrollTo('top');return false;">Top</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('core-wrapper');return false;">Core Beliefs</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('mission-wrapper');return false;">Mission</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('works-wrapper');return false;">How TGC Works</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('tgc-gov-wrapper');return false;">TGC and Government</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('team-wrapper');return false;">The Team</div>
+		<div class='about-nav-option' onclick="javascript:scrollTo('code-wrapper');return false;">Our Code</div>
 	</div>
 
-
-	<div id='corebeliefs'>
-		<h2>Our Core Beliefs</h2>
-		<div id='quote'>
-			“an enlightened citizenry is indispensable for the functioning of a republic”
-			<div id='quoteauthor'>Thomas Jefferson</div>
-		</div>
-		<div id='statedcore'>
-			We believe in the moral fiber of the American public. When more people have the power to know, check, and spread information about our government we will realize a better society. Throughout our history we consistently create a more inclusive, more peaceful, and more technologically advanced society. With TGC that ideal can continue to exist in the 21st century.
-		</div>
+	<div id='top-wrapper' class='section'>
+		<h1>About Us</h1>
+		<p>A message from the TGC team:<br>
+		We are currently a 8 person startup trying to fundamentally change the way Americans interact with our government. There is a lot we are still in the process of preparing and some of the things we intend to bring to the site might be missing at the moment, so please keep that in mind as you go through our beta test phase. If you like what we are doing, become a part of TCG family by: 
+		</p>
+		<ul>
+			<li>Helping us improve with feedback</li>
+			<li>Be sure to check out our new features as they come</li>
+			<li>Share TGC with anyone else that would like to become more politically involved</li>
+		</ul>
+		<p>Together we can raise the standard of American politics and we are just getting started.</p>
 	</div>
 
-	<div id='ourdata'>
-		<div id='easeofuse'>
-			<h3>What Makes Our Data So Easy To Use?</h3>
-			All the data in the world means nothing if you can’t draw conclusions from it. We pride ourselves in illuminating complicated issues so that anybody can understand them. We give everyone a holistic view of every facet of our government, along with the ability to comment on and share it.
+	<div id='core-wrapper' class='section'>
+		<h1>TGC Core Belief</h1>
+		<div class='quote-wrapper'>
+			<div class='quote-img-wrapper'></div>
+			<div class='quote-text'>“An enlightened citizenry is indispensable for the functioning of a republic”<br> - Thomas Jefferson</div>
 		</div>
-		<div id='datamethod'>
-			<h2>Our method of analysis can be broken down into three main components</h2>
-			<div id='' class='methodcomponent'>
-				<h3>The Facts</h3>
-				A clean and clear illustration of the facts surrounding an issue of part of government. How well does the current solution function? What is at stake? Who ultimately decides what will happen? Who stands to benefit from any changes.
-			</div>
-
-			<div id='' class='methodcomponent'>
-				<h3>The Context</h3>
-				Have things always been this way? How have we dealt with this issue in the past? How does it fit with American ideals?
-			</div>
-
-			<div id='' class='methodcomponent'>
-				<h3>The Current Debate</h3>
-				What are each party’s proposed solutions? Are there differences between the two parties and if so, what are they? Why hasn’t this issue been solved, or what are the main complaints about the current solution?
-			</div>
-		</div>
+		<p>We believe in the American public. When more people have the power to know, critically evaluate, and spread information about our government, we will constitute a better society. Throughout history, this means has repeatedly allowed us to overcome adversity and create a more inclusive, more peaceful, and more technologically advanced society. TGC strives to evolve our capabilities to match the information age of the 21st century.
+		</p>
 	</div>
 
-	<div id='thecode'>
-		<h2>How do we Stay True to our Mission?</h2>
-		<h3>We are dedicated to informing the American people above all else</h3>
-		That is why we created a code of operation. Our values are pure and we want to ensure that we hold ourselves accountable to them. 
-		<div id='codetenants'>
-			<ol>
-				<li>
-					This website will forever remain party and ideology independent
-				</li>
-				<li>
-					We serve the Individual - one person one vote - we do not cater to private interests or corporations
-				</li>
-				<li>
-					Any data users give us must first directly enhance the user’s experience and the quality of information available to them
-				</li>
-				<li>
-					we do not raise funds through irrelevant advertisements because we believe it would be a harmful diversion from the true purposes of this website
-				</li>
-				<li>
-					We maintain our database to provide only meaningful, accurate statistics which provide clarity to the user
-				</li>
-				<li>
-					We provide users with the methodology and derivation behind every statistic on our site
-				</li>
-				<li>
-					Statistics should provide the user fresh perspectives and ways of thinking about our government’s activity
-				</li>
-				<li>
-					All quotes or statements that are factually inaccurate will be labeled as such. This includes scientifically false statements, and other things that can be proven objectively inaccurate. Though we aren’t a fact checking agency, we believe in holding our legislators to only the highest standard
-				</li>
-				<li>
-					During election seasons any and all data regarding campaigns or historical trends in government function will be provided completely free of charge and accessible without even registering for our site
-				</li>
-				<li>
-					If any users feel we have violated our code in any way we will provide a forum for discussion to resolve the issues as quickly as possible
-				</li>
-			</ol>
-		</div>
+	<div id='mission-wrapper' class='section'>
+		<h1>TGC Mission</h1>
+		<ul>
+			<li>Create a greater knowledge base of our nation’s workings through well presented, simple to analyze data, that is open and honest about potential biases.</li>
+			<li>Elevate the political debate by providing unbiased information and a networking platform for Americans to critically think about and enact change in our government.</li>
+			<li>Hold our government and political media to higher standard of truth and transparency.</li>
+			<li>Make involvement and engagement in politics easy and accessible to everyone.</li>		
+		</ul>
 	</div>
 
-	<div id='opeeps'>
-		<h2>People of the Glass Capitol</h2>
-		<div id='founder' class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-			this is the dummy text yo for all original fish
-			</div>
-		</div>
-
-		<div class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-				this is the dummy text yo for all original fish
-			</div>
-		</div>
-
-		<div class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-				this is the dummy text yo for all original fish
-			</div>
-		</div>
-
-		<div class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-				this is the dummy text yo for all original fish
-			</div>
-		</div>
-
-		<div class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-				this is the dummy text yo for all original fish
-			</div>
-		</div>
-
-		<div class='peep'>
-			<div class='pimg'>imagedummy</div>
-			<div class="ptext">
-				this is the dummy text yo for all original fish
-			</div>
-		</div>
+	<div id='works-wrapper' class='section'>
+		<h1>How TGC Works</h1>
+		<h2>Data</h2>
+		<p>Much of the political data available is a mess to sort through so TGC takes all of it and presents it in a way that is easy to read and comprehend. Thus we make this organized raw data available to users so that they may compare and create their own graphical analyses and conclusions as they so wish.<br> 
+		But raw data is can still be arduous to access and all the data in the world means nothing if don’t know where to start looking. That’s why we aims to present this data in new, refreshing, and meaningful ways. So TGC offers a multitude of graphs, charts, and statistics created from this data, analyzing for its relatability, relevance, and the novelty of information it can provide. There are 3 main features that can be found for each piece of data - sources, context, and bias checks.</p>
+		<h2>Surveys</h2>
+		<p>Users are given optional surveys to personalize their experience with TGC. This allows you to stay up to date on issues that matter most to you. You can track personal changes and get to know yourself more. TGC also uses this for everyone to better understand TGC’s user base and to stay informed on other biases that may exist, e.g. population/selection bias, reporting bias. We keep surveys short and simple because they are meant to enhance your interactive experience, not be a time hinderance.</p>
+		<h2>Discussion</h2>
+		<p>We provide a forum to discuss the data or add your own insights. We also link any websites, news outlets, bloggers that use our data in their articles, so that you can see how others are interpreting the data. You can also use our data or create your own graphs and statistics with the data any time to build your own arguments to be further posted, shared, and discussed.</p>
 	</div>
+
+	<div id='tgc-gov-wrapper' class='section'>
+		<h1>How TGC Can Affect Government</h1>
+		<p>We create an environment that promotes critical analysis of information. So when you form your own opinions, then discuss and share and take surveys to understand yourself to ultimately develop an informed position, you can change the way we approach government. By being informed you can challenge and demote misinformation caused by sensationalized media, poor data analysis, and lack of critical thinking in the realm of political reporting. By being informed you can hold your representatives accountable, contact them, and make sure your vote is going to what you really want come election day. By being informed, you can network and form coalitions through social media to show our representatives what the american people want. Together we can remove the ambiguity, fallacies, and blind bandwagoning from the debate to get to the heart of the issues and find productive solutions.</p>
+	</div>
+
+	<div id='team-wrapper' class='section'>
+		<h1>The TGC Team</h1>
+		a list of team members with faces + description coming soon
+	</div>
+
+	<div id='code-wrapper' class='section'>
+		<h1>Our Code of Operation</h1>
+		<ol>
+			<li>TGC will forever remain party and ideology independent.</li>
+			<li>We serve the Individual - one person, one vote. </li>
+			<li>We will maintain our database to provide meaningful, accurate, and up to date statistics.</li>
+			<li>We will check for and report to users any research biases that may be inherent in the information we present.</li>
+			<li>We will provide users with the methodology and derivation behind every statistic so as to maintain transparency to our users.</li>
+			<li>We will provide well sourced context (historical, legal, etc.) to the data we present. All quotes or statements that are factually inaccurate will be labeled as such. </li>
+			<li>We will never use data, context, or any others means to tell users what they should think.</li>
+			<li>Any user information provided to TGC must be relevant to enhancing the user’s experience and to the quality of information available to the user.</li>
+			<li>We will not raise funds through advertisements on the site because we believe it would be a harmful to the purpose of TGC.</li>
+			<li>If any users feel we have violated our code in any way, we will provide a forum for discussion to resolve the issues as quickly as possible.</li>		
+		</ol>
+	</div>
+
 </div>
+
+<style>
+	#about{}
+	#about-nav-wrapper{position:fixed;top:70px;right:0;width:175px;}
+	.about-nav-option{width:100%;text-align:center;font-weight:bold;color:white;background:darkred;margin:10px 0;padding:10px;cursor:pointer;}
+	.about-nav-option:hover{background:#A23333;}
+
+
+	.section{padding:50px 200px 50px 5vw;}
+	#top-wrapper{padding-top:80px;}
+	#core-wrapper{}
+	#mission-wrapper{}
+</style>
 {% endblock %}
+
