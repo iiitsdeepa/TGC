@@ -427,6 +427,13 @@ class bulkdelete(BaseHandler):
             self.response.out.write(repr(e)+'\n')
             pass
 
+class Marketing(BaseHandler):
+    def get(self):
+        self.render("personalmarketing.html")
+    def post(self):
+        self.render("personalmarketing.html")
+
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/prop', Vprop),
@@ -438,5 +445,6 @@ application = webapp2.WSGIApplication([
     ('/updateall', UpdateAll),
     #('/up', UploadHandler),
     #('/upload', Upload),
-    ('/delete', bulkdelete)
+    #('/delete', bulkdelete)
+    ('/marketing', Marketing)
 ], debug=True)

@@ -1,5 +1,5 @@
 html{height:100%;}
-html, body{margin: 0;padding: 0;min-height: 100%;width: 100%;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;color:#0E1C32;font-size:95%;}
+html, body{background:url('/images/fabric.png');margin: 0;padding: 0;min-height: 100%;width: 100%;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;color:#0E1C32;font-size:95%;}
 h3{margin-bottom:5px;}
 .z-index-1{-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 .z-index-2{-moz-box-shadow: 0px 0px 15px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 15px rgba(0,0,0,1);box-shadow: 0px 0px 15px rgba(0,0,0,1);}
@@ -11,7 +11,7 @@ h3{margin-bottom:5px;}
 #alphacall{height:50px;line-height:50px;padding:0 20px;}
 #alphacall:hover{background-color:#5CD6FF;}
 #alogform{padding:20px;}
-#content{position:relative;min-height:100vh;z-index:1;}
+#content{position:relative;z-index:1;}
 #footer{position:relative;display:flex;flex-wrap:wrap;color:#EAEAEA;background-color: #0E1C32;z-index:3;border-top:solid1px #0B1628;}
 #footer h2{color:#ff3333;text-align:left;}
 #footer h3{color:#ff3333;margin-bottom:5px;}
@@ -36,22 +36,8 @@ h3{margin-bottom:5px;}
 #footquote{font-family:'Playball', cursive;font-size:200%;line-height:150%;margin:50px 0;}
 #footfoot{position:absolute;bottom:0;left:0;width:calc(100% - 20px);height: 50px;line-height: 50px;text-align:right;padding-right: 20px;background-color: #0B1628;border-top: solid 2px #091220;}
 #footlogo{vertical-align: bottom;height: 95%;}
-/*Table -> Slider Styles*/
 
-/*About Styles*/
-#about{padding-top:100px;}
-#usnutshell{margin:0 auto;width:40vw;padding:100px;}
-#ourgoals{width:70vw;margin:0 auto;}
-#corebeliefs{width:70vw;margin:0 auto;}
-#ourdata{width:70vw;margin:0 auto;}
-#thecode{width:70vw;margin:0 auto;}
-#codetenants{background:#EAEAEA;}
-#opeeps{width:80vw;margin:0 auto;display:flex;flex-wrap:wrap;}
-#opeeps h2{width:100%;}
-.pimg{background:pink;width:100px;height:100px;float:left;}
-.ptext{background:lavender;}
-#founder{background-color:#EAEAEA;width:100%;padding:50px 10vh;}
-.peep{width:calc(50% - 40px);padding:25px 20px;}
+
 /*Sources Styles*/
 #sources{background:#0E1C32;color:white;padding:100px 200px 50px 5vw;font-size:90%;z-index:1;}
 #sources h2, h3, h4, h4{text-align:left}
@@ -72,7 +58,6 @@ h3{margin-bottom:5px;}
 .citation{padding:25px 0;border-bottom:solid #214478 1px;font-size:80%;}
 .citation h3{color:white;}
 /*Feedback Styles*/
-#feedback{padding:100px 0 0 0;}
 
 
 /*Mobile only*/
@@ -111,8 +96,6 @@ h3{margin-bottom:5px;}
 	.foottext{min-width:calc(100% - 40px); margin:0;}
 	#footcontributions{position:relative;width:100%;}
 	.footcontribution{min-width:300px;}
-	/*About Styles*/
-	/*Sources Styles*/
 }
 
 /*Desktop*/
@@ -155,8 +138,6 @@ h3{margin-bottom:5px;}
 	#footcontributions{position:absolute;right:calc(5vw - 20px);}
 	.foottext{width:40%;margin-right:50%;margin-bottom:20px;}
 	#footquote{position:absolute;right:5vw;width:calc(50% - 40px);}
-	/*About Styles*/
-	/*Sources Styles*/
 }
 
 
