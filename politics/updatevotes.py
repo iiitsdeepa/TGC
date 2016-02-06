@@ -127,4 +127,4 @@ def getVotesUpdate():
 			if (breakvar == True):
 				break
 			sleep(1.00)#always sleep for 1 second to be a nice citizen to the sunlight api and not DOS their servers :)
-	#indVoteUpdate(voteinput)
+	indVoteUpdate(voteinput)

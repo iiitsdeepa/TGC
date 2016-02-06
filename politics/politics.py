@@ -401,12 +401,12 @@ class UpdateAll(BaseHandler):
     def get(self):
         logging.error('National Polls')
         getNationalPolls()
-        #logging.error('Votes')
-        #getVotesUpdate()
-        #logging.error('Bills')
-        #getBillsUpdate()
-        #logging.error('Cosponsors')
-        #getCosponsorsUpdate()
+        logging.error('Votes')
+        getVotesUpdate()
+        logging.error('Bills')
+        getBillsUpdate()
+        logging.error('Cosponsors')
+        getCosponsorsUpdate()
         self.redirect('/')
         self.response.set_status(200)
 
