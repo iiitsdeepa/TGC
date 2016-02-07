@@ -31,6 +31,8 @@ class User(db.Model):
     username = db.StringProperty(required = True)
     email = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
+    token = db.StringProperty()
+    token_creation = db.DateTimeProperty()
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()

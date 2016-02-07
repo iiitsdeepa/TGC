@@ -433,9 +433,19 @@ class Marketing(BaseHandler):
     def post(self):
         self.render("personalmarketing.html")
 
+class Login(BaseHandler):
+    def get(self):
+        self.render('login.html')
+
+class Signup(BaseHandler):
+    def get(self):
+        self.render('signup.html')
+
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
+    ('/signup', Signup),
+    ('/login', Login),
     ('/prop', Vprop),
     ('/feedback', Feedback),
     ('/about', About),
