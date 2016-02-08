@@ -436,22 +436,32 @@ class Login(BaseHandler):
 
 class Signup(BaseHandler):
     def get(self):
-        self.render('presignup.html')
+        self.render('onboarding.html')
 
     def post(self):
-        type = self.request.get('type')
-        if type == 'keyform':
+        ty = self.request.get('type')
+        if ty == 'keyform':
             key = self.request.get('key')
             if key == 'is you is':
                 self.render('signup.html')
-        elif type == 'signupform':
+        elif ty == 'signupform':
                 self.render('about.html')
 
+class Onboarding(BaseHandler):
+    def get(self):
+        self.render('ob-issuescroll.html')
+
+    def post(self):
+        ty = self.request.get('type')
+        if ty == 'issuelist':
+            issuelist = self.request.get('list')
+            self.response.out.write(issuelist)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/signup', Signup),
     ('/login', Login),
+    ('/onboarding', Onboarding),
     ('/prop', Vprop),
     ('/feedback', Feedback),
     ('/about', About),
