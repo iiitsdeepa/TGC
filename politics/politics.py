@@ -442,7 +442,13 @@ class Signup(BaseHandler):
         self.render('presignup.html')
 
     def post(self):
-        self.render('signup.html')
+        type = self.request.get('type')
+        if type == 'keyform':
+            key = self.request.get('key')
+            if key == 'is you is':
+                self.render('signup.html')
+        elif type == 'signupform':
+                self.render('about.html')
 
 
 application = webapp2.WSGIApplication([

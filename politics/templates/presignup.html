@@ -6,11 +6,12 @@
 		<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
 	</div>
 	<div id='us-content'>
-		<form id='userform'>
+		<form id='userform' method='post' action='/signup'>
+			<input type='hidden' name='type' value='keyform'>
 			<img id='loglogo' src='/images/awlogo.png'>
 			<h3>Enter Alpha Key</h3>
-			<input type='text' id='username' class='signupinput'><br>
-			<input type='button' id='loginbutton' value='submit'>
+			<input type='text' id='key' name='key' class='signupinput'><br>
+			<input type='submit' id='loginbutton' value='submit'>
 		</form>
 	</div>
 </div>
@@ -28,7 +29,7 @@
 	#us-content{position:absolute;top:100px;left:50%;transform:translate(-50%,0);text-align:center;}
 	#us-content h2, h3, h4{text-align:center;}
 	#userform{width:274px;padding:40px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
-	.signupinput{height:44px;width:calc(100% - 12px);margin-bottom:10px;border:solid 1px;border-radius:2px;padding-left:10px;font-size:16px;}
+	.signupinput{height:44px;width:calc(100% - 12px);margin-bottom:10px;border-radius:2px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 	#loginbutton{width:100%;height:34px;}
 	#loglogo{display:block;margin:0 auto;height:12vh;}
 	#footer{display:none;}

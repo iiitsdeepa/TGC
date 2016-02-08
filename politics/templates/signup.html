@@ -7,55 +7,60 @@
 		<div id='login-button' class='redbutton'>log in</div>
 	</div>
 	<div id='signup-head'>Join The Glass Capitol</div>
-	<div id='us-argument'>
-		<h2>See who supports your views</h2>
-		<h4>Develop your arguments on the issues, and match with those vying for your vote</h4>
-		<table id='temp-table'>
-			<tr id='top-row'>
-				<td>Issue</td>
-				<td>My View</td>
-				<td>Candidate</td>
-			</tr>
-			<tr >
-				<td>Issue 1</td>
-				<td>Yo, dis how me think</td>
-				<td class='drow'>Hilldog</td>
-			</tr>
-			<tr>
-				<td>Issue 2</td>
-				<td>Yo, dis how me think</td>
-				<td class='drow'>Sanders</td>
-			</tr>
-			<tr>
-				<td>Issue 3</td>
-				<td>Yo, dis how me think</td>
-				<td class='rrow'>Rubio</td>
-			</tr>
-			<tr>
-				<td>Issue 4</td>
-				<td>Yo, dis how me think</td>
-				<td class='drow'>Sanders</td>
-			</tr>
-			<tr>
-				<td>Issue 5</td>
-				<td>Yo, dis how me think</td>
-				<td class='rrow'>Trump</td>
-			</tr>
-		</table>
-	</div>
+	<div id='columnscontainer'>
+		<div id='us-argument'>
+			<h2>See who supports your views</h2>
+			<h4>Develop your arguments on the issues, and match with those vying for your vote</h4>
+			<table id='temp-table'>
+				<tr id='top-row'>
+					<td>Issue</td>
+					<td>My View</td>
+					<td>Candidate</td>
+				</tr>
+				<tr >
+					<td>Issue 1</td>
+					<td>Yo, dis how me think</td>
+					<td class='drow'>Hilldog</td>
+				</tr>
+				<tr>
+					<td>Issue 2</td>
+					<td>Yo, dis how me think</td>
+					<td class='drow'>Sanders</td>
+				</tr>
+				<tr>
+					<td>Issue 3</td>
+					<td>Yo, dis how me think</td>
+					<td class='rrow'>Rubio</td>
+				</tr>
+				<tr>
+					<td>Issue 4</td>
+					<td>Yo, dis how me think</td>
+					<td class='drow'>Sanders</td>
+				</tr>
+				<tr>
+					<td>Issue 5</td>
+					<td>Yo, dis how me think</td>
+					<td class='rrow'>Trump</td>
+				</tr>
+			</table>
+		</div>
 
-	<form id='signup-form'>
-		<h4>Name</h4>
-		<input type='text' id='firstname' class='signupinput halfrow' placeholder='First Name'>
-		<input type='text' id='lastname' class='signupinput halfrow' placeholder='Last Name'>
-		<h4>Choose your username</h4>
-		<input type='text' id='username' class='signupinput'>
-		<h4>Pick a password</h4>
-		<input type='text' id='username' class='signupinput'>
-		<h4>Confirm your password</h4>
-		<input type='text' id='username' class='signupinput'>
-		<input type='button' id='signupbutton' value='submit'>
-	</form>
+		<form id='signup-form' method='post' action='/signup'>
+			<input type='hidden' name='type' value='signupform'>
+			<h4>Name</h4>
+			<input type='text' id='firstname' name='firstname' class='signupinput halfrow' placeholder='First Name'>
+			<input type='text' id='lastname' name='lastname' class='signupinput halfrow' placeholder='Last Name'>
+			<h4>Choose your username</h4>
+			<input type='text' id='username' name='username' class='signupinput'>
+			<h4>Enter your email</h4>
+			<input type='text' id='email' name='email' class='signupinput'>
+			<h4>Pick a password</h4>
+			<input type='text' id='password' name='password' class='signupinput'>
+			<h4>Confirm your password</h4>
+			<input type='text' id='passconf' name='passconf' class='signupinput'>
+			<input type='submit' id='signupbutton' value='submit'>
+		</form>
+	</div>
 </div>
 
 <div id='footfoot'>
@@ -70,19 +75,21 @@
 	#login-button{display:block;float:right;margin-right:2vw;background:darkred;color:white;padding:4px 20px;margin-top:15px;border-radius:2px;font-weight:bold;font-size:12px;line-height:20px;}
 	#userservices{height:100vh;}
 	#signup-head{text-align:center;font-size:38px;padding:20px 0;margin-bottom:40px}
-	#us-argument{float:left;margin-left:10vw;width:calc(70vw - 312px);}
+	#columnscontainer{display:flex;margin:0 10vw;justify-content:space-between;margin-bottom:20px;}
+	#us-argument{width:calc(70vw - 312px);}
 	#us-argument h2,h3,h4{text-align:center;}
 	#temp-table{width:100%;text-align:center;}
 	#temp-table tr{height:40px;}
 	.drow{background:blue;}
 	.rrow{background:red;}
-	#signup-form{float:right;margin-right:10vw;width:312px;padding:25px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
+	#signup-form{width:312px;padding:25px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
 	#signup-form h4{margin:0;text-align:left;font-weight:bold;font-size:12px;}
 	.signupinput{margin-bottom:20px;padding-left:10px;height:25px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 	#top-row{font-weight:bold;}
 	.halfrow{width:calc(50% - 15px);}
 	#signupbutton{width:100%;height:34px;}
 	#footer{display:none;}
-	#footfoot{background:white;border-top:solid 1px #d9d9d9;}
+	#footfoot{position:relative;background:white;border-top:solid 1px #d9d9d9;}
 </style>
+
 {% endblock %}
