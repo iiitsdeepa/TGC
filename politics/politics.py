@@ -439,6 +439,9 @@ class Login(BaseHandler):
 
 class Signup(BaseHandler):
     def get(self):
+        self.render('presignup.html')
+
+    def post(self):
         self.render('signup.html')
 
 
