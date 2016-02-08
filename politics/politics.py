@@ -291,11 +291,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
-<<<<<<< HEAD
-=======
         #process_bill_csv(info)
         process_cosponsor_csv(info)
->>>>>>> lbdb
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -433,9 +430,28 @@ class Marketing(BaseHandler):
     def post(self):
         self.render("personalmarketing.html")
 
+class Login(BaseHandler):
+    def get(self):
+        self.render('login.html')
+
+class Signup(BaseHandler):
+    def get(self):
+        self.render('presignup.html')
+
+    def post(self):
+        type = self.request.get('type')
+        if type == 'keyform':
+            key = self.request.get('key')
+            if key == 'is you is':
+                self.render('signup.html')
+        elif type == 'signupform':
+                self.render('about.html')
+
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
+    ('/signup', Signup),
+    ('/login', Login),
     ('/prop', Vprop),
     ('/feedback', Feedback),
     ('/about', About),
