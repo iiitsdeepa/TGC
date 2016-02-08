@@ -3,10 +3,10 @@
 {% block content %}
 <div id='issue-list-holder'>
 </div>
+<div id='nav_wrapper'>
+	<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
+</div>
 <div id='onboarding'>
-	<div id='nav_wrapper'>
-		<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
-	</div>
 	<h1 id='signup-head'>Set Your Own Agenda</h1>
 	<div id='issue-rank-form' class='whiteback'>
 		<h3 id='formhead'>Put what matters to you on top</h3>
@@ -105,6 +105,25 @@ $(function() {
 	$( "#issue-list" ).sortable();
 	$( "#issue-list" ).disableSelection();
 });
+
+function setView(){
+	uview = $('#userview').val()
+	$.post("/onboarding",{type:"setview",view:uview}, function(data){
+		$('#view-holder').html(uview)
+		$('#onboarding').html(data)
+	});
+}
+
+function chooseCandidate(){
+	$('#choice-wrapper').html("<h1>You Chose a Candidate!!</h1><div id='next-action' class='redbutton' onclick='javascript:nextIssue();return false;'>Next Issue</div>")
+}
+function nextIssue(){
+	cissue = $('#issue-list-holder').attr('value')
+	$.post("/onboarding",{type:"issuelist",list:'yo yo'}, function(data){
+		$('#onboarding').html(data)
+	});
+}
+
 </script>
 {% endblock %}
 

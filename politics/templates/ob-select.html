@@ -1,0 +1,146 @@
+{% extends "publicbase.html" %}
+
+{% block content %}
+<div id='issue-list-holder' value='0'>
+</div>
+<div id='view-holder'>
+</div>
+<div id='nav_wrapper'>
+	<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
+</div>
+<div id='onboarding'>
+	<h1 id='isscroll-head' value='0'>Your opinion is what matters</h1>
+	<form id='user-view-form' class='whiteback' value='unset'>
+		<input type='hidden' id='issuename' name='issuename' value=''>
+		<div id='user-view-prompt'>Campaign Finance and Lobbying</div>
+		<div id='set-view-text'>There is too much money in politics. The system is corrupt</div>
+		<div id='user-view-action' onclick="javascript:chooseCandidate();return false;">Change view</div>
+	</form>
+
+	<div id='choice-wrapper'class='whiteback'>
+		<div id='candidate-default' class='candidate-wrapper'>
+			<h3>candidate agrees with you most</h3>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-1' class='candidate-choose redbutton'>choose</div>
+		</div>		
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-2' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-3' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-4' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-5' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-6' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-7' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-8' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-9' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-10' class='candidate-choose redbutton'>choose</div>
+		</div>
+		<div id='' class='candidate-wrapper'>
+			<div class='candidate-pic-wrapper'></div>
+			<div class='candidate-text'>this is dummy text replacing a candidate's most recent or most popular statements on a given issue</div>
+			<div id='ccb-11' class='candidate-choose redbutton'>choose</div>
+		</div>
+	</div>
+</div>
+
+<div id='footfoot'>
+  <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
+</div>
+
+<style>
+	h1,h2,h3,h4{font-weight:normal;margin:0;}
+	h3{font-size:20px;}
+	form h4{font-size:12px;font-weight:bold;}
+	.low-prom-text{text-align:left;font-size:12px;color:#737373;}
+	.action-text{font-size:12px;height:20px;line-height:20px;font-weight:bold;color:#BF0000;cursor:pointer;}
+	.action-text:hover{color:red;}
+	#onboarding{min-height:calc(100vh - 51px)}
+	#badge, #titlebar,#nav_container{display:none}
+	#nav_wrapper{padding-left:60px;position:relative;height:70px;line-height:70px;background:white;border-bottom:solid 1px #d9d9d9;padding-top:10px;}
+	#toplogo{display:block;position:absolute;height:90%;left:10px;}
+	#signup-head{text-align:center;font-size:38px;padding:20px 0;margin:0 0 40px 0}
+	#nextbutton{width:100%;height:34px;margin-bottom:10px;}
+	#missed-issue-wrapper{overflow:hidden;height:20px;}
+	.signupinput{margin-bottom:20px;padding-left:10px;height:25px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
+	#demo-info{position:absolute;top:100px;right:10px;width:300px;}
+	#issue-list-holder{display:none;}
+	#footer{display:none;}
+	#footfoot{position:relative;background:white;border-top:solid 1px #D9D9D9;}
+
+	#issue-rank-form{display:block;margin:0 auto 40px auto;width:312px;padding:25px;text-align:center;}
+	#formhead{text-align:center;margin-bottom:20px;}
+	#issue-list{list-style:none;padding:0;}
+	#issue-list li{position:relative;}
+	.issue{display:block;margin:2px 0;height:25px;border-bottom:solid 1px #d9d9d9;background:white;}
+
+	#isscroll-head{text-align:center;font-size:38px;padding:20px 0;margin:0;}
+	#issue-scroll-wrapper{position:relative;display:flex;margin:0 5vw;justify-content:space-between;}
+	#user-view-form{display:flex;position:relative;margin:0 auto;width:90vw;padding:25px;font-size:20px;font-weight:bold;}
+	#user-view-prompt{width:250px;}
+	#userview{background:#F2F2F2;border:solid 1px #D9D9D9;border-radius:2px;width:calc(100% - 450px);}
+	#user-view-action{width:200px;padding:11px 0 0 0;}
+	.is-title{text-align:center;}
+	#views-wrapper{width:312px;padding:25px;}
+	#views-list{padding:0;list-style:none;}
+	.view{display:block;margin:5px 0;border-bottom:solid 1px #d9d9d9;font-size:12px;}
+	.agbutton{margin:0 0 5px 50%;width:50%;font-weight:bold;color:#BF0000;text-align:right;cursor:pointer;}
+	.agbutton:hover{color:red;}
+	#context-wrapper{width:calc(100% - 412px);padding:25px;}
+	#choice-wrapper{display:flex;flex-wrap:wrap;justify-content:space-between;position:relative;margin:0 auto;width:90vw;padding:25px;margin-top:20px;margin-bottom:40px;}
+	.candidate-wrapper{width:200px;height:200px;margin:10px 0;}
+	.candidate-pic-wrapper{position:relative;height:100px;width:100px;margin:0 auto;background:#F2F2F2;border:solid 1px #D9D9D9;border-radius:50%;}
+	#candidate-default{height:300px;width:300px;margin:0 50px 50px 50px;}
+	#candidate-default .candidate-pic-wrapper{height:150px;width:150px;}
+	#view-holder{display:none;}
+	#set-view-text{font-weight:normal;width:calc(100% - 450px);text-align:center;}
+	#user-view-action{color:#BF0000;cursor:pointer;}
+</style>
+
+<script>
+function chooseCandidate(){
+	$('#choice-wrapper').html("<h1>You Chose a Candidate!!</h1><div id='next-action' class='redbutton' onclick='javascript:nextIssue();return false;'>Next Issue</div>")
+}
+function nextIssue(){
+	cissue = $('#issue-list-holder').attr('value')
+	$.post("/onboarding",{type:"issuelist",list:'yo yo'}, function(data){
+		$('#onboarding').html(data)
+	});
+}
+
+</script>
+{% endblock %}
+

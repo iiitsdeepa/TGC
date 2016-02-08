@@ -449,13 +449,16 @@ class Signup(BaseHandler):
 
 class Onboarding(BaseHandler):
     def get(self):
-        self.render('ob-issuescroll.html')
+        self.render('ob-select.html')
 
     def post(self):
         ty = self.request.get('type')
         if ty == 'issuelist':
             issuelist = self.request.get('list')
             self.response.out.write(issuelist)
+        elif ty =='setview':
+            uview = self.request.get('view')
+            self.response.out.write(uview)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),

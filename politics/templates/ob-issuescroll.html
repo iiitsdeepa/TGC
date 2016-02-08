@@ -1,18 +1,21 @@
 {% extends "publicbase.html" %}
 
 {% block content %}
-<div id='issue-list-holder'>
+<div id='issue-list-holder' value='0'>
+</div>
+<div id='view-holder'>
+</div>
+<div id='nav_wrapper'>
+	<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
 </div>
 <div id='onboarding'>
-	<div id='nav_wrapper'>
-		<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
-	</div>
-	<h1 id='isscroll-head'>Your opinion is what matters</h1>
-	<form id='user-view-form' class='whiteback'>
+	<h1 id='isscroll-head' value='0'>Your opinion is what matters</h1>
+	<form id='user-view-form' class='whiteback' value='unset'>
 		<input type='hidden' id='issuename' name='issuename' value=''>
 		<div id='user-view-prompt'>Campaign Finance and Lobbying</div>
 		<input type='text' id='userview' name='userview' placeholder='Enter your view on this issue in your own words (max 120 characters)'>
-		<div id='user-view-action' class='redbutton'>Set Your View -></div>
+		<div id='set-view-text'></div>
+		<div id='user-view-action' class='redbutton' onclick="javascript:setView('missed-issue-wrapper');return false;">Set Your View -></div>
 	</form>
 	<div id='issue-scroll-wrapper'>
 		<div id='views-wrapper'>
@@ -62,6 +65,7 @@
 	#issue-list li{position:relative;}
 	.issue{display:block;margin:2px 0;height:25px;border-bottom:solid 1px #d9d9d9;background:white;}
 
+	#goprevious{}
 	#isscroll-head{text-align:center;font-size:38px;padding:20px 0;margin:0;}
 	#issue-scroll-wrapper{position:relative;display:flex;margin:0 5vw;justify-content:space-between;}
 	#user-view-form{display:flex;position:relative;margin:0 auto;width:90vw;padding:25px;font-size:20px;font-weight:bold;}
@@ -75,6 +79,23 @@
 	.agbutton{margin:0 0 5px 50%;width:50%;font-weight:bold;color:#BF0000;text-align:right;cursor:pointer;}
 	.agbutton:hover{color:red;}
 	#context-wrapper{width:calc(100% - 412px);padding:25px;}
+	#choice-wrapper{display:none;flex-wrap:wrap;justify-content:space-between;position:relative;margin:0 auto;width:90vw;padding:25px;margin-top:20px;margin-bottom:40px;}
+	.candidate-wrapper{width:200px;height:200px;margin:10px 0;}
+	.candidate-pic-wrapper{position:relative;height:100px;width:100px;margin:0 auto;background:#F2F2F2;border:solid 1px #D9D9D9;border-radius:50%;}
+	#candidate-default{height:300px;width:300px;margin:0 50px 50px 50px;}
+	#candidate-default .candidate-pic-wrapper{height:150px;width:150px;}
+	#view-holder{display:none;}
 </style>
+
+<script>
+function setView(){
+	uview = $('#userview').val()
+	$.post("/onboarding",{type:"setview",view:uview}, function(data){
+		$('#view-holder').html(uview)
+		$('#onboarding').html(data)
+	});
+}
+
+</script>
 {% endblock %}
 
