@@ -26,6 +26,28 @@ from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 from politics import *
 
+#---------------------------User Implementation Functions--------------------------
+def make_secure_val(val):
+    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
+def check_secure_val(secure_val):
+    val = secure_val.split('|')[0]
+    if secure_val == make_secure_val(val):
+        return val
+
+def make_salt(length = 5):
+    return ''.join(random.choice(letters) for x in xrange(length))
+
+def make_pw_hash(username, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(username + pw + salt).hexdigest()
+    return '%s,%s' % (salt, h)
+
+def valid_pw(name, password, h):
+    salt = h.split(',')[0]
+    return h == make_pw_hash(name, password, salt)
+
 #-------------------------Database Classes------------------------------
 class User(db.Model):
     username = db.StringProperty(required = True)
@@ -38,6 +60,8 @@ class User(db.Model):
     gender = db.StringProperty()
     created = db.DateTimeProperty(required = True, auto_now = True)
     last_modified = db.DateTimeProperty(required = True, auto_now = True)
+    reset_code = db.StringProperty()
+    reset_expr = db.DateTimeProperty()
 
     @classmethod
     def by_id(cls, uid):

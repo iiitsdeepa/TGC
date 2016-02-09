@@ -80,7 +80,7 @@ def check_secure_val(secure_val):
     if secure_val == make_secure_val(val):
         return val
 
-def make_salt(length = 5):
+def make_salt(length = 30):
     return ''.join(random.choice(letters) for x in xrange(length))
 
 def make_pw_hash(username, pw, salt = None):
@@ -434,6 +434,27 @@ class Login(BaseHandler):
     def get(self):
         self.render('login.html')
 
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+        u = User.login(username, password)
+        if u:
+            self.login(u)
+            self.redirect('/')
+        else:
+            msg = 'Invalid username or password'
+            self.render('login.html', error = msg)
+
+class Logout(BaseHandler):
+    def get(self):
+        self.logout()
+        self.redirect('/')
+
+class CreateSteven(BaseHandler):
+    def get(self):
+        u = User.register('thatguysch', 'thatguysch@gmail.com', 'testpass123')
+        u.put()
+
 class Signup(BaseHandler):
     def get(self):
         self.render('presignup.html')
@@ -452,6 +473,7 @@ application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/signup', Signup),
     ('/login', Login),
+    ('/logout', Logout),
     ('/prop', Vprop),
     ('/feedback', Feedback),
     ('/about', About),
@@ -461,6 +483,7 @@ application = webapp2.WSGIApplication([
     ('/updateall', UpdateAll),
     #('/up', UploadHandler),
     #('/upload', Upload),
-    #('/delete', bulkdelete)
-    ('/marketing', Marketing)
+    #('/delete', bulkdelete),
+    ('/marketing', Marketing),
+    ('/createstevenuser', CreateSteven)
 ], debug=True)
