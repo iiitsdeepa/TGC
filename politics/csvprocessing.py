@@ -106,7 +106,10 @@ def process_cosponsor_csv(blob_info):
 def process_bill_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
+    count = 1
     for row in reader:
+        if (count%500 == 0):
+            logging.error(str(count))
         row_str = row[0]
         temp = row_str.split('$$$')
         bioidquery = GqlQuery("SELECT * FROM Bill WHERE bill_id = :1", temp[0])
@@ -119,6 +122,7 @@ def process_bill_csv(blob_info):
         except:
             introduced = datetime.strptime(temp[10], '%Y-%m-%dT%H:%M:%SZ')
         tempqueryrow = bioidquery.get()
+        count += 1
         if tempqueryrow is None:
             entry = Bill(bill_id=temp[0],official_title=temp[1],popular_title=temp[2],short_title=temp[3],nicknames=temp[4],url=temp[5],active=temp[6],vetoed=temp[7],enacted=temp[8],sponsor_id=temp[9], introduced=introduced, last_action=last_action, last_updated=datetime.today())
             entry.put()

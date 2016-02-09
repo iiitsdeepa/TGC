@@ -292,7 +292,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
-        process_cosponsor_csv(info)
+        #process_cosponsor_csv(info)
         self.redirect("/")
 
 class Landing(BaseHandler):
@@ -402,9 +402,9 @@ class UpdateAll(BaseHandler):
         getVotesUpdate()
         logging.error('Bills')
         getBillsUpdate()
-        logging.error('Cosponsors')
-        getCosponsorsUpdate()
-        self.redirect('/')
+        #logging.error('Cosponsors')
+        #getCosponsorsUpdate()
+        #self.redirect('/')
         self.response.set_status(200)
 
     def post(self):

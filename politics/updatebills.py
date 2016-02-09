@@ -42,7 +42,7 @@ If the Bill table is empty before this method is run, the default time to compar
 """
 def getBillsUpdate():
 	#some initializating of necesary queries and variables
-	bill_url = 'https://congress.api.sunlightfoundation.com/bills?%s&fields=bill_id,official_title,popular_title,short_title,nicknames,urls,active,vetoed,enacted,sponsor_id,introduced_on,history,last_action_at&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
+	bill_url = 'https://congress.api.sunlightfoundation.com/bills?%s&order=last_action_at&fields=bill_id,official_title,popular_title,short_title,nicknames,urls,active,vetoed,enacted,sponsor_id,introduced_on,history,last_action_at,cosponsor_ids&apikey=5a2e18d2e3ed4861a8604e9a5f96a47a'
 	tempdate = GqlQuery("SELECT last_action FROM Bill ORDER BY last_action DESC").get()
 	try:#pulls the last_action_at date from the Bill table. If that fails, topdate is set to datetime.min
 		topdate = tempdate.last_action
@@ -89,6 +89,7 @@ def getBillsUpdate():
 					bid = r["bill_id"].encode('utf-8')
 				except:
 					bid = 'None'
+				#logging.error(str(bid))
 				try:
 					official_title = r["official_title"].encode('utf-8')
 				except:
@@ -120,8 +121,22 @@ def getBillsUpdate():
 				try:
 					repeatedbill = Bill.gql("WHERE bill_id = :1", str(bid)).get()
 					repeatedbill.delete()
+					repeatedbill = 1
 				except:
 					repeatbill = 0
+				try:
+					cosponsorsa = r["cosponsor_ids"]
+					coentry = []
+					for tempco in iter(cosponsorsa):
+						coline = tempco.encode('utf-8')
+						cobioidquery = GqlQuery("SELECT * FROM Cosponsor WHERE bill_id = :1 AND bioguide_id = :2", bid, coline)
+						cotempqueryrow = cobioidquery.get()
+						if cotempqueryrow is None:
+							#logging.error('NEW COSPONSOR')
+							coentry.append(Cosponsor(bill_id=bid,bioguide_id=coline))
+					db.put(coentry)
+				except:
+					donothingvariable = 0
 				#place the bill entity into the Bill table
 				entry = Bill(bill_id=bid,official_title=official_title,popular_title=popular_title,short_title=short_title,nicknames=nicknames,url=url,active=active,vetoed=vetoed,enacted=enacted,sponsor_id=sponsor, introduced=introduced, last_action=last_action, last_updated=datetime.today())
 				entry.put()
