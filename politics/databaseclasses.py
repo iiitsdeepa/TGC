@@ -35,8 +35,12 @@ def check_secure_val(secure_val):
     if secure_val == make_secure_val(val):
         return val
 
-def make_salt(length = 5):
-    return ''.join(random.choice(letters) for x in xrange(length))
+def make_salt(length = 30):
+    random_bytes = os.urandom(length+2)
+    token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
+    reset_key = token[:-2]
+    logging.error(reset_key)
+    return reset_key
 
 def make_pw_hash(username, pw, salt = None):
     if not salt:
@@ -89,6 +93,13 @@ class User(db.Model):
         u = cls.by_username(username)
         if u and valid_pw(username, pw, u.pw_hash):
             return u
+
+    @classmethod
+    def changepass(cls, username, pw):
+        pw_hash = make_pw_hash(username, pw)
+        return cls( username = 'NONE',
+                    email = 'NONE',
+                    pw_hash = pw_hash)
 
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)

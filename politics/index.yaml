@@ -76,3 +76,8 @@ indexes:
   - name: trump
   - name: undecided
   - name: walker
+
+- kind: User
+  properties:
+  - name: username
+  - name: email

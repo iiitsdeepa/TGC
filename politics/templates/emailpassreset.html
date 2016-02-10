@@ -4,16 +4,15 @@
 <div id='userservices'>
 	<div id='nav_wrapper'>
 		<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
-		<a href='/signup' id='login-button' class='redbutton'>Sign up</a>
-		<a href='/passwordreset' id='login-button' class='redbutton'>Forgot password?</a>
 	</div>
 	<div id='us-content'>
 		<form id='userform' method='post'>
 			<img id='loglogo' src='/images/awlogo.png'>
-			<h2>Login</h2>
+			<input type='hidden' name='user' value={{username}}>
+			<h2>Reset your lost password below</h2>
 			<div class="error">{{error}}</div>
-			<input type='text' id='username' name='username' class='signupinput' placeholder='User Name'><br>
-			<input type='password' id='password' name='password' class='signupinput' placeholder='Password'>
+			<input type='password' id='password' name='password' class='signupinput' placeholder='New Password'><br>
+			<input type='password' id='passconf' name='passconf' class='signupinput' placeholder='Confirm Password'>
 			<input type='submit' id='loginbutton' value='submit'>
 		</form>
 	</div>
