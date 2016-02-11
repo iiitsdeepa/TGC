@@ -38,18 +38,22 @@
           </div>
           <div id='vpropslide_wrapper' class='flex-columns'>
             <div id='left-arrow' class='arrow' onclick="javascript:propScroll('left');return false;">
-              <div class='triangle-left arrblock'></div>
+              <div id='arrblock-left' class='triangle-left arrblock'></div>
             </div>
             <div id='vprop-msg'>
-              <h2>Impartial and Interactive Data</h2>
-              <h3>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</h3>
+              <h3>Impartial and Interactive Data</h3>
+              <div>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</div>
             </div>
             <div id='right-arrow' class='arrow' onclick="javascript:propScroll('right');return false;">
-              <div class='triangle-right arrblock'></div>
+              <div id='arrblock-right' class='triangle-right arrblock'></div>
             </div>
           </div>
         </div>
         <div id='vprop-actions'>
+          <a href='/prop' class='vprop-actions-redbutton'>Try it Out</a>
+          <a href='/feedback' class='vprop-actions-redbutton'>Leave Feedback</a>          
+        </div>
+        <div id='vprop-follow'>
           <div class='opacity-background z-index-1'></div>
             <div class='opacity-foreground'>
               <h2>Stay Up To Date With Our Development</h2>
@@ -87,15 +91,23 @@
     #construction{padding:10px;background:yellow;font-size:150%;color:black;font-weight:bold;border-top:dashed black 5px;border-bottom:dashed black 5px;}
     #perma{position:absolute;top:70px;left:calc(20vw - 20px);vw;min-width:500px;width:60vw;padding:20px;z-index:10}
     #permatitle{text-align:center}
+    h1{margin:30px 0;}
+    h2{margin:30px 0;}
     #principles{width:calc(38% - 10px);margin-right:10px;}
-    #principles ul{list-style:none;margin:0;padding:20px;text-align:center;}
-    .core-text{text-decoration:none;font-size:200%;font-weight:bold;margin:15px 0;}
+    #principles ul{list-style:none;margin:0;padding:0 20px;text-align:center;}
+    .core-text{text-decoration:none;font-size:150%;font-weight:bold;margin:10px 0;}
     #vpropslide_wrapper{position:relative;width:calc(62% - 10px);margin-left:10px;}
     .arrow{width:50px;}
     .arrblock{position:absolute;top:50%;transform:translate(0,-50%);text-align:center;cursor:pointer;}
+    .arrblock:hover{border}
+    #arrblock-left:hover{border-right:50px solid #A30000;}
+    #arrblock-right:hover{border-left:50px solid #A30000;}
     #vprop-msg{width:calc(100% - 140px);padding:20px;}
-    #vprop-actions{position:relative;margin-top:20px;text-align:center;padding:20px 0;}
-    #vprop-actions h2{margin:0 0 20px 0;}
+    #vprop-actions{display:flex;justify-content:space-between;}
+    .vprop-actions-redbutton{background:darkred;color:white;text-align:center;font-weight:bold;margin:0 10px;width:calc(50% - 20px);padding:15px;border-radius:50px;border:double 3px;}
+    .vprop-actions-redbutton:hover{background:#A30000;}
+    #vprop-follow{position:relative;margin-top:20px;text-align:center;padding:20px 0;}
+    #vprop-follow h2{margin:0 0 20px 0;}
     #sm-links{display:flex;justify-content:center;}
     .sm-link{background:#0E1C32;height:50px;width:50px;border-radius:50%;margin:0 50px;cursor:pointer;}
 
