@@ -8,6 +8,7 @@ a{text-decoration:none}
 .redbutton:hover{background:#A23333;}
 .triangle-left{width: 0;height: 0;border-top: 30px solid transparent;border-right: 50px solid darkred;border-bottom: 30px solid transparent;}
 .triangle-right {width: 0;height: 0;border-top: 30px solid transparent;border-left: 50px solid darkred;border-bottom: 30px solid transparent;}
+.whiteback{background:white;border:solid 1px #d9d9d9;border-radius:2px;}
 
 #nav ul{list-style:none;}
 .quote{font-style:italic;}
