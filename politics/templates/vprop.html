@@ -38,14 +38,14 @@
           </div>
           <div id='vpropslide_wrapper' class='flex-columns'>
             <div id='left-arrow' class='arrow' onclick="javascript:propScroll('left');return false;">
-              <div class='arrblock'></div>
+              <div class='triangle-left arrblock'></div>
             </div>
             <div id='vprop-msg'>
               <h2>Impartial and Interactive Data</h2>
               <h3>All government related knowledge made easy to understand, checked for bias, and equipped to create statistics, so you can build the bigger picture and make decisions for yourself.</h3>
             </div>
             <div id='right-arrow' class='arrow' onclick="javascript:propScroll('right');return false;">
-              <div class='arrblock'></div>
+              <div class='triangle-right arrblock'></div>
             </div>
           </div>
         </div>
@@ -53,10 +53,12 @@
           <div class='opacity-background z-index-1'></div>
             <div class='opacity-foreground'>
               <h2>Stay Up To Date With Our Development</h2>
-              <form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-                <input type='text' placeholder='Enter Email'>
-                <input type='button' value='submit' id='esfsubmit' class='z-depth-1 dformbutton' onclick="javascript:submitESF();return false;">
-              </form>
+              <div id='sm-links'>
+                <div class='sm-link'></div>
+                <div class='sm-link'></div>
+                <div class='sm-link'></div>
+                <div class='sm-link'></div>              
+              </div>
           </div>
         </div>
     </div>
@@ -87,16 +89,20 @@
     #permatitle{text-align:center}
     #principles{width:calc(38% - 10px);margin-right:10px;}
     #principles ul{list-style:none;margin:0;padding:20px;text-align:center;}
-    .core-text{text-decoration:none;font-size:200%;font-weight:bold;margin:20px 0;}
+    .core-text{text-decoration:none;font-size:200%;font-weight:bold;margin:15px 0;}
     #vpropslide_wrapper{position:relative;width:calc(62% - 10px);margin-left:10px;}
     .arrow{width:50px;}
-    .arrblock{position:absolute;top:50%;transform:translate(0,-50%);background:darkred;width:50px;height:50px;text-align:center;}
+    .arrblock{position:absolute;top:50%;transform:translate(0,-50%);text-align:center;cursor:pointer;}
     #vprop-msg{width:calc(100% - 140px);padding:20px;}
     #vprop-actions{position:relative;margin-top:20px;text-align:center;padding:20px 0;}
     #vprop-actions h2{margin:0 0 20px 0;}
+    #sm-links{display:flex;justify-content:center;}
+    .sm-link{background:#0E1C32;height:50px;width:50px;border-radius:50%;margin:0 50px;cursor:pointer;}
+
+
     h1{font-size:450%;font-weight:bold;}
     #logo img{height:100px;}
-    input{text-align:center;padding:10px;font-size:150%;}
+    input{text-align:center;padding:10px;font-size:125%;margin:0;}
     #redarialart{position:absolute;bottom:0;left:0;width:100%;}
     #footer{display:none;}
     #footfoot{color:white;}
