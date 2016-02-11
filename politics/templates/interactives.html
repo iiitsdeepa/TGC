@@ -55,7 +55,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class='interactive-display'>
+			<div class='interactive-display whiteback'>
 
 				<div id='congressional-leaders' class='reps-wrapper'>
 					<h2 class='id-title'>These are the leaders of congress</h2>
@@ -222,9 +222,6 @@
 				</div>
 
 			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
-			</div>
 		</div>
 	</div>
 
@@ -272,7 +269,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class='interactive-display'>
+			<div id='party-table-wrapper' class='interactive-display whiteback'>
 				<div id='pcomp-party-headers'>
 					<div id='dem-header' class='party-header pcomp-table-dem'>
 						The Democrats
@@ -304,9 +301,6 @@
 					</tr>					
 				</table>
 			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
-			</div>
 		</div>
 	</div>
 
@@ -331,15 +325,12 @@
 					</ol>
 				</div>	
 			</div>
-			<div class='interactive-display'>
+			<div class='interactive-display whiteback'>
 				<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
 				<h3 class='visualtitle'>Current National Standings</h3>
 				<div id='dem_national' class='graphback'></div>
 				<div id='repub_national' class='graphback'></div>
 				<div id='tableback'></div>
-			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
 			</div>
 		</div>
 	</div>
@@ -442,9 +433,8 @@ $( document ).ready(function() {
 	.interactive-display-legend{position:absolute;top:47%;left:23.6%;height:29.4%;width:14.5%;}
 	.idl-table{height:100%;width:100%;text-align:center;}
 	#pcomp-idl{top:23.5%;height:67.7%;}
-	.interactive-display{background:#EAEAEA;position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;}
+	.interactive-display{position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;padding-top:20px;}
 	.id-title{height:8.8%;line-height:100%;width:100%;}
-	.interactive-share{position:absolute;bottom:0;left:23.6%;width:76.4%;height:8.8%;background:#0E1C32;color:white;opacity:.5}
 	#mreps_r1{position:relative;height:47.1%;}
 	#mreps_r1-left{float:left;width:38.2%;height:100%;}
 	.ribbon-header{height:30px;line-height:30px;background:darkred;color:white;font-weight:bold;text-align:center;}
@@ -456,16 +446,16 @@ $( document ).ready(function() {
 	.issuebox{position:relative;text-align:center;height:20%;}
 	#repdisplay{background:#EAEAEA;position:absolute;top:0;right:14.5%;height:100%;width:32.7%;z-index: 5;}
 	#mreps_r3{position:relative;height:23.6%;padding-top:5%;}
-
 	#pcomp-search{position:relative;width:23.6%;height:50px;line-height:50px;text-align:center;color:white;background:darkred;z-index:5}
+	#party-table-wrapper{padding-top:0;}
 	#pcomp-suggestions{position:absolute;left:0;bottom:14.5%;width:18.2%;height:52.9%;}
 	#pcomp-display{position:absolute;top:0;right:14.5%;width:67.3%;height:85.5%;z-index: 1;}
 	#pcomp-party-headers{height:23.5%;}
 	.party-header{float:left;width:calc(50% - 2px);margin:1px;height:calc(100% - 2px);text-align:center;}
-	#pcomp-table{position:absolute;width:100%;height:67.7%;text-align:center;}
+	#pcomp-table{position:absolute;width:100%;height:76.5%;text-align:center;}
 	.pcomp-table-issue{width:29.7%;}
-	.pcomp-table-dem{background:blue;}
-	.pcomp-table-repub{background:red;}
+	.pcomp-table-dem{background:#162d50;color:white;}
+	.pcomp-table-repub{background:#A30000;color:white;}
 	#pcomp-social{position:absolute;bottom:0;left:0;width:85.5%;height:10%;padding-top:4.5%;}
 	.rep-header-wrapper{position:relative;height:46.4%;}
 	.rep-header-wrapper h4{width:100%;text-align:center;}
@@ -474,10 +464,10 @@ $( document ).ready(function() {
 	.rep-title{position:relative;background:red;padding:5px 10px;}
 	.rep-stats{height:35.7%;}
 	.rep-stats table{height:100%;margin:0 auto;}
-	.rep-stats td{background:gray;min-width:100px;}
-	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:91.2%;}
+	.rep-stats td{background:white;border:solid 1px #D9D9D9;border-radius:2px;min-width:100px;}
+	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:100%;}
 	.rep-wrapper{width:50%;height:100%;}
-	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;background:white;z-index:3}
+	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:calc(100% - 20px);background:white;z-index:3;padding-top:20px;}
 	#mreps-house{display:flex;z-index:2;height:91.2%;width:100%;}
 	.mrep-wrapper{width:33.3%;height:100%;}
 }
@@ -486,7 +476,8 @@ $( document ).ready(function() {
 .redbutton:hover{background:#A23333;}
 
 #interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;z-index:10;}
-.inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;}
+.inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;cursor:pointer;border-radius:2px;}
+.inav-option:hover{background:#162D50;}
 #opening{position:relative;padding:80px 5vw;min-height:calc(90vh - 220px);}
 #opening{text-align:center;}
 #centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
@@ -496,17 +487,17 @@ $( document ).ready(function() {
 .rightpane{float:right;position:relative;}
 .visual{background:#EAEAEA;width:600px;min-height:500px;max-width:90vw;}
 .visualtitle{text-align:center;}
-.dem{background:blue;}
-.repub{background:red;}
+.dem{background:#162D50;}
+.repub{background:#A30000;}
 #pcomptable{border-spacing:0;width:100%;}
 #pcomptable img{height:50px;}
 #pcomptable td{height:50px;}
 #pcomptitles{padding:5px;}
-.dem{background:blue;}
-.repub{background:red;}
+.dem{background:#162D50;color:white;}
+.repub{background:#A30000;color:white;}
 .graphimg{width:50%;}
 #partyselector{display:flex;margin:10px 0;}
-.partyselect{padding:10px;margin:10px 0;width:calc(100% - 20px);text-align:center;cursor:pointer;}
+.partyselect{padding:10px;margin:10px 0;width:calc(100% - 20px);text-align:center;cursor:pointer;border-radius:500px;}
 .partyselected{font-weight:bold;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 #current_standings{}
 .graphback{display:none;width:600px;height:400px;max-width:90vw}
@@ -514,7 +505,7 @@ $( document ).ready(function() {
 
 #repstoggle{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:80%;padding:15% 10px;}
 #district-reps{display:none;}
-#uselocation{position:relative;margin:10%;padding:5% 0;width:80%;}
+#uselocation{position:relative;margin:20px 10%;padding:5% 0;width:80%;}
 #address-submit{padding:5% 0;margin:20px 0 10% 0;}
 
 
