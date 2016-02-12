@@ -351,7 +351,7 @@ class Feedback(BaseHandler):
 
 class Vprop(BaseHandler):
     def get(self):
-        self.render('interactives.html')
+        self.render('new-feedback.html')
 
     def post(self):
         demo = self.request.get('demo')

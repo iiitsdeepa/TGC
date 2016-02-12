@@ -2,7 +2,7 @@
   <html>
     <head>
       <title>The Glass Capitol</title>
-      <link rel='stylesheet' href='css/newbase.css'/>
+      <link rel='stylesheet' href='css/publicbase.css'/>
       <!--Import materialize.css-->
       <link href='https://fonts.googleapis.com/css?family=Pinyon+Script|Alex+Brush|Parisienne|UnifrakturCook:700|UnifrakturMaguntia|Cookie|Playball' rel='stylesheet' type='text/css'>
 
@@ -10,22 +10,46 @@
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
       <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="/js/newbase.js"></script>
+      <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 
     <body>
-      <div id='nav_wrapper'>
-        <div id='badge'>
-          <img id='logo' src='/images/gclogo_noback.png' alt='...'>
-          The Glass Capitol
-        </div>
-        <ul>
-          <li><a href='/'>Home</a></li>
-          <li><a href='/about'>About Us</a></li>
-          <li><a href='/sources'>Our Data</a></li>
-        </ul>
+      <div id='popuplayer'>
+        {% block popup %}
+        {% endblock %}
       </div>
+      <div id='head'>
+        <div id='nav_container'>
+          <nav id='nav'>
+            <ul>
+              <li id='home_option' class='nav_option' value='contracted'>
+                <a href='/'>Vprop</a>
+              </li>
+              <li id='mrep_option' class='nav_option' value='contracted'>
+                <a href='/prop'>Interactives</a>
+                <div id='mrepexp' class='mexp' onclick="javascript:submarine('mrep_option', 'mrepexp');return false;"></div>
+              </li>
+              <li id='ccomp_option' class='nav_option' value='contracted'>
+                <a href='/feedback'>Feedback</a>
+                <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+              </li>
+              <li id='pcomp_option' class='nav_option' value='contracted'>
+                <a href='/about'>About Us</a>
+                <div id='pcompexp' class='mexp' onclick="javascript:submarine('pcomp_option', 'pcompexp');return false;"></div>
+              </li>
+              <li id='ccomp_option' class='nav_option' value='contracted'>
+                <a href='/sources'>Sources</a>
+                <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <script type="text/javascript" src="/js/publicbase.js"></script>
       <div id='content'>
+
       {% block content %}
       {% endblock %}
         
@@ -35,48 +59,67 @@
         <div id='footsocial'class='foottext'>
           <h2>Follow Us on Social Media</h2>
           <div id='footsocioconline'>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
+            <div class="fb-like" data-href="https://www.facebook.com/glasscapitol" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
+            <div class="g-follow" data-annotation="vertical-bubble" data-height="20" data-href="https://plus.google.com/103856422488893766971" data-rel="publisher"></div>
+            <div class='footsocioconred'>
+              <script type="text/javascript">reddit_newwindow='1'</script>
+              <script type="text/javascript" src="//www.redditstatic.com/button/button3.js"></script>
+            </div>
+            <div class='footsocioconinst'>
+              <style>.ig-b- { display: inline-block; }
+                .ig-b- img { visibility: hidden; }
+                .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
+                .ig-b-48 { width: 48px; height: 48px; background: url(//badges.instagram.com/static/images/ig-badge-sprite-48.png) no-repeat 0 0; }
+                @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+                .ig-b-48 { background-image: url(//badges.instagram.com/static/images/ig-badge-sprite-48@2x.png); background-size: 60px 178px; } }</style>
+                <a href="https://www.instagram.com/glasscapitol/?ref=badge" class="ig-b- ig-b-48"><img src="//badges.instagram.com/static/images/ig-badge-48.png" alt="Instagram" /></a>
+            </div>
+            <div class='footsociocontwit'>
+              <a href="https://twitter.com/glasscapitol" class="twitter-follow-button" data-show-count="false">Follow @glasscapitol</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
           </div>
         </div>
         <div id='footcontributions'>
           <div id='footcontact' class='footcontribution'>
             <h3>Help Us Improve</h3>
-            Join Our Email List For
-            <ul>
-              <li>first access to stats and insights</li>
-              <li>participate in surveys</li>
-              <li>ensure your issues are featured</li>
-            </ul>
             <form>
+              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Comments'></textarea>
               <input id='footemail' name='footemail' class='footcontactinput' type='text' placeholder='Enter Email'></br>
-              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Tell Us What You Think'></textarea>
+              <div class="g-recaptcha" data-sitekey="6Lcz-BYTAAAAAJqQBmRlbPETj64hWA9fIK1AvLVt"></div>
+              <input type='button' id='footformbutton' value='Submit'>
             </form>
           </div>
           <div id='footdonate' class='footcontribution'>
-            <h3>Keep Us Pure</h3>
-            We want to ensure that The Glass Capitol is free of bias, and advertisement free. That is why we are relying on individual donations to fund this website. We really appreciate anything you can spare! Every pennny helps.
+            <h3>Donation Station</h3>
+            We want to ensure that The Glass Capitol is free of bias or influencing advertisements. That is why we are relying on individual donations.
             <h4>Contribute Today!</h4>
+            <h4>Donate (via PayPal) **Comming Soon**</h4>
             <div id='footdonatebutton'></div>
           </div>
         </div>
         <div id='footabout' class='foottext'>
           <h3>About Us</h3>
-          We are a group of individuals passionate about improving America. Some of us are still college students, while others are just starting their careers in engineering, or pursuing medical school or law school. We don't have an office or physical location. Only our computers and the drive to do something for our country.
-          <a class='foottextlink' href='/about'>Learn More About Our Team -></a>
+          We are a small team of college students and pre-professionals passionate about improving America. All of us want to improve our nation and help others do the same!
+          <a class='foottextlink' href='/about'>Learn More -></a>
         </div>
         <div id='footsources' class='foottext'>
           <h3>Our Sources</h3>
-          We are committed to being the most trustworthy, unbiased, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources. Our data comes directly from the government or from other open data sources that distribute data directly from the government.
-          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
+          We are committed to being the most trustworthy, non-partisan, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources, either directly from the government or from other open data sources that distribute data directly from the government.          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
         </div>
         <div id='footfoot'>
-            <img id='footlogo' src='/images/gclogo_noback.png'>The Glass Capitol™ Founded 2015
+            <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
         </div>
       </div>
+
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
 
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -89,4 +132,6 @@
 
       </script>
       
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     </body>
