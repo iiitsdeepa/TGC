@@ -2,8 +2,7 @@
 
 {% block content %}
 <div id='interactivesnav'>
-	<div id='top-option' class='inav-option' onclick="javascript:scrollTo('top');return false;">Top</div>
-	<div id='personalize-option' class='inav-option' onclick="javascript:scrollTo('myreps_wrapper');return false;">Personalized Connection</div>
+	<div id='personalize-option' class='inav-option' onclick="javascript:scrollTo('myreps_wrapper');return false;">My Legislators</div>
 	<div id='partycomp-option' class='inav-option' onclick="javascript:scrollTo('pcomp_wrapper');return false;">Party Comparison</div>
 	<div id='currentpolls-option' class='inav-option' onclick="javascript:scrollTo('polls_wrapper');return false;">Current Polls</div>
 </div>
@@ -439,12 +438,10 @@ $( document ).ready(function() {
 .redbutton{background:darkred;color:white;font-weight:bold;text-align:center;cursor:pointer;border:double 3px #660000;}
 .redbutton:hover{background:#A23333;}
 
-#interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;z-index:10;}
-.inav-option{position:relative;margin:10px 0;width:100%;padding:10px 0;background:#0E1C32;color:white;font-weight:bold;cursor:pointer;border-radius:2px;}
-.inav-option:hover{background:#162D50;}
+#interactivesnav{display:flex;position:absolute;text-align:center;z-index:10;top: -30px;}
+.inav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
 #opening{position:relative;padding:80px 5vw;min-height:calc(90vh - 220px);}
 #opening{text-align:center;}
-#centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
 .vpoint h2,h4{display:block;text-align:left;}
 .leftpane{float:left;}
