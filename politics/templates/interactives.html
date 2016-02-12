@@ -11,10 +11,20 @@
 
 	<div id='mreps-wrapper' class='section'>
 		<div id='fr-form-wrapper'>
-			<h1>Find My Representatives</h1>
-			<div id='use-location'>
+			<div id='location-data-wrapper' class='fr-form'>
+				<h1>Find My Representatives</h1>
+				<div id='use-location' class='bluebutton button centered' onclick="javascript:useLocation();return false;">Use Location Data</div>
+				<div id='use-address' class='redbutton button centered' onclick="javascript:showAddressForm();return false;">Use Street Address -></div>
+			</div>
+			<div id='address-form-wrapper' class='fr-form' value='hidden'>
+				<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+		  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
+		  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+		  			<input type='button' value='Submit' onclick="javascript:useAddress();return false;">
+			</div>
 		</div>
-		<div id='myreps-ui' class='interactive-ui'>
+		<div id='mreps-ui' class='interactive-ui'>
 			<input type='hidden' id='hasdistrict' value='none'>
 			<div class='interactive-controlpanel'>
 				<div class='interactive-controlpanel-1'>
@@ -115,20 +125,6 @@
 
 				<div id='district-reps' class='reps-wrapper'>
 					<h2 class='id-title'>The Representatives for Kentucky:3</h2>
-					<div id='address-form-wrapper'>
-						<h2>We Need To Find Your District First</h2>
-						<div id='uselocation' class='redbutton' onclick="javascript:useLocation();return false;">Use Location Data</div>
-						Or<br>
-						<div id='useaddress'>
-							<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
-					  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
-					  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
-					  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
-					  			<div id='address-submit' class='redbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
-							</form>
-						</div>
-						<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
-					</div>
 					<div id='mreps-house'>
 						<div id='my-hr' class='mrep-wrapper'>
 							<div class='rep-header-wrapper'>
@@ -301,6 +297,17 @@
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
+function showAddressForm(){
+	if ($('#address-form-wrapper').attr('value') == 'hidden'){
+		console.log('doing thing')
+		$('#address-form-wrapper').animate({
+    		opacity: "1"
+  			}, 500, function() {
+    			$('#fr-form-wrapper').attr('value', 'expanded')
+  			});
+	}
+}
+
 function mrepsControl(changeaddress){
 	toggle = $('#repstoggle').attr('value')
 	if(toggle == 'seereps'){ //switch to the representatives
@@ -389,6 +396,11 @@ $( document ).ready(function() {
 /*Desktop*/
 @media screen and (min-width: 966px){
 
+	#fr-form-wrapper{position:absolute;left:50%;transform:translate(-25%, 0);width:800px;display:flex;}
+	.fr-form{width:400px;}
+	#location-data-wrapper{text-align:center;}
+	#address-form-wrapper{padding:90px 0 0 0;text-align:center;opacity:0;}
+	#mreps-ui{margin-top:230px;}
 	#back-to-top{position:absolute;bottom:0;right:5vw;font-weight:bold;cursor:pointer;margin:40px 0;}
 	#back-to-top:hover{text-decoration:underline;}
 
@@ -437,13 +449,10 @@ $( document ).ready(function() {
 	.rep-stats td{background:white;border:solid 1px #D9D9D9;border-radius:2px;min-width:100px;}
 	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:100%;}
 	.rep-wrapper{width:50%;height:100%;}
-	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:calc(100% - 20px);background:white;z-index:3;padding-top:20px;}
 	#mreps-house{display:flex;z-index:2;height:91.2%;width:100%;}
 	.mrep-wrapper{width:33.3%;height:100%;}
 }
 
-.redbutton{background:darkred;color:white;font-weight:bold;text-align:center;cursor:pointer;border:double 3px #660000;}
-.redbutton:hover{background:#A23333;}
 
 #interactivesnav{display:flex;position:absolute;text-align:center;z-index:10;top: -30px;}
 .inav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
