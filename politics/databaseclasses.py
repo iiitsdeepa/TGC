@@ -66,6 +66,31 @@ class User(db.Model):
         if u and valid_pw(username, pw, u.pw_hash):
             return u
 
+class Cookie_Info(db.Model):
+    times_visit = db.IntegerProperty(required = True)
+    signup = db.BooleanProperty(required = True)
+
+class Feed_Radio_Buttons(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    origin_val = db.IntegerProperty()
+    return_val = db.IntegerProperty()
+    recomm_val = db.IntegerProperty()
+
+class Feed_Top_Issues(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    envir_sci = db.IntegerProperty()
+    crim_just = db.IntegerProperty()
+    health = db.IntegerProperty()
+    privacy = db.IntegerProperty()
+    edu = db.IntegerProperty()
+    camp_fin_lobby = db.IntegerProperty()
+    soc_issues = db.IntegerProperty()
+    gun_cont = db.IntegerProperty()
+    immig = db.IntegerProperty()
+    econ = db.IntegerProperty()
+    for_pol = db.IntegerProperty()
+    terror = db.IntegerProperty()
+
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)
     rid = db.StringProperty(required = True)

@@ -347,6 +347,34 @@ class Feedback(BaseHandler):
     def get(self):
         self.render('feedback.html')
     def post(self):
+        cookiedata = Cookie_Info(times_visit = 1, signup = False)
+        cookiedata.put()
+        cookkey = cookiedata.key()
+        cookid = cookkey.id()
+        ret = self.request.get('return-likelihood')
+        rec = self.request.get('recommend-likelihood')
+        origin = self.request.get('origin')
+        issues = [self.request.get('environment'),
+                  self.request.get('criminal-justice'),
+                  self.request.get('health-care'),
+                  self.request.get('privacy'),
+                  self.request.get('education'),
+                  self.request.get('campaigns'),
+                  self.request.get('social-issues'),
+                  self.request.get('guns'),
+                  self.request.get('immigration'),
+                  self.request.get('economy'),
+                  self.request.get('foreign-policy'),
+                  self.request.get('terrorism')]
+        for count in range(len(issues)):
+            if (issues[count] == ''):
+                issues[count] = 0
+            else:
+                issues[count] = 1
+        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), origin_val = int(origin), return_val = int(ret), recomm_val = int(rec))
+        feedradio.put()
+        feedissues = Feed_Top_Issues(cookie_id = int(cookid), envir_sci = int(issues[0]), crim_just = int(issues[1]), health = int(issues[2]), privacy = int(issues[3]), edu = int(issues[4]), camp_fin_lobby = int(issues[5]), soc_issues = int(issues[6]), gun_cont = int(issues[7]), immig = int(issues[8]), econ = int(issues[9]), for_pol = int(issues[10]), terror = int(issues[11]))
+        feedissues.put()
         self.render('feedback.html')
 
 class Vprop(BaseHandler):
