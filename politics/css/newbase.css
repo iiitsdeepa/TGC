@@ -6,12 +6,14 @@ a:hover{text-decoration:underline;}
 a:visited{color:#0000EE;}
 div{border-radius:2px;}
 input{padding:0;border:none;}
+.redlink{color:darkred;text-decoration:none;cursor:pointer;}
+.redlink:hover{text-decoration:underline;}
 .subtle-link{color:#0E1C32;cursor:pointer;}
 .subtle-link:hover{color:#0E1C32;text-decoration:none;}
 .subtle-link:visited{color:#0E1C32;}
 .page{position:relative;}
 .rightrectangle{border-radius:0;}
-.centered{margin:0 auto !important;}
+.center{margin:0 auto !important;}
 .z-index-1{-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 .z-index-2{-moz-box-shadow: 0px 0px 15px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 15px rgba(0,0,0,1);box-shadow: 0px 0px 15px rgba(0,0,0,1);}
 .button{font-size:13px;height:34px;line-height:34px;border-radius:500px;width:275px;cursor:pointer;margin-bottom:10px !important;text-align:center;font-weight:bold;}
@@ -19,6 +21,7 @@ input{padding:0;border:none;}
 .bluebutton:hover{background:#263D60;}
 .redbutton{background:darkred;border-radius:500px;cursor:pointer;color:white;}
 .redbutton:hover{background:#A23333;}
+.togglebutton{width:275px;height:50px;line-height:50px;cursor:pointer;text-align:center;color:white;font-size:18px;border-radius:2px;}
 .triangle-left{width: 0;height: 0;border-top: 30px solid transparent;border-right: 50px solid darkred;border-bottom: 30px solid transparent;}
 .triangle-right {width: 0;height: 0;border-top: 30px solid transparent;border-left: 50px solid darkred;border-bottom: 30px solid transparent;}
 .whiteback{background:white;border:solid 1px #d9d9d9;border-radius:2px;}
@@ -27,6 +30,7 @@ input{padding:0;border:none;}
 .alert:visited{color:white;}
 .top-button{position:absolute;right:2vw; top:-84px;height:34px;line-height:34px;padding:0 20px;}
 .medium-text-input{height:44px;width:calc(100% - 12px);margin-bottom:10px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
+.small-text-input{padding-left:10px;height:32px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 #pagenav{display:flex;position:absolute;text-align:center;z-index:10;top: -30px;}
 .pagenav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
 

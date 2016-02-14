@@ -1,3 +1,5 @@
+"use strict"
+
 function rightEntry(id){
   w =  $('#'+id).css('display','block')
   w =  $('#'+id).width()
@@ -8,6 +10,7 @@ function rightEntry(id){
 }
 
 function fadeIn(id){
+  $('#'+id).css('display','block')
   $('#'+id).css('opacity','0')
   $('#'+id).animate({
         opacity: "1"
@@ -20,6 +23,23 @@ function scroller(id,classname){
   })
   $('#'+id).css('display','block')
   fadeIn(id)
+}
+
+function showHide(classname, index, hide){
+  console.log(classname, index, hide)
+  if(hide != '-1'){
+      $('.'+classname).each(function(i){
+        if(i == index){
+          $(this).css('display','block')
+          var others = $(this).attr('value')
+          console.log(i, $(this).attr('id'), others)
+          fadeIn($(this).attr('id'))
+          fadeIn(others)
+        }else{
+          $(this).css('display','none')
+        }
+    })
+  }
 }
 
 function expandGlobalNav(){
