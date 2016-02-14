@@ -15,7 +15,7 @@
 	<div id='issue-order-wrapper'>
 		<h3 id='formhead'>Put what matters to you on top</h3>
 		<div class='low-prom-text'>**Don't worry, you can change this list at any time</div>
-		<ul id='issue-list'>
+		<ul id='issue-list' class='whiteback'>
 			<li class='issue'>Environment and Science</li>
 			<li class='issue'>Criminal Justice</li>
 			<li class='issue'>Health Care</li>
@@ -35,5 +35,17 @@
 #home h1{margin:50px 0;text-align:center;}
 #home h2{margin:50px 0;text-align:center;}
 #openimg{display:block;margin:0 auto;width:60vw;}
+#issue-order-wrapper{margin:0 auto;width:354px;}
+#formhead{text-align:center;margin-bottom:20px;}
+#issue-list{list-style:none;padding:0;padding:40px;}
+#issue-list li{position:relative;}
+.issue{display:block;margin:2px 0;height:25px;border-bottom:solid 1px #d9d9d9;background:white;}
 </style>
+
+<script>
+$(function() {
+	$( "#issue-list" ).sortable();
+	$( "#issue-list" ).disableSelection();
+});
+</script>
 {% endblock %}
