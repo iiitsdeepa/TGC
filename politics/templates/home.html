@@ -2,11 +2,21 @@
 
 {% block content %}
 <div id='home'>
-	<h1>Your Government should answer to you</h1>
-	<h1>Become a part of communication era politics</h1>
-	<h1>Together we can forge a more responsive government</h1>
+	<h1 id='title'>The Glass Capitol</h1>
+	<div id='opening'>
+		<img id='openimg' src='/images/fullglasscapitol.png' alt='...'>
+	</div>
+
+	<div id='home'>
+		<h1>Communication era politics</h1>
+		<h1>Our gonverment needs more transparency and engagement</h1>
+		<h1>Together we can forge a more responsive government</h1>
+	</div>
 </div>
 <style>
+#head{display:none;}
 #home h1{margin:50px 0;text-align:center;}
+#home h2{margin:50px 0;text-align:center;}
+#openimg{display:block;margin:0 auto;width:60vw;}
 </style>
 {% endblock %}

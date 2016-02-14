@@ -297,7 +297,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("vprop.html")
+        self.render("home.html")
     def post(self):
         self.render('vprop.html')
 
