@@ -345,7 +345,7 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('feedback.html')
+        self.render('new-feedback.html')
     def post(self):
         cookiedata = Cookie_Info(times_visit = 1, signup = False)
         cookiedata.put()
