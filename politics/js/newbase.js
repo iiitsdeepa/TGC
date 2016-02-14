@@ -1,3 +1,12 @@
+function rightEntry(id){
+  w =  $('#'+id).css('display','block')
+  w =  $('#'+id).width()
+  $('#'+id).css('right',-w)
+  $('#'+id).animate({
+        right:'0'
+        }, 500);
+}
+
 function fadeIn(id){
   $('#'+id).css('opacity','0')
   $('#'+id).animate({

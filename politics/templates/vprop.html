@@ -139,6 +139,11 @@
   </style>
 
   <script>
+    function alphaAlert(){
+      width = $('#alpha-alert').width()
+      console.log(width)
+    }
+
     function propScroll(direction){
       current = Math.abs($('#propsections').attr('value'))
       if(direction == 'left'){newd = current - 1;}
@@ -158,7 +163,11 @@
         console.log(data)
       });
     }
-    $('#badge').html("<img src='/images/awlogo.png' alt='...' style='height:100%'>")
+  // A $( document ).ready() block.
+  $( document ).ready(function() {
+      console.log('ready')
+      alphaAlert()
+  });
   </script>
 
 {% endblock %}
