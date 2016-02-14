@@ -1,0 +1,39 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+<div id='home'>
+	<h1 id='title'>The Glass Capitol</h1>
+	<div id='opening'>
+		<img id='openimg' src='/images/fullglasscapitol.png' alt='...'>
+	</div>
+
+	<div id='home'>
+		<h1>Communication era politics</h1>
+		<h1>Our gonverment needs more transparency and engagement</h1>
+		<h1>Together we can forge a more responsive government</h1>
+	</div>
+	<div id='issue-order-wrapper'>
+		<h3 id='formhead'>Put what matters to you on top</h3>
+		<div class='low-prom-text'>**Don't worry, you can change this list at any time</div>
+		<ul id='issue-list'>
+			<li class='issue'>Environment and Science</li>
+			<li class='issue'>Criminal Justice</li>
+			<li class='issue'>Health Care</li>
+			<li class='issue'>Privacy and Data Security</li>
+			<li class='issue'>Education</li>
+			<li class='issue'>Campaign Finance and Lobbying</li>
+			<li class='issue'>Social Issues</li>
+			<li class='issue'>Gun Control</li>
+			<li class='issue'>Immigration</li>
+			<li class='issue'>The Economy</li>
+			<li class='issue'>Foreign Policy and Terrorism</li>
+		</ul>
+	</div>
+</div>
+<style>
+#head{display:none;}
+#home h1{margin:50px 0;text-align:center;}
+#home h2{margin:50px 0;text-align:center;}
+#openimg{display:block;margin:0 auto;width:60vw;}
+</style>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+<div id='feedback'>
+  <h1>Help Us Improve</h1>
+  <h2>We want you to get the most possible out of our site</h2>
+
+  <div id='feedbackform-wrapper' value='500'>
+    <div id='formdisplay'>
+      <form id='feedback-form' method='post'>
+        <div id='feedback-fs0' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>Do you think our government listens to you?</div>
+          <input type='radio' name='yes' value='1'>Yes<br><br>
+          <input type='radio' name='no' value='2'>No<br><br>
+          <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
+        </div> 
+        <div id='feedback-fs1' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>Do you want to be a more active participant in government?</div>
+          <input type='radio' name='yes' value='1'>Yes<br><br>
+          <input type='radio' name='no' value='2'>No<br><br>
+          <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
+        </div>
+        <div id='feedback-fs2' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>Would you be a more active participant in government if it were easier?</div>
+          <input type='radio' name='yes' value='1'>Yes<br><br>
+          <input type='radio' name='no' value='2'>No<br><br>
+          <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
+        </div>
+        <div id='feedback-fs3' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>What are your top issues this election?</div>
+          <input type='checkbox' name='environment' value='1'>Environment and Science<br><br>
+          <input type='checkbox' name='criminal-justice' value='1'>Criminal Justice<br><br>
+          <input type='checkbox' name='health-care' value='1'>Health Care<br><br>
+          <input type='checkbox' name='privacy' value='1'>Privacy and Data Security<br><br>
+          <input type='checkbox' name='education' value='1'>Education<br><br>
+          <input type='checkbox' name='campaigns' value='1'>Campaign Finance and Lobbying<br><br>
+          <input type='checkbox' name='social-issues' value='1'>Social Issues<br><br>
+          <input type='checkbox' name='guns' value='1'>Gun Control<br><br>
+          <input type='checkbox' name='immigration' value='1'>Immigration<br><br>
+          <input type='checkbox' name='economy' value='1'>The Economy<br><br>
+          <input type='checkbox' name='foreign-policy' value='1'>Foreign Policy<br><br>
+          <input type='checkbox' name='terrorism' value='1'>Terrorism<br><br>
+          <div id='use-location' class='bluebutton button centered' onclick="javascript:submitFeedback();return false;">Submit</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>s
+        
+</div>
+
+<style>
+  #feedback{text-align:center;padding-top:50px;}
+  #feedbackform-wrapper{margin:50px auto;width:1000px;max-width:80vw;}
+  #formcontrols{position:relative;display:flex;justify-content:center;}
+  .form-direction{background:#0E1C32;color:white;padding:20px;width:100px;font-weight:bold;cursor:pointer;border-radius:500px;border:double 2px;}
+  .form-direction:hover{background:#162D50;}
+  #form-position-indicator{margin:0 20px;}
+  #feedback-form{text-align:left;}
+  .fpi{position:relative;display:inline-block;height:19px;width:19px;border-radius:50%;border:solid 1px #D9D9D9;margin:20px 5px 0 5px;background:white;cursor:pointer;}
+  .feedback-fs{width:274px;padding:40px;margin:0 auto;background:white;margin-bottom:40px;display:none;border-radius:2px;}
+  .feedback-fs-q{font-size:125%;margin-bottom:40px;}
+  #feedback-fs0{display:block;}
+  .feedback-textarea{width:100%;border-radius:2px;}
+  #back-to-top{color:white;}
+</style>
+
+<script>
+  //helper function to reset all position indicators
+  function indicatorColor(i){
+    $('.fpi').each(function(index){$(this).css('background','white')})
+    $('#fpi-'+i).css('background','#0E1C32')
+    $('.feedback-fs').each(function(index){$(this).css('display','none')})
+    $('#feedback-fs'+i).css('display','block')
+    fadeIn('feedback-fs'+i)
+  }
+  function feedbackScroll(direction, newpos){
+    if(newpos){
+      np = parseInt(newpos) + 500
+      $('#feedbackform-wrapper').attr('value', np)
+      indicatorColor(newpos)
+
+    }else{
+      current = Math.abs($('#feedbackform-wrapper').attr('value'))
+      if(direction == 'left'){newd = current - 1;}
+      else{newd = current + 1}
+      $('#feedbackform-wrapper').attr('value', newd)
+      c = newd % 10
+      console.log(c)
+      indicatorColor(c)
+    }
+  }
+
+  function submitFeedback(){
+    console.log('submitting feedback')
+  }
+</script>
+
+
+{% endblock %}
