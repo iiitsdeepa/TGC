@@ -1,5 +1,5 @@
 html{height:100%;}
-html, body{margin: 0;padding: 0;min-height: 100%;width: 100%;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:150%;color:#0E1C32;font-size:95%;}
+html, body{margin: 0;padding: 0;min-height: 100%;width: 100%;font-family: 'Roboto Slab', serif;line-height:150%;color:#0E1C32;font-size:95%;}
 h3{margin-bottom:5px;}
 a{text-decoration:none}
 .centered{margin:0 auto !important;}
@@ -89,7 +89,7 @@ a{text-decoration:none}
 	.mexp{position: absolute;top: 5%;right: 0;width: 15%;height: 30px;text-align: center;font-size: 200%;z-index: 5;}
 	#nav ul{margin: 0;padding: 0;}
 	#nav ul li{position: relative;overflow: hidden;}
-	#nav ul a{position: relative;display: block;width: 100vw;height: 40px;line-height: 40px;text-decoration: none;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: bold;color: darkred;text-align: center;}
+	#nav ul a{position: relative;display: block;width: 100vw;height: 40px;line-height: 40px;text-decoration: none;font-weight: bold;color: darkred;text-align: center;}
 	#nav ul ul{	}
 	#nav ul ul a{font-size: 85%;background-color: gainsboro;}
 
