@@ -28,25 +28,42 @@
         </div>
         <div id='feedback-fs3' class='feedback-fs whiteback'>
           <div class='feedback-fs-q'>What are your top issues this election?</div>
-          <input type='checkbox' name='environment' value='1'>Environment and Science<br><br>
-          <input type='checkbox' name='criminal-justice' value='1'>Criminal Justice<br><br>
-          <input type='checkbox' name='health-care' value='1'>Health Care<br><br>
-          <input type='checkbox' name='privacy' value='1'>Privacy and Data Security<br><br>
-          <input type='checkbox' name='education' value='1'>Education<br><br>
-          <input type='checkbox' name='campaigns' value='1'>Campaign Finance and Lobbying<br><br>
-          <input type='checkbox' name='social-issues' value='1'>Social Issues<br><br>
-          <input type='checkbox' name='guns' value='1'>Gun Control<br><br>
-          <input type='checkbox' name='immigration' value='1'>Immigration<br><br>
-          <input type='checkbox' name='economy' value='1'>The Economy<br><br>
-          <input type='checkbox' name='foreign-policy' value='1'>Foreign Policy<br><br>
-          <input type='checkbox' name='terrorism' value='1'>Terrorism<br><br>
+          <div id='checkbox-area'>
+            <div class='checkboxinput'><input type='checkbox' name='environment' value='1'>Environment and Science</div>
+            <div class='checkboxinput'><input type='checkbox' name='criminal-justice' value='1'>Criminal Justice</div>
+            <div class='checkboxinput'><input type='checkbox' name='health-care' value='1'>Health Care</div>
+            <div class='checkboxinput'><input type='checkbox' name='privacy' value='1'>Privacy and Data Security</div>
+            <div class='checkboxinput'><input type='checkbox' name='education' value='1'>Education</div>
+            <div class='checkboxinput'><input type='checkbox' name='campaigns' value='1'>Campaign Finance and Lobbying</div>
+            <div class='checkboxinput'><input type='checkbox' name='social-issues' value='1'>Social Issues</div>
+            <div class='checkboxinput'><input type='checkbox' name='guns' value='1'>Gun Control</div>
+            <div class='checkboxinput'><input type='checkbox' name='immigration' value='1'>Immigration</div>
+            <div class='checkboxinput'><input type='checkbox' name='economy' value='1'>The Economy</div>
+            <div class='checkboxinput'><input type='checkbox' name='foreign-policy' value='1'>Foreign Policy</div>
+            <div class='checkboxinput'><input type='checkbox' name='terrorism' value='1'>Terrorism</div>
+          </div>
+          <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
+        </div>
+        <div id='feedback-fs4' class='feedback-fs whiteback'>
+          <h2>Thank you for your feedback!</h2>
+          <div class='feedback-fs-q'>We strive to be as responsive as possible to every suggestion</div>
+          <input type='text' name='email' class='medium-text-input' placeholder='Enter Your Email'>
           <div id='use-location' class='bluebutton button centered' onclick="javascript:submitFeedback();return false;">Submit</div>
         </div>
       </form>
+      <div id='formcontrols'>
+        <div id='form-position-indicator'>
+          <div id='fpi-0' class='fpi' onclick="javascript:feedbackScroll('n','0');return false;"style='background:#0E1C32'></div>
+          <div id='fpi-1' class='fpi' onclick="javascript:feedbackScroll('n','1');return false;"></div>
+          <div id='fpi-2' class='fpi' onclick="javascript:feedbackScroll('n','2');return false;"></div>
+          <div id='fpi-3' class='fpi' onclick="javascript:feedbackScroll('n','3');return false;"></div>
+          <div id='fpi-4' class='fpi' onclick="javascript:feedbackScroll('n','4');return false;"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>s
+  <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
         
 </div>
 
@@ -60,10 +77,12 @@
   #feedback-form{text-align:left;}
   .fpi{position:relative;display:inline-block;height:19px;width:19px;border-radius:50%;border:solid 1px #D9D9D9;margin:20px 5px 0 5px;background:white;cursor:pointer;}
   .feedback-fs{width:274px;padding:40px;margin:0 auto;background:white;margin-bottom:40px;display:none;border-radius:2px;}
-  .feedback-fs-q{font-size:125%;margin-bottom:40px;}
+  .feedback-fs-q{font-size:18px;margin-bottom:40px;}
   #feedback-fs0{display:block;}
+  #feedback-fs3{width:550px;max-width:95vw;}
+  #checkbox-area{display:flex;flex-wrap:wrap;justify-content:space-between;}
+  .checkboxinput{width:274px;margin-bottom:20px;}
   .feedback-textarea{width:100%;border-radius:2px;}
-  #back-to-top{color:white;}
 </style>
 
 <script>
@@ -86,7 +105,7 @@
       if(direction == 'left'){newd = current - 1;}
       else{newd = current + 1}
       $('#feedbackform-wrapper').attr('value', newd)
-      c = newd % 10
+      c = newd % 5
       console.log(c)
       indicatorColor(c)
     }
@@ -94,6 +113,7 @@
 
   function submitFeedback(){
     console.log('submitting feedback')
+
   }
 </script>
 

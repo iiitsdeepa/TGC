@@ -1,20 +1,14 @@
-{% extends "publicbase.html" %}
+{% extends "newbase.html" %}
 
 {% block content %}
-<div id='login'>
-	<div id='nav_wrapper'>
-		<img id='toplogo' src='/images/awlogo.png'>The Glass Capitol
-		<a href='/signup' id='login-button' class='redbutton'>sign up</a>
-	</div>
-	<div id='us-content'>
-		<form id='userform'>
-			<img id='loglogo' src='/images/awlogo.png'>
-			<h2>Login</h2>
-			<input type='text' id='username' class='signupinput' placeholder='User Name or Email'><br>
-			<input type='text' id='username' class='signupinput' placeholder='Password'>
-			<input type='button' id='loginbutton' value='submit'>
-		</form>
-	</div>
+<div id='login' class='page'>
+	<form id='userform'>
+		<img id='loglogo' src='/images/awlogo.png'>
+		<h2>Login</h2>
+		<input type='text' id='username' class='medium-text-input' placeholder='User Name or Email'><br>
+		<input type='text' id='username' class='medium-text-input' placeholder='Password'>
+		<input class='bluebutton button' type='button' value='submit'>
+	</form>
 </div>
 
 <div id='footfoot'>
@@ -29,9 +23,7 @@
 	#login-button{display:block;float:right;margin-right:2vw;color:white;padding:4px 20px;margin-top:15px;border-radius:2px;font-weight:bold;font-size:12px;line-height:20px;}
 	#us-content{position:absolute;top:100px;left:50%;transform:translate(-50%,0);text-align:center;}
 	#us-content h2, h3, h4{text-align:center;}
-	#userform{width:274px;padding:40px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
-	.signupinput{height:44px;width:calc(100% - 12px);margin-bottom:10px;border-radius:2px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
-	#loginbutton{width:100%;height:34px;}
+	#userform{margin:40px auto;position:relative;width:274px;padding:40px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
 	#loglogo{display:block;margin:0 auto;height:12vh;}
 	#footer{display:none;}
 	#footfoot{position:relative;background:white;border-top:solid 1px #D9D9D9;}

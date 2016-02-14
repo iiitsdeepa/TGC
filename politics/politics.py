@@ -464,7 +464,7 @@ class Login(BaseHandler):
 
 class Signup(BaseHandler):
     def get(self):
-        self.render('onboarding.html')
+        self.render('presignup.html')
 
     def post(self):
         ty = self.request.get('type')

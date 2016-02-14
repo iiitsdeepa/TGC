@@ -1,10 +1,10 @@
 {% extends "newbase.html" %}
 
 {% block content %}
-<div id='interactivesnav'>
-	<div id='personalize-option' class='inav-option' onclick="javascript:scroller('mreps-wrapper', 'section');return false;">My Legislators</div>
-	<div id='partycomp-option' class='inav-option' onclick="javascript:scroller('pcomp-wrapper','section');return false;">Party Comparison</div>
-	<div id='currentpolls-option' class='inav-option' onclick="javascript:scroller('polls-wrapper','section');return false;">Current Polls</div>
+<div id='pagenav'>
+	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('mreps-wrapper', 'section');return false;">My Legislators</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('pcomp-wrapper','section');return false;">Party Comparison</div>
+	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('polls-wrapper','section');return false;">Current Polls</div>
 </div>
 
 	<script type="text/javascript" src="/js/vprop.js"></script>
@@ -401,8 +401,6 @@ $( document ).ready(function() {
 	#location-data-wrapper{text-align:center;}
 	#address-form-wrapper{padding:90px 0 0 0;text-align:center;opacity:0;}
 	#mreps-ui{margin-top:230px;}
-	#back-to-top{position:absolute;bottom:0;right:5vw;font-weight:bold;cursor:pointer;margin:40px 0;}
-	#back-to-top:hover{text-decoration:underline;}
 
 	.section{position:relative;padding:50px 5vw 50px 5vw;}
 	.interactive-ui{position:relative;margin:50px 0;width:90vw;height:70vh;}
@@ -454,8 +452,7 @@ $( document ).ready(function() {
 }
 
 
-#interactivesnav{display:flex;position:absolute;text-align:center;z-index:10;top: -30px;}
-.inav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
+
 #opening{position:relative;padding:80px 5vw;min-height:calc(90vh - 220px);}
 #opening{text-align:center;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
