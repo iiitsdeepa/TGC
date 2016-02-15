@@ -288,7 +288,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'R')
-        #process_politician_csv(info)
+        process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -500,8 +500,8 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateall', UpdateAll),
-    #('/up', UploadHandler),
-    #('/upload', Upload),
+    ('/up', UploadHandler),
+    ('/upload', Upload),
     #('/delete', bulkdelete)
     ('/marketing', Marketing)
 ], debug=True)
