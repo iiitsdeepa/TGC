@@ -48,13 +48,13 @@
 		<form id='signup-form' method='post' action='/signup'>
 			<input type='hidden' name='type' value='signupform'>
 			<div class="error">{{error}}</div>
-			<h4>Name</h4>
-			<input type='text' id='firstname' name='firstname' class='small-text-input halfrow' placeholder='First Name'>
-			<input type='text' id='lastname' name='lastname' class='small-text-input halfrow' placeholder='Last Name'>
+			<h4>Name (optional)</h4>
+			<input type='text' id='firstname' name='firstname' class='small-text-input halfrow' placeholder='First Name' value={{fname}}>
+			<input type='text' id='lastname' name='lastname' class='small-text-input halfrow' placeholder='Last Name' value={{lname}}>
 			<h4>Choose your username</h4>
-			<input type='text' id='username' name='username' class='small-text-input'>
+			<input type='text' id='username' name='username' class='small-text-input' value={{uname}}>
 			<h4>Enter your email</h4>
-			<input type='text' id='email' name='email' class='small-text-input'>
+			<input type='text' id='email' name='email' class='small-text-input' value={{email}}>
 			<h4>Pick a password</h4>
 			<input type='password' id='password' name='password' class='small-text-input'>
 			<h4>Confirm your password</h4>

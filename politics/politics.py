@@ -522,7 +522,9 @@ class EmailReset(BaseHandler):
             db_code = emailuser.reset_code
             expr_date = emailuser.reset_expr
             db_code = emailuser.reset_code
-            if (key == db_code and expr_date > datetime.now()):
+            if (key == ''):
+                self.response.out.write('bad url or reset key expired, try password reset again')
+            elif (key == db_code and expr_date > datetime.now()):
                 self.render('emailpassreset.html', username = username)
             else:
                 self.response.out.write('bad url or reset key expired, try password reset again')
@@ -543,6 +545,7 @@ class EmailReset(BaseHandler):
                     temp = User.changepass(username, newpass)
                     emailuser.pw_hash = str(temp.pw_hash)
                     emailuser.last_modified = datetime.now()
+                    emailuser.reset_code = ''
                     emailuser.put()
                     self.render('successfulpasschange.html')
             else:
@@ -591,25 +594,27 @@ class Signup(BaseHandler):
                 existemail = GqlQuery("SELECT * FROM User WHERE email = :1", email).get()
                 if (uname == ''):
                     msg = 'Username is a required field'
-                    self.render('signup.html', error = msg)
-                elif existuser is User:
-                    msg = 'That username is already taken'
-                    self.render('signup.html', error = msg)
+                    self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
+                elif existuser is not None:
+                    msg = 'Error creating user, information already exists'
+                    self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
                 elif (email == ''):
                     msg = 'Email is a required field'
-                    self.render('signup.html', error = msg)
-                elif existemail is User:
-                    msg = 'That email is already taken'
+                    self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
+                elif existemail is not None:
+                    msg = 'Error creating user, information already exists'
+                    self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
                 elif (len(password) < 8):
                     msg = 'Password must be at least 8 characters long'
-                    self.render('signup.html', error = msg)
+                    self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
                 else:
                     temp = User.register(uname, email, password, fname, lname)
-                    emailuser.put()
-                    self.render('successfulpasschange.html')
+                    temp.put()
+                    logging.error('User created')
+                    self.render('successfulsignup.html')
             else:
                 msg = 'Passwords did not match, please try again'
-                self.render('signup.html', error = msg)
+                self.render('signup.html', error = msg, fname = fname, lname = lname, uname = uname, email = email)
 
 class Onboarding(BaseHandler):
     def get(self):

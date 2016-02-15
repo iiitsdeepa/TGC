@@ -59,6 +59,7 @@ class User(db.Model):
     username = db.StringProperty(required = True)
     email = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
+    emailverified = db.BooleanProperty()
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()
