@@ -5,10 +5,75 @@
   <h1>Help Us Improve</h1>
   <h2>We want you to get the most possible out of our site</h2>
 
-  <div id='feedbackform-wrapper' class='z-index-1' value='500'>
-    <div id='formdisplay'style='height:400px'>
-      <form id='feedback-form'>
-      <input type='button' value='submit' id='esfsubmit' class='z-depth-1 dformbutton' onclick="javascript:submitFeedback();return false;">
+  <div id='feedbackform-wrapper' value='500'>
+    <div id='formdisplay'>
+      <form id='feedback-form' method='post'>
+        <div id='feedback-fs0' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>How did you find out about the site?</div>
+          <input type='radio' name='origin' value='1'>from a friend<br><br>
+          <input type='radio' name='origin' value='2'>a link from another web page<br><br>
+          <input type='radio' name='origin' value='3'>found using a search engine<br><br>
+          <input type='radio' name='origin' value='4'>launchrock, kickofflabs, unbounce, quickmvp, etc...<br><br>
+          <input type='radio' name='origin' value='5'>social media (facebook, twitter, google +, etc...)<br><br>
+          <input type='radio' name='origin' value='5'>other
+        </div> 
+        <div id='feedback-fs1' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>How likely are you to:</div>
+          <div class='feedback-fs-q'>a. Return to this website</div>
+          <input type='radio' name='return-likelihood' value='1'>very likely<br><br>
+          <input type='radio' name='return-likelihood' value='2'>somewhat likely<br><br>
+          <input type='radio' name='return-likelihood' value='3'>somewhat unlikely<br><br>
+          <input type='radio' name='return-likelihood' value='4'>not at all likely
+          <div class='feedback-fs-q'>b. Recommended this website</div>
+          <input type='radio' name='recommend-likelihood' value='1'>very likely<br><br>
+          <input type='radio' name='recommend-likelihood' value='2'>somewhat likely<br><br>
+          <input type='radio' name='recommend-likelihood' value='3'>somewhat unlikely<br><br>
+          <input type='radio' name='recommend-likelihood' value='4'>not at all likely
+        </div>
+        <div id='feedback-fs2' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>What are your top issues this election?</div>
+          <input type='checkbox' name='environment' value='1'>Environment and Science<br><br>
+          <input type='checkbox' name='criminal-justice' value='1'>Criminal Justice<br><br>
+          <input type='checkbox' name='health-care' value='1'>Health Care<br><br>
+          <input type='checkbox' name='privacy' value='1'>Privacy and Data Security<br><br>
+          <input type='checkbox' name='education' value='1'>Education<br><br>
+          <input type='checkbox' name='campaigns' value='1'>Campaign Finance and Lobbying<br><br>
+          <input type='checkbox' name='social-issues' value='1'>Social Issues<br><br>
+          <input type='checkbox' name='guns' value='1'>Gun Control<br><br>
+          <input type='checkbox' name='immigration' value='1'>Immigration<br><br>
+          <input type='checkbox' name='economy' value='1'>The Economy<br><br>
+          <input type='checkbox' name='foreign-policy' value='1'>Foreign Policy<br><br>
+          <input type='checkbox' name='terrorism' value='1'>Terrorism<br><br>
+        </div>
+        <div id='feedback-fs3' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>How would you describe the site?</div>
+          <textarea class='feedback-textarea' name='site-description' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs4' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>What did you like best about the site?</div>
+          <textarea class='feedback-textarea' name='site-like' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs5' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>What would you like to see improved?</div>
+          <textarea class='feedback-textarea' name='site-improved' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs6' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>What is your main purpose in visiting the site today?</div>
+          <textarea class='feedback-textarea' name='visit-purpose' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs7' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>Would you consider creating a free account for more content and personalized data? Why orWhy not?</div>
+          <textarea class='feedback-textarea' name='account-creation' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs8' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>How would you rate the overall user interface?</div>
+          <textarea class='feedback-textarea' name='interface-rating' rows='8'></textarea>
+        </div>
+        <div id='feedback-fs9' class='feedback-fs whiteback'>
+          <div class='feedback-fs-q'>Please provide any other commentary you have that you think would be helpful to us</div>
+          <textarea class='feedback-textarea' name='commentary' rows='8'></textarea>
+          <input type='submit'>
+        </div>     
       </form>
     </div>
     <div id='formcontrols'>
@@ -19,21 +84,32 @@
         <div id='fpi-2' class='fpi' onclick="javascript:feedbackScroll('n','2');return false;"></div>
         <div id='fpi-3' class='fpi' onclick="javascript:feedbackScroll('n','3');return false;"></div>
         <div id='fpi-4' class='fpi' onclick="javascript:feedbackScroll('n','4');return false;"></div>
+        <div id='fpi-5' class='fpi' onclick="javascript:feedbackScroll('n','5');return false;"></div>
+        <div id='fpi-6' class='fpi' onclick="javascript:feedbackScroll('n','6');return false;"></div>
+        <div id='fpi-7' class='fpi' onclick="javascript:feedbackScroll('n','7');return false;"></div>
+        <div id='fpi-8' class='fpi' onclick="javascript:feedbackScroll('n','8');return false;"></div>
+        <div id='fpi-9' class='fpi' onclick="javascript:feedbackScroll('n','9');return false;"></div>
       </div>
       <div id='form-left-button' class='form-direction' onclick="javascript:feedbackScroll('right');return false;">Next/Skip</div>
     </div>
   </div>
-        
+    <div id='back-to-top' onclick>Back To Top</div>     
 </div>
 
 <style>
+  #head{background:#162d50 !important;color:white;}
   #feedback{text-align:center;padding-top:80px;}
-  #feedbackform-wrapper{margin:50px auto;width:1000px;max-width:80vw;background:white;}
-  #formcontrols{position:relative;display:flex;justify-content:space-between;border-top:solid 1px #0E1C32;}
-  .form-direction{background:#0E1C32;color:white;padding:20px;width:100px;font-weight:bold;cursor:pointer;}
+  #feedbackform-wrapper{margin:50px auto;width:1000px;max-width:80vw;}
+  #formcontrols{position:relative;display:flex;justify-content:center;}
+  .form-direction{background:#0E1C32;color:white;padding:20px;width:100px;font-weight:bold;cursor:pointer;border-radius:500px;border:double 2px;}
   .form-direction:hover{background:#162D50;}
-  #form-position-indicator{margin:0 auto;}
-  .fpi{position:relative;display:inline-block;height:19px;width:19px;border-radius:50%;border:solid 2px #0E1C32;margin:20px 20px 0 20px;}
+  #form-position-indicator{margin:0 20px;}
+  #feedback-form{text-align:left;}
+  .fpi{position:relative;display:inline-block;height:19px;width:19px;border-radius:50%;border:solid 1px #D9D9D9;margin:20px 5px 0 5px;background:white;cursor:pointer;}
+  .feedback-fs{width:274px;padding:40px;margin:0 auto;background:white;margin-bottom:40px;display:none;border-radius:2px;}
+  .feedback-fs-q{font-size:125%;margin-bottom:40px;}
+  #feedback-fs0{display:block;}
+  .feedback-textarea{width:100%;border-radius:2px;}
 </style>
 
 <script>
@@ -41,6 +117,8 @@
   function indicatorColor(i){
     $('.fpi').each(function(index){$(this).css('background','white')})
     $('#fpi-'+i).css('background','#0E1C32')
+    $('.feedback-fs').each(function(index){$(this).css('display','none')})
+    $('#feedback-fs'+i).css('display','block')
   }
   function feedbackScroll(direction, newpos){
     if(newpos){
@@ -53,7 +131,7 @@
       if(direction == 'left'){newd = current - 1;}
       else{newd = current + 1}
       $('#feedbackform-wrapper').attr('value', newd)
-      c = newd % 5
+      c = newd % 10
       console.log(c)
       indicatorColor(c)
     }

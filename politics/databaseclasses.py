@@ -54,11 +54,11 @@ def valid_pw(name, password, h):
 
 #-------------------------Database Classes------------------------------
 class User(db.Model):
+    firstname = db.StringProperty()
+    lastname = db.StringProperty()
     username = db.StringProperty(required = True)
     email = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
-    token = db.StringProperty()
-    token_creation = db.DateTimeProperty()
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()
@@ -82,11 +82,13 @@ class User(db.Model):
         return u
 
     @classmethod
-    def register(cls, username, email, pw):
+    def register(cls, username, email, pw, fname, lname):
         pw_hash = make_pw_hash(username, pw)
         return cls( username = username,
                     email = email,
-                    pw_hash = pw_hash)
+                    pw_hash = pw_hash,
+                    firstname = fname,
+                    lastname = lname)
 
     @classmethod
     def login(cls, username, pw):
@@ -100,6 +102,31 @@ class User(db.Model):
         return cls( username = 'NONE',
                     email = 'NONE',
                     pw_hash = pw_hash)
+
+class Cookie_Info(db.Model):
+    times_visit = db.IntegerProperty(required = True)
+    signup = db.BooleanProperty(required = True)
+
+class Feed_Radio_Buttons(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    origin_val = db.IntegerProperty()
+    return_val = db.IntegerProperty()
+    recomm_val = db.IntegerProperty()
+
+class Feed_Top_Issues(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    envir_sci = db.IntegerProperty()
+    crim_just = db.IntegerProperty()
+    health = db.IntegerProperty()
+    privacy = db.IntegerProperty()
+    edu = db.IntegerProperty()
+    camp_fin_lobby = db.IntegerProperty()
+    soc_issues = db.IntegerProperty()
+    gun_cont = db.IntegerProperty()
+    immig = db.IntegerProperty()
+    econ = db.IntegerProperty()
+    for_pol = db.IntegerProperty()
+    terror = db.IntegerProperty()
 
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)

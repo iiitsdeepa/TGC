@@ -298,7 +298,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("vprop.html")
+        self.render("home.html")
     def post(self):
         self.render('vprop.html')
 
@@ -346,8 +346,36 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('feedback.html')
+        self.render('new-feedback.html')
     def post(self):
+        cookiedata = Cookie_Info(times_visit = 1, signup = False)
+        cookiedata.put()
+        cookkey = cookiedata.key()
+        cookid = cookkey.id()
+        ret = self.request.get('return-likelihood')
+        rec = self.request.get('recommend-likelihood')
+        origin = self.request.get('origin')
+        issues = [self.request.get('environment'),
+                  self.request.get('criminal-justice'),
+                  self.request.get('health-care'),
+                  self.request.get('privacy'),
+                  self.request.get('education'),
+                  self.request.get('campaigns'),
+                  self.request.get('social-issues'),
+                  self.request.get('guns'),
+                  self.request.get('immigration'),
+                  self.request.get('economy'),
+                  self.request.get('foreign-policy'),
+                  self.request.get('terrorism')]
+        for count in range(len(issues)):
+            if (issues[count] == ''):
+                issues[count] = 0
+            else:
+                issues[count] = 1
+        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), origin_val = int(origin), return_val = int(ret), recomm_val = int(rec))
+        feedradio.put()
+        feedissues = Feed_Top_Issues(cookie_id = int(cookid), envir_sci = int(issues[0]), crim_just = int(issues[1]), health = int(issues[2]), privacy = int(issues[3]), edu = int(issues[4]), camp_fin_lobby = int(issues[5]), soc_issues = int(issues[6]), gun_cont = int(issues[7]), immig = int(issues[8]), econ = int(issues[9]), for_pol = int(issues[10]), terror = int(issues[11]))
+        feedissues.put()
         self.render('feedback.html')
 
 class Vprop(BaseHandler):
@@ -514,6 +542,7 @@ class EmailReset(BaseHandler):
                 else:
                     temp = User.changepass(username, newpass)
                     emailuser.pw_hash = str(temp.pw_hash)
+                    emailuser.last_modified = datetime.now()
                     emailuser.put()
                     self.render('successfulpasschange.html')
             else:
@@ -545,14 +574,55 @@ class Signup(BaseHandler):
         self.render('presignup.html')
 
     def post(self):
-        type = self.request.get('type')
-        if type == 'keyform':
+        ty = self.request.get('type')
+        if ty == 'keyform':
             key = self.request.get('key')
             if key == 'is you is':
                 self.render('signup.html')
-        elif type == 'signupform':
-                self.render('about.html')
+        elif ty == 'signupform':
+            fname = self.request.get('firstname')
+            lname = self.request.get('lastname')
+            uname = self.request.get('username')
+            email = self.request.get('email')
+            password = self.request.get('password')
+            passconf = self.request.get('passconf')
+            if (password == passconf):
+                existuser = GqlQuery("SELECT * FROM User WHERE username = :1", uname).get()
+                existemail = GqlQuery("SELECT * FROM User WHERE email = :1", email).get()
+                if (uname == ''):
+                    msg = 'Username is a required field'
+                    self.render('signup.html', error = msg)
+                elif existuser is User:
+                    msg = 'That username is already taken'
+                    self.render('signup.html', error = msg)
+                elif (email == ''):
+                    msg = 'Email is a required field'
+                    self.render('signup.html', error = msg)
+                elif existemail is User:
+                    msg = 'That email is already taken'
+                elif (len(password) < 8):
+                    msg = 'Password must be at least 8 characters long'
+                    self.render('signup.html', error = msg)
+                else:
+                    temp = User.register(uname, email, password, fname, lname)
+                    emailuser.put()
+                    self.render('successfulpasschange.html')
+            else:
+                msg = 'Passwords did not match, please try again'
+                self.render('signup.html', error = msg)
 
+class Onboarding(BaseHandler):
+    def get(self):
+        self.render('onboarding.html')
+
+    def post(self):
+        ty = self.request.get('type')
+        if ty == 'issuelist':
+            issuelist = self.request.get('list')
+            self.render('ob-issuescroll.html')
+        elif ty =='setview':
+            uview = self.request.get('view')
+            self.render('ob-select.html')
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
@@ -561,6 +631,7 @@ application = webapp2.WSGIApplication([
     ('/emailreset', EmailReset),
     ('/login', Login),
     ('/logout', Logout),
+    ('/onboarding', Onboarding),
     ('/prop', Vprop),
     ('/feedback', Feedback),
     ('/about', About),
