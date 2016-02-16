@@ -299,7 +299,7 @@ class Landing(BaseHandler):
     def get(self):
         self.render("home.html")
     def post(self):
-        self.render('vprop.html')
+        self.render('home.html')
 
 class About(BaseHandler):
     def get(self):
@@ -345,17 +345,28 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('new-feedback.html')
+        infos = self.read_secure_cookie('feedback_info')
+        logging.error(str(infos))
+        #if infos:
+        #    info_str = str(infos)
+        #    info = info_str.split('$$$')
+        self.render('new-feedback.html')#, envir='checked=1')
     def post(self):
-        cookiedata = Cookie_Info(times_visit = 1, signup = False)
-        cookiedata.put()
-        cookkey = cookiedata.key()
-        cookid = cookkey.id()
-        ret = self.request.get('return-likelihood')
-        rec = self.request.get('recommend-likelihood')
-        origin = self.request.get('origin')
+        oldcookie = self.read_secure_cookie('feedback_info')
+        cookid = 0
+        if oldcookie:
+            temp = oldcookie.split('$$$')
+            cookid = temp[0][10:]
+        else:
+            cookiedata = Cookie_Info(times_visit = 1, signup = False)
+            cookiedata.put()
+            cookkey = cookiedata.key()
+            cookid = cookkey.id()
+        activepart = self.request.get('activepart')
+        listens = self.request.get('listens')
+        easierpart = self.request.get('easierpart')
         issues = [self.request.get('environment'),
-                  self.request.get('criminal-justice'),
+                  self.request.get('criminaljustice'),
                   self.request.get('health-care'),
                   self.request.get('privacy'),
                   self.request.get('education'),
@@ -366,16 +377,29 @@ class Feedback(BaseHandler):
                   self.request.get('economy'),
                   self.request.get('foreign-policy'),
                   self.request.get('terrorism')]
+        if activepart == '':
+            activepart = -1
+        if listens == '':
+            listens = -1
+        if easierpart == '':
+            easierpart = -1
         for count in range(len(issues)):
             if (issues[count] == ''):
                 issues[count] = 0
             else:
                 issues[count] = 1
-        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), origin_val = int(origin), return_val = int(ret), recomm_val = int(rec))
+        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), listen_val = int(listens), active_val = int(activepart), easier_val = int(easierpart))
         feedradio.put()
         feedissues = Feed_Top_Issues(cookie_id = int(cookid), envir_sci = int(issues[0]), crim_just = int(issues[1]), health = int(issues[2]), privacy = int(issues[3]), edu = int(issues[4]), camp_fin_lobby = int(issues[5]), soc_issues = int(issues[6]), gun_cont = int(issues[7]), immig = int(issues[8]), econ = int(issues[9]), for_pol = int(issues[10]), terror = int(issues[11]))
         feedissues.put()
-        self.render('feedback.html')
+        cookietext = ('cookie_id='+str(cookid)+
+                      '$$$listen_val='+str(listens)+
+                      '$$$active_val='+str(activepart)+
+                      '$$$easier_val='+str(easierpart))
+        for i in range(len(issues)):
+            cookietext += ('$$$issues-'+str(i)+'='+str(issues[i]))
+        self.set_secure_cookie('feedback_info', cookietext)
+        self.render('new-feedback.html')
 
 class Vprop(BaseHandler):
     def get(self):
