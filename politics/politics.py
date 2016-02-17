@@ -461,6 +461,8 @@ class Marketing(BaseHandler):
 
 class Login(BaseHandler):
     def get(self):
+        if self.user:
+            self.redirect('/')
         self.render('login.html')
 
     def post(self):
@@ -580,7 +582,7 @@ class Signup(BaseHandler):
         ty = self.request.get('type')
         if ty == 'keyform':
             key = self.request.get('key')
-            if key == 'is you is':
+            if key == 'nextlevel':
                 self.render('signup.html')
         elif ty == 'signupform':
             fname = self.request.get('firstname')
@@ -629,6 +631,18 @@ class Onboarding(BaseHandler):
             uview = self.request.get('view')
             self.render('ob-select.html')
 
+class Admin(BaseHandler):
+    def get(self):
+        fname = 'TGC'
+        lname = 'Admin'
+        uname = 'admin'
+        email = 'glasscapitol@gmail.com'
+        password = 'BTFUtgc925@'
+        temp = User.register(uname, email, password, fname, lname)
+        temp.put()
+        self.login(temp)
+        self.redirect('/')
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/signup', Signup),
@@ -644,6 +658,7 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateall', UpdateAll),
+    ('/admin', Admin),
     #('/up', UploadHandler),
     #('/upload', Upload),
     #('/delete', bulkdelete),
