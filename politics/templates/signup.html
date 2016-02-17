@@ -18,28 +18,28 @@
 					<td>Candidate</td>
 				</tr>
 				<tr >
-					<td>Issue 1</td>
-					<td>Yo, dis how me think</td>
-					<td class='drow'>Hilldog</td>
+					<td>Campaign Finace</td>
+					<td>There is too much money in politics</td>
+					<td class='drow'>Sanders</td>
 				</tr>
 				<tr>
 					<td>Issue 2</td>
-					<td>Yo, dis how me think</td>
+					<td>user view on issue</td>
 					<td class='drow'>Sanders</td>
 				</tr>
 				<tr>
 					<td>Issue 3</td>
-					<td>Yo, dis how me think</td>
+					<td>user view on issue</td>
 					<td class='rrow'>Rubio</td>
 				</tr>
 				<tr>
 					<td>Issue 4</td>
-					<td>Yo, dis how me think</td>
-					<td class='drow'>Sanders</td>
+					<td>user view on issue</td>
+					<td class='drow'>Hillary</td>
 				</tr>
 				<tr>
 					<td>Issue 5</td>
-					<td>Yo, dis how me think</td>
+					<td>user view on issue</td>
 					<td class='rrow'>Trump</td>
 				</tr>
 			</table>
@@ -47,17 +47,18 @@
 
 		<form id='signup-form' method='post' action='/signup'>
 			<input type='hidden' name='type' value='signupform'>
-			<h4>Name</h4>
-			<input type='text' id='firstname' name='firstname' class='small-text-input halfrow' placeholder='First Name'>
-			<input type='text' id='lastname' name='lastname' class='small-text-input halfrow' placeholder='Last Name'>
+			<div class="error">{{error}}</div>
+			<h4>Name (optional)</h4>
+			<input type='text' id='firstname' name='firstname' class='small-text-input halfrow' placeholder='First Name' value={{fname}}>
+			<input type='text' id='lastname' name='lastname' class='small-text-input halfrow' placeholder='Last Name' value={{lname}}>
 			<h4>Choose your username</h4>
-			<input type='text' id='username' name='username' class='small-text-input'>
+			<input type='text' id='username' name='username' class='small-text-input' value={{uname}}>
 			<h4>Enter your email</h4>
-			<input type='text' id='email' name='email' class='small-text-input'>
+			<input type='text' id='email' name='email' class='small-text-input' value={{email}}>
 			<h4>Pick a password</h4>
-			<input type='text' id='password' name='password' class='small-text-input'>
+			<input type='password' id='password' name='password' class='small-text-input'>
 			<h4>Confirm your password</h4>
-			<input type='text' id='passconf' name='passconf' class='small-text-input'>
+			<input type='password' id='passconf' name='passconf' class='small-text-input'>
 			<input type='submit' id='signupbutton' value='next'>
 		</form>
 	</div>
@@ -80,6 +81,7 @@
 	#us-argument h2,h3,h4{text-align:center;}
 	#temp-table{width:100%;text-align:center;}
 	#temp-table tr{height:40px;}
+	.error {color: red;margin-bottom:10px;border-radius:2px;padding-left:10px;font-size:16px;}
 	.drow{background:blue;}
 	.rrow{background:red;}
 	#signup-form{width:312px;padding:25px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}

@@ -26,18 +26,47 @@ from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 from politics import *
 
+#---------------------------User Implementation Functions--------------------------
+def make_secure_val(val):
+    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
+def check_secure_val(secure_val):
+    val = secure_val.split('|')[0]
+    if secure_val == make_secure_val(val):
+        return val
+
+def make_salt(length = 30):
+    random_bytes = os.urandom(length+2)
+    token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
+    reset_key = token[:-2]
+    logging.error(reset_key)
+    return reset_key
+
+def make_pw_hash(username, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(username + pw + salt).hexdigest()
+    return '%s,%s' % (salt, h)
+
+def valid_pw(name, password, h):
+    salt = h.split(',')[0]
+    return h == make_pw_hash(name, password, salt)
+
 #-------------------------Database Classes------------------------------
 class User(db.Model):
+    firstname = db.StringProperty()
+    lastname = db.StringProperty()
     username = db.StringProperty(required = True)
     email = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
-    token = db.StringProperty()
-    token_creation = db.DateTimeProperty()
+    emailverified = db.BooleanProperty()
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()
     created = db.DateTimeProperty(required = True, auto_now = True)
     last_modified = db.DateTimeProperty(required = True, auto_now = True)
+    reset_code = db.StringProperty()
+    reset_expr = db.DateTimeProperty()
 
     @classmethod
     def by_id(cls, uid):
@@ -54,17 +83,26 @@ class User(db.Model):
         return u
 
     @classmethod
-    def register(cls, username, email, pw):
+    def register(cls, username, email, pw, fname, lname):
         pw_hash = make_pw_hash(username, pw)
         return cls( username = username,
                     email = email,
-                    pw_hash = pw_hash)
+                    pw_hash = pw_hash,
+                    firstname = fname,
+                    lastname = lname)
 
     @classmethod
     def login(cls, username, pw):
         u = cls.by_username(username)
         if u and valid_pw(username, pw, u.pw_hash):
             return u
+
+    @classmethod
+    def changepass(cls, username, pw):
+        pw_hash = make_pw_hash(username, pw)
+        return cls( username = 'NONE',
+                    email = 'NONE',
+                    pw_hash = pw_hash)
 
 class Cookie_Info(db.Model):
     times_visit = db.IntegerProperty(required = True)
