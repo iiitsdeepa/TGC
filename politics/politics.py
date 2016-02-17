@@ -658,17 +658,10 @@ application = webapp2.WSGIApplication([
     ('/sources', Sources),
     ('/pull/polldata', PollServer),
     ('/updateall', UpdateAll),
-<<<<<<< HEAD
-    ('/up', UploadHandler),
-    ('/upload', Upload),
-    #('/delete', bulkdelete)
-    ('/marketing', Marketing)
-=======
     ('/admin', Admin),
     #('/up', UploadHandler),
     #('/upload', Upload),
     #('/delete', bulkdelete),
     ('/marketing', Marketing),
     ('/createuser', CreateUser)
->>>>>>> usersystem
 ], debug=True)
