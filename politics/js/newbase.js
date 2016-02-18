@@ -143,11 +143,21 @@ function submitSign() {
 function scrollTo(id){
   if (id){
     if(id=='top'){scrollpos = 0}else{
-    scrollpos = $("#"+id).offset().top - 20;}
+    var scrollpos = $("#"+id).offset().top - 20;}
     $('html, body').animate({
           scrollTop: scrollpos
       }, 500);
   }
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 $( document ).ready(function() {

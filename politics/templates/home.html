@@ -2,45 +2,51 @@
 
 {% block content %}
 <div id='home'>
-	<h1 id='title'>The Glass Capitol</h1>
-	<div id='opening'>
-		<img id='openimg' src='/images/fullglasscapitol.png' alt='...'>
-	</div>
-
-	<div id='home'>
-		<h1>Government transparency for the communication era</h1>
-		<h1>We make it easy for you to stay up to date and be involved</h1>
-		<h1>Together we can forge a more responsive government</h1>
-	</div>
-	<div id='issue-order-wrapper'>
-		<h3 id='formhead'>Put what matters to you on top</h3>
-		<div class='low-prom-text'>**Don't worry, you can change this list at any time</div>
-		<ul id='issue-list' class='whiteback'>
-			<li class='issue'>Environment and Science</li>
-			<li class='issue'>Criminal Justice</li>
-			<li class='issue'>Health Care</li>
-			<li class='issue'>Privacy and Data Security</li>
-			<li class='issue'>Education</li>
-			<li class='issue'>Campaign Finance and Lobbying</li>
-			<li class='issue'>Social Issues</li>
-			<li class='issue'>Gun Control</li>
-			<li class='issue'>Immigration</li>
-			<li class='issue'>The Economy</li>
-			<li class='issue'>Foreign Policy and Terrorism</li>
-		</ul>
+	<h1>We make it easy for you to stay up to date and be involved</h1>
+	<h1>Together we can forge a more responsive government</h1>
+	<div id='see-how' class='call-to-action' onclick="javascript:scrollTo('issue-order-wrapper');return false;">See how</div>
+	<div id='issue-order-wrapper' class='section'>
+		<div class='column'>
+			<h1>Prioritize the issues in this election</h1>
+			<h2>The most powerful citizen is an informed opinionated one</h2>
+		</div>
+		<div class='column'>
+			<ul id='issue-list' class='whiteback'>
+				<li class='issue'>Environment and Science</li>
+				<li class='issue'>Criminal Justice</li>
+				<li class='issue'>Health Care</li>
+				<li class='issue'>Privacy and Data Security</li>
+				<li class='issue'>Education</li>
+				<li class='issue'>Campaign Finance and Lobbying</li>
+				<li class='issue'>Social Issues</li>
+				<li class='issue'>Gun Control</li>
+				<li class='issue'>Immigration</li>
+				<li class='issue'>The Economy</li>
+				<li class='issue'>Foreign Policy and Terrorism</li>
+			</ul>
+			<a href='/prop?s=pcomp' id='pcomp-link' class='call-to-action'>Compare The Parties</a>
+			<h3>Where do or representatives stand on these issues?</h3>
+		</div>
 	</div>
 </div>
+
 <style>
-#head{display:none;}
+#head{background:white;height:auto;}
+#see-how{background:red;color:white;font-size:18px;font-weight:normal;cursor:pointer;}
+#centerpiece{width:75%;}
+#content{border-top:none;}
 #alpha-alert{display:none;}
 #home h1{margin:50px 0;text-align:center;}
 #home h2{margin:50px 0;text-align:center;}
 #openimg{display:block;margin:0 auto;width:60vw;}
-#issue-order-wrapper{margin:0 auto;width:354px;}
+.column{margin:50px 25px;}
+#issue-order-wrapper{display:flex;}
 #formhead{text-align:center;margin-bottom:20px;}
-#issue-list{list-style:none;padding:0;padding:40px;}
+#issue-list{display:block;list-style:none;padding:0;padding:40px;margin:0 0 0 calc(100% - (5vw + 374px));width:354px;}
 #issue-list li{position:relative;}
 .issue{display:block;margin:2px 0;height:25px;border-bottom:solid 1px #d9d9d9;background:white;}
+#pcomp-link{display:block;text-decoration:none;color:white;background:#57D9FF;}
+#pcomp-link:hover{background:#5CE6FF;}
 </style>
 
 <script>
