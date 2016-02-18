@@ -33,8 +33,22 @@
 				<div class='reps-container'style='margin-top:100px'>
 					<h2>The leaders of our Congress</h2>
 					<div class='{{sfthparty}} rep-wrapper'>
+						<h4>Speaker For The House</h4>
+						<img src='/images/headshots/{{sfthpic}}.png' class='rep-pic'>
+						{{sfthname}}<br>
+						in office since {{sfthfyio}}<br>
+						<a href='{{sfthwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{sfthfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sfthtwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 					<div class='{{smjparty}} rep-wrapper'>
+						<h4>Senate Majority Leader</h4>
+						<img src='/images/headshots/{{smjpic}}.png' class='rep-pic'>
+						{{smjname}}<br>
+						in office since {{smjfyio}}<br>
+						<a href='{{smswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{smsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{smstwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 				</div>
 			</div>
@@ -45,10 +59,28 @@
 				<div class='reps-container'>
 					<h2>Your Representatives</h2>
 					<div class='{{hrparty}} rep-wrapper'>
+						<img src='/images/headshots/{{hrpic}}.png' class='rep-pic'>
+						{{hrname}}<br>
+						in office since {{hrfyio}}<br>
+						<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{hrfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{hrtwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 					<div class='{{ssparty}} rep-wrapper'>
+						<img src='/images/headshots/{{sspic}}.png' class='rep-pic'>
+						{{ssname}}<br>
+						in office since {{ssfyio}}<br>
+						<a href='{{sswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{ssfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sstwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 					<div class='{{jsparty}} rep-wrapper'>
+						<img src='/images/headshots/{{jspic}}.png' class='rep-pic'>
+						{{jsname}}<br>
+						in office since {{jsfyio}}<br>
+						<a href='{{jswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{jsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{jstwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 				</div>
 			</div>
@@ -59,8 +91,22 @@
 				<div class='reps-container'>
 					<h2>The leaders of our Congress</h2>
 					<div class='{{sfthparty}} rep-wrapper'>
+						<h4>Speaker For The House</h4>
+						<img src='/images/headshots/{{sfthpic}}.png' class='rep-pic'>
+						{{sfthname}}<br>
+						in office since {{sfthfyio}}<br>
+						<a href='{{sfthwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{sfthfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sfthtwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 					<div class='{{smjparty}} rep-wrapper'>
+						<h4>Senate Majority Leader</h4>
+						<img src='/images/headshots/{{smjpic}}.png' class='rep-pic'>
+						{{smjname}}<br>
+						in office since {{smjfyio}}<br>
+						<a href='{{smswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{smsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{smstwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
 				</div>
 			</div>
@@ -147,106 +193,106 @@
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-function setState(){
-	state=$('#page-data').val()
-	if (state == 'found-district'){
-		showHide('mwh','1','0');
-	}
-}
-
-function showHideDistrictForm(){
-	if($('#found-district-mreps-wrapper').attr('value') == 'hidden'){
-		console.log('shds conditional 1')
-	  	$('#fr-form-container').css('display','none')
-	  	$('#found-district-mreps-wrapper').css('display','block')
-	  	fadeIn('found-district-mreps-wrapper')
-	  	$('#found-district-mreps-wrapper').attr('value','shown')
-  	}else{
-  		showHideAddressForm('hide')
-  		$('#found-district-mreps-wrapper').css('display','none')
-  		$('#fr-form-container').css('display','block')
-  		fadeIn('fr-form-container')
-  		$('#found-district-mreps-wrapper').attr('value','hidden')
-  	}
-}
-
-function showHideAddressForm(direction){
-	if($('#address-form-wrapper').attr('value') == 'hidden' && direction !='hide'){
-		newpos = parseFloat($('#fr-form-wrapper').position().left) - 400;
-		console.log('hidden!!!')
-	  	$('#fr-form-wrapper').animate({
-	        left: newpos
-	        }, 500);
-	  	$('#address-form-wrapper').css('display','block')
-	  	fadeIn('address-form-wrapper')
-	  	$('#address-form-wrapper').attr('value','shown')
-  	}else if($('#address-form-wrapper').attr('value') == 'shown' && direction != 'show'){
-  		newpos = parseFloat($('#fr-form-wrapper').position().left) + 400;
-  		$('#address-form-wrapper').attr('value','hidden')
-  		$('#fr-form-wrapper').css('left','calc(50% - 200px)')
-  		$('#address-form-wrapper').css('display','none')
-  	}
-}
-
-function mrepsControl(changeaddress){
-	toggle = $('#repstoggle').attr('value')
-	if(toggle == 'seereps'){ //switch to the representatives
-		district = $('#hasdistrict').attr('value')
-		if(district == 'none'){ //display address form
-			$('address-form-wrapper').css('display','block')
+	function setState(){
+		state=$('#page-data').val()
+		if (state == 'found-district'){
+			showHide('mwh','1','0');
 		}
-		$('#district-reps').css('display','flex')
-		$('#congressional-leaders').css('display','none')
-		$('#repstoggle').attr('value','seeleaders')
-		$('#repstoggle').html('See The Leaders of Congress')
-	}else{ //switch to leaders of congress
-		$('#district-reps').css('display','none')
-		$('#congressional-leaders').css('display','flex')
-		$('#repstoggle').attr('value','seereps')
-		$('#repstoggle').html('See My Representatives')
 	}
-}
 
-function useLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(gotGPS);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
-}
-function gotGPS(position) {
-	console.log('using location')
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
-    $.post('/prop', {lat: lat, lng: lng}, function(data){
-    	if(validDistrict(data)){window.location.replace("/prop?district="+data);}
-    });
-}
-function useAddress(){
-	showHideDistrictForm()
-	street = document.getElementById('address').value;
-	state = document.getElementById('state').value;
-	city = document.getElementById('city').value;
-	address = street+' '+city+' '+state
-	$.post('/prop', {address: address}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'td')
-        inputRepData(data)
-    });
-}
+	function showHideDistrictForm(){
+		if($('#found-district-mreps-wrapper').attr('value') == 'hidden'){
+			console.log('shds conditional 1')
+		  	$('#fr-form-container').css('display','none')
+		  	$('#found-district-mreps-wrapper').css('display','block')
+		  	fadeIn('found-district-mreps-wrapper')
+		  	$('#found-district-mreps-wrapper').attr('value','shown')
+	  	}else{
+	  		showHideAddressForm('hide')
+	  		$('#found-district-mreps-wrapper').css('display','none')
+	  		$('#fr-form-container').css('display','block')
+	  		fadeIn('fr-form-container')
+	  		$('#found-district-mreps-wrapper').attr('value','hidden')
+	  	}
+	}
 
-function startPosition(){
-	section = getParameterByName('s')
-	if (!section) {section = 'mreps';}
-	scroller(section, 'section')
-}
+	function showHideAddressForm(direction){
+		if($('#address-form-wrapper').attr('value') == 'hidden' && direction !='hide'){
+			newpos = parseFloat($('#fr-form-wrapper').position().left) - 400;
+			console.log('hidden!!!')
+		  	$('#fr-form-wrapper').animate({
+		        left: newpos
+		        }, 500);
+		  	$('#address-form-wrapper').css('display','block')
+		  	fadeIn('address-form-wrapper')
+		  	$('#address-form-wrapper').attr('value','shown')
+	  	}else if($('#address-form-wrapper').attr('value') == 'shown' && direction != 'show'){
+	  		newpos = parseFloat($('#fr-form-wrapper').position().left) + 400;
+	  		$('#address-form-wrapper').attr('value','hidden')
+	  		$('#fr-form-wrapper').css('left','calc(50% - 200px)')
+	  		$('#address-form-wrapper').css('display','none')
+	  	}
+	}
 
-$( document ).ready(function() {
-	setState()
-    startPosition()
-});
+	function mrepsControl(changeaddress){
+		toggle = $('#repstoggle').attr('value')
+		if(toggle == 'seereps'){ //switch to the representatives
+			district = $('#hasdistrict').attr('value')
+			if(district == 'none'){ //display address form
+				$('address-form-wrapper').css('display','block')
+			}
+			$('#district-reps').css('display','flex')
+			$('#congressional-leaders').css('display','none')
+			$('#repstoggle').attr('value','seeleaders')
+			$('#repstoggle').html('See The Leaders of Congress')
+		}else{ //switch to leaders of congress
+			$('#district-reps').css('display','none')
+			$('#congressional-leaders').css('display','flex')
+			$('#repstoggle').attr('value','seereps')
+			$('#repstoggle').html('See My Representatives')
+		}
+	}
+
+	function useLocation() {
+	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(gotGPS);
+	    } else {
+	        console.log("Geolocation is not supported by this browser.");
+	    }
+	}
+	function gotGPS(position) {
+		console.log('using location')
+	    lat = position.coords.latitude;
+	    lng = position.coords.longitude;
+	    $.post('/prop', {lat: lat, lng: lng}, function(data){
+	    	if(validDistrict(data)){window.location.replace("/prop?district="+data);}
+	    });
+	}
+	function useAddress(){
+		showHideDistrictForm()
+		street = document.getElementById('address').value;
+		state = document.getElementById('state').value;
+		city = document.getElementById('city').value;
+		address = street+' '+city+' '+state
+		$.post('/prop', {address: address}, function(data){
+	    	j = JSON.parse(data)
+	    	$('#reps_slider').attr('value', j.district)
+	    	$('#js_wrapper').css('display', 'block')
+	    	$('.jsstat').css('display', 'td')
+	        inputRepData(data)
+	    });
+	}
+
+	function startPosition(){
+		section = getParameterByName('s')
+		if (!section) {section = 'mreps';}
+		scroller(section, 'section')
+	}
+
+	$( document ).ready(function() {
+		setState()
+	    startPosition()
+	});
 
 </script>
 
@@ -270,7 +316,11 @@ $( document ).ready(function() {
 #show-leaders-link{width:200px;margin:0 auto;text-align:center;}
 .reps-container{display:flex;justify-content:center;flex-wrap:wrap;}
 .reps-container h2{width:100%;text-align:center;margin-top:40px;}
-.rep-wrapper{margin:40px;width:250px;height:300px;}
+.rep-wrapper{margin:40px;width:250px;height:300px;padding:20px;text-align:center;}
+.rep-wrapper h4{text-align:center;}
+.rep-pic{position:relative;display:block;margin:0 auto;background:blue;width:50%;border-radius:50%;}
+.rep-link{text-decoration:none;cursor:pointer;color:white;}
+.rep-link:visited{color:white;}
 /*Desktop*/
 @media screen and (min-width: 966px){
 
@@ -313,7 +363,6 @@ $( document ).ready(function() {
 	.rep-header-wrapper{position:relative;height:46.4%;}
 	.rep-header-wrapper h4{width:100%;text-align:center;}
 	.rep-header{position:absolute;height:70%;top:50%;left:50%;transform:translate(-50%,-50%);min-width:50%;}
-	.rep-pic{position:relative;margin:0 auto;background:blue;height:80%;width:70%;border-radius:50%;}
 	.rep-title{position:relative;padding:5px 10px;border-radius:2px;border:solid 1px #D9D9D9;}
 	.rep-stats{height:35.7%;}
 	.rep-stats table{height:100%;margin:0 auto;}

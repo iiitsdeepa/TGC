@@ -186,7 +186,7 @@ class BaseHandler(webapp2.RequestHandler):
         logging.error(state)
         logging.error(district)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('None', '')
+        name = rep.name.replace('_', ' ')
         hr = dict(hrbioguideid = rep.bioguide_id,
                 hrpic = state+'_'+district,
                 hrstate = rep.state,
@@ -197,7 +197,8 @@ class BaseHandler(webapp2.RequestHandler):
                 hrparty = rep.party,
                 hrfyio = rep.fyio,
                 hrfbid = rep.facebook_id,
-                hrtwid = rep.twitter_id,)
+                hrtwid = rep.twitter_id,
+                hrwebsite = rep.website)
         return hr
 
     def getSs(self, dist):
@@ -206,7 +207,7 @@ class BaseHandler(webapp2.RequestHandler):
         msg = 'SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'S\'' %(state)
         logging.error(msg)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
-        name = rep.name.replace('None', '')
+        name = rep.name.replace('_', ' ')
         ss = dict(ssbioguideid = rep.bioguide_id,
                 sspic = state+'_SS',
                 ssstate = rep.state,
@@ -217,6 +218,7 @@ class BaseHandler(webapp2.RequestHandler):
                 ssfyio = rep.fyio,
                 ssfbid = rep.facebook_id,
                 sstwid = rep.twitter_id,
+                sswebsite = rep.website
                 )
         return ss
 
@@ -225,7 +227,7 @@ class BaseHandler(webapp2.RequestHandler):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
-        name = rep.name.replace('None', '')
+        name = rep.name.replace('_', ' ')
         js = dict(jsbioguideid = rep.bioguide_id,
                 jspic = state+'_JS',
                 jsstate = rep.state,
@@ -236,42 +238,44 @@ class BaseHandler(webapp2.RequestHandler):
                 jsfyio = rep.fyio,
                 jsfbid = rep.facebook_id,
                 jstwid = rep.twitter_id,
+                jswebsite = rep.website
                 )
         return js
 
     def getSfth(self,dist):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
-        logging.error(state)
-        logging.error(district)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('None', '')
+        name = rep.name.replace('_', ' ').replace('None','')
         hr = dict(sfthbioguideid = rep.bioguide_id,
                 sfthpic = state+'_'+district,
                 sfthstate = rep.state,
                 sfthdistrict = rep.distrank,
-                sfthname = name.replace('_', ' '),
+                sfthname = name,
                 sfthgender = rep.gender,
                 sfthparty = rep.party,
                 sfthfyio = rep.fyio,
                 sfthfbid = rep.facebook_id,
-                sfthtwid = rep.twitter_id,)
+                sfthtwid = rep.twitter_id,
+                sfthwebsite = rep.website
+                )
         return hr
 
     def getSmj(self,dist):
         state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
-        name = rep.name.replace('None', '')
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
+        name = rep.name.replace('_', ' ').replace('NONE', '')
         js = dict(smjbioguideid = rep.bioguide_id,
-                smjpic = state+'_JS',
+                smjpic = state+'_SS',
                 smjstate = rep.state,
-                smjrank = 'J',
-                smjname = name.replace('_', ' '),
+                smjrank = 'S',
+                smjname = name,
                 smjgender = rep.gender,
                 smjparty = rep.party,
                 smjfyio = rep.fyio,
                 smjfbid = rep.facebook_id,
                 smjtwid = rep.twitter_id,
+                smjwebsite = rep.website
                 )
         return js
 
@@ -423,6 +427,7 @@ class Vprop(BaseHandler):
             logging.error(params)
             self.render('interactives.html',PAGESTATE='found-district', **params)
         else:
+            logging.error('WHY T F IS THIS HAPPENING')
             params = self.getBig2()
             self.render('interactives.html', **params)
 
