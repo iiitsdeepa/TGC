@@ -22,12 +22,12 @@
 					<div id='address-form-wrapper' class='fr-form' value='hidden'>
 						<form method='post' name='address-form' id='address-form' onsubmit="javascript:handleZip();return false;">
 							<div id='address-form-inputs'>
-					  			<input id='address' class='small-text-input' type="text" name="address" placeholder='Street Address' style='width:275px'><br>
-					  			<input id='city' class='small-text-input' type="text" name="city" placeholder='City' style='width:130px;margin-bottom:0'>
-					  			<input id='state' class='small-text-input' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:130px;margin-bottom:0'>
-				  			</div>
-				  			<div id='use-address-go' class='redbutton' value='Submit' onclick="javascript:useAddress();return false;">Go -></div>
-				  		</form>
+								<input id='address' class='small-text-input' type="text" name="address" placeholder='Street Address' style='width:275px'><br>
+								<input id='city' class='small-text-input' type="text" name="city" placeholder='City' style='width:130px;margin-bottom:0'>
+								<input id='state' class='small-text-input' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:130px;margin-bottom:0'>
+							</div>
+							<div id='use-address-go' class='redbutton' value='Submit' onclick="javascript:useAddress();return false;">Go -></div>
+						</form>
 					</div>
 				</div>
 				<div class='reps-container'style='margin-top:100px'>
@@ -114,50 +114,115 @@
 	</div>
 
 	<div id='pcomp' class='section'>
+		<input type='hidden' id='issuelist-init' value='{{issuelist}}'>
 		<h1>Democrats Vs. Republicans</h1>
-		<h2>Which party stands for your values?</h2>
-				<table id='pcomp-table'>
-					<tr>
-						<td></td>
-						<td>The Democrats</td>
-						<td>The Republicans</td>
-					</tr>
-					<tr>
-						<td>The Economy</td>
-						<td class='pcomp-table-dem'>Democrats believe that we must raise the minimum wage and index it to inflation. We will continue to fight for equal pay for equal work to prepare more students for college.</td>
-						<td class='pcomp-table-repub'>The best jobs program is economic growth. Republicans will pursue free market policies that are the surest way to boost employment and create job growth and economic prosperity for all.</td>
-					</tr>
-					<tr>
-						<td>The Environment</td>
-						<td class='pcomp-table-dem'>Democrats are committed to protecting our natural resources while creating jobs, preserving habitats, and ensuring that future generations can enjoy our nation's outdoor heritage.</td>
-						<td class='pcomp-table-repub'>The environment is getting cleaner and healthier. Private ownership has been our best guarantee of conscientious stewardship. The worst instances of environmental degradation have occurred under government control.</td>
-					</tr>
-					<tr>
-						<td>Criminal Justice</td>
-						<td class='pcomp-table-dem'>We will continue to fight inequalities in our criminal justice system. We believe that the death penalty must not be arbitrary. The administration of justice should be fair and impartial.</td>
-						<td class='pcomp-table-repub'>Liberals do not understand this simple axiom: criminals behind bars cannot harm the general public. Courts should have the option of imposing the death penalty in capital murder cases.</td>
-					</tr>
-					<tr>
-						<td>Health Care</td>
-						<td class='pcomp-table-dem'> We believe accessible, affordable, high quality health care is part of the American promise, that Americans should have the security that comes with good health care, and that no one should go broke because they get sick.</td>
-						<td class='pcomp-table-repub'>In healthcare, genuine competition is the best guarantee of better care at lower cost. It is also the best guard against the fraud and abuse that have plagued Medicare in its isolation from free market forces, which in turn costs the taxpayers billions of dollars every year.</td>
-					</tr>
-					<tr>
-						<td>Privacy and Data Security</td>
-						<td class='pcomp-table-dem'>The Democratic Party is vigorously protecting U.S. intellectual property—our technology and creativity to support efforts by all parties to minimize infringement while supporting the free flow of information.</td>
-						<td class='pcomp-table-repub'>The Internet has unleashed innovation, enabled growth, and inspired freedom more rapidly and extensively than any other technological advance in human history.  We will remove regulatory barriers that protect outdated technologies and business plans from innovation and competition, as they become crucial components of the Internet ecosystem.</td>
-					</tr>
-					<tr>
-						<td>Education</td>
-						<td class='pcomp-table-dem'>Public education is one of our critical democratic institutions. We are committed to ensuring that every child in America has access to a world-class public education so we can out-educate the world and make sure America has the world's highest proportion of college graduates by 2020.</td>
-						<td class='pcomp-table-repub'>It is our responsibility to ensure that our children receive a world-class education that maximizes their potential. The Republican Party believes that every child should have an equal opportunity to get a great education—regardless of its zip code or its parents’ income.</td>
-					</tr>	
-					<tr>
-						<td>Civil Rights</td>
-						<td class='pcomp-table-dem'>We believe in an America where everybody gets a fair shot and everybody plays by the same set of rules. At the core of the Democratic Party is the principle that no one should face discrimination.</td>
-						<td class='pcomp-table-repub'>To those who stand in the darkness of tyranny, America has always been a beacon of hope, and so it must remain.</td>
-					</tr>						
-				</table>
+		<div id='topics' value='49'>
+			<div id='topic-0' class='topic'>
+				<div id='issuetext-0' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('0','topic','left','flex');return false;"></div>
+					<div class='issuetext'>The Economy</div>
+					<div class='triangle-right' onclick="javascript:slider('0','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Democrats believe that we must raise the minimum wage and index it to inflation. We will continue to fight for equal pay for equal work to prepare more students for college.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The best jobs program is economic growth. Republicans will pursue free market policies that are the surest way to boost employment and create job growth and economic prosperity for all.
+				</div>
+			</div>
+			<div id='topic-1' class='topic'>
+				<div id='issuetext-1' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('1','topic','left','flex');return false;"></div>
+					<div class='issuetext'>The Environment</div>
+					<div class='triangle-right' onclick="javascript:slider('1','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Democrats are committed to protecting our natural resources while creating jobs, preserving habitats, and ensuring that future generations can enjoy our nation's oudivoor heritage.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The environment is getting cleaner and healthier. Private ownership has been our best guarantee of conscientious stewardship. The worst instances of environmental degradation have occurred under government condivol.
+				</div>
+			</div>
+			<div id='topic-2' class='topic'>
+				<div id='issuetext-2' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('2','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Criminal Justice</div>
+					<div class='triangle-right' onclick="javascript:slider('2','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We will continue to fight inequalities in our criminal justice system. We believe that the death penalty must not be arbitrary. The administration of justice should be fair and impartial.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					Liberals do not understand this simple axiom: criminals behind bars cannot harm the general public. Courts should have the option of imposing the death penalty in capital murder cases.
+				</div>
+			</div>
+			<div id='topic-3' class='topic'>
+				<div id='issuetext-3' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('3','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Healthcare</div>
+					<div class='triangle-right' onclick="javascript:slider('3','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We believe accessible, affordable, high quality health care is part of the American promise, that Americans should have the security that comes with good health care, and that no one should go broke because they get sick.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					In healthcare, genuine competition is the best guarantee of better care at lower cost. It is also the best guard against the fraud and abuse that have plagued Medicare in its isolation from free market forces, which in turn costs the taxpayers billions of dollars every year.
+				</div>
+			</div>
+			<div id='topic-4' class='topic'>
+				<div id='issuetext-4' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('4','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Privacy and Data Security</div>
+					<div class='triangle-right' onclick="javascript:slider('4','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					The Democratic Party is vigorously protecting U.S. intellectual property—our technology and creativity to support efforts by all parties to minimize infringement while supporting the free flow of information.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The Internet has unleashed innovation, enabled growth, and inspired freedom more rapidly and extensively than any other technological advance in human history.  We will remove regulatory barriers that protect oudivated technologies and business plans from innovation and competition, as they become crucial components of the Internet ecosystem.
+				</div>
+			</div>
+			<div id='topic-5' class='topic'>
+				<div id='issuetext-5' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('5','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Education</div>
+					<div class='triangle-right' onclick="javascript:slider('5','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Public education is one of our critical democratic institutions. We are committed to ensuring that every child in America has access to a world-class public education so we can out-educate the world and make sure America has the world's highest proportion of college graduates by 2020.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					It is our responsibility to ensure that our children receive a world-class education that maximizes their potential. The Republican Party believes that every child should have an equal opportunity to get a great education—regardless of its zip code or its parents’ income.
+				</div>
+			</div>	
+			<div id='topic-6' class='topic'>
+				<div id='issuetext-6' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('6','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Civil Rights</div>
+					<div class='triangle-right' onclick="javascript:slider('6','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We believe in an America where everybody gets a fair shot and everybody plays by the same set of rules. At the core of the Democratic Party is the principle that no one should face discrimination.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					To those who stand in the darkness of tyranny, America has always been a beacon of hope, and so it must remain.
+				</div>
+			</div>						
+		</div>
 	</div>
 
 	<div id='polls' class='section'>
@@ -200,38 +265,39 @@
 		}
 	}
 
+
 	function showHideDistrictForm(){
 		if($('#found-district-mreps-wrapper').attr('value') == 'hidden'){
 			console.log('shds conditional 1')
-		  	$('#fr-form-container').css('display','none')
-		  	$('#found-district-mreps-wrapper').css('display','block')
-		  	fadeIn('found-district-mreps-wrapper')
-		  	$('#found-district-mreps-wrapper').attr('value','shown')
-	  	}else{
-	  		showHideAddressForm('hide')
-	  		$('#found-district-mreps-wrapper').css('display','none')
-	  		$('#fr-form-container').css('display','block')
-	  		fadeIn('fr-form-container')
-	  		$('#found-district-mreps-wrapper').attr('value','hidden')
-	  	}
+			$('#fr-form-container').css('display','none')
+			$('#found-district-mreps-wrapper').css('display','block')
+			fadeIn('found-district-mreps-wrapper','block')
+			$('#found-district-mreps-wrapper').attr('value','shown')
+		}else{
+			showHideAddressForm('hide')
+			$('#found-district-mreps-wrapper').css('display','none')
+			$('#fr-form-container').css('display','block')
+			fadeIn('fr-form-container','block')
+			$('#found-district-mreps-wrapper').attr('value','hidden')
+		}
 	}
 
 	function showHideAddressForm(direction){
 		if($('#address-form-wrapper').attr('value') == 'hidden' && direction !='hide'){
 			newpos = parseFloat($('#fr-form-wrapper').position().left) - 400;
 			console.log('hidden!!!')
-		  	$('#fr-form-wrapper').animate({
-		        left: newpos
-		        }, 500);
-		  	$('#address-form-wrapper').css('display','block')
-		  	fadeIn('address-form-wrapper')
-		  	$('#address-form-wrapper').attr('value','shown')
-	  	}else if($('#address-form-wrapper').attr('value') == 'shown' && direction != 'show'){
-	  		newpos = parseFloat($('#fr-form-wrapper').position().left) + 400;
-	  		$('#address-form-wrapper').attr('value','hidden')
-	  		$('#fr-form-wrapper').css('left','calc(50% - 200px)')
-	  		$('#address-form-wrapper').css('display','none')
-	  	}
+			$('#fr-form-wrapper').animate({
+				left: newpos
+				}, 500);
+			$('#address-form-wrapper').css('display','block')
+			fadeIn('address-form-wrapper','block')
+			$('#address-form-wrapper').attr('value','shown')
+		}else if($('#address-form-wrapper').attr('value') == 'shown' && direction != 'show'){
+			newpos = parseFloat($('#fr-form-wrapper').position().left) + 400;
+			$('#address-form-wrapper').attr('value','hidden')
+			$('#fr-form-wrapper').css('left','calc(50% - 200px)')
+			$('#address-form-wrapper').css('display','none')
+		}
 	}
 
 	function mrepsControl(changeaddress){
@@ -254,19 +320,19 @@
 	}
 
 	function useLocation() {
-	    if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(gotGPS);
-	    } else {
-	        console.log("Geolocation is not supported by this browser.");
-	    }
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(gotGPS);
+		} else {
+			console.log("Geolocation is not supported by this browser.");
+		}
 	}
 	function gotGPS(position) {
 		console.log('using location')
-	    lat = position.coords.latitude;
-	    lng = position.coords.longitude;
-	    $.post('/prop', {lat: lat, lng: lng}, function(data){
-	    	if(validDistrict(data)){window.location.replace("/prop?district="+data);}
-	    });
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		$.post('/prop', {lat: lat, lng: lng}, function(data){
+			if(validDistrict(data)){window.location.replace("/prop?district="+data);}
+		});
 	}
 	function useAddress(){
 		showHideDistrictForm()
@@ -275,12 +341,12 @@
 		city = document.getElementById('city').value;
 		address = street+' '+city+' '+state
 		$.post('/prop', {address: address}, function(data){
-	    	j = JSON.parse(data)
-	    	$('#reps_slider').attr('value', j.district)
-	    	$('#js_wrapper').css('display', 'block')
-	    	$('.jsstat').css('display', 'td')
-	        inputRepData(data)
-	    });
+			j = JSON.parse(data)
+			$('#reps_slider').attr('value', j.district)
+			$('#js_wrapper').css('display', 'block')
+			$('.jsstat').css('display', 'td')
+			inputRepData(data)
+		});
 	}
 
 	function startPosition(){
@@ -291,7 +357,8 @@
 
 	$( document ).ready(function() {
 		setState()
-	    startPosition()
+		startPosition()
+		slider(1,'topic','','flex')
 	});
 
 </script>
@@ -321,10 +388,14 @@
 .rep-pic{position:relative;display:block;margin:0 auto;background:blue;width:50%;border-radius:50%;}
 .rep-link{text-decoration:none;cursor:pointer;color:white;}
 .rep-link:visited{color:white;}
+#topics{position:relative;}
+.topic{position:relative;display:flex;justify-content:center;margin:50px 0;flex-wrap:wrap;}
+.issuetext-wrapper{display:flex;justify-content:center;line-height:50px;width:100%;text-align:center;font-size:36px;margin-bottom:50px;}
+.issuetext{margin:0 50px;}
+.issue-cell{width:250px;margin:0 25px;position:relative;padding:10px;}
+.issue-cell h3{text-align:center;margin-bottom:20px;}
 /*Desktop*/
 @media screen and (min-width: 966px){
-
-
 
 	.section{position:relative;padding:50px 5vw 50px 5vw;}
 	.interactive-ui{position:relative;margin:50px 0;width:90vw;height:70vh;}
@@ -351,14 +422,8 @@
 	#pcomp-search{position:relative;width:23.6%;height:50px;line-height:50px;text-align:center;color:white;background:darkred;z-index:5}
 	#party-table-wrapper{padding-top:0;}
 	#pcomp-suggestions{position:absolute;left:0;bottom:14.5%;width:18.2%;height:52.9%;}
-	#pcomp-display{position:absolute;top:0;right:14.5%;width:67.3%;height:85.5%;z-index: 1;}
 	#pcomp-party-headers{height:23.5%;}
 	.party-header{float:left;width:calc(50% - 2px);margin:1px;height:calc(100% - 2px);text-align:center;}
-	#pcomp-table{margin-top:50px;width:75vw;}
-	#pcomp-table td{padding:10px;}
-	.pcomp-table-issue{width:29.7%;}
-	.pcomp-table-dem{background:#162d50;color:white;}
-	.pcomp-table-repub{background:#A30000;color:white;}
 	#pcomp-social{position:absolute;bottom:0;left:0;width:85.5%;height:10%;padding-top:4.5%;}
 	.rep-header-wrapper{position:relative;height:46.4%;}
 	.rep-header-wrapper h4{width:100%;text-align:center;}

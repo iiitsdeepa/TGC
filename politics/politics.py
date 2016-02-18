@@ -342,7 +342,7 @@ class Landing(BaseHandler):
     def get(self):
         self.render("home.html")
     def post(self):
-        self.render('vprop.html')
+        self.render('home.html')
 
 class About(BaseHandler):
     def get(self):
@@ -432,18 +432,22 @@ class Vprop(BaseHandler):
             self.render('interactives.html', **params)
 
     def post(self):
+        issuelist = self.request.get('issuelist')
         district = self.request.get('district')
         address = self.request.get('address')
         lat = self.request.get('lat')
         lng = self.request.get('lng')
-        if lat and lng:
-            logging.error('+++++++++++++++++++ 4')
+        if issuelist:
+            logging.error('+++++++++++++++++++ HERE')
+            logging.error(issuelist)
+            params = self.getBig2()
+            #params['issuelist'] = issuelist
+            self.render('interactives.html', issuelist=issuelist, **params)
+        elif lat and lng:
             district = self.latlngToDistrict(lat, lng)
             logging.error(district)
             self.write(district)
         else:
-            logging.error('+++++++++++++++++++ 2')
-            params = self.getBig2()
             params = self.getBig2()
             self.render('interactives.html', **params)
 

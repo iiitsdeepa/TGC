@@ -28,8 +28,12 @@ input{padding:0;border:none;}
 .redbutton{background:darkred;border-radius:500px;cursor:pointer;color:white;}
 .redbutton:hover{background:#A23333;}
 .togglebutton{width:275px;height:50px;line-height:50px;cursor:pointer;text-align:center;color:white;font-size:18px;border-radius:2px;}
+.leftarrow-block{position:absolute;top:0;left:0;width:50px;height:100%;background:lavender;z-index:10;}
+.rightarrow-block{position:absolute;top:0;right:0;width:50px;height:100%;background:lavender;z-index:10;}
 .triangle-left{width: 0;height: 0;border-top: 30px solid transparent;border-right: 50px solid darkred;border-bottom: 30px solid transparent;}
 .triangle-right {width: 0;height: 0;border-top: 30px solid transparent;border-left: 50px solid darkred;border-bottom: 30px solid transparent;}
+.triangle-left:hover{border-right:50px solid #A30000;}
+.triangle-right:hover{border-left:50px solid #A30000;}
 .whiteback{background:white;border:solid 1px #d9d9d9;border-radius:2px;}
 .alert{display:block;background:#57D9FF;color:white;text-align:center;height:34px;line-height:34px;cursor:pointer;color:white;text-decoration:none;}
 .alert:hover{background:#5CE6FF;text-decoration:none;color:white;}

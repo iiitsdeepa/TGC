@@ -15,8 +15,8 @@ function rightEntry(id){
         }, 150);
 }
 
-function fadeIn(id){
-  $('#'+id).css('display','block')
+function fadeIn(id,display){
+  $('#'+id).css('display',display)
   $('#'+id).css('opacity','0')
   $('#'+id).animate({
         opacity: "1"
@@ -28,7 +28,22 @@ function scroller(id,classname){
     $(this).css('display','none')
   })
   $('#'+id).css('display','block')
-  fadeIn(id)
+  fadeIn(id, 'block')
+}
+
+function slider(index, classname, direction,display){
+  var num = 0;
+  $('.'+classname).each(function(index){
+    $(this).css('display','none')
+    num = num + 1;
+  });
+  var curr = $('#'+classname+'s').attr('value')
+  var next
+  if (direction=='left'){next = (parseInt(curr)- 1) % num}
+  else if (direction == 'right'){ next = (parseInt(curr) + 1) % num}
+  else {next = parseInt(curr) % num}
+  $('#'+classname+'s').attr('value',(next+(num * 100)))
+  fadeIn(classname+'-'+next,display)
 }
 
 function showHide(classname, index, hide){

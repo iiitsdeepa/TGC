@@ -11,20 +11,23 @@
 			<h2>The most powerful citizen is an informed opinionated one</h2>
 		</div>
 		<div class='column'>
-			<ul id='issue-list' class='whiteback'>
-				<li class='issue'>Environment and Science</li>
-				<li class='issue'>Criminal Justice</li>
-				<li class='issue'>Health Care</li>
-				<li class='issue'>Privacy and Data Security</li>
-				<li class='issue'>Education</li>
-				<li class='issue'>Campaign Finance and Lobbying</li>
-				<li class='issue'>Social Issues</li>
-				<li class='issue'>Gun Control</li>
-				<li class='issue'>Immigration</li>
-				<li class='issue'>The Economy</li>
-				<li class='issue'>Foreign Policy and Terrorism</li>
+			<ul id='issues' class='whiteback' value='1'>
+				<li id='issue-1' class='issue'>Campaign Finance and Lobbying</li>
+				<li id='issue-2' class='issue'>Privacy and Data Security</li>
+				<li id='issue-3' class='issue'>The Economy</li>
+				<li id='issue-4' class='issue'>Environment and Science</li>
+				<li id='issue-5' class='issue'>Criminal Justice</li>
+				<li id='issue-6' class='issue'>Immigration</li>
+				<li id='issue-9' class='issue'>Education</li>
+				<li id='issue-10' class='issue'>Foreign Policy and Terrorism</li>
+				<li id='issue-11' class='issue'>Health Care</li>
+				<li id='issue-12' class='issue'>Social Issues</li>
+				<li id='issue-13' class='issue'>Guns</li>
 			</ul>
-			<a href='/prop?s=pcomp' id='pcomp-link' class='call-to-action'>Compare The Parties</a>
+			<div id='pcomp-link' type='submit' class='call-to-action' onclick="javascript:saveIssues();return false;">Compare The Parties</div>
+			<form id='issue-list-form' method='post' action='/prop?s=pcomp'>
+				<input type='hidden' id='issuelist-init' name='issuelist' value='WTF IS HAPPENING'>
+			</form>
 			<h3>Where do or representatives stand on these issues?</h3>
 		</div>
 	</div>
@@ -42,18 +45,34 @@
 .column{margin:50px 25px;}
 #issue-order-wrapper{display:flex;}
 #formhead{text-align:center;margin-bottom:20px;}
-#issue-list{display:block;list-style:none;padding:0;padding:40px;margin:0 0 0 calc(100% - (5vw + 374px));width:354px;}
-#issue-list li{position:relative;}
+#issues{display:block;list-style:none;padding:0;padding:40px;margin:0 0 0 calc(100% - (5vw + 374px));width:354px;}
+#issues li{position:relative;}
 .issue{display:block;margin:2px 0;height:25px;border-bottom:solid 1px #d9d9d9;background:white;}
 #pcomp-link{display:block;text-decoration:none;color:white;background:#57D9FF;}
 #pcomp-link:hover{background:#5CE6FF;}
 </style>
 
 <script>
+function saveIssues(){
+	console.log('generating list')
+	issuelist = ''
+	$('#issue-list li').each(function(index){
+		current_issue = $(this).attr('id').split('-')[1]
+		if (index != '12'){
+			issuelist = issuelist + current_issue + '$$$'
+		} else{
+			issuelist = issuelist + current_issue
+		}
+	})
+	console.log($('#issuelist-init').attr('value', issuelist))
+	document.getElementById("issue-list-form").submit();
+}
+
 $(function(){
 	setTimeout(function(){rightEntry('alpha-alert')}, 400);
 	$( "#issue-list" ).sortable();
 	$( "#issue-list" ).disableSelection();
+	$('#issue-list li').attr('onclick',"javascript:saveIssues()")
 });
 </script>
 {% endblock %}
