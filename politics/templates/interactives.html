@@ -1,6 +1,7 @@
 {% extends "newbase.html" %}
 
 {% block content %}
+<input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('mreps', 'section');return false;">My Legislators</div>
 	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('pcomp','section');return false;">Party Comparison</div>
@@ -31,35 +32,35 @@
 				</div>
 				<div class='reps-container'style='margin-top:100px'>
 					<h2>The leaders of our Congress</h2>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{sfthparty}} rep-wrapper'>
 					</div>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{smjparty}} rep-wrapper'>
 					</div>
 				</div>
 			</div>
 			<div id='found-district-mreps-wrapper' class='mwh fdw' value='district-reps'>
-				<h1>Kentucky's 3rd District</h1>
+				<h1>{{hrstatename}} District {{hrdistrict}}</h1>
 				<div id='show-leaders-link' class='redlink' onclick="javascript:showHide('mwh','2','1');return false;">Show Congressional Leaders</div>
 				<div id='change-district' class='redlink' onclick="javascript:showHide('mwh','0','1');return false;">Change District</div>
 				<div class='reps-container'>
 					<h2>Your Representatives</h2>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{hrparty}} rep-wrapper'>
 					</div>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{ssparty}} rep-wrapper'>
 					</div>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{jsparty}} rep-wrapper'>
 					</div>
 				</div>
 			</div>
 			<div id='found-district-leaders-wrapper' class='mwh fdw' value='congressional-leaders'>
 				<h1>These are the leaders of our Congress</h1>
-				<div id='show-leaders-link' class='redlink' onclick="javascript:showHide('mwh','1','1');return false;">Show USER_DISTRICT's reps</div>
+				<div id='show-leaders-link' class='redlink' onclick="javascript:showHide('mwh','1','1');return false;">{{hrstatename}} District {{hrdistrict}}</div>
 				<div id='change-district' class='redlink' onclick="javascript:showHide('mwh','0','1');return false;">Change District</div>
 				<div class='reps-container'>
 					<h2>The leaders of our Congress</h2>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{sfthparty}} rep-wrapper'>
 					</div>
-					<div class='rep-wrapper whiteback'>
+					<div class='{{smjparty}} rep-wrapper'>
 					</div>
 				</div>
 			</div>
@@ -146,6 +147,13 @@
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
+function setState(){
+	state=$('#page-data').val()
+	if (state == 'found-district'){
+		showHide('mwh','1','0');
+	}
+}
+
 function showHideDistrictForm(){
 	if($('#found-district-mreps-wrapper').attr('value') == 'hidden'){
 		console.log('shds conditional 1')
@@ -199,47 +207,19 @@ function mrepsControl(changeaddress){
 	}
 }
 
-function inputRepData(data){
-	console.log(data)
-	j = JSON.parse(data)
-	if(j.district){
-		$('#hasdistrict').attr('value',j.district)
-		$('#address-form-wrapper').css('display','none')
-	}
-	if ($('#reps_slider').attr('value') == 'leaders'){
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	else {
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.hrpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.sspic+'.png)')
-		$('#jspic').css('background', 'url(/images/headshots/'+j.jspic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	//update names
-	$('#hrname').html(j.hrname)
-	$('#ssname').html(j.ssname)
-	$('#jsname').html(j.jsname)
-	//update ployalty
-	$('#ployalty .hrstat').html(j.hrployalty+'%')
-	$('#ployalty .ssstat').html(j.ssployalty+'%')
-	$('#ployalty .jsstat').html(j.jsployalty+'%')
-}
 function useLocation() {
-	showHide('mwh','1','1')
-	console.log('using location')
-    navigator.geolocation.getCurrentPosition(gotGPS);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(gotGPS);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
 }
 function gotGPS(position) {
+	console.log('using location')
     lat = position.coords.latitude;
     lng = position.coords.longitude;
     $.post('/prop', {lat: lat, lng: lng}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'block')
-        inputRepData(data)
+    	if(validDistrict(data)){window.location.replace("/prop?district="+data);}
     });
 }
 function useAddress(){
@@ -264,10 +244,8 @@ function startPosition(){
 }
 
 $( document ).ready(function() {
+	setState()
     startPosition()
-    $.post('/prop', {demo: 'yes'}, function(data){
-  		inputRepData(data)
-    });
 });
 
 </script>
@@ -289,10 +267,10 @@ $( document ).ready(function() {
 #mreps-view-wrapper{margin-top:40px;min-height:300px;background:lavender;}
 #change-district{margin:0 auto 10px;text-align:center;width:150px;margin-bottom:10px;}
 #rep-view-toggle{background:#0E1C32;margin:0 auto;}
-#show-leaders-link{width:200px;margin:0 auto;}
+#show-leaders-link{width:200px;margin:0 auto;text-align:center;}
 .reps-container{display:flex;justify-content:center;flex-wrap:wrap;}
 .reps-container h2{width:100%;text-align:center;margin-top:40px;}
-.rep-wrapper{margin:40px;width:300px;height:400px;}
+.rep-wrapper{margin:40px;width:250px;height:300px;}
 /*Desktop*/
 @media screen and (min-width: 966px){
 

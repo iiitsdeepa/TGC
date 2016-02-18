@@ -6,6 +6,9 @@ a:hover{text-decoration:underline;}
 a:visited{color:#0000EE;}
 div{border-radius:2px;}
 input{padding:0;border:none;}
+.R{background: #cc0000;color:white;}
+.D{background: #1a53ff;color:white;}
+#page-data{display:none;}
 .section{padding:50px 5vw;}
 .redlink{color:darkred;text-decoration:none;cursor:pointer;}
 .redlink:hover{text-decoration:underline;}

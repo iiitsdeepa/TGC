@@ -1,12 +1,18 @@
 "use strict"
 
+function validDistrict(str){
+  var re = '^[A-Z]{2}:[0-9]{1,2}';
+  var test = str.match(re)
+  return test
+}
+
 function rightEntry(id){
-  w =  $('#'+id).css('display','block')
-  w =  $('#'+id).width()
+  var w =  $('#'+id).css('display','block')
+  var w =  $('#'+id).width()
   $('#'+id).css('right',-w)
   $('#'+id).animate({
         right:'0'
-        }, 500);
+        }, 150);
 }
 
 function fadeIn(id){

@@ -68,7 +68,7 @@ ZIP_RE = re.compile(r'^[0-9]{5}(?:-[0-9]{4})?$')
 def valid_zip(zip):
     return zip and ZIP_RE.match(zip)
 
-DISTRICT_RE = re.compile(r'^[A-Z]{2}[:]{1}[1-9]{1}')
+DISTRICT_RE = re.compile(r'^[A-Z]{2}:[0-9]{1,2}')
 def valid_district(district):
     return district and DISTRICT_RE.match(district)
 
@@ -190,6 +190,7 @@ class BaseHandler(webapp2.RequestHandler):
         hr = dict(hrbioguideid = rep.bioguide_id,
                 hrpic = state+'_'+district,
                 hrstate = rep.state,
+                hrstatename = rep.state_name,
                 hrdistrict = rep.distrank,
                 hrname = name.replace('_', ' '),
                 hrgender = rep.gender,
@@ -220,6 +221,7 @@ class BaseHandler(webapp2.RequestHandler):
         return ss
 
     def getJs(self, dist):
+        logging.error(dist)
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
@@ -237,27 +239,63 @@ class BaseHandler(webapp2.RequestHandler):
                 )
         return js
 
+    def getSfth(self,dist):
+        #returns a dictionary with the basic info for the representative of district=dist
+        state, district = dist.split(':')
+        logging.error(state)
+        logging.error(district)
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
+        name = rep.name.replace('None', '')
+        hr = dict(sfthbioguideid = rep.bioguide_id,
+                sfthpic = state+'_'+district,
+                sfthstate = rep.state,
+                sfthdistrict = rep.distrank,
+                sfthname = name.replace('_', ' '),
+                sfthgender = rep.gender,
+                sfthparty = rep.party,
+                sfthfyio = rep.fyio,
+                sfthfbid = rep.facebook_id,
+                sfthtwid = rep.twitter_id,)
+        return hr
+
+    def getSmj(self,dist):
+        state, district = dist.split(':')
+        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
+        name = rep.name.replace('None', '')
+        js = dict(smjbioguideid = rep.bioguide_id,
+                smjpic = state+'_JS',
+                smjstate = rep.state,
+                smjrank = 'J',
+                smjname = name.replace('_', ' '),
+                smjgender = rep.gender,
+                smjparty = rep.party,
+                smjfyio = rep.fyio,
+                smjfbid = rep.facebook_id,
+                smjtwid = rep.twitter_id,
+                )
+        return js
+
     def getBig2(self):
         #returns a json file with the basic info for the two most powerful people in congress
-        smj = self.getSs('KY:3')
-        sfth = self.getHr('WI:1')
+        smj = self.getSmj('KY:3')
+        sfth = self.getSfth('WI:1')
         big2 = smj.copy()
         big2.update(sfth)
         big2['smjlpic'] = 'KY_SS'
         big2['spthpic'] = 'WI_1'
-        big2json = json.dumps(big2)
-        return big2json
+        return big2
 
     def pullReps(self, district):
+        big2 = self.getBig2()
         hr = self.getHr(district)
         ss = self.getSs(district)
         js = self.getJs(district)
         reps = hr.copy()
         reps.update(ss)
         reps.update(js)
+        reps.update(big2)
         reps['district'] = district
-        repsjson = json.dumps(reps)
-        return repsjson
+        return reps
 
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
@@ -322,7 +360,6 @@ class NewsLetter(BaseHandler):
         email = self.request.get('email')
         error_message = 'none'
         have_error = False
-        logging.error(email)
         if not valid_email(email):
             error_message = "invalid email"
             have_error = True
@@ -380,27 +417,30 @@ class Feedback(BaseHandler):
 
 class Vprop(BaseHandler):
     def get(self):
-        self.render('interactives.html')
+        district = self.request.get('district')
+        if valid_district(district):
+            params = self.pullReps(district)
+            logging.error(params)
+            self.render('interactives.html',PAGESTATE='found-district', **params)
+        else:
+            params = self.getBig2()
+            self.render('interactives.html', **params)
 
     def post(self):
-        demo = self.request.get('demo')
-        if demo:
-            params = self.getBig2()
-            self.write(params)
-
+        district = self.request.get('district')
         address = self.request.get('address')
-        if address:
-            district = self.address_to_district(address)
-            logging.error(district)
-            repjson = self.pullReps(district)
-            self.write(repjson)
-
         lat = self.request.get('lat')
         lng = self.request.get('lng')
         if lat and lng:
+            logging.error('+++++++++++++++++++ 4')
             district = self.latlngToDistrict(lat, lng)
-            repjson = self.pullReps(district)
-            self.write(repjson)
+            logging.error(district)
+            self.write(district)
+        else:
+            logging.error('+++++++++++++++++++ 2')
+            params = self.getBig2()
+            params = self.getBig2()
+            self.render('interactives.html', **params)
 
 class PollServer(BaseHandler):
     def get(self):
@@ -643,6 +683,7 @@ class Admin(BaseHandler):
         self.login(temp)
         self.redirect('/')
 
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/signup', Signup),
@@ -659,8 +700,8 @@ application = webapp2.WSGIApplication([
     ('/pull/polldata', PollServer),
     ('/updateall', UpdateAll),
     ('/admin', Admin),
-    #('/up', UploadHandler),
-    #('/upload', Upload),
+    ('/up', UploadHandler),
+    ('/upload', Upload),
     #('/delete', bulkdelete),
     ('/marketing', Marketing),
     ('/createuser', CreateUser)
