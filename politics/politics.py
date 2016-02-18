@@ -117,6 +117,7 @@ class BaseHandler(webapp2.RequestHandler):
 
     def set_secure_cookie(self, name, val):
         cookie_val = make_secure_val(val)
+        logging.error(str(val))
         self.response.headers.add_header(
             'Set-Cookie',
             '%s=%s; expires= Wed, 01 Jan 2020 11:59:59 EST; Path=/' % (name, cookie_val))
@@ -125,11 +126,18 @@ class BaseHandler(webapp2.RequestHandler):
         cookie_val = self.request.cookies.get(name)
         return cookie_val and check_secure_val(cookie_val)
 
-    def login(self, user):
-        self.set_secure_cookie('user_id', str(user.key().id()))
+    def read_session_cookie(self):
+        cookie_val = self.request.cookies.get('sid')
+        date = str(cookie_val).split('|')[0]
+        date = str
+        logging.error(date)
+        return cookie_val and check_secure_val(cookie_val)
+
+    def login(self, session, expr):
+        self.set_secure_cookie('sid', str(session.key().id())+'--'+str(expr))
 
     def logout(self):
-        self.response.delete_cookie('user_id')
+        self.response.delete_cookie('sid')
 
     def address_to_district(self, address):
         #geocoding
@@ -461,7 +469,7 @@ class Marketing(BaseHandler):
 
 class Login(BaseHandler):
     def get(self):
-        if self.user:
+        if self.read_session_cookie():
             self.redirect('/')
         self.render('login.html')
 
@@ -470,7 +478,11 @@ class Login(BaseHandler):
         password = self.request.get('password')
         u = User.login(username, password)
         if u:
-            self.login(u)
+            expr = datetime.now()+timedelta(seconds=7200)
+            uid = u.key().id()
+            sess = Session(userid = uid, expiration = expr)
+            sess.put()
+            self.login(sess, expr)
             self.redirect('/')
         else:
             msg = 'Invalid username or password'
@@ -491,7 +503,7 @@ class PassReset(BaseHandler):
             token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
             reset_key = token[:-2]
             databaseuser.reset_code = reset_key
-            databaseuser.reset_expr = datetime.now() + timedelta(seconds=7200)
+            databaseuser.reset_expr = datetime.now() + timedelta(seconds=3600)
             databaseuser.put()
             reset_url = 'http://www.glasscapitol.com/emailreset?user=%s&key=%s' % (username, reset_key)
             logging.error(reset_url)
@@ -568,7 +580,7 @@ class CreateUser(BaseHandler):
         email = self.request.get('email')
         password = self.request.get('password')
         if (username != '' and email != '' and password != ''):
-            u = User.register(username, email, password)
+            u = User.register(username, email, password, '', '')
             u.put()
             self.response.out.write('congrats it should have worked. Now go get a cookie')
         else:

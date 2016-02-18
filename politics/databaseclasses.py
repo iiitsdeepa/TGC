@@ -108,6 +108,10 @@ class Cookie_Info(db.Model):
     times_visit = db.IntegerProperty(required = True)
     signup = db.BooleanProperty(required = True)
 
+class Session(db.Model):
+    userid = db.IntegerProperty(required = True)
+    expiration = db.DateTimeProperty(required = True)
+
 class Feed_Radio_Buttons(db.Model):
     cookie_id = db.IntegerProperty(required = True)
     origin_val = db.IntegerProperty()
