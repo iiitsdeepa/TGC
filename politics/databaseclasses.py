@@ -108,15 +108,19 @@ class Cookie_Info(db.Model):
     times_visit = db.IntegerProperty(required = True)
     signup = db.BooleanProperty(required = True)
 
+    @classmethod
+    def by_id(cls, uid):
+        return Cookie_Info.get_by_id(uid)
+
 class Session(db.Model):
     userid = db.IntegerProperty(required = True)
     expiration = db.DateTimeProperty(required = True)
 
 class Feed_Radio_Buttons(db.Model):
     cookie_id = db.IntegerProperty(required = True)
-    origin_val = db.IntegerProperty()
-    return_val = db.IntegerProperty()
-    recomm_val = db.IntegerProperty()
+    listen_val = db.IntegerProperty()
+    active_val = db.IntegerProperty()
+    easier_val = db.IntegerProperty()
 
 class Feed_Top_Issues(db.Model):
     cookie_id = db.IntegerProperty(required = True)
