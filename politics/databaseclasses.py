@@ -105,6 +105,7 @@ class User(db.Model):
                     pw_hash = pw_hash)
 
 class Cookie_Info(db.Model):
+    user_id = db.IntegerProperty()
     times_visit = db.IntegerProperty(required = True)
     signup = db.BooleanProperty(required = True)
 

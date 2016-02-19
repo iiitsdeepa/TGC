@@ -96,6 +96,14 @@ def valid_pw(name, password, h):
     salt = h.split(',')[0]
     return h == make_pw_hash(name, password, salt)
 
+def weekdaytostr(date):
+    daylist = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    return daylist[date]
+
+def monthtostr(date):
+    monthlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return monthlist[date-1]
+
 #--------------------------Pages----------------------------------------
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
@@ -121,7 +129,16 @@ class BaseHandler(webapp2.RequestHandler):
         cookie_val = make_secure_val(val)
         self.response.headers.add_header(
             'Set-Cookie',
-            '%s=%s; expires= Wed, 01 Jan 2020 11:59:59 EST; Path=/' % (name, cookie_val))
+            '%s=%s; expires= Wed, 01 Feb 2017 11:59:59 EST; Path=/' % (name, cookie_val))
+
+    def set_secure_cookiedate(self, name, val, expr):
+        weekday = weekdaytostr(expr.weekday())
+        exprstr = weekday+', '+str(expr.day)+' '+monthtostr(expr.month)+' '+str(expr.year)+' '+str(expr.hour)+':'+str(expr.minute)+':'+str(expr.second)+' GMT'
+        logging.error(exprstr)
+        cookie_val = make_secure_val(val)
+        self.response.headers.add_header(
+            'Set-Cookie',
+            '%s=%s; expires= %s; Path=/' % (name, cookie_val, exprstr))
 
     def read_secure_cookie(self, name):
         cookie_val = self.request.cookies.get(name)
@@ -141,7 +158,7 @@ class BaseHandler(webapp2.RequestHandler):
             strcookdate = str(cookdate)
             strcookdate = strcookdate[:10]+'_'+strcookdate[11:19]
             cookie_val = cookie_val[:18]+strcookdate
-            self.set_secure_cookie('sid', str(cookie_val))
+            self.set_secure_cookiedate('sid', str(cookie_val), cookdate)
             logging.error('Session seconds left: '+str(secleft))
             return secleft
         else:
@@ -165,9 +182,9 @@ class BaseHandler(webapp2.RequestHandler):
             return -1
 
     def login(self, session, expr):
-        expr = str(expr)
-        expr = expr[:10]+'_'+expr[11:19]
-        self.set_secure_cookie('sid', str(session.key().id())+'--'+str(expr))
+        exprstr = str(expr)
+        exprstr = exprstr[:10]+'_'+exprstr[11:19]
+        self.set_secure_cookiedate('sid', str(session.key().id())+'--'+str(exprstr), expr)
 
     def logout(self):
         self.response.delete_cookie('sid')
@@ -684,6 +701,14 @@ class Signup(BaseHandler):
                 else:
                     temp = User.register(uname, email, password, fname, lname)
                     temp.put()
+                    feedcookie = self.read_secure_cookie('feedback_info')
+                    if feedcookie:
+                        tempcook = feedcookie.split('$$$')
+                        cookid = tempcook[0][10:]
+                        user_id = temp.key().id()
+                        tempcook = Cookie_Info.get_by_id(int(cookid))
+                        tempcook.user_id = user_id
+                        tempcook.put()
                     logging.error('User created')
                     self.render('successfulsignup.html')
             else:
