@@ -46,6 +46,8 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 secret = '2A3437B9B29034B7'
 sunlight_key = '5a2e18d2e3ed4861a8604e9a5f96a47a'
+SESSION_LENGTH = 7200
+DB_SESSION_RESET = 600
 
 
 def render_str(template, **params):
@@ -117,7 +119,6 @@ class BaseHandler(webapp2.RequestHandler):
 
     def set_secure_cookie(self, name, val):
         cookie_val = make_secure_val(val)
-        logging.error(str(val))
         self.response.headers.add_header(
             'Set-Cookie',
             '%s=%s; expires= Wed, 01 Jan 2020 11:59:59 EST; Path=/' % (name, cookie_val))
@@ -126,14 +127,46 @@ class BaseHandler(webapp2.RequestHandler):
         cookie_val = self.request.cookies.get(name)
         return cookie_val and check_secure_val(cookie_val)
 
-    def read_session_cookie(self):
+    def is_session_active(self):
         cookie_val = self.request.cookies.get('sid')
-        date = str(cookie_val).split('|')[0]
-        date = str
-        logging.error(date)
-        return cookie_val and check_secure_val(cookie_val)
+        strcookdate = str(cookie_val).split('|')[0].split('--')[1]
+        cookid = str(cookie_val).split('|')[0].split('--')[0]
+        cookdate = datetime.strptime(strcookdate, '%Y-%m-%d_%H:%M:%S')
+        dbsecleft = self.db_session_active(cookid)
+        logging.error('db sess secleft: '+str(dbsecleft))
+        if cookdate >= datetime.now() and dbsecleft > 0:
+            secleft = cookdate - datetime.now()
+            secleft = secleft.seconds
+            cookdate = datetime.now() + timedelta(seconds=SESSION_LENGTH)
+            strcookdate = str(cookdate)
+            strcookdate = strcookdate[:10]+'_'+strcookdate[11:19]
+            cookie_val = cookie_val[:18]+strcookdate
+            self.set_secure_cookie('sid', str(cookie_val))
+            logging.error('Session seconds left: '+str(secleft))
+            return secleft
+        else:
+            return -1
+
+    def db_session_active(self, cookid):
+        dbentry = Session.get_by_id(int(cookid))
+        if dbentry:
+            dbdate = dbentry.expiration
+        else:
+            dbdate = datetime.min
+        if dbdate >= datetime.now():
+            if ((dbdate-datetime.now()).seconds <= DB_SESSION_RESET) and ((dbdate-datetime.now()).seconds > 0):
+                dbentry.expiration = dbdate+timedelta(seconds=SESSION_LENGTH)
+                dbentry.put()
+            secleft = dbdate - datetime.now()
+            secleft = secleft.seconds
+            logging.error('Database seconds left: '+str(secleft))
+            return secleft
+        else:
+            return -1
 
     def login(self, session, expr):
+        expr = str(expr)
+        expr = expr[:10]+'_'+expr[11:19]
         self.set_secure_cookie('sid', str(session.key().id())+'--'+str(expr))
 
     def logout(self):
@@ -469,16 +502,19 @@ class Marketing(BaseHandler):
 
 class Login(BaseHandler):
     def get(self):
-        if self.read_session_cookie():
-            self.redirect('/')
-        self.render('login.html')
+        msg = 'Session expired, login again to continue browsing'
+        if self.read_secure_cookie('sid'):
+            secleft = self.is_session_active()
+            if secleft >= 0:
+                msg = 'Session cookie still active: '+str(secleft)+' seconds left.'
+        self.render('login.html', error = msg)
 
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
         u = User.login(username, password)
         if u:
-            expr = datetime.now()+timedelta(seconds=7200)
+            expr = datetime.now()+timedelta(seconds=SESSION_LENGTH)
             uid = u.key().id()
             sess = Session(userid = uid, expiration = expr)
             sess.put()
