@@ -230,29 +230,14 @@
 		<h2>Stay up to date with the presidential race</h2>
 		
 		<div id='pcomp-ui' class='interactive-ui'>
-			<div class='interactive-controlpanel'>
-				<div class='interactive-controlpanel-1'>
-					<h2>Select Party</h2>
-					<div id='dem_select' class='partyselect dem' onclick="javascript:partySelect('D');return false;">Democrats</div>
-					<div id='repub_select' class='partyselect repub' onclick="javascript:partySelect('R');return false;">Republicans</div>
-				</div>
-				<div class='interactive-controlpanel-2'>
-					<h3 class='icp2-title'>Upcoming Primaries</h3>
-					<ol>
-						<li>Iowa</li>
-						<li>New Hampshire</li>
-						<li>South Carolina</li>
-						<li>Nevada</li>
-					</ol>
-				</div>	
-			</div>
-			<div class='interactive-display whiteback'>
-				<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
-				<h3 class='visualtitle'>Current National Standings</h3>
-				<div id='dem_national' class='graphback'></div>
-				<div id='repub_national' class='graphback'></div>
-				<div id='tableback'></div>
-			</div>
+			<h2>Select Party</h2>
+			<div id='dem_select' class='D button' onclick="javascript:partySelect('D');return false;">Democrats</div>
+			<div id='repub_select' class='R button' onclick="javascript:partySelect('R');return false;">Republicans</div>
+			<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
+			<h3 class='visualtitle'>Current National Standings</h3>
+			<div id='dem_national' class='graphback'></div>
+			<div id='repub_national' class='graphback'></div>
+			<div id='tableback'></div>
 		</div>
 	</div>
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
