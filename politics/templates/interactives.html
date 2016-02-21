@@ -226,19 +226,18 @@
 	</div>
 
 	<div id='polls' class='section'>
-		<h1>Election Season!</h1>
+		<h1>It's Election Season!</h1>
 		<h2>Stay up to date with the presidential race</h2>
-		
-		<div id='pcomp-ui' class='interactive-ui'>
-			<h2>Select Party</h2>
-			<div id='dem_select' class='D button' onclick="javascript:partySelect('D');return false;">Democrats</div>
-			<div id='repub_select' class='R button' onclick="javascript:partySelect('R');return false;">Republicans</div>
-			<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
-			<h3 class='visualtitle'>Current National Standings</h3>
-			<div id='dem_national' class='graphback'></div>
-			<div id='repub_national' class='graphback'></div>
-			<div id='tableback'></div>
+		<div id='party-select-wrapper'>
+			<div id='dem_select' class='D button partyselector' onclick="javascript:partySelect('D');return false;">Democrats</div>
+			<div id='repub_select' class='R button partyselector' onclick="javascript:partySelect('R');return false;">Republicans</div>
 		</div>
+		
+		<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
+		<h3 class='visualtitle'>Current National Standings</h3>
+		<div id='dem_national' class='graphback'></div>
+		<div id='repub_national' class='graphback'></div>
+		<div id='tableback'></div>
 	</div>
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
@@ -379,6 +378,10 @@
 .issuetext{margin:0 50px;}
 .issue-cell{width:250px;margin:0 25px;position:relative;padding:10px;}
 .issue-cell h3{text-align:center;margin-bottom:20px;}
+#polls h2{text-align:center;}
+.partyselector{margin:0 25px;}
+#party-select-wrapper{display:flex;justify-content:center;margin:40px 0;}
+.graphback{display:none;width:600px;height:400px;max-width:90vw;margin:0 auto;}
 /*Desktop*/
 @media screen and (min-width: 966px){
 
@@ -445,7 +448,7 @@
 .partyselect{padding:10px;margin:10px 0;width:calc(100% - 20px);text-align:center;cursor:pointer;border-radius:500px;}
 .partyselected{font-weight:bold;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 #current_standings{}
-.graphback{display:none;width:600px;height:400px;max-width:90vw}
+
 #reps_slider{display:flex;flex-wrap:none;background:lavender;}
 
 #repstoggle{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:80%;padding:15% 10px;}
