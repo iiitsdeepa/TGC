@@ -28,7 +28,6 @@
 			<form id='issue-list-form' method='post' action='/prop?s=pcomp'>
 				<input type='hidden' id='issuelist-init' name='issuelist' value='WTF IS HAPPENING'>
 			</form>
-			<h3>Where do or representatives stand on these issues?</h3>
 		</div>
 	</div>
 </div>
@@ -70,9 +69,9 @@ function saveIssues(){
 
 $(function(){
 	setTimeout(function(){rightEntry('alpha-alert')}, 400);
-	$( "#issue-list" ).sortable();
-	$( "#issue-list" ).disableSelection();
-	$('#issue-list li').attr('onclick',"javascript:saveIssues()")
+	$( "#issues" ).sortable();
+	$( "#issues" ).disableSelection();
+	//$('#issue-list li').attr('onclick',"javascript:saveIssues()")
 });
 </script>
 {% endblock %}

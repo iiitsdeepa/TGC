@@ -128,7 +128,7 @@ function initChart(dataarray,svgid,domain) {
 
 //on page load
 $( document ).ready(function(){
-    organizedDownload();
+    //organizedDownload();
     partySelect('D');
 });
 
