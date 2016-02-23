@@ -291,11 +291,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
-<<<<<<< HEAD
-=======
         #process_bill_csv(info)
         process_cosponsor_csv(info)
->>>>>>> lbdb
         self.redirect("/")
 
 class Landing(BaseHandler):
