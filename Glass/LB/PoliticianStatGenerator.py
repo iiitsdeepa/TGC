@@ -39,7 +39,7 @@ with open('ind_Voter_Table.csv') as csv_file:
 	reader = csv_file.readlines()
 	for row in reader:
 		ind_votes.append(row.split(','))
-#print ind_votes
+
 print 'Now the All Votes csv file'
 with open('votesall.csv') as csv_file:
 	reader = csv_file.readlines()
@@ -48,14 +48,13 @@ with open('votesall.csv') as csv_file:
 		temp[13] = temp[13][:-1]
 		votes.append([temp[10], temp[11], temp[12], temp[13]]) 
 		#temp[10] -> votes[i][0] = Total Vote, temp[11] -> votes[i][1] = GOP Vote, temp[12] -> votes[i][2] = Dem Vote, temp[13] -> votes[i][3] = Ind Vote
-#print votes
+
 print 'Finally the output csv file'
 with open('PoliticianStats.csv', 'w') as csv_file: #order of data in csv file: party loyalty, sponsored/cosponsored, attendance, yio, effectiveness
 	for i in range(len(bioids)):
 		bioid = bioids[i][0]
 		pol_party = bioids[i][1]
 		fyio = bioids[i][2]
-		line = str(bioid)+','
 		votes_in_party = 0
 		total_votes = 0
 		attendance = 0
@@ -71,40 +70,30 @@ with open('PoliticianStats.csv', 'w') as csv_file: #order of data in csv file: p
 				which_party = votes[j][2]
 			elif pol_party == 'I':
 				continue
-			#if which_party == 'None':
-			#	continue
 			party_breakdown = which_party.split('_')
 			party_vote = ''
 			temp_break = 0
-			#print party_breakdown, temp_break,
 			if temp_break < int(party_breakdown[0]):
 				temp_break = int(party_breakdown[0])
 				party_vote = 'Y'
-			#print temp_break,
 			if temp_break < int(party_breakdown[1]):
 				temp_break = int(party_breakdown[1])
 				party_vote = 'N'
-			#print temp_break,
 			if temp_break < int(party_breakdown[3]):
 				temp_break = int(party_breakdown[3])
 				party_vote = 'P'
-			#print temp_break,
-			#print 'Pol: '+pol_vote+' Party: '+party_vote
 			if pol_vote == party_vote:
 				votes_in_party += 1
 			if pol_vote == 'NV':
 				attendance += 1
 			elif party_vote != '' and pol_vote != 'None':
 				total_votes += 1
-			#print votes_in_party, total_votes
-			#sleep(0.25)
 		if (pol_party == 'I' or total_votes == 0):
 			attendance = 'N/A'
-			line += str('N/A') + ','
+			party_loyalty = 'N/A'
 		else:
 			attendance = "%.1f" % (float(attendance) / float(total_votes) * 100)
 			party_loyalty = "%.1f" % (float(votes_in_party) / float(total_votes) * 100)
-			line += party_loyalty + ','#This is for party loyalty 
 		#this is used to calculate the number of sponsored and cosponsored bills and the effectiveness
 		cosponsor_count = 0
 		cosponsor_billid = []
@@ -118,13 +107,14 @@ with open('PoliticianStats.csv', 'w') as csv_file: #order of data in csv file: p
 					cosponsor_billid.append(temp_line[0])
 		
 		sponsor_passed = 0
+		sponsor_count = 0
 		
 		with open('bills_all.csv') as third_file:
 			reader = third_file.readlines()
 			for each in reader:
 				temp_line = each.split('$$$')
 				if temp_line[9] == bioid:
-					cosponsor_count += 1
+					sponsor_count += 1
 					if temp_line[6] == 'True':
 						if temp_line[8] == 'True':
 							sponsor_passed += 1
@@ -134,9 +124,16 @@ with open('PoliticianStats.csv', 'w') as csv_file: #order of data in csv file: p
 							if temp_line[8] == 'True':
 								sponsor_passed += 1
 		
-		if cosponsor_count == 0:
+		if (sponsor_count + cosponsor_count) == 0:
 			effectiveness = 0
 		else:
-			effectiveness = "%.1f" % (float(sponsor_passed) / float(cosponsor_count) * 100)
-		line += str(cosponsor_count) + ',' + str(attendance) + ',' + str(2016-int(fyio)) + ',' + str(sponsor_passed) + '_' + str(effectiveness) + '\n'
+			effectiveness = "%.1f" % (float(sponsor_passed) / float(sponsor_count + cosponsor_count) * 100)
+		line = str(bioid)+','
+		line += party_loyalty + ','
+		line += str(sponsor_count) + ','
+		line += str(cosponsor_count) + ','
+		line += str(attendance) + ','
+		line += str(2016-int(fyio)) + ','
+		line += str(sponsor_passed) + ','
+		line += str(effectiveness) + '\n'
 		csv_file.write(line)
