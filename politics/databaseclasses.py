@@ -945,6 +945,22 @@ class Politician(db.Model):
     youtube_id = db.StringProperty(required = True)
     facebook_id = db.StringProperty(required = True)
 
+class Politician_Stats(db.Model):
+    bioguide_id = db.StringProperty(required = True)
+    party_loyalty = db.StringProperty()
+    legislative_index = db.StringProperty()
+    Bills_sponsored = db.StringProperty()
+    Attendance = db.StringProperty()
+    Approval = db.StringProperty()
+    yio = db.IntegerProperty()
+    effectiveness = db.StringProperty()
+    total_contributions = db.StringProperty()
+    record_gun_control = db.StringProperty()
+    record_military_spending = db.StringProperty()
+    record_immigration = db.StringProperty()
+    record_criminal_justice = db.StringProperty()
+    record_privacy = db.StringProperty()
+
 class Bill(db.Model):
     bill_id = db.StringProperty(required = True)
     official_title = db.StringProperty(required = True)
