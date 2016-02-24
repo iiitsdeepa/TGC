@@ -63,6 +63,26 @@ function showHide(classname, index, hide){
   }
 }
 
+function startState(){
+  var tab = getParameterByName('s')
+  if (!tab){
+    tab = $('.tab').first().attr('id')
+  }
+  scroller(tab, 'tab')
+}
+
+function submitESF() {
+  var email = document.getElementById('esfemail').value;
+  console.log(email)
+  $.post('/esf', {esfemail:email}, function(data){
+    if (data == 'success'){
+      console.log(data)
+      $('.incomp-pre').css('display','none')
+      $('.incomp-post').css('display','block')
+    }
+  });
+}
+
 function expandGlobalNav(){
   //expand
   if ($('#nav_expand').attr('value') == 'contracted'){

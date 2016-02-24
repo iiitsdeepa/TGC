@@ -331,7 +331,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'D')
-        #process_politician_csv(info)
+        process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -704,6 +704,34 @@ class Admin(BaseHandler):
         self.login(temp)
         self.redirect('/')
 
+class ESF(BaseHandler):
+    def get(self):
+        self.redirect('/home')
+
+    def post(self):
+        email = self.request.get('esfemail')
+        error_message = 'none'
+        have_error = False
+        if not valid_email(email):
+            error_message = "invalid email"
+            have_error = True
+
+        if have_error:
+            self.write(error_message)
+        else:
+            e = NewsLetterUser.by_email(email)
+            if e:
+                error_message='already on list'
+                self.write(error_message)
+            else: #vetted email: add to db, send thankyou email, and success code to front end
+                potential_signee=NewsLetterUser(email=email)
+                potential_signee.put()
+                self.write('success')
+                #send thank you email
+                sender_address = "glasscapitol.com Mailing List <glasscapitol@gmail.com>"
+                subject = "Welcome to the NewsLetter!!"
+                body = 'congrats on becoming a boss'
+                mail.send_mail(sender_address, email, subject, body)
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
@@ -728,5 +756,6 @@ application = webapp2.WSGIApplication([
     ('/upload', Upload),
     #('/delete', bulkdelete),
     ('/marketing', Marketing),
+    ('/esf', ESF),
     ('/createuser', CreateUser)
 ], debug=True)
