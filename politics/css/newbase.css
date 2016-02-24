@@ -6,6 +6,7 @@ a:hover{text-decoration:underline;}
 a:visited{color:#0000EE;}
 div{border-radius:2px;}
 input{padding:0;border:none;}
+.toptext{vertical-align: top;}
 .R{background: #cc0000;color:white;}
 .D{background: #1a53ff;color:white;}
 #page-data{display:none;}
@@ -23,10 +24,10 @@ input{padding:0;border:none;}
 .call-to-action{cursor:pointer;margin:0 auto;text-align:center;font-weight:bold;width:274px;height:80px;line-height:80px;margin:50px auto;border:solid 1px #D9D9D9;}
 .call-to-action:hover{font-weight:bold;}
 .button{font-size:13px;height:34px;line-height:34px;border-radius:500px;width:275px;cursor:pointer;margin-bottom:10px !important;text-align:center;font-weight:bold;}
-.bluebutton{background:#162D50;color:white;}
+.bluebutton{display:block;background:#162D50;color:white;}
 .bluebutton:hover{background:#263D60;}
-.redbutton{background:darkred;border-radius:500px;cursor:pointer;color:white;}
-.redbutton:hover{background:#A23333;}
+.redbutton{display:block;background:#cc0000;border-radius:500px;cursor:pointer;color:white;}
+.redbutton:hover{background:red;}
 .togglebutton{width:275px;height:50px;line-height:50px;cursor:pointer;text-align:center;color:white;font-size:18px;border-radius:2px;}
 .leftarrow-block{position:absolute;top:0;left:0;width:50px;height:100%;background:lavender;z-index:10;}
 .rightarrow-block{position:absolute;top:0;right:0;width:50px;height:100%;background:lavender;z-index:10;}

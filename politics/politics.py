@@ -331,7 +331,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'D')
-        process_politician_csv(info)
+        #process_politician_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -340,9 +340,21 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
 
 class Landing(BaseHandler):
     def get(self):
-        self.render("home.html")
+        self.render("landing.html")
     def post(self):
+        self.render('landing.html')
+
+class Home(BaseHandler):
+    def get(self):
         self.render('home.html')
+
+class Election(BaseHandler):
+    def get(self):
+        self.render('election.html')
+
+class Lb(BaseHandler):
+    def get(self):
+        self.render('lb.html')
 
 class About(BaseHandler):
     def get(self):
@@ -695,6 +707,9 @@ class Admin(BaseHandler):
 
 application = webapp2.WSGIApplication([
     ('/', Landing),
+    ('/home', Home),
+    ('/election', Election),
+    ('/lb', Lb),
     ('/signup', Signup),
     ('/passwordreset', PassReset),
     ('/emailreset', EmailReset),
