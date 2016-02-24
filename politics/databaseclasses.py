@@ -962,6 +962,10 @@ class Politician_Stats(db.Model):
     record_immigration = db.StringProperty()
     record_criminal_justice = db.StringProperty()
     record_privacy = db.StringProperty()
+    sponsor_sub = db.StringProperty()
+    cosponsor_sub = db.StringProperty()
+    enacted_sub = db.StringProperty()
+    missed_sub = db.StringProperty()
 
 class Bill(db.Model):
     bill_id = db.StringProperty(required = True)

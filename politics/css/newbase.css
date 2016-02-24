@@ -40,10 +40,10 @@ input{padding:0;border:none;}
 
 
 #alpha-alert{display:block;position:absolute;top:100px;right:0;z-index:101;width:275px;}
-#head{position:relative;height:300px;background-color:#F7F7F7;padding:5px 5vw;}
+#head{position:relative;height:200px;background-color:#F7F7F7;padding:5px 5vw;}
 #title{display:block;position:absolute;top:50px;font-size:36px;font-weight:bold;}
 #slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
-#centerpiece{display:block;position:relative;margin:30px auto 0;height:70%;}
+#centerpiece{display:block;position:relative;margin:0px auto 0;height:150%;}
 #nav-container{position:absolute;top:50px;right:0;z-index:100}
 #back-to-top{position:fixed;bottom:50px;right:5vw;font-weight:bold;cursor:pointer;margin:40px 0;}
 #back-to-top:hover{text-decoration:underline;}

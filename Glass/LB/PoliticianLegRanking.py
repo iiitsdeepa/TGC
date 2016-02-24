@@ -28,6 +28,7 @@ cosponsored = []
 missedvotes = []
 enacted = []
 yio = []
+bio = []
 stdeviation = [0.0, 0.0, 0.0, 0.0]
 zscores = []
 with open('PoliticianStats.csv') as csv_file:
@@ -40,6 +41,7 @@ with open('PoliticianStats.csv') as csv_file:
 		cosponsored.append(float(temp[3]))
 		enacted.append(float(temp[7]))
 		yio.append(int(temp[5]))
+		bio.append(temp[0])
 		if (temp[4] != 'N/A'):
 			missedvotes.append(float(temp[4]))
 		else:
@@ -78,14 +80,14 @@ for i in range(len(sponsored)):#First do the sponsor z-scores
 	sponsored[i] = (sponsored[i] - averagespon) / stdevspon
 	if sponsored[i] > 5.0:
 		sponsored[i] = 5.0
-	sponsored[i] = (sponsored[i]*5)+75
+	sponsored[i] = (sponsored[i]*5)+50
 	if (sponsored[i] > maxzscore[0]):
 		maxzscore[0] = sponsored[i]
 for i in range(len(cosponsored)):#then the cosponsor z-scores
 	cosponsored[i] = (cosponsored[i] - averagecosp) / stdevcosp
 	if cosponsored[i] > 5.0:
 		cosponsored[i] = 5.0
-	cosponsored[i] = (cosponsored[i]*5)+75
+	cosponsored[i] = (cosponsored[i]*5)+50
 	if (cosponsored[i] > maxzscore[1]):
 		maxzscore[1] = cosponsored[i]
 for i in range(len(missedvotes)):#this is the first step of calculating the missed votes. 
@@ -103,7 +105,7 @@ for i in range(len(enacted)):#enacted scores are calculated last
 	enacted[i] = (enacted[i] - averageenac) / stdenac
 	if enacted[i] > 5.0:
 		enacted[i] = 5.0
-	enacted[i] = (enacted[i]*5)+75
+	enacted[i] = (enacted[i]*5)+50
 	if (enacted[i] > maxzscore[3]):
 		maxzscore[3] = enacted[i]
 for i in range(len(missedvotes)):#this is the second step of calculting missed votes, setting each score on the 100 scale
@@ -112,11 +114,38 @@ for i in range(len(missedvotes)):#this is the second step of calculting missed v
 	missedvotes[i] = missedvotes[i] + (100 - maxzscore[2])
 
 with open('PoliticianStatsComplete.csv', 'w') as csv_file:
+	legislative_score = []
 	for i in range(707):
-		legislative_score = 0
 		if (missedvotes[i] == 'N/A'):
-			legislative_score = float(sponsored[i])*0.375 + float(cosponsored[i])*0.375 + float(enacted[i])*0.25
+			temp = float(sponsored[i])*0.375 + float(cosponsored[i])*0.375 + float(enacted[i])*0.25
+			legislative_score.append(temp)
 		else:
-			legislative_score = float(sponsored[i])*0.3 + float(cosponsored[i])*0.3 + float(missedvotes[i])*0.2 + float(enacted[i])*0.2
-		#csv_file.write(str(sponsored[i]) +','+ str(cosponsored[i]) +','+ str(missedvotes[i]) +','+ str(enacted[i]) +','+ str('%.2f') % (legislative_score) + '\n')
-		csv_file.write(master[i] +','+ str('%.2f') % (legislative_score) + '\n')
+			temp = float(sponsored[i])*0.3 + float(cosponsored[i])*0.3 + float(missedvotes[i])*0.2 + float(enacted[i])*0.2
+			legislative_score.append(temp)
+	aveleg = mean(legislative_score)
+	stdleg = pstdev(legislative_score)
+	maxleg = 0.0
+	minleg = 0.0
+	for i in range(707):
+		legislative_score[i] = (legislative_score[i] - aveleg) / stdleg
+		#print legislative_score[i],
+		if legislative_score[i] > maxleg:
+			maxleg = legislative_score[i]
+		if legislative_score[i] < minleg:
+			minleg = legislative_score[i]
+	minleg = 0-minleg
+	#print ''
+	#print maxleg, minleg
+	for i in range(707):
+		if legislative_score[i] > 0:
+			legislative_score[i] = (legislative_score[i] * (50/maxleg)) + 50
+		else:
+			legislative_score[i] = (legislative_score[i] * (50/minleg)) + 50
+	for i in range(707):
+		if missedvotes[i] == 'N/A':
+			csv_file.write(master[i] +','+ str('%.2f,%.2f,%.2f,%.2f,') % (legislative_score[i],sponsored[i],cosponsored[i],enacted[i]) +'N/A,\n')
+		else:
+			csv_file.write(master[i] +','+ str('%.2f,%.2f,%.2f,%.2f,%.2f,') % (legislative_score[i],sponsored[i],cosponsored[i],enacted[i],missedvotes[i]) +'\n')
+with open('PoliticianStatsSubscores.csv', 'w') as csv_file:
+	for i in range(707):
+		csv_file.write(bio[i] +','+ str(sponsored[i]) +','+ str(cosponsored[i]) +','+ str(missedvotes[i]) +','+ str(enacted[i]) +','+ str('%.2f') % (legislative_score[i]) + ',\n')
