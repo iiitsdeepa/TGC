@@ -129,6 +129,27 @@ class Feed_Top_Issues(db.Model):
     for_pol = db.IntegerProperty()
     terror = db.IntegerProperty()
 
+class State(db.Model):
+    name = db.StringProperty(required = True)
+    abbreviation = db.StringProperty(required = True)
+    num_reps = db.IntegerProperty()
+    ge_delegates = db.IntegerProperty()
+    primary_type = db.StringProperty()
+    primary_notes = db.StringProperty()
+    registration_link = db.StringProperty()
+    D_primary_date = db.DateTimeProperty()
+    D_delegates = db.IntegerProperty()
+    D_pledged = db.IntegerProperty()
+    D_superdelegates = db.IntegerProperty()
+    R_primary_date = db.DateTimeProperty()
+    R_delegates = db.IntegerProperty()
+
+class Candidate(db.Model):
+    name = db.StringProperty(required = True)
+    party = db.StringProperty(required = True)
+    delegates = db.IntegerProperty()
+    superdelegates = db.IntegerProperty()
+
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)
     rid = db.StringProperty(required = True)
