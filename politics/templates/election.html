@@ -2,14 +2,36 @@
 {% block content %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('election','tab');return false;">2016 Election</div>
-	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('reps','tab');return false;">My Representatives</div>
+	<div class='pagenav-option' onclick="javascript:scroller('standings', 'tab');return false;">Current Standings</div>
+	<div class='pagenav-option' onclick="javascript:scroller('candidates','tab');return false;">Candidates</div>
+	<div class='pagenav-option' onclick="javascript:scroller('map','tab');return false;">Map</div>
 </div>
 
-<div id='news' class='tab'>
-	<h1 class='tab-title'>Current News</h1>
+<div id='standings' class='tab'>
+	<h1 class='tab-title'>Current Standings</h1>
 		<div class='incomplete-tab'>
+		<div class='incomp-tab incomp-pre'>
+			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
+			<h2>TGC is currently in development and we're looking for new testers</h2>
+			<ul>
+				<li>Get exclusive access to new features</li>
+				<li>Stay up to date with development</li>
+				<li>Direct contact our team so we can make the best possible service for you</li>
+			</ul>
+			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
+				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
+				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
+			</form>
+		</div>
+		<div class='incomp-tab incomp-post'>
+			<h2>Thanks for signing up! We just sent you an email</h2>
+		</div>
+	</div>
+
+</div>
+
+<div id='candidates' class='tab'>
+	<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
 			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
 			<h2>TGC is currently in development and we're looking for new testers</h2>
@@ -29,8 +51,8 @@
 	</div>
 </div>
 
-<div id='election' class='tab'>
-	<h1 class='tab-title'>The 2016 Election</h1>
+<div id='map' class='tab'>
+	<h1 class='tab-title'>Map</h1>
 		<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
 			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
@@ -49,28 +71,7 @@
 			<h2>Thanks for signing up! We just sent you an email</h2>
 		</div>
 	</div>
-</div>
 
-<div id='reps' class='tab'>
-	<h1 class='tab-title'>Your Representatives</h1>
-		<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
-		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
-		</div>
-	</div>
 </div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>

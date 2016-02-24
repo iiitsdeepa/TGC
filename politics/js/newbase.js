@@ -1,16 +1,22 @@
 "use strict"
 
+function validDistrict(str){
+  var re = '^[A-Z]{2}:[0-9]{1,2}';
+  var test = str.match(re)
+  return test
+}
+
 function rightEntry(id){
-  w =  $('#'+id).css('display','block')
-  w =  $('#'+id).width()
+  var w =  $('#'+id).css('display','block')
+  var w =  $('#'+id).width()
   $('#'+id).css('right',-w)
   $('#'+id).animate({
         right:'0'
-        }, 500);
+        }, 150);
 }
 
-function fadeIn(id){
-  $('#'+id).css('display','block')
+function fadeIn(id,display){
+  $('#'+id).css('display',display)
   $('#'+id).css('opacity','0')
   $('#'+id).animate({
         opacity: "1"
@@ -22,7 +28,22 @@ function scroller(id,classname){
     $(this).css('display','none')
   })
   $('#'+id).css('display','block')
-  fadeIn(id)
+  fadeIn(id, 'block')
+}
+
+function slider(index, classname, direction,display){
+  var num = 0;
+  $('.'+classname).each(function(index){
+    $(this).css('display','none')
+    num = num + 1;
+  });
+  var curr = $('#'+classname+'s').attr('value')
+  var next
+  if (direction=='left'){next = (parseInt(curr)- 1) % num}
+  else if (direction == 'right'){ next = (parseInt(curr) + 1) % num}
+  else {next = parseInt(curr) % num}
+  $('#'+classname+'s').attr('value',(next+(num * 100)))
+  fadeIn(classname+'-'+next,display)
 }
 
 function showHide(classname, index, hide){
@@ -40,6 +61,26 @@ function showHide(classname, index, hide){
         }
     })
   }
+}
+
+function startState(){
+  var tab = getParameterByName('s')
+  if (!tab){
+    tab = $('.tab').first().attr('id')
+  }
+  scroller(tab, 'tab')
+}
+
+function submitESF() {
+  var email = document.getElementById('esfemail').value;
+  console.log(email)
+  $.post('/esf', {esfemail:email}, function(data){
+    if (data == 'success'){
+      console.log(data)
+      $('.incomp-pre').css('display','none')
+      $('.incomp-post').css('display','block')
+    }
+  });
 }
 
 function expandGlobalNav(){

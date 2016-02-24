@@ -1,0 +1,27 @@
+{% extends "entrybase.html" %}
+{% block content %}
+<div id='landing'>
+    <h1>Welcome to TGC!</h1>
+    <a href='/home?s=news' class='redbutton landingbutton'>See The News</a>
+    <a href='/home?s=election' class='redbutton landingbutton'>Stay Up To Date With The Election</a>
+    <a href='/home?s=reps' class='redbutton landingbutton'>Find Your Representatives</a>
+</div>
+
+<style>
+#landing{text-align:center;}
+#landing h1{margin-bottom:50px;}
+.landingbutton{display:block;width:354px;height:80px;line-height:80px;margin:25px;text-decoration:none;font-size:18px;}
+.landingbutton:hover{text-decoration:none;}
+.landingbutton:visited{color:white;text-decoration:none;}
+
+/*Mobile and Tablet*/
+@media screen and (max-width: 965px){
+    .landingbutton{margin:25px auto}
+}
+/*Mobile only*/
+@media screen and (max-width: 520px){
+    #landing h1{display:none;}
+    .landingbutton{height:50px;line-height:50px;font-size:14px;width:90vw;}
+}
+</style>
+{% endblock %}
