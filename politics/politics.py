@@ -331,7 +331,9 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'D')
-        process_politician_csv(info)
+        #process_politician_csv(info)
+        process_candidate_csv(info)
+        #process_visualization_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -733,6 +735,33 @@ class ESF(BaseHandler):
                 body = 'congrats on becoming a boss'
                 mail.send_mail(sender_address, email, subject, body)
 
+class VisualizationHandler(BaseHandler):
+    def get(self):
+        self.render('e1.html')
+
+    def post(self):
+        vis = self.request.get('visualization')
+        v = GqlQuery("SELECT * FROM Visualization WHERE name = :1", vis).get()
+        dataquery = GqlQuery(v.query)
+        rows = []
+        for d in dataquery:
+            temp = dict(name = d.name,
+                delegates = d.delegates)
+            #logging.error(d.name+' '+d.party)
+            rows.append(temp)
+        cols = [
+                {"id":"","label":"Topping","pattern":"","type":"string"},
+                {"id":"","label":"Slices","pattern":"","type":"number"}
+            ]
+        data = dict(cols = cols,
+                rows = rows)
+        final = dict(title = v.title,
+                xaxis = v.xaxis,
+                yaxis = v.yaxis,
+                element = v.element,
+                data = data)
+        self.response.out.write(json.dumps(final))
+
 application = webapp2.WSGIApplication([
     ('/', Landing),
     ('/home', Home),
@@ -757,5 +786,6 @@ application = webapp2.WSGIApplication([
     #('/delete', bulkdelete),
     ('/marketing', Marketing),
     ('/esf', ESF),
+    ('/vishandle', VisualizationHandler),
     ('/createuser', CreateUser)
 ], debug=True)

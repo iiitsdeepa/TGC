@@ -17,7 +17,7 @@
 				<h3>Delegates won</h3>
 				2,383 needed for nomination out of 4,189 total
 			</div>
-			<div class='cstanding-graph-wrapper'>where the graph will go</div>
+			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'><svg></div>
 			<div class='cstanding-processinfo'>
 				<h3>The Process</h3>
 				The Democratic primary has two types of delegates that are awarded to the candidates<br><br>
@@ -87,8 +87,26 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
+function drawChart(id) {
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Nitrogen', 0.78],
+        ['Oxygen', 0.21],
+        ['Other', 0.01]
+      ]);
+
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.PieChart(document.getElementById(id));
+      chart.draw(data, null);
+    }
+    
 	$( document ).ready(function() {
 		startState()
+		//drawChart('dstanding-graph-wrapper')
+
 	});
 </script>
 

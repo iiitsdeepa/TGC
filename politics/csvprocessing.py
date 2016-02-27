@@ -29,6 +29,30 @@ from databaseclasses import *
 
 #------------------------File Processing----------------------------
 
+def process_visualization_csv(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split(',')
+        namequery = GqlQuery("SELECT * FROM Visualization WHERE bioguide_id = :1", temp[0])
+        tempqueryrow = namequery.get()
+        if tempqueryrow is None:
+            entry = Visualization(name=temp[0],vtype=temp[1],title=temp[2],xaxis=temp[3],yaxis=temp[4],element=temp[5],query=temp[6])
+            entry.put()
+
+def process_candidate_csv(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split(',')
+        namequery = GqlQuery("SELECT * FROM Candidate WHERE bioguide_id = :1", temp[0])
+        tempqueryrow = namequery.get()
+        if tempqueryrow is None:
+            entry = Candidate(name=temp[0],party=temp[1],delegates=int(temp[2]),superdelegates=int(temp[3]))
+            entry.put()
+
 def process_state_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')

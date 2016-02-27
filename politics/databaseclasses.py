@@ -877,7 +877,6 @@ class Ind_Votes(db.Model):
     Z000017 = db.StringProperty(required = False)
     Z000018 = db.StringProperty(required = False)
 
-
 class NewsLetterUser(db.Model):
     created = db.DateTimeProperty(required = True, auto_now = True)
     email = db.StringProperty(required = True)
@@ -975,3 +974,12 @@ class Bill(db.Model):
 class Cosponsor(db.Model):
     bill_id = db.StringProperty(required = True)
     bioguide_id = db.StringProperty(required = True)
+
+class Visualization(db.Model):
+    name = db.StringProperty(required = True)
+    vtype = db.StringProperty(required = True)
+    title = db.StringProperty(required = True)
+    xaxis = db.StringProperty(required = True)
+    yaxis = db.StringProperty(required = True)
+    element = db.StringProperty(required = True)
+    query = db.StringProperty(required = True)

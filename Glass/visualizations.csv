@@ -1,0 +1,2 @@
+dpresults,bar,Democratic Primary Results,candidate,delegates,dstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'D'
+rpresults,bar,Republican Primary Results,candidate,delegates,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R'

@@ -1,5 +1,13 @@
 "use strict"
 
+function getVisualizationData(vis){
+  $.post('/vishandle', {'visualization':vis}, function(data){
+    var objJSON = eval("(function(){return " + data + ";})()");
+    google.charts.setOnLoadCallback(drawChart(objJSON))
+  })
+}
+
+
 function validDistrict(str){
   var re = '^[A-Z]{2}:[0-9]{1,2}';
   var test = str.match(re)

@@ -39,7 +39,7 @@
 				<h3>Delegates won</h3>
 				2,383 needed for nomination out of 4,189 total
 			</div>
-			<div class='cstanding-graph-wrapper'>where the graph will go</div>
+			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>The Process</h3>
 				The Democratic primary has two types of delegates that are awarded to the candidates<br><br>
@@ -53,7 +53,7 @@
 				<h3>Delegates won</h3>
 				1,237 needed for nomination out of 2,340 total
 			</div>
-			<div class='cstanding-graph-wrapper'>where the graph will go</div>
+			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>The Process</h3>
 				The Republican primary only has pledged delegates that vote as per the primary election, unlike the Democratic primary.
@@ -87,9 +87,26 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-	$( document ).ready(function() {
-		startState()
-	});
+var dpresults;
+var rpresults;
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(loadData);
+function loadData(){
+	$.post('/vishandle', {'visualization':'dpresults'},function(data){
+		chart_data = $.parseJSON(data);
+		drawChart(chart_data)
+	})
+}
+function drawChart(d) {
+	console.log(d['data'])
+    var chart1_data = new google.visualization.DataTable(d['data']);
+    var chart1_options = {
+        title: d['title']
+    };
+
+    var chart1_chart = new google.visualization.BarChart(document.getElementById(d['element']));
+    chart1_chart.draw(chart1_data, chart1_options);
+}
 </script>
 
 <style>
