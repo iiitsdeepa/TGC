@@ -85,14 +85,14 @@ function submitStats(){
 	$('#change_selector_wrapper').css('display','none')
 	if(distparams.district == undefined){
 		if (checkedValue == '') {
-			window.location.replace("/home");
+			window.location.replace("/homes=reps&");
 		} else {
-			window.location.replace("/home?stats="+checkedValue);
+			window.location.replace("/home?s=reps&stats="+checkedValue);
 		}
 	} else if (checkedValue == '') {
-		window.location.replace("/home?district="+distparams.district);
+		window.location.replace("/home?s=reps&district="+distparams.district);
 	} else {
-		window.location.replace("/home?district="+distparams.district+"&stats="+checkedValue);
+		window.location.replace("/home?s=reps&district="+distparams.district+"&stats="+checkedValue);
 	}
 }
 
@@ -106,11 +106,11 @@ function gotGPS(position) {
 	var distparams = getQueryParams(document.location.search);
 	if (distparams.stats == undefined){
 		$.post('/home', {lat: lat, lng: lng}, function(data){
-			window.location.replace("/home?district="+data);
+			window.location.replace("/home?s=reps&district="+data);
 		});
 	} else {
 		$.post('/home', {lat: lat, lng: lng}, function(data){
-			window.location.replace("/home?district="+data+"&stats="+distparams.stats);
+			window.location.replace("/home?s=reps&district="+data+"&stats="+distparams.stats);
 		});
 	}
 }
@@ -120,13 +120,13 @@ function useAddress(){
 	city = document.getElementById('city').value;
 	address = street+' '+city+' '+state
 	var distparams = getQueryParams(document.location.search);
-	if (distparams.stats == ''){
+	if (distparams.stats == undefined){
 		$.post('/home', {address: address}, function(data){
-			window.location.replace("/home?district="+data);
+			window.location.replace("/home?s=reps&district="+data);
 		});
 	} else {
 		$.post('/home', {address: address}, function(data){
-			window.location.replace("/home?district="+data+"&stats="+distparams.stats);
+			window.location.replace("/home?s=reps&district="+data+"&stats="+distparams.stats);
 		});
 	}
 }

@@ -87,7 +87,7 @@
 	.orow:hover{background-color: #d7e2f4;}
 	.erow:hover{background-color: #d7e2f4;}
 	#pdatanote{padding: 20px;}
-	#replinks_wrapper{position:absolute;bottom:0px;left:150px;display:none;height:50px;width:800px;}
+	#replinks_wrapper{position:absolute;bottom:0px;left:150px;display:flex;height:50px;width:800px;}
 	.replinks{position:relative;margin: 0 auto;height:50px;width:50%);display:flex;}
 	.rep-link{position:relative;margin-top:0px;color: blue;font-weight:bold;}
 	.rep-link_spacer{width:20px;}
