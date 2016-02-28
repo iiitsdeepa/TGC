@@ -983,3 +983,4 @@ class Visualization(db.Model):
     yaxis = db.StringProperty(required = True)
     element = db.StringProperty(required = True)
     query = db.StringProperty(required = True)
+    color = db.StringProperty(required = True)

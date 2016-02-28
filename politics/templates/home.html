@@ -96,17 +96,24 @@ function loadData(){
 		chart_data = $.parseJSON(data);
 		drawChart(chart_data)
 	})
+	$.post('/vishandle', {'visualization':'rpresults'},function(data){
+		chart_data = $.parseJSON(data);
+		drawChart(chart_data)
+		startState()
+	})
+
 }
 function drawChart(d) {
 	console.log(d['data'])
     var chart1_data = new google.visualization.DataTable(d['data']);
     var chart1_options = {
-        title: d['title']
+        title: d['title'],
     };
 
-    var chart1_chart = new google.visualization.BarChart(document.getElementById(d['element']));
+    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
     chart1_chart.draw(chart1_data, chart1_options);
 }
+
 </script>
 
 <style>
