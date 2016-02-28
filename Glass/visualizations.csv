@@ -1,2 +1,2 @@
-dpresults,bar,Democratic Primary Results,candidate,delegates,dstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'D',#1a53ff
-rpresults,bar,Republican Primary Results,candidate,delegates,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R',#cc0000
+dpresults,bar,Democratic Primary Results,Candidate,Delegates,#1a53ff,name&&&delegates&&&color,dstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'D' ORDER BY delegates
+rpresults,bar,Republican Primary Results,Candidate,Delegates,,#cc0000,name&&&delegates&&&color,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R' ORDER BY delegates

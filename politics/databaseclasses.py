@@ -981,6 +981,7 @@ class Visualization(db.Model):
     title = db.StringProperty(required = True)
     xaxis = db.StringProperty(required = True)
     yaxis = db.StringProperty(required = True)
+    color = db.StringProperty(required = True)
+    query_columns = db.StringProperty(required = True)
     element = db.StringProperty(required = True)
     query = db.StringProperty(required = True)
-    color = db.StringProperty(required = True)
