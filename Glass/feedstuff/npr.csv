@@ -1,0 +1,52 @@
+{
+    "responseData": {
+        "feed": {
+            "author": "", 
+            "description": "Assorted stories from NPR", 
+            "entries": [
+                {
+                    "author": "NPR Staff", 
+                    "categories": [], 
+                    "content": "<p>The politics team is back with a special episode of the podcast that explains everything you ever wanted to know about Super Tuesday.</p>", 
+                    "contentSnippet": "The politics team is back with a special episode of the podcast that explains everything you ever wanted to know about Super ...", 
+                    "link": "http://www.npr.org/2016/02/28/468273038/politics-podcast-everything-you-need-to-know-about-super-tuesday?utm_medium=RSS&utm_campaign=storiesfromnpr", 
+                    "publishedDate": "Sun, 28 Feb 2016 09:36:04 -0800", 
+                    "title": "Politics Podcast: Everything You Need To Know About Super Tuesday"
+                }, 
+                {
+                    "author": "Camila Domonoske", 
+                    "categories": [], 
+                    "content": "<p>On <em>Meet the Press, </em>Rep. Tulsi Gabbard of Hawaii announced she'd resign her post at the Democratic National Committee to endorse Sanders, citing her military experience as the impetus for her decision.</p>", 
+                    "contentSnippet": "On Meet the Press, Rep. Tulsi Gabbard of Hawaii announced she'd resign her post at the Democratic National Committee to endorse ...", 
+                    "link": "http://www.npr.org/sections/thetwo-way/2016/02/28/468457319/vice-chair-of-dnc-resigns-to-support-bernie-sanders?utm_medium=RSS&utm_campaign=storiesfromnpr", 
+                    "publishedDate": "Sun, 28 Feb 2016 09:01:00 -0800", 
+                    "title": "Vice Chair Of DNC Resigns To Support Bernie Sanders"
+                }, 
+                {
+                    "author": "Philip Ewing", 
+                    "categories": [], 
+                    "content": "<p>The U.S. military has lifted its ban on women in combat positions. But that doesn't necessarily mean they would soon be conscripted into service.</p>", 
+                    "contentSnippet": "The U.S. military has lifted its ban on women in combat positions. But that doesn't necessarily mean they would soon be ...", 
+                    "link": "http://www.npr.org/2016/02/28/468456823/fact-check-are-women-facing-the-draft?utm_medium=RSS&utm_campaign=storiesfromnpr", 
+                    "publishedDate": "Sun, 28 Feb 2016 08:08:00 -0800", 
+                    "title": "Fact Check: Are Women Facing The Draft?"
+                }, 
+                {
+                    "author": "Camila Domonoske", 
+                    "categories": [], 
+                    "content": "<p>On CNN's <em>State of the Union, </em>the Republican front-runner was asked if he'd distance himself from the support of former KKK grand wizard David Duke. Trump refused four times, saying, \"I don't know.\"</p>", 
+                    "contentSnippet": "On CNN's State of the Union, the Republican front-runner was asked if he'd distance himself from the support of former KKK ...", 
+                    "link": "http://www.npr.org/sections/thetwo-way/2016/02/28/468455028/trump-wont-condemn-kkk-says-he-knows-nothing-about-white-supremacists?utm_medium=RSS&utm_campaign=storiesfromnpr", 
+                    "publishedDate": "Sun, 28 Feb 2016 07:31:00 -0800", 
+                    "title": "Trump Won't Condemn KKK, Says He 'Knows Nothing About White Supremacists'"
+                }
+            ], 
+            "feedUrl": "http://www.npr.org/rss/rss.php", 
+            "link": "http://www.npr.org", 
+            "title": "Stories from NPR : NPR", 
+            "type": "rss20"
+        }
+    }, 
+    "responseDetails": null, 
+    "responseStatus": 200
+}

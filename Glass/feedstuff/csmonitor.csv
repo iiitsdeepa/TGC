@@ -1,0 +1,52 @@
+{
+    "responseData": {
+        "feed": {
+            "author": "", 
+            "description": "Read the front page stories of csmonitor.com.", 
+            "entries": [
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "<p>A new rocket fuel feature appears to be causing technical problems. But even if the glitch is fixed for Sunday's launch, the big question still remains: Will the Falcon 9 be able to land back on Earth in one piece?</p><img src=\"http://feeds.feedburner.com/~r/feeds/csm/~4/V5vPK5G93bA\" height=\"1\" width=\"1\" alt=\"\">", 
+                    "contentSnippet": "A new rocket fuel feature appears to be causing technical problems. But even if the glitch is fixed for Sunday's launch, the ...", 
+                    "link": "http://www.csmonitor.com/Science/2016/0228/After-two-technical-delays-will-SpaceX-be-able-to-launch-Falcon-9-Sunday", 
+                    "publishedDate": "", 
+                    "title": "After two technical delays, will SpaceX be able to launch Falcon 9 Sunday?"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "<p>Both senators hit the Sunday morning circuit trying to blunt the Republican front-runner's advance.</p><img src=\"http://feeds.feedburner.com/~r/feeds/csm/~4/tD8hAfg5fTc\" height=\"1\" width=\"1\" alt=\"\">", 
+                    "contentSnippet": "Both senators hit the Sunday morning circuit trying to blunt the Republican front-runner's advance.", 
+                    "link": "http://www.csmonitor.com/USA/2016/0228/Cruz-Rubio-keep-pressure-on-Trump-as-Super-Tuesday-looms", 
+                    "publishedDate": "", 
+                    "title": "Cruz, Rubio keep pressure on Trump as Super Tuesday looms"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "<p>The referendum had been polling well last year, but it drove voter turnout and was ultimately rejected by a majority of voters.</p><img src=\"http://feeds.feedburner.com/~r/feeds/csm/~4/SOypyyLeTZ0\" height=\"1\" width=\"1\" alt=\"\">", 
+                    "contentSnippet": "The referendum had been polling well last year, but it drove voter turnout and was ultimately rejected by a majority of voters.", 
+                    "link": "http://www.csmonitor.com/World/2016/0228/Swiss-reject-controversial-proposal-to-expel-foreigners-who-commit-crimes", 
+                    "publishedDate": "", 
+                    "title": "Swiss reject controversial proposal to expel foreigners who commit crimes"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "<p>Reportedly, the strikes were carried out by Russian warplanes; there have also been accounts of clashes between government and opposition troops.</p><img src=\"http://feeds.feedburner.com/~r/feeds/csm/~4/wH4Rwq8FhxA\" height=\"1\" width=\"1\" alt=\"\">", 
+                    "contentSnippet": "Reportedly, the strikes were carried out by Russian warplanes; there have also been accounts of clashes between government and ...", 
+                    "link": "http://www.csmonitor.com/World/2016/0228/Sporadic-airstrikes-continue-in-Syria-despite-cease-fire", 
+                    "publishedDate": "", 
+                    "title": "Sporadic airstrikes continue in Syria despite cease-fire"
+                }
+            ], 
+            "feedUrl": "http://rss.csmonitor.com/feeds/csm", 
+            "link": "http://www.csmonitor.com/", 
+            "title": "Christian Science Monitor | All Stories", 
+            "type": "rss10"
+        }
+    }, 
+    "responseDetails": null, 
+    "responseStatus": 200
+}

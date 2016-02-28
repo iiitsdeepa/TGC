@@ -1,0 +1,52 @@
+{
+    "responseData": {
+        "feed": {
+            "author": "", 
+            "description": "www.washingtontimes.com stories: National", 
+            "entries": [
+                {
+                    "author": "Kellan Howell", 
+                    "categories": [], 
+                    "content": "<p>A woman who volunteered to help burn victim Safyre Terry open thousands of Christmas cards she received after her story went viral on social media has been charged of stealing donations and gift cards intended for the 8-year-old girl.\u00a0</p> <p>Kimberly Bradford, 41 of Rotterdam, N.Y. was charged with fourth-degree larceny, ...</p>", 
+                    "contentSnippet": "A woman who volunteered to help burn victim Safyre Terry open thousands of Christmas cards she received after her story went ...", 
+                    "link": "http://www.washingtontimes.com/news/2016/feb/27/safyre-terry-theft-woman-charged-stealing-money-8-/?utm_source=RSS_Feed&utm_medium=RSS", 
+                    "publishedDate": "Sat, 27 Feb 2016 11:44:45 -0800", 
+                    "title": "Safyre Terry theft: woman charged with stealing money from 8-year-old burn victim's Christmas cards"
+                }, 
+                {
+                    "author": "Kellan Howell", 
+                    "categories": [], 
+                    "content": "<p>A man claiming to be a Marine Corps veteran was escorted out of an event for Democratic presidential candidate Hillary Clinton in South Carolina on Friday after he asked her husband, former President Bill Clinton about his wife&#39;s role in the Benghazi terror attacks.\u00a0</p> <p>During a question and answer period ...</p>", 
+                    "contentSnippet": "A man claiming to be a Marine Corps veteran was escorted out of an event for Democratic presidential candidate Hillary Clinton ...", 
+                    "link": "http://www.washingtontimes.com/news/2016/feb/27/bill-clinton-blasts-marine-protesting-hillary-beng/?utm_source=RSS_Feed&utm_medium=RSS", 
+                    "publishedDate": "Sat, 27 Feb 2016 08:59:26 -0800", 
+                    "title": "Bill Clinton blasts Marine protesting Hillary on Benghazi: 'His mind has been poisoned by lies'"
+                }, 
+                {
+                    "author": "Jessica Chasmar", 
+                    "categories": [], 
+                    "content": "<p>A Georgia police sergeant has accused her chief and captain of unjustifiably assaulting and choking a 17-year-old boy suspected of burglary.</p> <p>Lithonia police arrested Isiah Lee Harvey, 17, and two other men for a burglary on Feb. 5. Police said Isiah ran from police when they arrived at the burglarized ...</p>", 
+                    "contentSnippet": "A Georgia police sergeant has accused her chief and captain of unjustifiably assaulting and choking a 17-year-old boy suspected ...", 
+                    "link": "http://www.washingtontimes.com/news/2016/feb/26/georgia-police-sergeant-accuses-own-chief-captain-/?utm_source=RSS_Feed&utm_medium=RSS", 
+                    "publishedDate": "Fri, 26 Feb 2016 11:26:23 -0800", 
+                    "title": "Georgia police sergeant accuses own chief, captain of 'unethical' attack on teen"
+                }, 
+                {
+                    "author": "Kellan Howell", 
+                    "categories": [], 
+                    "content": "<p>The U.S. Air Force on Friday revealed the first concept image of its much anticipated B-21 long-range bomber and will be taking suggestions from airmen to help decide the name of the futuristic warplane.</p> <p>Speaking at the Air Force Association's Air Warfare Symposium in Orlando, Florida, Air Force Secretary Deborah ...</p>", 
+                    "contentSnippet": "The U.S. Air Force on Friday revealed the first concept image of its much anticipated B-21 long-range bomber and will be taking ...", 
+                    "link": "http://www.washingtontimes.com/news/2016/feb/26/air-force-unveils-first-image-b-21-long-range-bomb/?utm_source=RSS_Feed&utm_medium=RSS", 
+                    "publishedDate": "Fri, 26 Feb 2016 11:13:23 -0800", 
+                    "title": "Air Force unveils first image of B-21 long-range bomber"
+                }
+            ], 
+            "feedUrl": "http://www.washingtontimes.com/rss/headlines/news/national/", 
+            "link": "http://www.washingtontimes.com/news/national/?utm_medium=RSS", 
+            "title": "www.washingtontimes.com stories: National", 
+            "type": "rss20"
+        }
+    }, 
+    "responseDetails": null, 
+    "responseStatus": 200
+}

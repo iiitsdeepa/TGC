@@ -1,0 +1,52 @@
+{
+    "responseData": {
+        "feed": {
+            "author": "", 
+            "description": "FOX News Channel - We Report. You Decide.", 
+            "entries": [
+                {
+                    "author": "foxnewsonline@foxnews.com (Fox News Online)", 
+                    "categories": [], 
+                    "content": "", 
+                    "contentSnippet": "", 
+                    "link": "http://www.foxnews.com/politics/2016/02/28/trump-hit-by-rubio-and-cruz-in-kkk-endorsement-flap.html", 
+                    "publishedDate": "Sun, 28 Feb 2016 11:30:12 -0800", 
+                    "title": "Trump hit by Rubio and Cruz  in flap over KKK endorsement"
+                }, 
+                {
+                    "author": "foxnewsonline@foxnews.com (Fox News Online)", 
+                    "categories": [], 
+                    "content": "", 
+                    "contentSnippet": "", 
+                    "link": "http://www.foxnews.com/us/2016/02/28/accused-cop-killer-was-army-staff-sergeant-assigned-to-pentagon.html", 
+                    "publishedDate": "Sun, 28 Feb 2016 11:30:12 -0800", 
+                    "title": "OFFICER MURDERED  Accused killer an Army sgt. assigned to the Pentagon"
+                }, 
+                {
+                    "author": "foxnewsonline@foxnews.com (Fox News Online)", 
+                    "categories": [], 
+                    "content": "", 
+                    "contentSnippet": "", 
+                    "link": "http://www.foxnews.com/entertainment/2016/02/28/woman-sets-up-sting-after-craigslist-hamilton-ticket-scam/", 
+                    "publishedDate": "Sun, 28 Feb 2016 11:30:12 -0800", 
+                    "title": "FACING THE MUSIC  'Hamilton' scam shot down after woman buys fake tix"
+                }, 
+                {
+                    "author": "foxnewsonline@foxnews.com (Fox News Online)", 
+                    "categories": [], 
+                    "content": "", 
+                    "contentSnippet": "", 
+                    "link": "http://www.foxnews.com/politics/2016/02/28/cruz-rubio-release-tax-filings-to-pressure-trump-and-other-candidates.html", 
+                    "publishedDate": "Sun, 28 Feb 2016 11:30:12 -0800", 
+                    "title": "SUPER TUESDAY BOOST  Clinton cruises over Sanders in SC primary"
+                }
+            ], 
+            "feedUrl": "http://feeds.foxnews.com/foxnews/latest", 
+            "link": "http://www.foxnews.com/", 
+            "title": "FOXNews.com", 
+            "type": "rss20"
+        }
+    }, 
+    "responseDetails": null, 
+    "responseStatus": 200
+}
