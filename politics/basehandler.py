@@ -66,28 +66,6 @@ DISTRICT_RE = re.compile(r'^[A-Z]{2}:[0-9]{1,2}')
 def valid_district(district):
     return district and DISTRICT_RE.match(district)
 
-#---------------------------User Implementation Functions--------------------------
-def make_secure_val(val):
-    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
-
-def check_secure_val(secure_val):
-    val = secure_val.split('|')[0]
-    if secure_val == make_secure_val(val):
-        return val
-
-def make_salt(length = 30):
-    return ''.join(random.choice(letters) for x in xrange(length))
-
-def make_pw_hash(username, pw, salt = None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(username + pw + salt).hexdigest()
-    return '%s,%s' % (salt, h)
-
-def valid_pw(name, password, h):
-    salt = h.split(',')[0]
-    return h == make_pw_hash(name, password, salt)
-
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
     signup_link = '<a href="/signup" class="user_links" id="signup_link">Signup</a>'

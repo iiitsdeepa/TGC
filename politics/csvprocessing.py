@@ -37,6 +37,7 @@ def process_visualization_csv(blob_info):
         temp = row_str.split(',')
         namequery = GqlQuery("SELECT * FROM Visualization WHERE bioguide_id = :1", temp[0])
         tempqueryrow = namequery.get()
+        logging.error(tempqueryrow)
         if tempqueryrow is None:
             entry = Visualization(name=temp[0],vtype=temp[1],title=temp[2],xaxis=temp[3],yaxis=temp[4],color=temp[5],query_columns=temp[6],element=temp[7],query=temp[8])
             entry.put()

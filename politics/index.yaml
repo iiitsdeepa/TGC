@@ -16,6 +16,11 @@ indexes:
   - name: Key
   - name: last_action
 
+- kind: Candidate
+  properties:
+  - name: party
+  - name: delegates
+
 - kind: NationalDemocraticPrimary
   properties:
   - name: entry_date
