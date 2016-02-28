@@ -37,59 +37,52 @@ function rhover(id){
 	}
 }
 
-function inputRepData(data){
-	j = JSON.parse(data)
-	if ($('#reps_slider').attr('value') == 'leaders'){
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	else {
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.hrpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.sspic+'.png)')
-		$('#jspic').css('background', 'url(/images/headshots/'+j.jspic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	//update names
-	$('#hrname').html(j.hrname)
-	$('#ssname').html(j.ssname)
-	$('#jsname').html(j.jsname)
-	//update ployalty
-	$('#ployalty .hrstat').html(j.hrployalty+'%')
-	$('#ployalty .ssstat').html(j.ssployalty+'%')
-	$('#ployalty .jsstat').html(j.jsployalty+'%')
+function showThird(){
+	$('#demo_content').css('width', '1200px')
+	$('.findform_wrapper').css('width', '1200px')
+	$('#reps_container').css('width', '1030px')
+	$('#replinks_wrapper').css('width', '1050px')
+	$('.rep_wrapper').css('width', '33%')
+	$('#last_replink').css('display', 'flex')
+	$('#js_wrapper').css('display', 'block')
 }
+
 function useLocation() {
 	console.log('using location')
     navigator.geolocation.getCurrentPosition(gotGPS);
 }
 function gotGPS(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
-    $.post('/demo', {lat: lat, lng: lng}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'block')
-        inputRepData(data)
-    });
+	lat = position.coords.latitude;
+	lng = position.coords.longitude;
+	console.log(lat+' '+lng)
+	$.post('/home', {lat: lat, lng: lng}, function(data){
+		window.location.replace("/home?district="+data);
+	});
 }
 function useAddress(){
 	street = document.getElementById('address').value;
 	state = document.getElementById('state').value;
 	city = document.getElementById('city').value;
 	address = street+' '+city+' '+state
-	$.post('/demo', {address: address}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'td')
-        inputRepData(data)
-    });
+	$.post('/home', {address: address}, function(data){
+		window.location.replace("/home?district="+data);
+	});
+}
+
+function setState(){
+	state=$('#page-data').val()
+	if (state == 'found-district'){
+		console.log("Inside")
+		showThird();
+	}
+}
+
+function startPosition(){
+	scrollTo('demo_wrapper');
 }
 
 $( document ).ready(function() {
-    $.post('/demo', {demo: 'yes'}, function(data){
-  		inputRepData(data)
-    });
+	setState();
+	startPosition();
+	slider(1,'topic','','flex');
 });

@@ -325,6 +325,7 @@
 		city = document.getElementById('city').value;
 		address = street+' '+city+' '+state
 		$.post('/prop', {address: address}, function(data){
+			console.log(data)
 			j = JSON.parse(data)
 			$('#reps_slider').attr('value', j.district)
 			$('#js_wrapper').css('display', 'block')

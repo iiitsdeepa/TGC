@@ -104,6 +104,14 @@ def monthtostr(date):
     monthlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     return monthlist[date-1]
 
+def processname(name):
+    name = name.split('_')
+    for i in range(5):
+        name[i] = name[i] + ' '
+        if (name[i] == 'None '):
+            name[i] = ''
+    return name[1] + name[2] + name[0] + name[3]# + name[4]
+
 #--------------------------Pages----------------------------------------
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
@@ -244,7 +252,15 @@ class BaseHandler(webapp2.RequestHandler):
         logging.error(state)
         logging.error(district)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         hr = dict(hrbioguideid = rep.bioguide_id,
                 hrpic = state+'_'+district,
                 hrstate = rep.state,
@@ -252,11 +268,19 @@ class BaseHandler(webapp2.RequestHandler):
                 hrdistrict = rep.distrank,
                 hrname = name.replace('_', ' '),
                 hrgender = rep.gender,
-                hrparty = rep.party,
+                hrparty = party,
                 hrfyio = rep.fyio,
                 hrfbid = rep.facebook_id,
-                hrtwid = rep.twitter_id,
-                hrwebsite = rep.website)
+                hrtwid = twitter,
+                hrwebsite = rep.website,
+                hrpartyloyalty = stats.party_loyalty,
+                hrlegindex = stats.legislative_index,
+                hrsponsored = stats.bills_sponsored,
+                hrcosponsored = stats.bills_cosponsored,
+                hrattendance = stats.attendance,
+                hrnumber_enacted = stats.number_enacted,
+                hreffectiveness = stats.effectiveness,
+                hrtitle = '%s District %s Representative' % (state, district))
         return hr
 
     def getSs(self, dist):
@@ -265,19 +289,34 @@ class BaseHandler(webapp2.RequestHandler):
         msg = 'SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'S\'' %(state)
         logging.error(msg)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         ss = dict(ssbioguideid = rep.bioguide_id,
                 sspic = state+'_SS',
                 ssstate = rep.state,
                 ssrank = 'S',
                 ssname = name.replace('_', ' '),
                 ssgender = rep.gender,
-                ssparty = rep.party,
+                ssparty = party,
                 ssfyio = rep.fyio,
                 ssfbid = rep.facebook_id,
-                sstwid = rep.twitter_id,
-                sswebsite = rep.website
-                )
+                sstwid = twitter,
+                sswebsite = rep.website,
+                sspartyloyalty = stats.party_loyalty,
+                sslegindex = stats.legislative_index,
+                sssponsored = stats.bills_sponsored,
+                sscosponsored = stats.bills_cosponsored,
+                ssattendance = stats.attendance,
+                ssnumber_enacted = stats.number_enacted,
+                sseffectiveness = stats.effectiveness,
+                sstitle = '%s Senior Senator' % (state))
         return ss
 
     def getJs(self, dist):
@@ -285,78 +324,91 @@ class BaseHandler(webapp2.RequestHandler):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         js = dict(jsbioguideid = rep.bioguide_id,
                 jspic = state+'_JS',
                 jsstate = rep.state,
                 jsrank = 'J',
                 jsname = name.replace('_', ' '),
                 jsgender = rep.gender,
-                jsparty = rep.party,
+                jsparty = party,
                 jsfyio = rep.fyio,
                 jsfbid = rep.facebook_id,
-                jstwid = rep.twitter_id,
-                jswebsite = rep.website
-                )
+                jstwid = twitter,
+                jswebsite = rep.website,
+                jspartyloyalty = stats.party_loyalty,
+                jslegindex = stats.legislative_index,
+                jssponsored = stats.bills_sponsored,
+                jscosponsored = stats.bills_cosponsored,
+                jsattendance = stats.attendance,
+                jsnumber_enacted = stats.number_enacted,
+                jseffectiveness = stats.effectiveness,
+                jstitle = '%s Junior Senator' % (state))
         return js
 
-    def getSfth(self,dist):
-        #returns a dictionary with the basic info for the representative of district=dist
-        state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('_', ' ').replace('None','')
-        hr = dict(sfthbioguideid = rep.bioguide_id,
-                sfthpic = state+'_'+district,
-                sfthstate = rep.state,
-                sfthdistrict = rep.distrank,
-                sfthname = name,
-                sfthgender = rep.gender,
-                sfthparty = rep.party,
-                sfthfyio = rep.fyio,
-                sfthfbid = rep.facebook_id,
-                sfthtwid = rep.twitter_id,
-                sfthwebsite = rep.website
-                )
-        return hr
-
-    def getSmj(self,dist):
-        state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
-        name = rep.name.replace('_', ' ').replace('NONE', '')
-        js = dict(smjbioguideid = rep.bioguide_id,
-                smjpic = state+'_SS',
-                smjstate = rep.state,
-                smjrank = 'S',
-                smjname = name,
-                smjgender = rep.gender,
-                smjparty = rep.party,
-                smjfyio = rep.fyio,
-                smjfbid = rep.facebook_id,
-                smjtwid = rep.twitter_id,
-                smjwebsite = rep.website
-                )
-        return js
-
-    def getBig2(self):
+    def getBig2(self, statlist):
         #returns a json file with the basic info for the two most powerful people in congress
-        smj = self.getSmj('KY:3')
-        sfth = self.getSfth('WI:1')
+        smj = self.getSs('KY:3')
+        sfth = self.getHr('WI:1')
         big2 = smj.copy()
         big2.update(sfth)
-        big2['smjlpic'] = 'KY_SS'
-        big2['spthpic'] = 'WI_1'
+        big2['hrtitle'] = 'Senate Majority Leader'
+        big2['sstitle'] = 'Speaker of the House'
+        stats = dict(hrstat1=big2['hrpartyloyalty'],
+                     hrstat2=big2['hrlegindex'],
+                     hrstat3=big2['hrsponsored'],
+                     hrstat4=big2['hrattendance'],
+                     hrstat5=big2['hreffectiveness'],
+                     ssstat1=big2['sspartyloyalty'],
+                     ssstat2=big2['sslegindex'],
+                     ssstat3=big2['sssponsored'],
+                     ssstat4=big2['ssattendance'],
+                     ssstat5=big2['sseffectiveness'],
+                     stat1name=statlist[0],
+                     stat2name=statlist[1],
+                     stat3name=statlist[2],
+                     stat4name=statlist[3],
+                     stat5name=statlist[4])
+        big2.update(stats)
         return big2
 
-    def pullReps(self, district):
-        big2 = self.getBig2()
+    def pullReps(self, district, statlist):
         hr = self.getHr(district)
         ss = self.getSs(district)
         js = self.getJs(district)
         reps = hr.copy()
         reps.update(ss)
         reps.update(js)
-        reps.update(big2)
         reps['district'] = district
+        stats = dict(hrstat1=reps['hrpartyloyalty'],
+                     hrstat2=reps['hrlegindex'],
+                     hrstat3=reps['hrsponsored'],
+                     hrstat4=reps['hrattendance'],
+                     hrstat5=reps['hreffectiveness'],
+                     ssstat1=reps['sspartyloyalty'],
+                     ssstat2=reps['sslegindex'],
+                     ssstat3=reps['sssponsored'],
+                     ssstat4=reps['ssattendance'],
+                     ssstat5=reps['sseffectiveness'],
+                     jsstat1=reps['jspartyloyalty'],
+                     jsstat2=reps['jslegindex'],
+                     jsstat3=reps['jssponsored'],
+                     jsstat4=reps['jsattendance'],
+                     jsstat5=reps['jseffectiveness'],
+                     stat1name=statlist[0],
+                     stat2name=statlist[1],
+                     stat3name=statlist[2],
+                     stat4name=statlist[3],
+                     stat5name=statlist[4])
+        reps.update(stats)
         return reps
 
     def initialize(self, *a, **kw):
@@ -405,7 +457,41 @@ class Landing(BaseHandler):
 
 class Home(BaseHandler):
     def get(self):
-        self.render('home.html')
+        district = self.request.get('district')
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
+        if valid_district(district):
+            params = self.pullReps(district, statlist)
+            logging.error(params)
+            self.render('demo.html',PAGESTATE='found-district', **params)
+        else:
+            params = self.getBig2(statlist)
+            self.render('demo.html', **params)
+
+    def post(self):
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
+        issuelist = self.request.get('issuelist')
+        district = self.request.get('district')
+        address = self.request.get('address')
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if issuelist:
+            logging.error('+++++++++++++++++++ HERE')
+            logging.error(issuelist)
+            params = self.getBig2(statlist)
+            params['issuelist'] = issuelist
+            self.render('demo.html', issuelist=issuelist, **params)
+        elif lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            logging.error(district)
+            self.write(district)
+        elif address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            self.write(district)
+        else:
+            params = self.getBig2(statlist)
+            logging.error(params)
+            self.render('demo.html', **params)
 
 class Election(BaseHandler):
     def get(self):
@@ -517,16 +603,18 @@ class Feedback(BaseHandler):
 class Vprop(BaseHandler):
     def get(self):
         district = self.request.get('district')
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
         if valid_district(district):
-            params = self.pullReps(district)
+            params = self.pullReps(district, statlist)
             logging.error(params)
             self.render('interactives.html',PAGESTATE='found-district', **params)
         else:
             logging.error('WHY T F IS THIS HAPPENING')
-            params = self.getBig2()
+            params = self.getBig2(statlist)
             self.render('interactives.html', **params)
 
     def post(self):
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
         issuelist = self.request.get('issuelist')
         district = self.request.get('district')
         address = self.request.get('address')
@@ -535,15 +623,16 @@ class Vprop(BaseHandler):
         if issuelist:
             logging.error('+++++++++++++++++++ HERE')
             logging.error(issuelist)
-            params = self.getBig2()
-            #params['issuelist'] = issuelist
+            params = self.getBig2(statlist)
+            params['issuelist'] = issuelist
             self.render('interactives.html', issuelist=issuelist, **params)
         elif lat and lng:
             district = self.latlngToDistrict(lat, lng)
             logging.error(district)
             self.write(district)
         else:
-            params = self.getBig2()
+            params = self.getBig2(statlist)
+            logging.error(params)
             self.render('interactives.html', **params)
 
 class PollServer(BaseHandler):

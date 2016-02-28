@@ -1,9 +1,9 @@
-{% extends "publicbase.html" %}
+{% extends "newbase.html" %}
 
 {% block content %}
 <link rel='stylesheet' href='css/demo.css'/>
 <div id='toplayer'>
-	<div id='opening'>
+	<!--<div id='opening'>
 		<img id='flagswaving'src='/images/flagswaving.png'>
 	</div>
 	<div id='wwa'>
@@ -41,44 +41,67 @@
 		<div id='quote'>
 			“The essence of Government is power; and power, lodged as it must be in human hands, will ever be liable to abuse” - James Madison.
 		</div> 
-	</div>
+	</div>-->
 	<div id='demo_wrapper'>
 
 		<h2>Find Your Representatives</h2>
-		<div id='findform_wrapper'>
-			<div id='use_address' class='districtentry'>
-				<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
-					<div class='formhead'>Enter Street Address</div>
-		  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
-		  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
-		  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
-		  			<div id='zip_submit' class='z-depth-1 dformbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
-				</form>
+		<div class='findform_wrapper z-index-1'>
+			<div class='findform_wrapper'>
+				<div id='location_data' class="dformbutton" onclick="javascript:useLocation();return false;">Find Using Your Location</div>
+				<span style='font-size:250%;margin: 0 auto;margin-top:30px'>-OR-</span>
+				<div id='use_address' class='districtentry'>
+					<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+						<div class='formhead'>Enter Street Address</div>
+			  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+			  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 5px)'>
+			  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+					</form>
+					<div id='zip_submit' class='z-depth-1 dformbutton' onclick="javascript:useAddress();return false;">Find Using Your Address</div>
+				</div>
 			</div>
-			<div id='use_location' class='districtentry'>
-				<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
-				<div class="dformbutton" onclick="javascript:useLocation();return false;">Find With Location Data</div>
-			</div>
+			<span id='privacy-statement' style='font-size:80%'>*Privacy: We won't save your location data. When you use these buttons it will be single use to find your district.</span>
 		</div>
 
-		<div id='demo_content' class='content z-index-1'>
-			<div id='statdata'>
-				<div id='statdescription'>
-					This is the stat description
+		<div id='demo_content' class='z-index-1'>
+			<div id='statdescription'>
+				<div id='statdata'>
+					<!--<span id='stattext'>Display Your Reps</span>-->
 				</div>
-				<h4>Stats</h4>
 			</div>
 			<div id='reps_container'>
-				<h3>Your Representatives</h3>
+				
 				<div id='reps_slider' value='leaders'>
-					<div id='hr_wrapper' class='rep_wrapper'>
-						<h4>Speaker For The House</h4>
-						<div id='hrpic' class='reppic_wrapper'></div>
-						<div class='basic_info'>
-							<div id='hrname' class='repname'>rep name</div>
-							<div id='hrparty' class='repparty'>rep party</div>
-							<div id='hryears' class='repyears'>years in office</div>
-							<div class='partypic_wrapper'></div>
+					<div id='hr_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{hrtitle}}</h4>
+						<div id='hr_head_wrapper' class='head_wrapper'>
+							<div id='hrpic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{hrpic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='hrname' class='repname'>{{hrname}}</div>
+								<div id='hrparty' class='repparty'>{{hrparty}}</div>
+								<div id='hryears' class='repyears'>In office since {{hrfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{hrstat1}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{hrstat2}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{hrstat3}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{hrstat4}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{hrstat5}}</td> 
+								</tr>
+							</table>
 						</div>
 						<div class='mobrep_spacer'></div>
 						<div class='mobrep_info'>
@@ -107,14 +130,37 @@
 						</div>
 					</div>
 
-					<div id='ss_wrapper' class='rep_wrapper'>
-						<h4>Senate Majority Leader</h4>
-						<div id='sspic' class='reppic_wrapper'></div>
-						<div class='basic_info'>
-							<div id='ssname' class='repname'>rep name</div>
-							<div id='ssparty' class='repparty'>rep party</div>
-							<div id='ssyears' class='repyears'>years in office</div>
-							<div class='partypic_wrapper'></div>
+					<div id='ss_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{sstitle}}</h4>
+						<div id='ss_head_wrapper' class='head_wrapper'>
+							<div id='sspic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{sspic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='ssname' class='repname'>{{ssname}}</div>
+								<div id='ssparty' class='repparty'>{{ssparty}}</div>
+								<div id='ssyears' class='repyears'>In office since {{ssfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{ssstat1}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{ssstat2}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{ssstat3}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{ssstat4}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{ssstat5}}</td> 
+								</tr>
+							</table>
 						</div>
 						<div class='mobrep_spacer'></div>
 						<div class='mobrep_info'>
@@ -142,15 +188,37 @@
 							</table>
 						</div>
 					</div>
-
-					<div id='js_wrapper' class='rep_wrapper'>
-						<h4>Junior Senator</h4>
-						<div id='jspic' class='reppic_wrapper'></div>
-						<div class='basic_info'>
-							<div id='jsname' class='repname'>rep name</div>
-							<div id='jsparty' class='repparty'>rep party</div>
-							<div id='jsyears' class='repyears'>years in office</div>
-							<div class='partypic_wrapper'></div>
+					<div id='js_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{jstitle}}</h4>
+						<div id='js_head_wrapper' class='head_wrapper'>
+							<div id='jspic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{jspic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='jsname' class='repname'>{{jsname}}</div>
+								<div id='jsparty' class='repparty'>{{jsparty}}</div>
+								<div id='jsyears' class='repyears'>In office since {{jsfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{jsstat1}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{jsstat2}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{jsstat3}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>{{jsstat4}}</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='orow drepstat'>{{jsstat5}}</td> 
+								</tr>
+							</table>
 						</div>
 						<div class='mobrep_spacer'></div>
 						<div class='mobrep_info'>
@@ -180,48 +248,79 @@
 					</div>
 				</div>
 			</div>
-			<div id='repstable_wrapper'>
-				<table id='repstable'>
-					<tr id='ployalty' class='orow plrow' onmouseover="javascript:rhover('stat1');return false;">
-						<td class='sname'>Party Loyalty</td>
-						<td class='hrstat'>X%</td>
-						<td class='ssstat'>X%</td>
-						<td class='jsstat'>X%</td>
+			<div id='repsheader_wrapper'>
+				<table class='tabledisplay'>
+					<tr id='head1' class='orow sporow' onmouseover="javascript:rhover('head1');return false;">
+						<td class='sname'>{{stat1name}}</td>
 					</tr>
-					<tr id='sponsored' class='erow sporow' onmouseover="javascript:rhover('stat2');return false;">
-						<td class='sname'>Stat 2 Name</td>
-						<td class='hrstat'>HR stat 2</td>
-						<td class='ssstat'>SS stat 2</td>
-						<td class='jsstat'>JS stat 2</td>
+					<tr id='head2' class='erow plrow' onmouseover="javascript:rhover('head2');return false;">
+						<td class='sname'>{{stat2name}}</td>
 					</tr>
-					<tr id='stat3' class='orow' onmouseover="javascript:rhover('stat3');return false;">
-						<td class='sname'>Stat 3 Name</td>
-						<td class='hrstat'>HR stat 3</td>
-						<td class='ssstat'>SS stat 3</td>
-						<td class='jsstat'>JS stat 3</td>
+					<tr id='head3' class='orow' onmouseover="javascript:rhover('head3');return false;">
+						<td class='sname'>{{stat3name}}</td>
 					</tr>
-					<tr id='stat4' class='erow' onmouseover="javascript:rhover('stat4');return false;">
-						<td class='sname'>Stat 4 Name</td>
-						<td class='hrstat'>HR stat 4</td>
-						<td class='ssstat'>SS stat 4</td>
-						<td class='jsstat'>JS stat 4</td>
+					<tr id='head4' class='erow' onmouseover="javascript:rhover('head4');return false;">
+						<td class='sname'>{{stat4name}}</td>
 					</tr>
-					<tr id='stat5' class='orow' onmouseover="javascript:rhover('stat5');return false;">
-						<td class='sname'>Stat 5 Name</td>
-						<td class='hrstat'>HR stat 5</td>
-						<td class='ssstat'>SS stat 5</td>
-						<td class='jsstat'>JS stat 5</td>
+					<tr id='head5' class='orow' onmouseover="javascript:rhover('head5');return false;">
+						<td class='sname'>{{stat5name}}</td>
 					</tr>
 				</table>
 			</div>
+			<div id='change_button_wrapper'>
+				<span id='changetext' class='dformbutton'>Change Stats</span>
+			</div>
+			<div id='replinks_wrapper'>
+				<div class='replinks'>
+					<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{hrfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{hrtwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+				<div class='replinks'>
+					<a href='{{sswebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{ssfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{sstwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+				<div id='last_replink' class='replinks'>
+					<a href='{{jswebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{jsfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{jstwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+			</div>
+			<div id='change_selector_wrapper'>
+					<div class='change_header'><h3>Select 5 legislator statictics to display from the list below.</h3></div>
+					<div id='change_checkbox_wrapper'>
+						<div class='change_checkbox'>
+							<div class='change-check'><input type='checkbox'  name='leg-stats' value='1'>Party Loyalty</div>
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='2'>Legislative Index</div>
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='3'>Bills Sponsored</div>
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='4'>Bills Cosponsored</div>
+						<!--</div>
+						<div class='change_checkbox'>-->
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='5'>Percent of Votes Missed</div>
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
+							<div class='change-check'><input type='checkbox' name='leg-stats' value='7'>Effectiveness</div>
+				        </div>
+					</div>
+					<div id='change_submit_wrapper'>
+						<span id='change_submit_button' class='dformbutton'>Submit</span>
+					</div>
+				</div>
 		</div>
 	</div>
+	<!--
 	<div id='personalmessage'>
   		<h2>To All Who Want A Better America</h2>
   		I created this site so we will have the power to make an actual difference this election. My goal is to elevate the political debate, and enable anyone to participate in it. I want to make it easy for anyone to be an active participant in government because only together can we affect real change.
-	</div>
+	</div>-->
 </div>
-<div id='baselayer'><img id='monuments'src='/images/monuments.png'></div>
+<!--<div id='baselayer'><img id='monuments'src='/images/monuments.png'></div>-->
 
 <script type="text/javascript" src="/js/demo.js"></script>
 {% endblock %}
