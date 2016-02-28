@@ -62,7 +62,7 @@
 	.rep_wrapper{width: 50%;margin:10px;height:460px;text-align: center;border:double 2px #4d0000;}
 	.rep_wrapper h4{margin: 0;text-align:center;height:25px;}
 	.head_wrapper{width:100%;height:154px;display:flex;}
-	.reppic_wrapper{left:0;margin-left:20%;height: 135px;width: 30%;border-radius: 50%;}
+	.reppic_wrapper{left:0;margin-left:12%;height: 135px;width: 38%;border-radius: 50%;}
 	.desrep_info{display:block;position: relative;bottom: 0;width: 100%;height: 240px;}
 	.basic_info{width:50%;height:46px;margin-top:88px;}
 	#js_wrapper{display: none;}
