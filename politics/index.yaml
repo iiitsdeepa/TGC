@@ -21,6 +21,12 @@ indexes:
   - name: party
   - name: delegates
 
+- kind: Candidate
+  properties:
+  - name: party
+  - name: delegates
+    direction: desc
+
 - kind: NationalDemocraticPrimary
   properties:
   - name: entry_date

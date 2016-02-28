@@ -5,7 +5,7 @@ from updatecosponsors import *
 import databaseclasses
 from csvprocessing import *
 from basehandler import *
-from vizualization_server import *
+from visualization_server import *
 
 #from oauth2client.client import flow_from_clientsecrets
 #from oauth2client.client import FlowExchangeError
@@ -37,10 +37,10 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_senator_csv(info)
         #process_rep_csv(info)
         #process_stat_csv(info)
-        #process_nationalpolls(info, 'D')
+        process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_candidate_csv(info)
-        process_visualization_csv(info)
+        #process_visualization_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
