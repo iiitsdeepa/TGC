@@ -354,7 +354,7 @@ class BaseHandler(webapp2.RequestHandler):
                 jstitle = '%s Junior Senator' % (state))
         return js
 
-    def getBig2(self, statlist):
+    def getBig2(self, statlist, basicstats):
         #returns a json file with the basic info for the two most powerful people in congress
         smj = self.getSs('KY:3')
         sfth = self.getHr('WI:1')
@@ -362,25 +362,31 @@ class BaseHandler(webapp2.RequestHandler):
         big2.update(sfth)
         big2['hrtitle'] = 'Senate Majority Leader'
         big2['sstitle'] = 'Speaker of the House'
-        stats = dict(hrstat1=big2['hrpartyloyalty'],
-                     hrstat2=big2['hrlegindex'],
-                     hrstat3=big2['hrsponsored'],
-                     hrstat4=big2['hrattendance'],
-                     hrstat5=big2['hreffectiveness'],
-                     ssstat1=big2['sspartyloyalty'],
-                     ssstat2=big2['sslegindex'],
-                     ssstat3=big2['sssponsored'],
-                     ssstat4=big2['ssattendance'],
-                     ssstat5=big2['sseffectiveness'],
-                     stat1name=statlist[0],
-                     stat2name=statlist[1],
-                     stat3name=statlist[2],
-                     stat4name=statlist[3],
-                     stat5name=statlist[4])
-        big2.update(stats)
+        temprep = ['hr','ss']
+        tempstat = basicstats.split(',')
+        for i in range(len(temprep)):
+            logging.error(i)
+            for j in range(len(tempstat)):
+                logging.error(j)
+                logging.error('%sstat%s'%(temprep[i],str(j+1)))
+                if tempstat[j] == '1':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%spartyloyalty'%(temprep[i])]
+                elif tempstat[j] == '2':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%slegindex'%(temprep[i])]
+                elif tempstat[j] == '3':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%ssponsored'%(temprep[i])]
+                elif tempstat[j] == '4':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%scosponsored'%(temprep[i])]
+                elif tempstat[j] == '5':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%sattendance'%(temprep[i])]
+                elif tempstat[j] == '6':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%snumber_enacted'%(temprep[i])]
+                elif tempstat[j] == '7':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]
+                big2['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
         return big2
 
-    def pullReps(self, district, statlist):
+    def pullReps(self, district, statlist, basicstats):
         hr = self.getHr(district)
         ss = self.getSs(district)
         js = self.getJs(district)
@@ -388,29 +394,48 @@ class BaseHandler(webapp2.RequestHandler):
         reps.update(ss)
         reps.update(js)
         reps['district'] = district
-        stats = dict(hrstat1=reps['hrpartyloyalty'],
-                     hrstat2=reps['hrlegindex'],
-                     hrstat3=reps['hrsponsored'],
-                     hrstat4=reps['hrattendance'],
-                     hrstat5=reps['hreffectiveness'],
-                     ssstat1=reps['sspartyloyalty'],
-                     ssstat2=reps['sslegindex'],
-                     ssstat3=reps['sssponsored'],
-                     ssstat4=reps['ssattendance'],
-                     ssstat5=reps['sseffectiveness'],
-                     jsstat1=reps['jspartyloyalty'],
-                     jsstat2=reps['jslegindex'],
-                     jsstat3=reps['jssponsored'],
-                     jsstat4=reps['jsattendance'],
-                     jsstat5=reps['jseffectiveness'],
-                     stat1name=statlist[0],
-                     stat2name=statlist[1],
-                     stat3name=statlist[2],
-                     stat4name=statlist[3],
-                     stat5name=statlist[4])
-        reps.update(stats)
+        temprep = ['hr','ss','js']
+        tempstat = basicstats.split(',')
+        for i in range(len(temprep)):
+            for j in range(len(tempstat)):
+                if tempstat[j] == '1':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%spartyloyalty'%(temprep[i])]
+                elif tempstat[j] == '2':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%slegindex'%(temprep[i])]
+                elif tempstat[j] == '3':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%ssponsored'%(temprep[i])]
+                elif tempstat[j] == '4':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%scosponsored'%(temprep[i])]
+                elif tempstat[j] == '5':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%sattendance'%(temprep[i])]
+                elif tempstat[j] == '6':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%snumber_enacted'%(temprep[i])]
+                elif tempstat[j] == '7':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]
+                reps['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
         return reps
-
+    """stats = dict(hrstat1=reps['hrpartyloyalty'],
+                         hrstat2=reps['hrlegindex'],
+                         hrstat3=reps['hrsponsored'],
+                         hrstat4=reps['hrattendance'],
+                         hrstat5=reps['hreffectiveness'],
+                         ssstat1=reps['sspartyloyalty'],
+                         ssstat2=reps['sslegindex'],
+                         ssstat3=reps['sssponsored'],
+                         ssstat4=reps['ssattendance'],
+                         ssstat5=reps['sseffectiveness'],
+                         jsstat1=reps['jspartyloyalty'],
+                         jsstat2=reps['jslegindex'],
+                         jsstat3=reps['jssponsored'],
+                         jsstat4=reps['jsattendance'],
+                         jsstat5=reps['jseffectiveness'],
+                         stat1name=statlist[0],
+                         stat2name=statlist[1],
+                         stat3name=statlist[2],
+                         stat4name=statlist[3],
+                         stat5name=statlist[4])
+            reps.update(stats)
+    """
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
@@ -458,13 +483,21 @@ class Landing(BaseHandler):
 class Home(BaseHandler):
     def get(self):
         district = self.request.get('district')
-        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
+        userstats = self.request.get('stats')
+        statlist = ['Party Loyalty','Legislative Index','Bills Sponsored','Bills Cosponsored','% of Votes Missed','Number of Bills Enacted','Effectiveness']
+        basicstats = '1,2,3,5,7'
         if valid_district(district):
-            params = self.pullReps(district, statlist)
-            logging.error(params)
-            self.render('demo.html',PAGESTATE='found-district', **params)
+            if userstats:
+                params = self.pullReps(district, statlist, userstats)
+                self.render('demo.html',PAGESTATE='found-district', **params)
+            else:
+                params = self.pullReps(district, statlist, basicstats)
+                self.render('demo.html',PAGESTATE='found-district', **params)
+        elif userstats:
+            params = self.getBig2(statlist, userstats)
+            self.render('demo.html', **params)
         else:
-            params = self.getBig2(statlist)
+            params = self.getBig2(statlist, basicstats)
             self.render('demo.html', **params)
 
     def post(self):

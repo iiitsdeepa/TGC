@@ -69,13 +69,15 @@
 	#last_replink{display:none;}
 	.repname{margin: 0 auto;width: 150px;height: 21px;font-weight: bold;}
 	#repsheader_wrapper{display:block;position:absolute;z-index:0;bottom: 50px;left: 0;width: 150px;height: 250px;}
-	#change_selector_wrapper{position:absolute;z-index:1;padding:10px;width:300px;left:0;height:480px;background-color: lightgrey}
+	#change_selector_wrapper{display:none;position:absolute;z-index:1;padding:10px;width:300px;left:0;height:480px;background-color: lightgrey}
 	#change_button_wrapper{position:absolute;z-index:0;bottom: 0px;left: 0px;width: 134px;height: 50px;margin:8px;}
 	#change_checkbox_wrapper{display:flex;margin-top:20px;}
 	.change_checkbox{width:100%;display:inline;}
 	.change-check{margin-top:10px;}
 	.change_header{margin: 0 auto;text-align:center;}
-	#change_submit_wrapper{position:relative;width: 100px;height: 50px;margin: 0 auto;margin-top:20px;}
+	#change_submit_wrapper{display:flex;position:relative;width: 220px;height: 50px;margin: 0 auto;margin-top:20px;}
+	#change_submit_button{position:relative;width:90px;margin: 0 auto;}
+	#change_cancel_button{position:relative;width:90px;margin: 0 auto;}
 	.tabledisplay{height: 100%;width: 100%;text-align: center;}
 	.sname{width: 40%;}
 	.hrstat{}

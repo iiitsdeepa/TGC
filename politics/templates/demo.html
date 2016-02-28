@@ -268,7 +268,7 @@
 				</table>
 			</div>
 			<div id='change_button_wrapper'>
-				<span id='changetext' class='dformbutton'>Change Stats</span>
+				<span id='changetext' class='dformbutton' onclick="javascript:loadStats();return false;">Change Stats</span>
 			</div>
 			<div id='replinks_wrapper'>
 				<div class='replinks'>
@@ -293,23 +293,24 @@
 					<a href='http://twitter.com/{{jstwid}}' class='rep-link'target='blank'>Twitter</a>
 				</div>
 			</div>
-			<div id='change_selector_wrapper'>
+			<div id='change_selector_wrapper' class='z-index-1'>
 					<div class='change_header'><h3>Select 5 legislator statictics to display from the list below.</h3></div>
 					<div id='change_checkbox_wrapper'>
 						<div class='change_checkbox'>
-							<div class='change-check'><input type='checkbox'  name='leg-stats' value='1'>Party Loyalty</div>
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='2'>Legislative Index</div>
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='3'>Bills Sponsored</div>
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='4'>Bills Cosponsored</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='1'>Party Loyalty</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='2'>Legislative Index</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='3'>Bills Sponsored</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='4'>Bills Cosponsored</div>
 						<!--</div>
 						<div class='change_checkbox'>-->
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='5'>Percent of Votes Missed</div>
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
-							<div class='change-check'><input type='checkbox' name='leg-stats' value='7'>Effectiveness</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='5'>Percent of Votes Missed</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
+							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='7'>Effectiveness</div>
 				        </div>
 					</div>
 					<div id='change_submit_wrapper'>
-						<span id='change_submit_button' class='dformbutton'>Submit</span>
+						<span id='change_submit_button' class='dformbutton' onclick="javascript:submitStats();return false;">Submit</span>
+						<span id='change_cancel_button' class='dformbutton' onclick="javascript:cancelStats();return false;">Cancel</span>
 					</div>
 				</div>
 		</div>

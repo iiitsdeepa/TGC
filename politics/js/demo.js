@@ -47,6 +47,55 @@ function showThird(){
 	$('#js_wrapper').css('display', 'block')
 }
 
+function loadStats(){
+	$('#change_selector_wrapper').css('display','inline')
+}
+
+function cancelStats(){
+	$('#change_selector_wrapper').css('display','none')
+}
+
+function getQueryParams(qs) {
+    qs = qs.split('+').join(' ');
+
+    var params = {},
+        tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
+
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+
+    return params;
+}
+
+//var query = getQueryParams(document.location.search);
+//alert(query.foo);
+
+function submitStats(){
+	var checkedValue = new String(''); 
+	var inputElements = document.getElementsByClassName('leg-stats');
+	var distparams = getQueryParams(document.location.search);
+	for(var i=0; inputElements[i]; ++i){
+		if(inputElements[i].checked){
+			checkedValue = checkedValue + inputElements[i].value + ',';
+		}
+	}
+	checkedValue = checkedValue.substring(0,checkedValue.lastIndexOf(','));
+	$('#change_selector_wrapper').css('display','none')
+	if(distparams.district == undefined){
+		if (checkedValue == '') {
+			window.location.replace("/home");
+		} else {
+			window.location.replace("/home?stats="+checkedValue);
+		}
+	} else if (checkedValue == '') {
+		window.location.replace("/home?district="+distparams.district);
+	} else {
+		window.location.replace("/home?district="+distparams.district+"&stats="+checkedValue);
+	}
+}
+
 function useLocation() {
 	console.log('using location')
     navigator.geolocation.getCurrentPosition(gotGPS);
@@ -54,19 +103,32 @@ function useLocation() {
 function gotGPS(position) {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
-	console.log(lat+' '+lng)
-	$.post('/home', {lat: lat, lng: lng}, function(data){
-		window.location.replace("/home?district="+data);
-	});
+	var distparams = getQueryParams(document.location.search);
+	if (distparams.stats == undefined){
+		$.post('/home', {lat: lat, lng: lng}, function(data){
+			window.location.replace("/home?district="+data);
+		});
+	} else {
+		$.post('/home', {lat: lat, lng: lng}, function(data){
+			window.location.replace("/home?district="+data+"&stats="+distparams.stats);
+		});
+	}
 }
 function useAddress(){
 	street = document.getElementById('address').value;
 	state = document.getElementById('state').value;
 	city = document.getElementById('city').value;
 	address = street+' '+city+' '+state
-	$.post('/home', {address: address}, function(data){
-		window.location.replace("/home?district="+data);
-	});
+	var distparams = getQueryParams(document.location.search);
+	if (distparams.stats == ''){
+		$.post('/home', {address: address}, function(data){
+			window.location.replace("/home?district="+data);
+		});
+	} else {
+		$.post('/home', {address: address}, function(data){
+			window.location.replace("/home?district="+data+"&stats="+distparams.stats);
+		});
+	}
 }
 
 function setState(){
