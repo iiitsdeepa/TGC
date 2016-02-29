@@ -1,5 +1,28 @@
 {% extends "newbase.html" %}
 {% block content %}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
+      feed.load(function(result) {
+        if (!result.error) {
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(entry.title));
+            container.appendChild(div);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize)
+    </script>
+
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
@@ -8,25 +31,7 @@
 </div>
 
 <div id='news' class='tab'>
-	<h1 class='tab-title'>Current News</h1>
-		<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
-		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
-		</div>
-	</div>
+	<div id="feed"></div>
 </div>
 
 <div id='election' class='tab'>
