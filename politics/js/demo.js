@@ -17,22 +17,28 @@ function rhover(id){
 	s3 = 'This is the text for stat 3'
 	s4 = 'This is the text for stat 4'
 	s5 = 'This is the text for stat 5'
+	s6 = 'This is the text for stat 5'
+	s7 = 'This is the text for stat 5'
+	s8 = ''
 
 	switch (id){
-		case 'stat1':
+		case 'head1':
 			$('#statdescription').html(s1)
 			break
-		case 'stat2':
+		case 'head2':
 			$('#statdescription').html(s2)
 			break
-		case 'stat3':
+		case 'head3':
 			$('#statdescription').html(s3)
 			break
-		case 'stat4':
+		case 'head4':
 			$('#statdescription').html(s4)
 			break
-		case 'stat5':
+		case 'head5':
 			$('#statdescription').html(s5)
+			break
+		default:
+			$('#statdescription').html(s8)
 			break
 	}
 }
@@ -52,7 +58,40 @@ function loadStats(){
 }
 
 function cancelStats(){
+	$('#change_selector_wrapper').css('animation-name','change_animation3')
+	$('#change_checkbox_wrapper').css('animation-name','change_animation4')
+	$('#change_checkbox_wrapper').css('animation-duration','500ms')
+	$('.change_checkbox').css('animation-name','change_animation4')
+	$('.change_checkbox').css('animation-duration','500ms')
+	$('.change-check').css('animation-name','change_animation4')
+	$('.change-check').css('animation-duration','500ms')
+	$('.change_header').css('animation-name','change_animation4')
+	$('.change_header').css('animation-duration','500ms')
+	$('#change_submit_wrapper').css('animation-name','change_animation4')
+	$('#change_submit_wrapper').css('animation-duration','500ms')
+	$('#change_submit_button').css('animation-name','change_animation4')
+	$('#change_submit_button').css('animation-duration','500ms')
+	$('#change_cancel_button').css('animation-name','change_animation4')
+	$('#change_cancel_button').css('animation-duration','500ms')
+	window.setTimeout(cancelpartB,450);
+}
+function cancelpartB(){
 	$('#change_selector_wrapper').css('display','none')
+	$('#change_selector_wrapper').css('animation-name','change_animation1')
+	$('#change_checkbox_wrapper').css('animation-name','change_animation2')
+	$('#change_checkbox_wrapper').css('animation-duration','1s')
+	$('.change_checkbox').css('animation-name','change_animation2')
+	$('.change_checkbox').css('animation-duration','1s')
+	$('.change-check').css('animation-name','change_animation2')
+	$('.change-check').css('animation-duration','1s')
+	$('.change_header').css('animation-name','change_animation2')
+	$('.change_header').css('animation-duration','1s')
+	$('#change_submit_wrapper').css('animation-name','change_animation2')
+	$('#change_submit_wrapper').css('animation-duration','1s')
+	$('#change_submit_button').css('animation-name','change_animation2')
+	$('#change_submit_button').css('animation-duration','1s')
+	$('#change_cancel_button').css('animation-name','change_animation2')
+	$('#change_cancel_button').css('animation-duration','1s')
 }
 
 function getQueryParams(qs) {

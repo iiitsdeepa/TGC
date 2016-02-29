@@ -365,18 +365,25 @@ class BaseHandler(webapp2.RequestHandler):
                 logging.error('%sstat%s'%(temprep[i],str(j+1)))
                 if tempstat[j] == '1':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%spartyloyalty'%(temprep[i])]
+                    big2['stat1checked'] = 'checked="yes"'
                 elif tempstat[j] == '2':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%slegindex'%(temprep[i])]
+                    big2['stat2checked'] = 'checked="yes"'
                 elif tempstat[j] == '3':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%ssponsored'%(temprep[i])]
+                    big2['stat3checked'] = 'checked="yes"'
                 elif tempstat[j] == '4':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%scosponsored'%(temprep[i])]
+                    big2['stat4checked'] = 'checked="yes"'
                 elif tempstat[j] == '5':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%sattendance'%(temprep[i])]
+                    big2['stat5checked'] = 'checked="yes"'
                 elif tempstat[j] == '6':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%snumber_enacted'%(temprep[i])]
+                    big2['stat6checked'] = 'checked="yes"'
                 elif tempstat[j] == '7':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]
+                    big2['stat7checked'] = 'checked="yes"'
                 big2['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
         return big2
 
@@ -394,18 +401,25 @@ class BaseHandler(webapp2.RequestHandler):
             for j in range(len(tempstat)):
                 if tempstat[j] == '1':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%spartyloyalty'%(temprep[i])]
+                    reps['stat1checked'] = 'checked="yes"'
                 elif tempstat[j] == '2':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%slegindex'%(temprep[i])]
+                    reps['stat2checked'] = 'checked="yes"'
                 elif tempstat[j] == '3':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%ssponsored'%(temprep[i])]
+                    reps['stat3checked'] = 'checked="yes"'
                 elif tempstat[j] == '4':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%scosponsored'%(temprep[i])]
+                    reps['stat4checked'] = 'checked="yes"'
                 elif tempstat[j] == '5':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%sattendance'%(temprep[i])]
+                    reps['stat5checked'] = 'checked="yes"'
                 elif tempstat[j] == '6':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%snumber_enacted'%(temprep[i])]
+                    reps['stat6checked'] = 'checked="yes"'
                 elif tempstat[j] == '7':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]
+                    reps['stat7checked'] = 'checked="yes"'
                 reps['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
         return reps
     def initialize(self, *a, **kw):

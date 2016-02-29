@@ -79,7 +79,7 @@
 <div id='reps' class='tab'>
 	<div id='demo_wrapper'>
 		<h2>Find Your Representatives</h2>
-		<div class='findform_wrapper z-index-1'>
+		<div class='findform_wrapper z-index-1' onmouseover="javascript:rhover('bleh');return false;">
 			<div class='findform_wrapper'>
 				<div id='location_data' class="dformbutton" onclick="javascript:useLocation();return false;">Find Using Your Location</div>
 				<span style='font-size:250%;margin: 0 auto;margin-top:30px'>-OR-</span>
@@ -102,7 +102,7 @@
 					<!--<span id='stattext'>Display Your Reps</span>-->
 				</div>
 			</div>
-			<div id='reps_container'>
+			<div id='reps_container' onmouseover="javascript:rhover('bleh');return false;">
 				
 				<div id='reps_slider' value='leaders'>
 					<div id='hr_wrapper' class='rep_wrapper z-index-1'>
@@ -301,10 +301,10 @@
 					</tr>
 				</table>
 			</div>
-			<div id='change_button_wrapper'>
+			<div id='change_button_wrapper' onmouseover="javascript:rhover('bleh');return false;">
 				<span id='changetext' class='dformbutton' onclick="javascript:loadStats();return false;">Change Stats</span>
 			</div>
-			<div id='replinks_wrapper'>
+			<div id='replinks_wrapper' onmouseover="javascript:rhover('bleh');return false;">
 				<div class='replinks'>
 					<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a>
 					<div class='rep-link_spacer'></div>
@@ -331,15 +331,15 @@
 					<div class='change_header'><h3>Select 5 legislator statictics to display from the list below.</h3></div>
 					<div id='change_checkbox_wrapper'>
 						<div class='change_checkbox'>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='1'>Party Loyalty</div>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='2'>Legislative Index</div>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='3'>Bills Sponsored</div>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='4'>Bills Cosponsored</div>
+							<div class='change-check'><input type='checkbox' {{stat1checked}} class='leg-stats' name='leg-stats' value='1'>Party Loyalty</div>
+							<div class='change-check'><input type='checkbox' {{stat2checked}} class='leg-stats' name='leg-stats' value='2'>Legislative Index</div>
+							<div class='change-check'><input type='checkbox' {{stat3checked}} class='leg-stats' name='leg-stats' value='3'>Bills Sponsored</div>
+							<div class='change-check'><input type='checkbox' {{stat4checked}} class='leg-stats' name='leg-stats' value='4'>Bills Cosponsored</div>
 						<!--</div>
 						<div class='change_checkbox'>-->
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='5'>Percent of Votes Missed</div>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
-							<div class='change-check'><input type='checkbox' class='leg-stats' name='leg-stats' value='7'>Effectiveness</div>
+							<div class='change-check'><input type='checkbox' {{stat5checked}} class='leg-stats' name='leg-stats' value='5'>Percent of Votes Missed</div>
+							<div class='change-check'><input type='checkbox' {{stat6checked}} class='leg-stats' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
+							<div class='change-check'><input type='checkbox' {{stat7checked}} class='leg-stats' name='leg-stats' value='7'>Effectiveness</div>
 				        </div>
 					</div>
 					<div id='change_submit_wrapper'>
