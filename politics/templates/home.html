@@ -97,12 +97,36 @@
 		</div>
 
 		<div id='demo_content' class='z-index-1'>
-			<div id='statdescription'>
-				<div id='statdata'>
-					<!--<span id='stattext'>Display Your Reps</span>-->
+			<div id='statdescription' class='z-index-1 tooltip'>
+				<span class="tooltiptext2">{{colorhover}}</span>
+				<div class='stattitle'>Color Key:</div>
+				<div class='statgradientbackground'></div>
+				<table id='statdata'>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #FF0000;'></div>-->
+							<div class='statkeytext'>Best</div>
+						</td> 
+					</tr>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #FFFF00;'></div>-->
+							<div class='statkeytext'>Average</div>
+						</td> 
+					</tr>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #00FF00;'></div>-->
+							<div class='statkeytext'>Worst</div>
+						</td> 
+					</tr> 
+				</table>
+				<div class ='drepstat2'>
+					<div class='statkeybackground' style='background-color: #AAAAAA;'></div>
+					<div class='statkeytext2'>N/A</div>
 				</div>
 			</div>
-			<div id='reps_container' onmouseover="javascript:rhover('bleh');return false;">
+			<div id='reps_container'>
 				
 				<div id='reps_slider' value='leaders'>
 					<div id='hr_wrapper' class='rep_wrapper z-index-1'>
@@ -121,19 +145,34 @@
 						<div class='desrep_info'>
 							<table class='tabledisplay'>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{hrstat1}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr1back}};'></div>
+										<div class='stattext'>{{hrstat1}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{hrstat2}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr2back}};'></div>
+										<div class='stattext'>{{hrstat2}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{hrstat3}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr3back}};'></div>
+										<div class='stattext'>{{hrstat3}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{hrstat4}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr4back}};'></div>
+										<div class='stattext'>{{hrstat4}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{hrstat5}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr5back}};'></div>
+										<div class='stattext'>{{hrstat5}}</div>
+									</td> 
 								</tr>
 							</table>
 						</div>
@@ -180,19 +219,34 @@
 						<div class='desrep_info'>
 							<table class='tabledisplay'>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{ssstat1}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss1back}};'></div>
+										<div class='stattext'>{{ssstat1}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{ssstat2}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss2back}};'></div>
+										<div class='stattext'>{{ssstat2}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{ssstat3}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss3back}};'></div>
+										<div class='stattext'>{{ssstat3}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{ssstat4}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss4back}};'></div>
+										<div class='stattext'>{{ssstat4}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{ssstat5}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss5back}};'></div>
+										<div class='stattext'>{{ssstat5}}</div>
+									</td> 
 								</tr>
 							</table>
 						</div>
@@ -238,19 +292,34 @@
 						<div class='desrep_info'>
 							<table class='tabledisplay'>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{jsstat1}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js1back}};'></div>
+										<div class='stattext'>{{jsstat1}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{jsstat2}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js2back}};'></div>
+										<div class='stattext'>{{jsstat2}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{jsstat3}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js3back}};'></div>
+										<div class='stattext'>{{jsstat3}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='erow drepstat'>{{jsstat4}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js4back}};'></div>
+										<div class='stattext'>{{jsstat4}}</div>
+									</td> 
 								</tr>
 								<tr class='dtrow'>
-									<td class ='orow drepstat'>{{jsstat5}}</td> 
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js5back}};'></div>
+										<div class='stattext'>{{jsstat5}}</div>
+									</td> 
 								</tr>
 							</table>
 						</div>
@@ -284,27 +353,32 @@
 			</div>
 			<div id='repsheader_wrapper'>
 				<table class='tabledisplay'>
-					<tr id='head1' class='orow sporow' onmouseover="javascript:rhover('head1');return false;">
-						<td class='sname'>{{stat1name}}</td>
+					<tr id='head1' class='erow sporow'>
+						<td class='sname tooltip'>{{stat1name}}<span class="tooltiptext">{{hover1}}</span></td>
+						
 					</tr>
-					<tr id='head2' class='erow plrow' onmouseover="javascript:rhover('head2');return false;">
-						<td class='sname'>{{stat2name}}</td>
+					<tr id='head2' class='erow plrow'>
+						<td class='sname tooltip'>{{stat2name}}<span class="tooltiptext">{{hover2}}</span></td>
+						
 					</tr>
-					<tr id='head3' class='orow' onmouseover="javascript:rhover('head3');return false;">
-						<td class='sname'>{{stat3name}}</td>
+					<tr id='head3' class='erow'>
+						<td class='sname tooltip'>{{stat3name}}<span class="tooltiptext">{{hover3}}</span></td>
+						
 					</tr>
-					<tr id='head4' class='erow' onmouseover="javascript:rhover('head4');return false;">
-						<td class='sname'>{{stat4name}}</td>
+					<tr id='head4' class='erow'>
+						<td class='sname tooltip'>{{stat4name}}<span class="tooltiptext">{{hover4}}</span></td>
+						
 					</tr>
-					<tr id='head5' class='orow' onmouseover="javascript:rhover('head5');return false;">
-						<td class='sname'>{{stat5name}}</td>
+					<tr id='head5' class='erow'>
+						<td class='sname tooltip'>{{stat5name}}<span class="tooltiptext">{{hover5}}</span></td>
+						
 					</tr>
 				</table>
 			</div>
-			<div id='change_button_wrapper' onmouseover="javascript:rhover('bleh');return false;">
+			<div id='change_button_wrapper'>
 				<span id='changetext' class='dformbutton' onclick="javascript:loadStats();return false;">Change Stats</span>
 			</div>
-			<div id='replinks_wrapper' onmouseover="javascript:rhover('bleh');return false;">
+			<div id='replinks_wrapper'>
 				<div class='replinks'>
 					<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a>
 					<div class='rep-link_spacer'></div>
@@ -339,7 +413,7 @@
 						<div class='change_checkbox'>-->
 							<div class='change-check'><input type='checkbox' {{stat5checked}} class='leg-stats' name='leg-stats' value='5'>Percent of Votes Missed</div>
 							<div class='change-check'><input type='checkbox' {{stat6checked}} class='leg-stats' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
-							<div class='change-check'><input type='checkbox' {{stat7checked}} class='leg-stats' name='leg-stats' value='7'>Effectiveness</div>
+							<div class='change-check'><input type='checkbox' {{stat7checked}} class='leg-stats' name='leg-stats' value='7'>Performance</div>
 				        </div>
 					</div>
 					<div id='change_submit_wrapper'>

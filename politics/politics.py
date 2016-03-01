@@ -38,8 +38,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_rep_csv(info)
         #process_stat_csv(info)
         #process_nationalpolls(info, 'R')
-        process_politician_csv(info)
-        #process_politician_stats(info)
+        #process_politician_csv(info)
+        process_politician_stats(info)
         #process_candidate_csv(info)
         #process_visualization_csv(info)
         #process_votes_csv(info)
@@ -58,7 +58,7 @@ class Home(BaseHandler):
     def get(self):
         district = self.request.get('district')
         userstats = self.request.get('stats')
-        statlist = ['Party Loyalty','Legislative Index','Bills Sponsored','Bills Cosponsored','% of Votes Missed','Number of Bills Enacted','Effectiveness']
+        statlist = ['Party Loyalty','Legislative Index','Bills Sponsored','Bills Cosponsored','% of Votes Missed','Number of Bills Enacted','Performance']
         basicstats = '1,2,3,5,7'
         if valid_district(district):
             if userstats:
@@ -75,7 +75,7 @@ class Home(BaseHandler):
             self.render('home.html', **params)
 
     def post(self):
-        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Performance']
         issuelist = self.request.get('issuelist')
         district = self.request.get('district')
         address = self.request.get('address')
@@ -271,9 +271,6 @@ class UpdateAll(BaseHandler):
         getVotesUpdate()
         logging.error('Bills')
         getBillsUpdate()
-        #logging.error('Cosponsors')
-        #getCosponsorsUpdate()
-        #self.redirect('/')
         self.response.set_status(200)
 
     def post(self):

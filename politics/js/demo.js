@@ -20,7 +20,8 @@ function rhover(id){
 	s6 = 'This is the text for stat 5'
 	s7 = 'This is the text for stat 5'
 	s8 = ''
-
+	s9 = ''
+	/*
 	switch (id){
 		case 'head1':
 			$('#statdescription').html(s1)
@@ -40,7 +41,7 @@ function rhover(id){
 		default:
 			$('#statdescription').html(s8)
 			break
-	}
+	}*/
 }
 
 function showThird(){

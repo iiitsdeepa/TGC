@@ -107,6 +107,68 @@ def processname(name):
             name[i] = ''
     return name[1] + name[2] + name[0] + name[3]# + name[4]
 
+def strtohexcode(inputdec):
+    inputdec = float(inputdec)
+    if inputdec < 0:
+        outputcolor = 'lightgray'
+    elif inputdec > 50:
+        tempdec = inputdec - 50
+        tempdec = 255 - int((tempdec*(255.0/25.1)))
+        temphex = hex(tempdec)[2:]
+        if len(temphex) == 1:
+            temphex = '0'+temphex
+        outputcolor = '#%sff00'%str(temphex)
+    else:
+        tempdec = inputdec - 40
+        tempdec = int((tempdec*(255.0/10.0)))
+        temphex = hex(tempdec)[2:]
+        if len(temphex) == 1:
+            temphex = '0'+temphex
+        outputcolor = '#ff%s00'%str(temphex)
+    logging.error('1 '+outputcolor)
+    return outputcolor
+
+def strtohexcode2(inputdec):
+    if inputdec == 'N/A':
+        outputcolor = 'lightgray'
+    else:
+        inputdec = float(inputdec)
+        if inputdec < 0:
+            outputcolor = 'gray'
+        elif inputdec > 94:
+            tempdec = inputdec - 94
+            tempdec = 255 - int((tempdec*(255.0/6.1)))
+            temphex = hex(tempdec)[2:]
+            if len(temphex) == 1:
+                temphex = '0'+temphex
+            outputcolor = '#%sff00'%str(temphex)
+        else:
+            tempdec = inputdec - 35
+            tempdec = int((tempdec*(255.0/59.1)))
+            temphex = hex(tempdec)[2:]
+            if len(temphex) == 1:
+                temphex = '0'+temphex
+            outputcolor = '#ff%s00'%str(temphex)
+    logging.error('2 '+outputcolor)
+    return outputcolor
+
+def strtohexcode3(inputdec):
+    inputdec = float(inputdec)
+    if inputdec < 0:
+        outputcolor = 'lightgray'
+    elif inputdec > 50:
+        tempdec = inputdec - 50
+        tempdec = 255 - int((tempdec*(255.0/50.0)))
+        temphex = hex(tempdec)[2:]
+        outputcolor = '#%sff00'%str(temphex)
+    else:
+        tempdec = inputdec
+        tempdec = int((tempdec*(255.0/50.0)))
+        temphex = hex(tempdec)[2:]
+        outputcolor = '#ff%s00'%str(temphex)
+    logging.error('3 '+outputcolor)
+    return outputcolor
+
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
     signup_link = '<a href="/signup" class="user_links" id="signup_link">Signup</a>'
@@ -274,6 +336,10 @@ class BaseHandler(webapp2.RequestHandler):
                 hrattendance = stats.attendance,
                 hrnumber_enacted = stats.number_enacted,
                 hreffectiveness = stats.effectiveness,
+                hrsponsorsub = stats.sponsor_sub,
+                hrcosponsorsub = stats.cosponsor_sub,
+                hrenactedsub = stats.enacted_sub,
+                hrmissedsub = stats.missed_sub,
                 hrtitle = '%s District %s Representative' % (state, district))
         return hr
 
@@ -310,6 +376,10 @@ class BaseHandler(webapp2.RequestHandler):
                 ssattendance = stats.attendance,
                 ssnumber_enacted = stats.number_enacted,
                 sseffectiveness = stats.effectiveness,
+                sssponsorsub = stats.sponsor_sub,
+                sscosponsorsub = stats.cosponsor_sub,
+                ssenactedsub = stats.enacted_sub,
+                ssmissedsub = stats.missed_sub,
                 sstitle = '%s Senior Senator' % (state))
         return ss
 
@@ -345,6 +415,10 @@ class BaseHandler(webapp2.RequestHandler):
                 jsattendance = stats.attendance,
                 jsnumber_enacted = stats.number_enacted,
                 jseffectiveness = stats.effectiveness,
+                jssponsorsub = stats.sponsor_sub,
+                jscosponsorsub = stats.cosponsor_sub,
+                jsenactedsub = stats.enacted_sub,
+                jsmissedsub = stats.missed_sub,
                 jstitle = '%s Junior Senator' % (state))
         return js
 
@@ -364,27 +438,42 @@ class BaseHandler(webapp2.RequestHandler):
                 logging.error(j)
                 logging.error('%sstat%s'%(temprep[i],str(j+1)))
                 if tempstat[j] == '1':
-                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%spartyloyalty'%(temprep[i])]
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%spartyloyalty'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     big2['stat1checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Percentage of times the politician votes with their party.'
                 elif tempstat[j] == '2':
-                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%slegindex'%(temprep[i])]
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%slegindex'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode3(big2['%slegindex'%(temprep[i])])
                     big2['stat2checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'This stat is used to compare politicians\' effectiveness. It is calculated using 4 substats: Sponsored Bills, Cosponsored Bills, Missed Votes, and Effectiveness. Each of these subscores are weighted and combined to form the final score. The final score is then normalized on a scale from 0 to 100 with a mean score of 50. Scores for most politicians fall between 40 and 60.'
                 elif tempstat[j] == '3':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%ssponsored'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%ssponsorsub'%(temprep[i])])
                     big2['stat3checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills the politician has sponsored in the past 6 years.'
                 elif tempstat[j] == '4':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%scosponsored'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%scosponsorsub'%(temprep[i])])
                     big2['stat4checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills the politician has cosponsored in the past 6 years.'
                 elif tempstat[j] == '5':
-                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%sattendance'%(temprep[i])]
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%sattendance'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode2(big2['%smissedsub'%(temprep[i])])
                     big2['stat5checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Percentage of votes in congress the politician has missed over the past 6 years.'
                 elif tempstat[j] == '6':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%snumber_enacted'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     big2['stat6checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
                 elif tempstat[j] == '7':
-                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%senactedsub'%(temprep[i])])
                     big2['stat7checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = '(sponsored + cosponsored bills) / number of bills enacted'
                 big2['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
+                big2['colorhover'] = 'This gradient represents where the politician is ranked against all other politicians in congress, green being the highest ranked all the way to red being the lowest ranked.'
         return big2
 
     def pullReps(self, district, statlist, basicstats):
@@ -400,27 +489,42 @@ class BaseHandler(webapp2.RequestHandler):
         for i in range(len(temprep)):
             for j in range(len(tempstat)):
                 if tempstat[j] == '1':
-                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%spartyloyalty'%(temprep[i])]
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%spartyloyalty'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     reps['stat1checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Percentage of times the politician votes with their party.'
                 elif tempstat[j] == '2':
-                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%slegindex'%(temprep[i])]
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%slegindex'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode3(reps['%slegindex'%(temprep[i])])
                     reps['stat2checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'This stat is used to compare politicians\' effectiveness. It is calculated using 4 substats: Sponsored Bills, Cosponsored Bills, Missed Votes, and Effectiveness. Each of these subscores are weighted and combined to form the final score. The final score is then normalized on a scale from 0 to 100 with a mean score of 50. Scores for most politicians fall between 40 and 60.'
                 elif tempstat[j] == '3':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%ssponsored'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%ssponsorsub'%(temprep[i])])
                     reps['stat3checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills the politician has sponsored in the past 6 years.'
                 elif tempstat[j] == '4':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%scosponsored'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%scosponsorsub'%(temprep[i])])
                     reps['stat4checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills the politician has cosponsored in the past 6 years.'
                 elif tempstat[j] == '5':
-                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%sattendance'%(temprep[i])]
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%sattendance'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode2(reps['%smissedsub'%(temprep[i])])
                     reps['stat5checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Percentage of votes in congress the politician has missed over the past 6 years.'
                 elif tempstat[j] == '6':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%snumber_enacted'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     reps['stat6checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
                 elif tempstat[j] == '7':
-                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%senactedsub'%(temprep[i])])
                     reps['stat7checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = '(sponsored + cosponsored bills) / number of bills enacted'
                 reps['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
+                reps['colorhover'] = 'This gradient represents where the politician is ranked against all other politicians in congress, green being the highest ranked all the way to red being the lowest ranked.'
         return reps
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)

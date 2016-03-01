@@ -69,9 +69,9 @@
 	#quote{width: 30%;right: 150px;}
 	.formhead{border-bottom: solid darkred 2px;margin-bottom: 5px;font-weight: bold;}
 	#districtform{margin: 0;width:500px;}
-	#statdata{display:flex;margin: 0 auto;width:100%;height:100%;}
+	#statdata{margin: 0 auto;width:140px;height:85px;}
 	#stattext{font-size:130%;margin: 0 auto;margin-top:77px;width:100px;height:46px;text-align:center;}
-	#statdescription{position:absolute;top:10px;left:10px;width: 130px;height: 1800px;}
+	#statdescription{position:absolute;top:10px;left:10px;width: 140px;height: 180px;border:solid 2px;}
 	#reps_container{position:absolute;z-index:0;top:10px;left:160px;width:780px;height:440px;}
 	#reps_container h3{height: 50px;line-height: 50px;margin: 0;text-align: center;}
 	#reps_slider{position: relative;justify-content: space-between;padding: 2px;height: 100%;}
@@ -95,6 +95,16 @@
 	#change_submit_button{animation-name:change_animation2;animation-duration:1s;position:relative;width:90px;margin: 0 auto;}
 	#change_cancel_button{animation-name:change_animation2;animation-duration:1s;position:relative;width:90px;margin: 0 auto;}
 	.tabledisplay{height: 100%;width: 100%;text-align: center;}
+	.drepstat{display:flex;height:46px;}
+	.drepstat3{display:flex;height:32px;margin:0 auto;}
+	.drepstat2{display:flex;height:30px;}
+	.statbackground{position:absolute;width:150px;height:34px;left:calc(50% - 75px);margin-top:6px;opacity:0.35;z-index:0;}
+	.statgradientbackground{position:absolute;width:20px;height: 90px;margin-left:10px;margin-top:10px;z-index:0;opacity:0.35;background-image:linear-gradient(rgb(0, 255, 0) 0%, rgb(255, 255, 0) 50%, rgb(255, 0, 0) 100%);}
+	.statkeybackground{position:absolute;width:20px;height: 22px;margin-left:10px;z-index:0;opacity:0.35;}
+	.stattext{position:relative;margin: 0 auto;font-weight:bold;margin-top:12px;font-size:100%;z-index:1;}
+	.statkeytext{position:relative;margin-left:32px;margin-top:5px;font-size:100%;z-index:0;}
+	.statkeytext2{position:relative;margin-left:34px;margin-top:0px;font-size:100%;z-index:0;}
+	.stattitle{position:relative;font-weight:bold;margin-top:10px;margin-left:10px;text-decoration:underline;}
 	.sname{width: 40%;}
 	.hrstat{}
 	.ssstat{}
@@ -105,8 +115,12 @@
 	#pdatanote{padding: 20px;}
 	#replinks_wrapper{position:absolute;bottom:0px;left:150px;display:flex;height:50px;width:800px;}
 	.replinks{position:relative;margin: 0 auto;height:50px;width:50%);display:flex;}
-	.rep-link{position:relative;margin-top:0px;color: blue;font-weight:bold;}
+	.rep-link{position:relative;margin-top:5px;color: blue;font-weight:bold;}
 	.rep-link_spacer{width:20px;}
+	.tooltip .tooltiptext {visibility: hidden;width:350px;bottom:100%;left:50%;margin-left:-70px;background-color: #ccc;color: #000;text-align:justify;border-radius: 6px;padding: 10px;position: absolute;z-index: 2;}
+	.tooltip:hover .tooltiptext {visibility: visible;}
+	.tooltip .tooltiptext2 {visibility: hidden;width:350px;left:100%;top:50%;margin-top:-90px;background-color: #ccc;color: #000;text-align:justify;border-radius: 6px;padding: 10px;position: absolute;z-index: 2;}
+	.tooltip:hover .tooltiptext2 {visibility: visible;}
 }
 
 /*Tablet and Phone*/
