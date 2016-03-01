@@ -26,16 +26,47 @@ from google.appengine.ext.db import GqlQuery
 from google.appengine.api import mail
 from politics import *
 
+#---------------------------User Implementation Functions--------------------------
+def make_secure_val(val):
+    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
+def check_secure_val(secure_val):
+    val = secure_val.split('|')[0]
+    if secure_val == make_secure_val(val):
+        return val
+
+def make_salt(length = 30):
+    random_bytes = os.urandom(length+2)
+    token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
+    reset_key = token[:-2]
+    logging.error(reset_key)
+    return reset_key
+
+def make_pw_hash(username, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(username + pw + salt).hexdigest()
+    return '%s,%s' % (salt, h)
+
+def valid_pw(name, password, h):
+    salt = h.split(',')[0]
+    return h == make_pw_hash(name, password, salt)
+
 #-------------------------Database Classes------------------------------
 class User(db.Model):
+    firstname = db.StringProperty()
+    lastname = db.StringProperty()
     username = db.StringProperty(required = True)
     email = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
+    emailverified = db.BooleanProperty()
     district = db.StringProperty()
     age = db.IntegerProperty()
     gender = db.StringProperty()
     created = db.DateTimeProperty(required = True, auto_now = True)
     last_modified = db.DateTimeProperty(required = True, auto_now = True)
+    reset_code = db.StringProperty()
+    reset_expr = db.DateTimeProperty()
 
     @classmethod
     def by_id(cls, uid):
@@ -52,17 +83,81 @@ class User(db.Model):
         return u
 
     @classmethod
-    def register(cls, username, email, pw):
+    def register(cls, username, email, pw, fname, lname):
         pw_hash = make_pw_hash(username, pw)
         return cls( username = username,
                     email = email,
-                    pw_hash = pw_hash)
+                    pw_hash = pw_hash,
+                    firstname = fname,
+                    lastname = lname)
 
     @classmethod
     def login(cls, username, pw):
         u = cls.by_username(username)
         if u and valid_pw(username, pw, u.pw_hash):
             return u
+
+    @classmethod
+    def changepass(cls, username, pw):
+        pw_hash = make_pw_hash(username, pw)
+        return cls( username = 'NONE',
+                    email = 'NONE',
+                    pw_hash = pw_hash)
+
+class Cookie_Info(db.Model):
+    user_id = db.IntegerProperty()
+    times_visit = db.IntegerProperty(required = True)
+    signup = db.BooleanProperty(required = True)
+
+    @classmethod
+    def by_id(cls, uid):
+        return Cookie_Info.get_by_id(uid)
+
+class Session(db.Model):
+    userid = db.IntegerProperty(required = True)
+    expiration = db.DateTimeProperty(required = True)
+
+class Feed_Radio_Buttons(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    listen_val = db.IntegerProperty()
+    active_val = db.IntegerProperty()
+    easier_val = db.IntegerProperty()
+
+class Feed_Top_Issues(db.Model):
+    cookie_id = db.IntegerProperty(required = True)
+    envir_sci = db.IntegerProperty()
+    crim_just = db.IntegerProperty()
+    health = db.IntegerProperty()
+    privacy = db.IntegerProperty()
+    edu = db.IntegerProperty()
+    camp_fin_lobby = db.IntegerProperty()
+    soc_issues = db.IntegerProperty()
+    gun_cont = db.IntegerProperty()
+    immig = db.IntegerProperty()
+    econ = db.IntegerProperty()
+    for_pol = db.IntegerProperty()
+    terror = db.IntegerProperty()
+
+class State(db.Model):
+    name = db.StringProperty(required = True)
+    abbreviation = db.StringProperty(required = True)
+    num_reps = db.IntegerProperty()
+    ge_delegates = db.IntegerProperty()
+    primary_type = db.StringProperty()
+    primary_notes = db.StringProperty()
+    registration_link = db.StringProperty()
+    D_primary_date = db.DateTimeProperty()
+    D_delegates = db.IntegerProperty()
+    D_pledged = db.IntegerProperty()
+    D_superdelegates = db.IntegerProperty()
+    R_primary_date = db.DateTimeProperty()
+    R_delegates = db.IntegerProperty()
+
+class Candidate(db.Model):
+    name = db.StringProperty(required = True)
+    party = db.StringProperty(required = True)
+    delegates = db.IntegerProperty()
+    superdelegates = db.IntegerProperty()
 
 class Votes(db.Model):
     bill_id = db.StringProperty(required = True)
@@ -791,7 +886,6 @@ class Ind_Votes(db.Model):
     Z000017 = db.StringProperty(required = False)
     Z000018 = db.StringProperty(required = False)
 
-
 class NewsLetterUser(db.Model):
     created = db.DateTimeProperty(required = True, auto_now = True)
     email = db.StringProperty(required = True)
@@ -871,6 +965,28 @@ class Politician(db.Model):
     youtube_id = db.StringProperty(required = True)
     facebook_id = db.StringProperty(required = True)
 
+class Politician_Stats(db.Model):
+    bioguide_id = db.StringProperty(required = True)
+    party_loyalty = db.StringProperty()
+    legislative_index = db.StringProperty()
+    bills_sponsored = db.StringProperty()
+    bills_cosponsored = db.StringProperty()
+    attendance = db.StringProperty()
+    approval = db.StringProperty()
+    yio = db.StringProperty()
+    number_enacted = db.StringProperty()
+    effectiveness = db.StringProperty()
+    total_contributions = db.StringProperty()
+    record_gun_control = db.StringProperty()
+    record_military_spending = db.StringProperty()
+    record_immigration = db.StringProperty()
+    record_criminal_justice = db.StringProperty()
+    record_privacy = db.StringProperty()
+    sponsor_sub = db.StringProperty()
+    cosponsor_sub = db.StringProperty()
+    enacted_sub = db.StringProperty()
+    missed_sub = db.StringProperty()
+
 class Bill(db.Model):
     bill_id = db.StringProperty(required = True)
     official_title = db.StringProperty(required = True)
@@ -889,3 +1005,14 @@ class Bill(db.Model):
 class Cosponsor(db.Model):
     bill_id = db.StringProperty(required = True)
     bioguide_id = db.StringProperty(required = True)
+
+class Visualization(db.Model):
+    name = db.StringProperty(required = True)
+    vtype = db.StringProperty(required = True)
+    title = db.StringProperty(required = True)
+    xaxis = db.StringProperty(required = True)
+    yaxis = db.StringProperty(required = True)
+    color = db.StringProperty(required = True)
+    query_columns = db.StringProperty(required = True)
+    element = db.StringProperty(required = True)
+    query = db.StringProperty(required = True)

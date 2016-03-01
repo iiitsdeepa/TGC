@@ -4,89 +4,66 @@
       <title>The Glass Capitol</title>
       <link rel='stylesheet' href='css/newbase.css'/>
       <!--Import materialize.css-->
-      <link href='https://fonts.googleapis.com/css?family=Pinyon+Script|Alex+Brush|Parisienne|UnifrakturCook:700|UnifrakturMaguntia|Cookie|Playball' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
       <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+      <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
       <script type="text/javascript" src="/js/newbase.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
 
     <body>
-      <div id='nav_wrapper'>
-        <div id='badge'>
-          <img id='logo' src='/images/gclogo_noback.png' alt='...'>
-          The Glass Capitol
-        </div>
-        <ul>
-          <li><a href='/'>Home</a></li>
-          <li><a href='/about'>About Us</a></li>
-          <li><a href='/sources'>Our Data</a></li>
-        </ul>
+      <input type='hidden' id="page-data" value="{{PAGESTATE}}">
+      <div id='popuplayer'>
+        {% block popup %}
+        {% endblock %}
+      </div>
+      <div id='nav-container'>
+        <nav id='nav'>
+          <ul>
+            <li id='home_option' class='nav_option' value='contracted'>
+              <a href='/home'>Home</a>
+            </li>
+            <li id='mrep_option' class='nav_option' value='contracted'>
+              <a href='/election'>2016 Election</a>
+              <div id='mrepexp' class='mexp' onclick="javascript:submarine('mrep_option', 'mrepexp');return false;"></div>
+            </li>
+            <li id='ccomp_option' class='nav_option' value='contracted'>
+              <a href='/feedback'>Feedback</a>
+              <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+            </li>
+            <li id='pcomp_option' class='nav_option' value='contracted'>
+              <a href='/about'>About Us</a>
+              <div id='pcompexp' class='mexp' onclick="javascript:submarine('pcomp_option', 'pcompexp');return false;"></div>
+            </li>
+            <li id='ccomp_option' class='nav_option' value='contracted'>
+              <a href='/sources'>Sources</a>
+              <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <a href='/login' id='alpha-alert' class='alert'>Already part of the alpha?</a>
+      <div id='head'>
+        <a href='/' id='title' class='subtle-link'>The Glass Capitol</a>
+        <div id='slogan'>Government Transparency For The Communication Era</div>
+        <img id='centerpiece' src='/images/fullglasscapitol.png' alt='...'>
       </div>
       <div id='content'>
+
       {% block content %}
       {% endblock %}
         
       </div>
       
       <div id='footer'>
-        <div id='footsocial'class='foottext'>
-          <h2>Follow Us on Social Media</h2>
-          <div id='footsocioconline'>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-            <div class='footsociocon'></div>
-          </div>
-        </div>
-        <div id='footcontributions'>
-          <div id='footcontact' class='footcontribution'>
-            <h3>Help Us Improve</h3>
-            Join Our Email List For
-            <ul>
-              <li>first access to stats and insights</li>
-              <li>participate in surveys</li>
-              <li>ensure your issues are featured</li>
-            </ul>
-            <form>
-              <input id='footemail' name='footemail' class='footcontactinput' type='text' placeholder='Enter Email'></br>
-              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Tell Us What You Think'></textarea>
-            </form>
-          </div>
-          <div id='footdonate' class='footcontribution'>
-            <h3>Keep Us Pure</h3>
-            We want to ensure that The Glass Capitol is free of bias, and advertisement free. That is why we are relying on individual donations to fund this website. We really appreciate anything you can spare! Every pennny helps.
-            <h4>Contribute Today!</h4>
-            <div id='footdonatebutton'></div>
-          </div>
-        </div>
-        <div id='footabout' class='foottext'>
-          <h3>About Us</h3>
-          We are a group of individuals passionate about improving America. Some of us are still college students, while others are just starting their careers in engineering, or pursuing medical school or law school. We don't have an office or physical location. Only our computers and the drive to do something for our country.
-          <a class='foottextlink' href='/about'>Learn More About Our Team -></a>
-        </div>
-        <div id='footsources' class='foottext'>
-          <h3>Our Sources</h3>
-          We are committed to being the most trustworthy, unbiased, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources. Our data comes directly from the government or from other open data sources that distribute data directly from the government.
-          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
-        </div>
-        <div id='footfoot'>
-            <img id='footlogo' src='/images/gclogo_noback.png'>The Glass Capitol™ Founded 2015
-        </div>
+          <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
       </div>
 
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-        ga('create', 'UA-71696329-1', 'auto');
-        ga('send', 'pageview');
-
-      </script>
-      
     </body>

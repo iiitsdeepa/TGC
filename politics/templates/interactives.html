@@ -1,434 +1,388 @@
-{% extends "publicbase.html" %}
+{% extends "newbase.html" %}
 
 {% block content %}
-<div id='interactivesnav'>
-	<div id='top-option' class='inav-option' onclick="javascript:scrollTo('top');return false;">Top</div>
-	<div id='personalize-option' class='inav-option' onclick="javascript:scrollTo('myreps_wrapper');return false;">Personalized Connection</div>
-	<div id='partycomp-option' class='inav-option' onclick="javascript:scrollTo('pcomp_wrapper');return false;">Party Comparison</div>
-	<div id='currentpolls-option' class='inav-option' onclick="javascript:scrollTo('polls_wrapper');return false;">Current Polls</div>
+<input type='hidden' id="page-statename" value="{{hrstatename}}">
+<div id='pagenav'>
+	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('mreps', 'section');return false;">My Legislators</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('pcomp','section');return false;">Party Comparison</div>
+	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('polls','section');return false;">Current Polls</div>
 </div>
 
 	<script type="text/javascript" src="/js/vprop.js"></script>
-	<div id='opening'>
-		<img id='centerpiece' src='/images/fullglasscapitol.png' alt='...'>
-		<h1>Government Transparency At Its Finest</h1>
-		<h2>All the facts to inform us and a network to unite us</h2>
-	</div>
 
-	<div id='myreps_wrapper' class='section'>
-		<h1>A More Personalized Connection</h1>
-		<h2>Analyse your legislator's voting record on issues and metrics you care about</h2>
-		<div id='myreps-ui' class='interactive-ui'>
-			<input type='hidden' id='hasdistrict' value='none'>
-			<div class='interactive-controlpanel'>
-				<div class='interactive-controlpanel-1'>
-					<div id='repstoggle' class='redbutton' onclick="javascript:mrepsControl();return false;" value='seereps'>See My Representatives</div>
-				</div>
-				<div class='interactive-controlpanel-2'>
-			  		<h2 class='icp2-title'>Choose Your Own Stats</h2>
-					<h3>Potential Choices</h3> 
-					<ul>
-			  			<li>Issue 1</li>
-			  			<li>Issue 2</li>
-			  			<li>Issue 3</li>
-			  			<li>Issue 4</li>
-			  			<li>Issue 5</li>
-			  		</ul>
-			  	</div>
-			</div>
-			<div class='interactive-display-legend'>
-				<table class='idl-table'>
-					<tr>
-						<td>Issue 1</td>
-					</tr>
-					<tr>
-						<td>Issue 2</td>
-					</tr>
-					<tr>
-						<td>Issue 3</td>
-					</tr>
-					<tr>
-						<td>Issue 4</td>
-					</tr>
-					<tr>
-						<td>Issue 5</td>
-					</tr>
-				</table>
-			</div>
-			<div class='interactive-display'>
-
-				<div id='congressional-leaders' class='reps-wrapper'>
-					<h2 class='id-title'>These are the leaders of congress</h2>
-					<div id='spthouse' class='rep-wrapper'>
-						<div class='rep-header-wrapper'>
-							<h4>Speaker For The House</h4>
-							<div class='rep-header'>
-								<div class='rep-pic'></div>
-								<div class='rep-title'>Paul Ryan</div>
-							</div>
-						</div>
-						<div class='rep-stats'>
-							<table>
-								<tr>
-									<td>Stat 1</td>
-								</tr>
-								<tr>
-									<td>Stat 2</td>
-								</tr>
-								<tr>
-									<td>Stat 3</td>
-								</tr>
-								<tr>
-									<td>Stat 4</td>
-								</tr>
-								<tr>
-									<td>Stat 5</td>
-								</tr>
-							</table>
-						</div>
+	<div id='mreps' class='section'>
+		<div id='mreps-wrapper-head'>
+			<div id='fr-form-container' class='mwh' value='ctitle'>
+				<h1>Find My Representatives</h1>
+				<div id='fr-form-wrapper'>
+					<div id='location-data-wrapper' class='fr-form'>
+						<div id='use-location' class='bluebutton button center' onclick="javascript:useLocation();return false;">Use Location Data</div>
+						<div id='use-address' class='redbutton button center' onclick="javascript:showHideAddressForm();return false;">Use Street Address -></div>
 					</div>
-					<div id='smjleader' class='rep-wrapper'>
-						<div class='rep-header-wrapper'>
-							<h4>Senate Majority Leader</h4>
-							<div class='rep-header'>
-								<div class='rep-pic'></div>
-								<div class='rep-title'>Mitch McConnell</div>
+					<div id='address-form-wrapper' class='fr-form' value='hidden'>
+						<form method='post' name='address-form' id='address-form' onsubmit="javascript:handleZip();return false;">
+							<div id='address-form-inputs'>
+								<input id='address' class='small-text-input' type="text" name="address" placeholder='Street Address' style='width:275px'><br>
+								<input id='city' class='small-text-input' type="text" name="city" placeholder='City' style='width:130px;margin-bottom:0'>
+								<input id='state' class='small-text-input' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:130px;margin-bottom:0'>
 							</div>
-						</div>
-						<div class='rep-stats'>
-							<table>
-								<tr>
-									<td>Stat 1</td>
-								</tr>
-								<tr>
-									<td>Stat 2</td>
-								</tr>
-								<tr>
-									<td>Stat 3</td>
-								</tr>
-								<tr>
-									<td>Stat 4</td>
-								</tr>
-								<tr>
-									<td>Stat 5</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<div id='district-reps' class='reps-wrapper'>
-					<h2 class='id-title'>The Representatives for Kentucky:3</h2>
-					<div id='address-form-wrapper'>
-						<h2>We Need To Find Your District First</h2>
-						<div id='uselocation' class='redbutton' onclick="javascript:useLocation();return false;">Use Location Data</div>
-						Or<br>
-						<div id='useaddress'>
-							<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
-					  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
-					  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 6px)'>
-					  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
-					  			<div id='address-submit' class='redbutton' onclick="javascript:useAddress();return false;">Find With Street Address</div>
-							</form>
-						</div>
-						<span style='font-size:80%'>*Privacy: We never save any location data. When you use this button it is single use to find your district.</span>
-					</div>
-					<div id='mreps-house'>
-						<div id='my-hr' class='mrep-wrapper'>
-							<div class='rep-header-wrapper'>
-								<h4>Speaker For The House</h4>
-								<div class='rep-header'>
-									<div class='rep-pic'></div>
-									<div class='rep-title'></div>
-								</div>
-							</div>
-							<div class='rep-stats'>
-								<table>
-									<tr>
-										<td>Stat 1</td>
-									</tr>
-									<tr>
-										<td>Stat 2</td>
-									</tr>
-									<tr>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>Stat 4</td>
-									</tr>
-									<tr>
-										<td>Stat 5</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-						<div id='my-ss' class='mrep-wrapper'>
-							<div class='rep-header-wrapper'>
-								<h4>Senate Majority Leader</h4>
-								<div class='rep-header'>
-									<div class='rep-pic'></div>
-									<div class='rep-title'></div>
-								</div>
-							</div>
-							<div class='rep-stats'>
-								<table>
-									<tr>
-										<td>Stat 1</td>
-									</tr>
-									<tr>
-										<td>Stat 2</td>
-									</tr>
-									<tr>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>Stat 4</td>
-									</tr>
-									<tr>
-										<td>Stat 5</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-						<div id='my-js' class='mrep-wrapper'>
-							<div class='rep-header-wrapper'>
-								<h4>Senate Majority Leader</h4>
-								<div class='rep-header'>
-									<div class='rep-pic'></div>
-									<div class='rep-title'></div>
-								</div>
-							</div>
-							<div class='rep-stats'>
-								<table>
-									<tr>
-										<td>Stat 1</td>
-									</tr>
-									<tr>
-										<td>Stat 2</td>
-									</tr>
-									<tr>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>Stat 4</td>
-									</tr>
-									<tr>
-										<td>Stat 5</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
-			</div>
-		</div>
-	</div>
-
-	<div id='pcomp_wrapper' class='section'>
-		<h1>Democrats Vs. Republicans</h1>
-		<h2>Which party stands for your values?</h2>
-		<div id='pcomp-ui' class='interactive-ui'>
-			<div class='interactive-controlpanel'>
-				<div class='interactive-controlpanel-1'>
-					<div class='ribbon-header'>See The Leaders of Congress</div>
-					<div id='addressform_wrapper'>
-						<div class='ribbon-header'>See My Representatives</div>
-						<form method='post' name='districtform' id='districtform'>
-							<input type='checkbox' id='uselocation' name='uselocation'>Use Location Data
+							<div id='use-address-go' class='redbutton' value='Submit' onclick="javascript:useAddress();return false;">Go -></div>
 						</form>
 					</div>
 				</div>
-				<div class='interactive-controlpanel-2'>
-			  		<h3 class='icp2-title'>Popular Issues</h3>
-			  		<ul>
-			  			<li>Issue 1</li>
-			  			<li>Issue 2</li>
-			  			<li>Issue 3</li>
-			  			<li>Issue 4</li>
-			  			<li>Issue 5</li>
-			  		</ul>
-			  	</div>
-			</div>
-			<div id='pcomp-idl' class='interactive-display-legend'>
-				<table class='idl-table'>
-					<tr>
-						<td>Issue 1</td>
-					</tr>
-					<tr>
-						<td>Issue 2</td>
-					</tr>
-					<tr>
-						<td>Issue 3</td>
-					</tr>
-					<tr>
-						<td>Issue 4</td>
-					</tr>
-					<tr>
-						<td>Issue 5</td>
-					</tr>
-				</table>
-			</div>
-			<div class='interactive-display'>
-				<div id='pcomp-party-headers'>
-					<div id='dem-header' class='party-header pcomp-table-dem'>
-						The Democrats
+				<div class='reps-container'style='margin-top:100px'>
+					<h2>The leaders of our Congress</h2>
+					<div class='{{sfthparty}} rep-wrapper'>
+						<h4>Speaker For The House</h4>
+						<img src='/images/headshots/{{sfthpic}}.png' class='rep-pic'>
+						{{sfthname}}<br>
+						in office since {{sfthfyio}}<br>
+						<a href='{{sfthwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{sfthfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sfthtwid}}' class='rep-link'target='blank'>Twitter</a>
 					</div>
-					<div id='repub-header' class='party-header pcomp-table-repub'>
-						The Republicans
-					</div>					
+					<div class='{{smjparty}} rep-wrapper'>
+						<h4>Senate Majority Leader</h4>
+						<img src='/images/headshots/{{smjpic}}.png' class='rep-pic'>
+						{{smjname}}<br>
+						in office since {{smjfyio}}<br>
+						<a href='{{smswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{smsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{smstwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
 				</div>
-				<table id='pcomp-table'>
-					<tr>
-						<td class='pcomp-table-dem'>Yea</td>
-						<td class='pcomp-table-repub'>Nay</td>
-					</tr>
-					<tr>
-						<td class='pcomp-table-dem'>Yea</td>
-						<td class='pcomp-table-repub'>Nay</td>
-					</tr>
-					<tr>
-						<td class='pcomp-table-dem'>Yea</td>
-						<td class='pcomp-table-repub'>Nay</td>
-					</tr>
-					<tr>
-						<td class='pcomp-table-dem'>Yea</td>
-						<td class='pcomp-table-repub'>Nay</td>
-					</tr>
-					<tr>
-						<td class='pcomp-table-dem'>Yea</td>
-						<td class='pcomp-table-repub'>Nay</td>
-					</tr>					
-				</table>
 			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
+			<div id='found-district-mreps-wrapper' class='mwh fdw' value='district-reps'>
+				<h1>{{hrstatename}} District {{hrdistrict}}</h1>
+				<div id='show-leaders-link' class='redlink' onclick="javascript:showHide('mwh','2','1');return false;">Show Congressional Leaders</div>
+				<div id='change-district' class='redlink' onclick="javascript:showHide('mwh','0','1');return false;">Change District</div>
+				<div class='reps-container'>
+					<h2>Your Representatives</h2>
+					<div class='{{hrparty}} rep-wrapper'>
+						<img src='/images/headshots/{{hrpic}}.png' class='rep-pic'>
+						{{hrname}}<br>
+						in office since {{hrfyio}}<br>
+						<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{hrfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{hrtwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
+					<div class='{{ssparty}} rep-wrapper'>
+						<img src='/images/headshots/{{sspic}}.png' class='rep-pic'>
+						{{ssname}}<br>
+						in office since {{ssfyio}}<br>
+						<a href='{{sswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{ssfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sstwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
+					<div class='{{jsparty}} rep-wrapper'>
+						<img src='/images/headshots/{{jspic}}.png' class='rep-pic'>
+						{{jsname}}<br>
+						in office since {{jsfyio}}<br>
+						<a href='{{jswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{jsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{jstwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
+				</div>
+			</div>
+			<div id='found-district-leaders-wrapper' class='mwh fdw' value='congressional-leaders'>
+				<h1>These are the leaders of our Congress</h1>
+				<div id='show-leaders-link' class='redlink' onclick="javascript:showHide('mwh','1','1');return false;">{{hrstatename}} District {{hrdistrict}}</div>
+				<div id='change-district' class='redlink' onclick="javascript:showHide('mwh','0','1');return false;">Change District</div>
+				<div class='reps-container'>
+					<h2>The leaders of our Congress</h2>
+					<div class='{{sfthparty}} rep-wrapper'>
+						<h4>Speaker For The House</h4>
+						<img src='/images/headshots/{{sfthpic}}.png' class='rep-pic'>
+						{{sfthname}}<br>
+						in office since {{sfthfyio}}<br>
+						<a href='{{sfthwebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{sfthfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{sfthtwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
+					<div class='{{smjparty}} rep-wrapper'>
+						<h4>Senate Majority Leader</h4>
+						<img src='/images/headshots/{{smjpic}}.png' class='rep-pic'>
+						{{smjname}}<br>
+						in office since {{smjfyio}}<br>
+						<a href='{{smswebsite}}' class='rep-link'target='blank'>Website</a><br>
+						<a href='http://facebook.com/{{smsfbid}}' class='rep-link'target='blank'>Facebook</a><br>
+						<a href='http://twitter.com/{{smstwid}}' class='rep-link'target='blank'>Twitter</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id='polls_wrapper' class='section'>
-		<h1>Election Season!</h1>
-		<h2>Stay up to date with the presidential race</h2>
-		
-		<div id='pcomp-ui' class='interactive-ui'>
-			<div class='interactive-controlpanel'>
-				<div class='interactive-controlpanel-1'>
-					<h2>Select Party</h2>
-					<div id='dem_select' class='partyselect dem' onclick="javascript:partySelect('D');return false;">Democrats</div>
-					<div id='repub_select' class='partyselect repub' onclick="javascript:partySelect('R');return false;">Republicans</div>
+	<div id='pcomp' class='section'>
+		<input type='hidden' id='issuelist-init' value='{{issuelist}}'>
+		<h1>Democrats Vs. Republicans</h1>
+		<div id='topics' value='49'>
+			<div id='topic-0' class='topic'>
+				<div id='issuetext-0' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('0','topic','left','flex');return false;"></div>
+					<div class='issuetext'>The Economy</div>
+					<div class='triangle-right' onclick="javascript:slider('0','topic','right','flex');return false;"></div>
 				</div>
-				<div class='interactive-controlpanel-2'>
-					<h3 class='icp2-title'>Upcoming Primaries</h3>
-					<ol>
-						<li>Iowa</li>
-						<li>New Hampshire</li>
-						<li>South Carolina</li>
-						<li>Nevada</li>
-					</ol>
-				</div>	
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Democrats believe that we must raise the minimum wage and index it to inflation. We will continue to fight for equal pay for equal work to prepare more students for college.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The best jobs program is economic growth. Republicans will pursue free market policies that are the surest way to boost employment and create job growth and economic prosperity for all.
+				</div>
 			</div>
-			<div class='interactive-display'>
-				<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
-				<h3 class='visualtitle'>Current National Standings</h3>
-				<div id='dem_national' class='graphback'></div>
-				<div id='repub_national' class='graphback'></div>
-				<div id='tableback'></div>
+			<div id='topic-1' class='topic'>
+				<div id='issuetext-1' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('1','topic','left','flex');return false;"></div>
+					<div class='issuetext'>The Environment</div>
+					<div class='triangle-right' onclick="javascript:slider('1','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Democrats are committed to protecting our natural resources while creating jobs, preserving habitats, and ensuring that future generations can enjoy our nation's oudivoor heritage.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The environment is getting cleaner and healthier. Private ownership has been our best guarantee of conscientious stewardship. The worst instances of environmental degradation have occurred under government condivol.
+				</div>
 			</div>
-			<div class='interactive-share'>
-				<h2>Share</h2>
+			<div id='topic-2' class='topic'>
+				<div id='issuetext-2' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('2','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Criminal Justice</div>
+					<div class='triangle-right' onclick="javascript:slider('2','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We will continue to fight inequalities in our criminal justice system. We believe that the death penalty must not be arbitrary. The administration of justice should be fair and impartial.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					Liberals do not understand this simple axiom: criminals behind bars cannot harm the general public. Courts should have the option of imposing the death penalty in capital murder cases.
+				</div>
 			</div>
+			<div id='topic-3' class='topic'>
+				<div id='issuetext-3' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('3','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Healthcare</div>
+					<div class='triangle-right' onclick="javascript:slider('3','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We believe accessible, affordable, high quality health care is part of the American promise, that Americans should have the security that comes with good health care, and that no one should go broke because they get sick.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					In healthcare, genuine competition is the best guarantee of better care at lower cost. It is also the best guard against the fraud and abuse that have plagued Medicare in its isolation from free market forces, which in turn costs the taxpayers billions of dollars every year.
+				</div>
+			</div>
+			<div id='topic-4' class='topic'>
+				<div id='issuetext-4' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('4','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Privacy and Data Security</div>
+					<div class='triangle-right' onclick="javascript:slider('4','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					The Democratic Party is vigorously protecting U.S. intellectual property—our technology and creativity to support efforts by all parties to minimize infringement while supporting the free flow of information.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					The Internet has unleashed innovation, enabled growth, and inspired freedom more rapidly and extensively than any other technological advance in human history.  We will remove regulatory barriers that protect oudivated technologies and business plans from innovation and competition, as they become crucial components of the Internet ecosystem.
+				</div>
+			</div>
+			<div id='topic-5' class='topic'>
+				<div id='issuetext-5' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('5','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Education</div>
+					<div class='triangle-right' onclick="javascript:slider('5','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					Public education is one of our critical democratic institutions. We are committed to ensuring that every child in America has access to a world-class public education so we can out-educate the world and make sure America has the world's highest proportion of college graduates by 2020.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					It is our responsibility to ensure that our children receive a world-class education that maximizes their potential. The Republican Party believes that every child should have an equal opportunity to get a great education—regardless of its zip code or its parents’ income.
+				</div>
+			</div>	
+			<div id='topic-6' class='topic'>
+				<div id='issuetext-6' class='issuetext-wrapper'>
+					<div class='triangle-left' onclick="javascript:slider('6','topic','left','flex');return false;"></div>
+					<div class='issuetext'>Civil Rights</div>
+					<div class='triangle-right' onclick="javascript:slider('6','topic','right','flex');return false;"></div>
+				</div>
+				<div class='issue-cell D'>
+					<h3>The Democrat's View</h3>
+					We believe in an America where everybody gets a fair shot and everybody plays by the same set of rules. At the core of the Democratic Party is the principle that no one should face discrimination.
+				</div>
+				<div class='issue-cell R'>
+					<h3>The Republican's View</h3>
+					To those who stand in the darkness of tyranny, America has always been a beacon of hope, and so it must remain.
+				</div>
+			</div>						
 		</div>
 	</div>
+
+	<div id='polls' class='section'>
+		<h1>It's Election Season!</h1>
+		<h2>Stay up to date with the presidential race</h2>
+		<div id='party-select-wrapper'>
+			<div id='dem_select' class='D button partyselector' onclick="javascript:partySelect('D');return false;">Democrats</div>
+			<div id='repub_select' class='R button partyselector' onclick="javascript:partySelect('R');return false;">Republicans</div>
+		</div>
+		
+		<input id='dataref' value='/pull/polldata,dem_national,repub_national' type='hidden'>
+		<h3 class='visualtitle'>Current National Standings</h3>
+		<div id='dem_national' class='graphback'></div>
+		<div id='repub_national' class='graphback'></div>
+		<div id='tableback'></div>
+	</div>
+	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-function mrepsControl(changeaddress){
-	toggle = $('#repstoggle').attr('value')
-	if(toggle == 'seereps'){ //switch to the representatives
-		district = $('#hasdistrict').attr('value')
-		if(district == 'none'){ //display address form
-			$('address-form-wrapper').css('display','block')
+	function setState(){
+		state=$('#page-data').val()
+		if (state == 'found-district'){
+			showHide('mwh','1','0');
 		}
-		$('#district-reps').css('display','flex')
-		$('#congressional-leaders').css('display','none')
-		$('#repstoggle').attr('value','seeleaders')
-		$('#repstoggle').html('See The Leaders of Congress')
-	}else{ //switch to leaders of congress
-		$('#district-reps').css('display','none')
-		$('#congressional-leaders').css('display','flex')
-		$('#repstoggle').attr('value','seereps')
-		$('#repstoggle').html('See My Representatives')
 	}
-}
 
-function inputRepData(data){
-	console.log(data)
-	j = JSON.parse(data)
-	if(j.district){
-		$('#hasdistrict').attr('value',j.district)
-		$('#address-form-wrapper').css('display','none')
-	}
-	if ($('#reps_slider').attr('value') == 'leaders'){
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.spthpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.smjlpic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	else {
-		$('#hrpic').css('background', 'url(/images/headshots/'+j.hrpic+'.png)')
-		$('#sspic').css('background', 'url(/images/headshots/'+j.sspic+'.png)')
-		$('#jspic').css('background', 'url(/images/headshots/'+j.jspic+'.png)')
-		$('.reppic_wrapper').css('background-size', '100%')
-	}
-	//update names
-	$('#hrname').html(j.hrname)
-	$('#ssname').html(j.ssname)
-	$('#jsname').html(j.jsname)
-	//update ployalty
-	$('#ployalty .hrstat').html(j.hrployalty+'%')
-	$('#ployalty .ssstat').html(j.ssployalty+'%')
-	$('#ployalty .jsstat').html(j.jsployalty+'%')
-}
-function useLocation() {
-	console.log('using location')
-    navigator.geolocation.getCurrentPosition(gotGPS);
-}
-function gotGPS(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
-    $.post('/prop', {lat: lat, lng: lng}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'block')
-        inputRepData(data)
-    });
-}
-function useAddress(){
-	street = document.getElementById('address').value;
-	state = document.getElementById('state').value;
-	city = document.getElementById('city').value;
-	address = street+' '+city+' '+state
-	$.post('/prop', {address: address}, function(data){
-    	j = JSON.parse(data)
-    	$('#reps_slider').attr('value', j.district)
-    	$('#js_wrapper').css('display', 'block')
-    	$('.jsstat').css('display', 'td')
-        inputRepData(data)
-    });
-}
 
-$( document ).ready(function() {
-    $.post('/prop', {demo: 'yes'}, function(data){
-  		inputRepData(data)
-    });
-});
+	function showHideDistrictForm(){
+		if($('#found-district-mreps-wrapper').attr('value') == 'hidden'){
+			console.log('shds conditional 1')
+			$('#fr-form-container').css('display','none')
+			$('#found-district-mreps-wrapper').css('display','block')
+			fadeIn('found-district-mreps-wrapper','block')
+			$('#found-district-mreps-wrapper').attr('value','shown')
+		}else{
+			showHideAddressForm('hide')
+			$('#found-district-mreps-wrapper').css('display','none')
+			$('#fr-form-container').css('display','block')
+			fadeIn('fr-form-container','block')
+			$('#found-district-mreps-wrapper').attr('value','hidden')
+		}
+	}
+
+	function showHideAddressForm(direction){
+		if($('#address-form-wrapper').attr('value') == 'hidden' && direction !='hide'){
+			newpos = parseFloat($('#fr-form-wrapper').position().left) - 400;
+			console.log('hidden!!!')
+			$('#fr-form-wrapper').animate({
+				left: newpos
+				}, 500);
+			$('#address-form-wrapper').css('display','block')
+			fadeIn('address-form-wrapper','block')
+			$('#address-form-wrapper').attr('value','shown')
+		}else if($('#address-form-wrapper').attr('value') == 'shown' && direction != 'show'){
+			newpos = parseFloat($('#fr-form-wrapper').position().left) + 400;
+			$('#address-form-wrapper').attr('value','hidden')
+			$('#fr-form-wrapper').css('left','calc(50% - 200px)')
+			$('#address-form-wrapper').css('display','none')
+		}
+	}
+
+	function mrepsControl(changeaddress){
+		toggle = $('#repstoggle').attr('value')
+		if(toggle == 'seereps'){ //switch to the representatives
+			district = $('#hasdistrict').attr('value')
+			if(district == 'none'){ //display address form
+				$('address-form-wrapper').css('display','block')
+			}
+			$('#district-reps').css('display','flex')
+			$('#congressional-leaders').css('display','none')
+			$('#repstoggle').attr('value','seeleaders')
+			$('#repstoggle').html('See The Leaders of Congress')
+		}else{ //switch to leaders of congress
+			$('#district-reps').css('display','none')
+			$('#congressional-leaders').css('display','flex')
+			$('#repstoggle').attr('value','seereps')
+			$('#repstoggle').html('See My Representatives')
+		}
+	}
+
+	function useLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(gotGPS);
+		} else {
+			console.log("Geolocation is not supported by this browser.");
+		}
+	}
+	function gotGPS(position) {
+		console.log('using location')
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		$.post('/prop', {lat: lat, lng: lng}, function(data){
+			if(validDistrict(data)){window.location.replace("/prop?district="+data);}
+		});
+	}
+	function useAddress(){
+		showHideDistrictForm()
+		street = document.getElementById('address').value;
+		state = document.getElementById('state').value;
+		city = document.getElementById('city').value;
+		address = street+' '+city+' '+state
+		$.post('/prop', {address: address}, function(data){
+			console.log(data)
+			j = JSON.parse(data)
+			$('#reps_slider').attr('value', j.district)
+			$('#js_wrapper').css('display', 'block')
+			$('.jsstat').css('display', 'td')
+			inputRepData(data)
+		});
+	}
+
+	function startPosition(){
+		section = getParameterByName('s')
+		if (!section) {section = 'mreps';}
+		scroller(section, 'section')
+	}
+
+	$( document ).ready(function() {
+		setState()
+		startPosition()
+		slider(1,'topic','','flex')
+	});
 
 </script>
 
 <style>
+.small-text-input{margin-bottom:10px;}
+#found-district-wrapper{display:none;}
+.section h1{text-align:center;}
+#fr-form-container{position:relative;padding-bottom:88px;}
+#fr-form-wrapper{position:absolute;left:calc(50% - 200px);display:flex;}
+#fr-form-wrapper h1{width:100%;}
+.fr-form{min-width:400px;}
+.fdw{display:none;}
+#location-data-wrapper{text-align:center;width:400px;}
+#address-form-wrapper{position:relative;text-align:center;opacity:0;width:500px;display:none;}
+#address-form{position:relative;display:flex;}
+#address-form-inputs{position:relative;margin-left:40px;}
+#use-address-go{position:relative;height:34px;margin-top:44px;padding:0 10px;width:50px;margin-left:10px;border-radius:2px;line-height:34px;}
+#mreps-view-wrapper{margin-top:40px;min-height:300px;background:lavender;}
+#change-district{margin:0 auto 10px;text-align:center;width:150px;margin-bottom:10px;}
+#rep-view-toggle{background:#0E1C32;margin:0 auto;}
+#show-leaders-link{width:200px;margin:0 auto;text-align:center;}
+.reps-container{display:flex;justify-content:center;flex-wrap:wrap;}
+.reps-container h2{width:100%;text-align:center;margin-top:40px;}
+.rep-wrapper{margin:40px;width:250px;height:300px;padding:20px;text-align:center;}
+.rep-wrapper h4{text-align:center;}
+.rep-pic{position:relative;display:block;margin:0 auto;background:blue;width:50%;border-radius:50%;}
+.rep-link{text-decoration:none;cursor:pointer;color:white;}
+.rep-link:visited{color:white;}
+#topics{position:relative;}
+.topic{position:relative;display:flex;justify-content:center;margin:50px 0;flex-wrap:wrap;}
+.issuetext-wrapper{display:flex;justify-content:center;line-height:50px;width:100%;text-align:center;font-size:36px;margin-bottom:50px;}
+.issuetext{margin:0 50px;}
+.issue-cell{width:250px;margin:0 25px;position:relative;padding:10px;}
+.issue-cell h3{text-align:center;margin-bottom:20px;}
+#polls h2{text-align:center;}
+.partyselector{margin:0 25px;}
+#party-select-wrapper{display:flex;justify-content:center;margin:40px 0;}
+.graphback{display:none;width:600px;height:400px;max-width:90vw;margin:0 auto;}
 /*Desktop*/
 @media screen and (min-width: 966px){
 
@@ -442,79 +396,65 @@ $( document ).ready(function() {
 	.interactive-display-legend{position:absolute;top:47%;left:23.6%;height:29.4%;width:14.5%;}
 	.idl-table{height:100%;width:100%;text-align:center;}
 	#pcomp-idl{top:23.5%;height:67.7%;}
-	.interactive-display{background:#EAEAEA;position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;}
+	.interactive-display{position:absolute;width:47.3%;height:100%;top:0;left:38.2%;text-align:center;padding-top:20px;}
 	.id-title{height:8.8%;line-height:100%;width:100%;}
-	.interactive-share{position:absolute;bottom:0;left:23.6%;width:76.4%;height:8.8%;background:#0E1C32;color:white;opacity:.5}
 	#mreps_r1{position:relative;height:47.1%;}
 	#mreps_r1-left{float:left;width:38.2%;height:100%;}
 	.ribbon-header{height:30px;line-height:30px;background:darkred;color:white;font-weight:bold;text-align:center;}
 	#addressform_wrapper{margin:30px 0;}
-	#districtform{position:relative;margin:0 auto; width:80%;}
 	#mreps_r2{position:relative;height:29.4%;}
 	#mreps_r2-1{float:left;height:100%;width:21.3vw;}
 	#mreps_r2-2{float:left;width:26.2vw;height:100%;}
 	.issuebox{position:relative;text-align:center;height:20%;}
 	#repdisplay{background:#EAEAEA;position:absolute;top:0;right:14.5%;height:100%;width:32.7%;z-index: 5;}
 	#mreps_r3{position:relative;height:23.6%;padding-top:5%;}
-
 	#pcomp-search{position:relative;width:23.6%;height:50px;line-height:50px;text-align:center;color:white;background:darkred;z-index:5}
+	#party-table-wrapper{padding-top:0;}
 	#pcomp-suggestions{position:absolute;left:0;bottom:14.5%;width:18.2%;height:52.9%;}
-	#pcomp-display{position:absolute;top:0;right:14.5%;width:67.3%;height:85.5%;z-index: 1;}
 	#pcomp-party-headers{height:23.5%;}
 	.party-header{float:left;width:calc(50% - 2px);margin:1px;height:calc(100% - 2px);text-align:center;}
-	#pcomp-table{position:absolute;width:100%;height:67.7%;text-align:center;}
-	.pcomp-table-issue{width:29.7%;}
-	.pcomp-table-dem{background:blue;}
-	.pcomp-table-repub{background:red;}
 	#pcomp-social{position:absolute;bottom:0;left:0;width:85.5%;height:10%;padding-top:4.5%;}
 	.rep-header-wrapper{position:relative;height:46.4%;}
 	.rep-header-wrapper h4{width:100%;text-align:center;}
 	.rep-header{position:absolute;height:70%;top:50%;left:50%;transform:translate(-50%,-50%);min-width:50%;}
-	.rep-pic{position:relative;margin:0 auto;background:blue;height:80%;width:70%;border-radius:50%;}
-	.rep-title{position:relative;background:red;padding:5px 10px;}
+	.rep-title{position:relative;padding:5px 10px;border-radius:2px;border:solid 1px #D9D9D9;}
 	.rep-stats{height:35.7%;}
 	.rep-stats table{height:100%;margin:0 auto;}
-	.rep-stats td{background:gray;min-width:100px;}
-	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:91.2%;}
-	.rep-wrapper{width:50%;height:100%;}
-	#address-form-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;background:white;z-index:3}
+	.rep-stats td{background:white;border:solid 1px #D9D9D9;border-radius:2px;min-width:100px;}
+	.reps-wrapper{position:relative;display:flex;flex-wrap:wrap;width:100%;height:100%;}
 	#mreps-house{display:flex;z-index:2;height:91.2%;width:100%;}
 	.mrep-wrapper{width:33.3%;height:100%;}
 }
 
-.redbutton{background:darkred;color:white;font-weight:bold;text-align:center;cursor:pointer;border:double 3px #660000;}
-.redbutton:hover{background:#A23333;}
 
-#interactivesnav{position:fixed;top:70px;right:0;width:15vw;text-align:center;z-index:10;}
-.inav-option{position:relative;margin:10px 0;width:100%;height:50px;line-height:50px;background:#0E1C32;color:white;font-weight:bold;}
+
 #opening{position:relative;padding:80px 5vw;min-height:calc(90vh - 220px);}
 #opening{text-align:center;}
-#centerpiece{display:block;position:relative;margin:50px auto;width:60vw;}
 .vpoint{position:relative;width:450px;max-width:90vw;margin-bottom:100px;}
 .vpoint h2,h4{display:block;text-align:left;}
 .leftpane{float:left;}
 .rightpane{float:right;position:relative;}
 .visual{background:#EAEAEA;width:600px;min-height:500px;max-width:90vw;}
 .visualtitle{text-align:center;}
-.dem{background:blue;}
-.repub{background:red;}
+.dem{background:#162D50;}
+.repub{background:#A30000;}
 #pcomptable{border-spacing:0;width:100%;}
 #pcomptable img{height:50px;}
 #pcomptable td{height:50px;}
 #pcomptitles{padding:5px;}
-.dem{background:blue;}
-.repub{background:red;}
+.dem{background:#162D50;color:white;}
+.repub{background:#A30000;color:white;}
 .graphimg{width:50%;}
 #partyselector{display:flex;margin:10px 0;}
-.partyselect{padding:10px;margin:10px 0;width:calc(100% - 20px);text-align:center;cursor:pointer;}
+.partyselect{padding:10px;margin:10px 0;width:calc(100% - 20px);text-align:center;cursor:pointer;border-radius:500px;}
 .partyselected{font-weight:bold;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 #current_standings{}
-.graphback{display:none;width:600px;height:400px;max-width:90vw}
+
 #reps_slider{display:flex;flex-wrap:none;background:lavender;}
 
 #repstoggle{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:80%;padding:15% 10px;}
 #district-reps{display:none;}
-#uselocation{position:relative;margin:10%;padding:5% 0;width:80%;}
+#uselocation{position:relative;margin:20px 10%;padding:5% 0;width:80%;}
 #address-submit{padding:5% 0;margin:20px 0 10% 0;}
 
 

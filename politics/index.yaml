@@ -16,6 +16,17 @@ indexes:
   - name: Key
   - name: last_action
 
+- kind: Candidate
+  properties:
+  - name: party
+  - name: delegates
+
+- kind: Candidate
+  properties:
+  - name: party
+  - name: delegates
+    direction: desc
+
 - kind: NationalDemocraticPrimary
   properties:
   - name: entry_date
@@ -76,3 +87,8 @@ indexes:
   - name: trump
   - name: undecided
   - name: walker
+
+- kind: User
+  properties:
+  - name: username
+  - name: email
