@@ -451,7 +451,6 @@
 <script>
 var dpresults;
 var rpresults;
-startState()
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(loadData);
 function loadData(){
@@ -470,6 +469,7 @@ function loadData(){
 	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
 		chart_data = $.parseJSON(data);
 		drawLineChart(chart_data)
+		startState()
 	})
 
 }
