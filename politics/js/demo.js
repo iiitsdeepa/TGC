@@ -154,6 +154,32 @@ function gotGPS(position) {
 		});
 	}
 }
+
+function submitGraph() {
+	var length = document.getElementById("timelength").value
+	var smooth = document.getElementById("smoothness").value
+	if (length == 0){length=30} 
+	else if (length == 25){length=60}
+	else if (length == 50){length=120}
+	else if (length == 75){length=180}
+	else {length=360}
+	if (smooth == 0){smooth=10}
+	else if (smooth == 25){smooth=20}
+	else if (smooth == 50){smooth=30}
+	else if (smooth == 75){smooth=45}
+	else {smooth=90}
+	console.log(length)
+	console.log(smooth)
+	$.post('/vishandle', {'visualization':'dnpolls', 'length':length, 'smooth':smooth},function(data){
+		chart_data = $.parseJSON(data);
+		drawLineChart(chart_data)
+	})
+	$.post('/vishandle', {'visualization':'rnpolls', 'length':length, 'smooth':smooth},function(data){
+		chart_data = $.parseJSON(data);
+		drawLineChart(chart_data)
+	})
+}
+
 function useAddress(){
 	street = document.getElementById('address').value;
 	state = document.getElementById('state').value;

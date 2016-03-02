@@ -40,8 +40,8 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
         #process_politician_stats(info)
-        process_candidate_csv(info)
-        #process_visualization_csv(info)
+        #process_candidate_csv(info)
+        process_visualization_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -267,10 +267,10 @@ class UpdateAll(BaseHandler):
     def get(self):
         logging.error('National Polls')
         getNationalPolls()
-        logging.error('Votes')
-        getVotesUpdate()
-        logging.error('Bills')
-        getBillsUpdate()
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
         self.response.set_status(200)
 
     def post(self):

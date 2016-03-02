@@ -1,4 +1,4 @@
-dpresults,bar,Democratic Primary Results,Candidate,Delegates,#1a53ff,name&&&delegates&&&color,dstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'D' ORDER BY delegates DESC
-rpresults,bar,Republican Primary Results,Candidate,Delegates,#cc0000,name&&&delegates&&&color,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R' ORDER BY delegates DESC
-dnpolls,line,Democratic National Polls,Date,Percentage,hill$$$sanders,Clinton$$$Sanders,dpoll-graph-wrapper,SELECT * FROM NationalDemocraticPrimary ORDER BY start_date DESC LIMIT 10
-rnpolls,line,Republican National Polls,Date,Percentage,trump$$$cruz$$$rubio$$$kasich$$$carson,Trump$$$Cruz$$$Rubio$$$Kasich$$$Carson,rpoll-graph-wrapper,SELECT * FROM NationalRepublicanPrimary ORDER BY start_date DESC LIMIT 10
+dpresults,bar,Delegates Won,Candidate,Delegates,#1a53ff,name&&&delegates&&&color,dstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'D' ORDER BY delegates DESC
+rpresults,bar,Delegates Won,Candidate,Delegates,#cc0000,name&&&delegates&&&color,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R' ORDER BY delegates DESC
+dnpolls,line,Democratic National Polls,Date,Percentage,hill$$$sanders,Clinton$$$Sanders,dpoll-graph-wrapper,SELECT * FROM NationalDemocraticPrimary %s
+rnpolls,line,Republican National Polls,Date,Percentage,trump$$$cruz$$$rubio$$$kasich$$$carson,Trump$$$Cruz$$$Rubio$$$Kasich$$$Carson,rpoll-graph-wrapper,SELECT * FROM NationalRepublicanPrimary %s

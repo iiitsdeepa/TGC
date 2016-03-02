@@ -35,6 +35,9 @@
 .mobrep_info{display:none;}
 #pdatanote{text-align: center;}
 #personalmessage{background:white;color:darkred;padding:50px 20vw;}
+#learnmore{}
+#learn_button_wrapper{position:relative;z-index:0;margin: 0 auto;width: 200px;height: 70px;}
+#learnmore{height:50px;}
 
 
 /*Desktop*/
@@ -121,6 +124,18 @@
 	.tooltip:hover .tooltiptext {visibility: visible;}
 	.tooltip .tooltiptext2 {visibility: hidden;width:350px;left:100%;top:50%;margin-top:-90px;background-color: #ccc;color: #000;text-align:justify;border-radius: 6px;padding: 10px;position: absolute;z-index: 2;}
 	.tooltip:hover .tooltiptext2 {visibility: visible;}
+	#form_wrapper{width:100%;display:flex;height:30px;}
+	#graph-form{position:relative;display:flex;margin:0 auto;}
+	#form-one{position:relative;display:flex;margin-right:30px;}
+	#form-two{position:relative;display:flex;}
+	#length_title{position:relative;}
+	#smoothness_wrapper{position:relative;margin-left:10px;}
+	#smoothness{width:200px;}
+	#smooth_title{position:relative;}
+	#timelength_wrapper{position:relative;margin-left:10px;}
+	#timelength{width:200px;}
+	#graph_submit_wrapper{position:relative;}
+	#graph_submit{margin-left:30px;font-size:15px;height:20px;line-height:20px;width:100px;cursor:pointer;text-align:center;font-weight:bold;background-color:#AAAAAA;}
 }
 
 /*Tablet and Phone*/
