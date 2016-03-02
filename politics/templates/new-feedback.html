@@ -10,27 +10,27 @@
       <form id='feedback-form' method='post'>
         <div id='feedback-fs0' class='feedback-fs whiteback'>
           <div class='feedback-fs-q'>Do you think our government listens to you?</div>
-          <input type='radio' name='yes' value='1'>Yes<br><br>
-          <input type='radio' name='no' value='2'>No<br><br>
+          <input type='radio' name='listens' value='1'>Yes<br><br>
+          <input type='radio' name='listens' value='0'>No<br><br>
           <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
         </div> 
         <div id='feedback-fs1' class='feedback-fs whiteback'>
           <div class='feedback-fs-q'>Do you want to be a more active participant in government?</div>
-          <input type='radio' name='yes' value='1'>Yes<br><br>
-          <input type='radio' name='no' value='2'>No<br><br>
+          <input type='radio' name='activepart' value='1'>Yes<br><br>
+          <input type='radio' name='activepart' value='0'>No<br><br>
           <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
         </div>
         <div id='feedback-fs2' class='feedback-fs whiteback'>
           <div class='feedback-fs-q'>Would you be a more active participant in government if it were easier?</div>
-          <input type='radio' name='yes' value='1'>Yes<br><br>
-          <input type='radio' name='no' value='2'>No<br><br>
+          <input type='radio' name='easierpart' value='1'>Yes<br><br>
+          <input type='radio' name='easierpart' value='0'>No<br><br>
           <div id='use-location' class='bluebutton button centered' onclick="javascript:feedbackScroll('right');return false;">Next</div>
         </div>
         <div id='feedback-fs3' class='feedback-fs whiteback'>
           <div class='feedback-fs-q'>What are your top issues this election?</div>
           <div id='checkbox-area'>
-            <div class='checkboxinput'><input type='checkbox' name='environment' value='1'>Environment and Science</div>
-            <div class='checkboxinput'><input type='checkbox' name='criminal-justice' value='1'>Criminal Justice</div>
+            <div class='checkboxinput'><input type='checkbox' {{envir}} name='environment' value='1'>Environment and Science</div>
+            <div class='checkboxinput'><input type='checkbox' name='criminaljustice' value='1'>Criminal Justice</div>
             <div class='checkboxinput'><input type='checkbox' name='health-care' value='1'>Health Care</div>
             <div class='checkboxinput'><input type='checkbox' name='privacy' value='1'>Privacy and Data Security</div>
             <div class='checkboxinput'><input type='checkbox' name='education' value='1'>Education</div>
@@ -48,7 +48,7 @@
           <h2>Thank you for your feedback!</h2>
           <div class='feedback-fs-q'>We strive to be as responsive as possible to every suggestion</div>
           <input type='text' name='email' class='medium-text-input' placeholder='Enter Your Email'>
-          <div id='use-location' class='bluebutton button centered' onclick="javascript:submitFeedback();return false;">Submit</div>
+          <input class='bluebutton button centered' type='submit' value='Submit'>
         </div>
       </form>
       <div id='formcontrols'>
@@ -87,6 +87,7 @@
 
 <script>
   //helper function to reset all position indicators
+  //<div id='use-location' class='bluebutton button centered' onclick="javascript:submitFeedback();return false;">Submit</div>
   function indicatorColor(i){
     $('.fpi').each(function(index){$(this).css('background','white')})
     $('#fpi-'+i).css('background','#0E1C32')

@@ -1,4 +1,5 @@
 from basehandler import *
+from datetime import datetime, date, time, timedelta
 
 class VisualizationHandler(BaseHandler):
     def barjson(self,v):
@@ -31,9 +32,71 @@ class VisualizationHandler(BaseHandler):
         narray = names.split('$$$')
         for n in narray:
             t = dict(v=getattr(d,n))
+            logging.error(t)
             retarray.append(t)
         ret = dict(c=retarray)
         return ret
+
+    def natpolls(self,v):
+        rows = []
+        if self.request.get('length') != '' and self.request.get('length') != '':
+            length = self.request.get('length')
+            smooth = self.request.get('smooth')
+        else:
+            length = 30
+            smooth = 10
+        ultstartday = datetime.now() - timedelta(days=(int(smooth)+int(length)))
+        ultendday = datetime.now()
+        querystr = 'WHERE entry_date >= :1 AND entry_date <= :2'
+        querystr = v.query%(querystr)
+        query = GqlQuery(querystr, ultstartday, ultendday)
+        masterquery = []
+        for row in query:
+            masterquery.append(row)
+        for i in range(int(length)):
+            startday = datetime.now() - timedelta(days=(i+int(smooth)))
+            endday = datetime.now() - timedelta(days=i)
+            tempquery = []
+            for mq in masterquery:
+                if mq.entry_date >= startday and mq.entry_date <= endday:
+                    tempquery.append(mq)
+            endday = endday.date()
+            retarray = [{"v":str(endday)}]
+            if v.name == 'dnpolls':
+                average = [0,0]
+            else:
+                average = [0,0,0,0,0]
+            count = 0
+            for each in tempquery:
+                narray = v.color.split('$$$')
+
+                for i in range(len(narray)):
+                    temp = getattr(each,narray[i])
+                    average[i] += temp
+                count += 1
+            for j in range(len(average)):
+                if average[j] < 0:
+                    average[j] = 0;
+            if v.name == 'dnpolls' and count != 0:
+                average[0] = float(average[0])/float(count)
+                average[1] = float(average[1])/float(count)
+            elif count != 0:
+                average[0] = float(average[0])/float(count)
+                average[1] = float(average[1])/float(count)
+                average[2] = float(average[2])/float(count)
+                average[3] = float(average[3])/float(count)
+                average[4] = float(average[4])/float(count)
+            for each in average:
+                t = dict(v=each)
+                retarray.append(t)
+            ret = dict(c=retarray)
+            if i == 0:
+                rows.append(ret)
+            else:
+                rows.insert(0,ret)
+        return rows
+                
+
 
     def linejson(self,v):
         cols = [{"id":"","label":v.xaxis,"pattern":"","type":"string"}]
@@ -43,11 +106,14 @@ class VisualizationHandler(BaseHandler):
             cols.append(t)
         cols.append({"id":"","role":"style","type":"string"})
         
-        dataquery = GqlQuery(v.query)
         rows = []
-        for d in dataquery:
-            t = self.makerow(d,v.color)
-            rows.append(t)
+        if v.name == 'dnpolls' or v.name == 'rnpolls':
+            rows = self.natpolls(v)
+        else:
+            dataquery = GqlQuery(v.query)#%('ORDER BY start_date DESC LIMIT 10')
+            for d in dataquery:
+                t = self.makerow(d,v.color)
+                rows.append(t)
         data = dict(cols=cols,rows=rows)
 
         final = dict(title = v.title,

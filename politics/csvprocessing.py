@@ -35,7 +35,7 @@ def process_visualization_csv(blob_info):
     for row in reader:
         row_str = row[0]
         temp = row_str.split(',')
-        namequery = GqlQuery("SELECT * FROM Visualization WHERE bioguide_id = :1", temp[0])
+        namequery = GqlQuery("SELECT * FROM Visualization WHERE name = :1", temp[0])
         tempqueryrow = namequery.get()
         logging.error(tempqueryrow)
         if tempqueryrow is None:
@@ -110,6 +110,16 @@ def process_politician_csv(blob_info):
         if tempqueryrow is None:
             entry = Politician(in_office=temp[0],party=temp[1],gender=temp[2],state=temp[3],state_name=temp[4],distrank=temp[5],chamber=temp[6],birthday=temp[7],fyio=int(temp[8]),bioguide_id=temp[9],crp_id=temp[10],fec_ids=temp[11],name=temp[12],phone=temp[13],website=temp[14],contact_form=temp[15],twitter_id=temp[16],youtube_id=temp[17],facebook_id=temp[18])
             entry.put()
+
+def process_politician_stats(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    entry = []
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split(',')
+        entry.append(Politician_Stats(bioguide_id=temp[0],party_loyalty=temp[1],legislative_index=temp[8],bills_sponsored=temp[2],bills_cosponsored=temp[3],attendance=temp[4],yio=temp[5],number_enacted=temp[6],effectiveness=temp[7],sponsor_sub=temp[9],cosponsor_sub=temp[10],enacted_sub=temp[11],missed_sub=temp[12]))
+    db.put(entry)
 
 def process_cosponsor_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())

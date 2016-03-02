@@ -29,8 +29,8 @@ from updatepolls import *
 from updatecosponsors import *
 import databaseclasses
 from csvprocessing import *
-from politics import *
 from basehandler import *
+from politics import *
 
 login_session = {}
 
@@ -40,6 +40,9 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 secret = '2A3437B9B29034B7'
 sunlight_key = '5a2e18d2e3ed4861a8604e9a5f96a47a'
+SESSION_LENGTH = 7200
+DB_SESSION_RESET = 600
+
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
@@ -66,6 +69,106 @@ DISTRICT_RE = re.compile(r'^[A-Z]{2}:[0-9]{1,2}')
 def valid_district(district):
     return district and DISTRICT_RE.match(district)
 
+#---------------------------User Implementation Functions--------------------------
+def make_secure_val(val):
+    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
+def check_secure_val(secure_val):
+    val = secure_val.split('|')[0]
+    if secure_val == make_secure_val(val):
+        return val
+
+def make_salt(length = 30):
+    return ''.join(random.choice(letters) for x in xrange(length))
+
+def make_pw_hash(username, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(username + pw + salt).hexdigest()
+    return '%s,%s' % (salt, h)
+
+def valid_pw(name, password, h):
+    salt = h.split(',')[0]
+    return h == make_pw_hash(name, password, salt)
+
+def weekdaytostr(date):
+    daylist = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    return daylist[date]
+
+def monthtostr(date):
+    monthlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return monthlist[date-1]
+
+def processname(name):
+    name = name.split('_')
+    for i in range(5):
+        name[i] = name[i] + ' '
+        if (name[i] == 'None '):
+            name[i] = ''
+    return name[1] + name[2] + name[0] + name[3]# + name[4]
+
+def strtohexcode(inputdec):
+    inputdec = float(inputdec)
+    if inputdec < 0:
+        outputcolor = 'lightgray'
+    elif inputdec > 50:
+        tempdec = inputdec - 50
+        tempdec = 255 - int((tempdec*(255.0/25.1)))
+        temphex = hex(tempdec)[2:]
+        if len(temphex) == 1:
+            temphex = '0'+temphex
+        outputcolor = '#%sff00'%str(temphex)
+    else:
+        tempdec = inputdec - 40
+        tempdec = int((tempdec*(255.0/10.0)))
+        temphex = hex(tempdec)[2:]
+        if len(temphex) == 1:
+            temphex = '0'+temphex
+        outputcolor = '#ff%s00'%str(temphex)
+    logging.error('1 '+outputcolor)
+    return outputcolor
+
+def strtohexcode2(inputdec):
+    if inputdec == 'N/A':
+        outputcolor = 'lightgray'
+    else:
+        inputdec = float(inputdec)
+        if inputdec < 0:
+            outputcolor = 'gray'
+        elif inputdec > 94:
+            tempdec = inputdec - 94
+            tempdec = 255 - int((tempdec*(255.0/6.1)))
+            temphex = hex(tempdec)[2:]
+            if len(temphex) == 1:
+                temphex = '0'+temphex
+            outputcolor = '#%sff00'%str(temphex)
+        else:
+            tempdec = inputdec - 35
+            tempdec = int((tempdec*(255.0/59.1)))
+            temphex = hex(tempdec)[2:]
+            if len(temphex) == 1:
+                temphex = '0'+temphex
+            outputcolor = '#ff%s00'%str(temphex)
+    logging.error('2 '+outputcolor)
+    return outputcolor
+
+def strtohexcode3(inputdec):
+    inputdec = float(inputdec)
+    if inputdec < 0:
+        outputcolor = 'lightgray'
+    elif inputdec > 50:
+        tempdec = inputdec - 50
+        tempdec = 255 - int((tempdec*(255.0/50.0)))
+        temphex = hex(tempdec)[2:]
+        outputcolor = '#%sff00'%str(temphex)
+    else:
+        tempdec = inputdec
+        tempdec = int((tempdec*(255.0/50.0)))
+        temphex = hex(tempdec)[2:]
+        outputcolor = '#ff%s00'%str(temphex)
+    logging.error('3 '+outputcolor)
+    return outputcolor
+
 class BaseHandler(webapp2.RequestHandler):
     year = 2015
     signup_link = '<a href="/signup" class="user_links" id="signup_link">Signup</a>'
@@ -90,17 +193,65 @@ class BaseHandler(webapp2.RequestHandler):
         cookie_val = make_secure_val(val)
         self.response.headers.add_header(
             'Set-Cookie',
-            '%s=%s; expires= Wed, 01 Jan 2020 11:59:59 EST; Path=/' % (name, cookie_val))
+            '%s=%s; expires= Wed, 01 Feb 2017 11:59:59 EST; Path=/' % (name, cookie_val))
+
+    def set_secure_cookiedate(self, name, val, expr):
+        weekday = weekdaytostr(expr.weekday())
+        exprstr = weekday+', '+str(expr.day)+' '+monthtostr(expr.month)+' '+str(expr.year)+' '+str(expr.hour)+':'+str(expr.minute)+':'+str(expr.second)+' GMT'
+        logging.error(exprstr)
+        cookie_val = make_secure_val(val)
+        self.response.headers.add_header(
+            'Set-Cookie',
+            '%s=%s; expires= %s; Path=/' % (name, cookie_val, exprstr))
 
     def read_secure_cookie(self, name):
         cookie_val = self.request.cookies.get(name)
         return cookie_val and check_secure_val(cookie_val)
 
-    def login(self, user):
-        self.set_secure_cookie('user_id', str(user.key().id()))
+    def is_session_active(self):
+        cookie_val = self.request.cookies.get('sid')
+        strcookdate = str(cookie_val).split('|')[0].split('--')[1]
+        cookid = str(cookie_val).split('|')[0].split('--')[0]
+        cookdate = datetime.strptime(strcookdate, '%Y-%m-%d_%H:%M:%S')
+        dbsecleft = self.db_session_active(cookid)
+        logging.error('db sess secleft: '+str(dbsecleft))
+        if cookdate >= datetime.now() and dbsecleft > 0:
+            secleft = cookdate - datetime.now()
+            secleft = secleft.seconds
+            cookdate = datetime.now() + timedelta(seconds=SESSION_LENGTH)
+            strcookdate = str(cookdate)
+            strcookdate = strcookdate[:10]+'_'+strcookdate[11:19]
+            cookie_val = cookie_val[:18]+strcookdate
+            self.set_secure_cookiedate('sid', str(cookie_val), cookdate)
+            logging.error('Session seconds left: '+str(secleft))
+            return secleft
+        else:
+            return -1
+
+    def db_session_active(self, cookid):
+        dbentry = Session.get_by_id(int(cookid))
+        if dbentry:
+            dbdate = dbentry.expiration
+        else:
+            dbdate = datetime.min
+        if dbdate >= datetime.now():
+            if ((dbdate-datetime.now()).seconds <= DB_SESSION_RESET) and ((dbdate-datetime.now()).seconds > 0):
+                dbentry.expiration = dbdate+timedelta(seconds=SESSION_LENGTH)
+                dbentry.put()
+            secleft = dbdate - datetime.now()
+            secleft = secleft.seconds
+            logging.error('Database seconds left: '+str(secleft))
+            return secleft
+        else:
+            return -1
+
+    def login(self, session, expr):
+        exprstr = str(expr)
+        exprstr = exprstr[:10]+'_'+exprstr[11:19]
+        self.set_secure_cookiedate('sid', str(session.key().id())+'--'+str(exprstr), expr)
 
     def logout(self):
-        self.response.delete_cookie('user_id')
+        self.response.delete_cookie('sid')
 
     def address_to_district(self, address):
         #geocoding
@@ -157,7 +308,15 @@ class BaseHandler(webapp2.RequestHandler):
         logging.error(state)
         logging.error(district)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         hr = dict(hrbioguideid = rep.bioguide_id,
                 hrpic = state+'_'+district,
                 hrstate = rep.state,
@@ -165,11 +324,23 @@ class BaseHandler(webapp2.RequestHandler):
                 hrdistrict = rep.distrank,
                 hrname = name.replace('_', ' '),
                 hrgender = rep.gender,
-                hrparty = rep.party,
+                hrparty = party,
                 hrfyio = rep.fyio,
                 hrfbid = rep.facebook_id,
-                hrtwid = rep.twitter_id,
-                hrwebsite = rep.website)
+                hrtwid = twitter,
+                hrwebsite = rep.website,
+                hrpartyloyalty = stats.party_loyalty,
+                hrlegindex = stats.legislative_index,
+                hrsponsored = stats.bills_sponsored,
+                hrcosponsored = stats.bills_cosponsored,
+                hrattendance = stats.attendance,
+                hrnumber_enacted = stats.number_enacted,
+                hreffectiveness = stats.effectiveness,
+                hrsponsorsub = stats.sponsor_sub,
+                hrcosponsorsub = stats.cosponsor_sub,
+                hrenactedsub = stats.enacted_sub,
+                hrmissedsub = stats.missed_sub,
+                hrtitle = '%s District %s Representative' % (state, district))
         return hr
 
     def getSs(self, dist):
@@ -178,19 +349,38 @@ class BaseHandler(webapp2.RequestHandler):
         msg = 'SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'S\'' %(state)
         logging.error(msg)
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         ss = dict(ssbioguideid = rep.bioguide_id,
                 sspic = state+'_SS',
                 ssstate = rep.state,
                 ssrank = 'S',
                 ssname = name.replace('_', ' '),
                 ssgender = rep.gender,
-                ssparty = rep.party,
+                ssparty = party,
                 ssfyio = rep.fyio,
                 ssfbid = rep.facebook_id,
-                sstwid = rep.twitter_id,
-                sswebsite = rep.website
-                )
+                sstwid = twitter,
+                sswebsite = rep.website,
+                sspartyloyalty = stats.party_loyalty,
+                sslegindex = stats.legislative_index,
+                sssponsored = stats.bills_sponsored,
+                sscosponsored = stats.bills_cosponsored,
+                ssattendance = stats.attendance,
+                ssnumber_enacted = stats.number_enacted,
+                sseffectiveness = stats.effectiveness,
+                sssponsorsub = stats.sponsor_sub,
+                sscosponsorsub = stats.cosponsor_sub,
+                ssenactedsub = stats.enacted_sub,
+                ssmissedsub = stats.missed_sub,
+                sstitle = '%s Senior Senator' % (state))
         return ss
 
     def getJs(self, dist):
@@ -198,80 +388,144 @@ class BaseHandler(webapp2.RequestHandler):
         #returns a dictionary with the basic info for the representative of district=dist
         state, district = dist.split(':')
         rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'j\'' %(state)).get()
-        name = rep.name.replace('_', ' ')
+        stats = GqlQuery('SELECT * FROM Politician_Stats WHERE bioguide_id = \'%s\'' % (rep.bioguide_id)).get()
+        name = processname(rep.name)
+        twitter = rep.twitter_id
+        if rep.twitter_id == 'None':
+            twitter = ''
+        if rep.party == 'R':
+            party = 'Republican'
+        else:
+            party = 'Democrat'
         js = dict(jsbioguideid = rep.bioguide_id,
                 jspic = state+'_JS',
                 jsstate = rep.state,
                 jsrank = 'J',
                 jsname = name.replace('_', ' '),
                 jsgender = rep.gender,
-                jsparty = rep.party,
+                jsparty = party,
                 jsfyio = rep.fyio,
                 jsfbid = rep.facebook_id,
-                jstwid = rep.twitter_id,
-                jswebsite = rep.website
-                )
+                jstwid = twitter,
+                jswebsite = rep.website,
+                jspartyloyalty = stats.party_loyalty,
+                jslegindex = stats.legislative_index,
+                jssponsored = stats.bills_sponsored,
+                jscosponsored = stats.bills_cosponsored,
+                jsattendance = stats.attendance,
+                jsnumber_enacted = stats.number_enacted,
+                jseffectiveness = stats.effectiveness,
+                jssponsorsub = stats.sponsor_sub,
+                jscosponsorsub = stats.cosponsor_sub,
+                jsenactedsub = stats.enacted_sub,
+                jsmissedsub = stats.missed_sub,
+                jstitle = '%s Junior Senator' % (state))
         return js
 
-    def getSfth(self,dist):
-        #returns a dictionary with the basic info for the representative of district=dist
-        state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'%s\'' %(state, district)).get()
-        name = rep.name.replace('_', ' ').replace('None','')
-        hr = dict(sfthbioguideid = rep.bioguide_id,
-                sfthpic = state+'_'+district,
-                sfthstate = rep.state,
-                sfthdistrict = rep.distrank,
-                sfthname = name,
-                sfthgender = rep.gender,
-                sfthparty = rep.party,
-                sfthfyio = rep.fyio,
-                sfthfbid = rep.facebook_id,
-                sfthtwid = rep.twitter_id,
-                sfthwebsite = rep.website
-                )
-        return hr
-
-    def getSmj(self,dist):
-        state, district = dist.split(':')
-        rep = GqlQuery('SELECT * FROM Politician WHERE state=\'%s\' and distrank=\'s\'' %(state)).get()
-        name = rep.name.replace('_', ' ').replace('NONE', '')
-        js = dict(smjbioguideid = rep.bioguide_id,
-                smjpic = state+'_SS',
-                smjstate = rep.state,
-                smjrank = 'S',
-                smjname = name,
-                smjgender = rep.gender,
-                smjparty = rep.party,
-                smjfyio = rep.fyio,
-                smjfbid = rep.facebook_id,
-                smjtwid = rep.twitter_id,
-                smjwebsite = rep.website
-                )
-        return js
-
-    def getBig2(self):
+    def getBig2(self, statlist, basicstats):
         #returns a json file with the basic info for the two most powerful people in congress
-        smj = self.getSmj('KY:3')
-        sfth = self.getSfth('WI:1')
+        smj = self.getSs('KY:3')
+        sfth = self.getHr('WI:1')
         big2 = smj.copy()
         big2.update(sfth)
-        big2['smjlpic'] = 'KY_SS'
-        big2['spthpic'] = 'WI_1'
+        big2['hrtitle'] = 'Senate Majority Leader'
+        big2['sstitle'] = 'Speaker of the House'
+        temprep = ['hr','ss']
+        tempstat = basicstats.split(',')
+        for i in range(len(temprep)):
+            logging.error(i)
+            for j in range(len(tempstat)):
+                logging.error(j)
+                logging.error('%sstat%s'%(temprep[i],str(j+1)))
+                if tempstat[j] == '1':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%spartyloyalty'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
+                    big2['stat1checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Percentage of times the politician votes with their party.'
+                elif tempstat[j] == '2':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%slegindex'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode3(big2['%slegindex'%(temprep[i])])
+                    big2['stat2checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'This stat is used to compare politicians\' effectiveness. It is calculated using 4 substats: Sponsored Bills, Cosponsored Bills, Missed Votes, and Effectiveness. Each of these subscores are weighted and combined to form the final score. The final score is then normalized on a scale from 0 to 100 with a mean score of 50. Scores for most politicians fall between 40 and 60.'
+                elif tempstat[j] == '3':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%ssponsored'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%ssponsorsub'%(temprep[i])])
+                    big2['stat3checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills the politician has sponsored in the past 6 years.'
+                elif tempstat[j] == '4':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%scosponsored'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%scosponsorsub'%(temprep[i])])
+                    big2['stat4checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills the politician has cosponsored in the past 6 years.'
+                elif tempstat[j] == '5':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%sattendance'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode2(big2['%smissedsub'%(temprep[i])])
+                    big2['stat5checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Percentage of votes in congress the politician has missed over the past 6 years.'
+                elif tempstat[j] == '6':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%snumber_enacted'%(temprep[i])]
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
+                    big2['stat6checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
+                elif tempstat[j] == '7':
+                    big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]+'%'
+                    big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%senactedsub'%(temprep[i])])
+                    big2['stat7checked'] = 'checked="yes"'
+                    big2['hover%s'%(str(j+1))] = '(sponsored + cosponsored bills) / number of bills enacted'
+                big2['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
+                big2['colorhover'] = 'This gradient represents where the politician is ranked against all other politicians in congress, green being the highest ranked all the way to red being the lowest ranked.'
         return big2
 
-    def pullReps(self, district):
-        big2 = self.getBig2()
+    def pullReps(self, district, statlist, basicstats):
         hr = self.getHr(district)
         ss = self.getSs(district)
         js = self.getJs(district)
         reps = hr.copy()
         reps.update(ss)
         reps.update(js)
-        reps.update(big2)
         reps['district'] = district
+        temprep = ['hr','ss','js']
+        tempstat = basicstats.split(',')
+        for i in range(len(temprep)):
+            for j in range(len(tempstat)):
+                if tempstat[j] == '1':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%spartyloyalty'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
+                    reps['stat1checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Percentage of times the politician votes with their party.'
+                elif tempstat[j] == '2':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%slegindex'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode3(reps['%slegindex'%(temprep[i])])
+                    reps['stat2checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'This stat is used to compare politicians\' effectiveness. It is calculated using 4 substats: Sponsored Bills, Cosponsored Bills, Missed Votes, and Effectiveness. Each of these subscores are weighted and combined to form the final score. The final score is then normalized on a scale from 0 to 100 with a mean score of 50. Scores for most politicians fall between 40 and 60.'
+                elif tempstat[j] == '3':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%ssponsored'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%ssponsorsub'%(temprep[i])])
+                    reps['stat3checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills the politician has sponsored in the past 6 years.'
+                elif tempstat[j] == '4':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%scosponsored'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%scosponsorsub'%(temprep[i])])
+                    reps['stat4checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills the politician has cosponsored in the past 6 years.'
+                elif tempstat[j] == '5':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%sattendance'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode2(reps['%smissedsub'%(temprep[i])])
+                    reps['stat5checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Percentage of votes in congress the politician has missed over the past 6 years.'
+                elif tempstat[j] == '6':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%snumber_enacted'%(temprep[i])]
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
+                    reps['stat6checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
+                elif tempstat[j] == '7':
+                    reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]+'%'
+                    reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%senactedsub'%(temprep[i])])
+                    reps['stat7checked'] = 'checked="yes"'
+                    reps['hover%s'%(str(j+1))] = '(sponsored + cosponsored bills) / number of bills enacted'
+                reps['stat%sname'%(str(j+1))] = statlist[int(tempstat[j])-1]
+                reps['colorhover'] = 'This gradient represents where the politician is ranked against all other politicians in congress, green being the highest ranked all the way to red being the lowest ranked.'
         return reps
-
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')

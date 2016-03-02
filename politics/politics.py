@@ -39,6 +39,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_stat_csv(info)
         #process_nationalpolls(info, 'R')
         #process_politician_csv(info)
+        #process_politician_stats(info)
         #process_candidate_csv(info)
         process_visualization_csv(info)
         #process_votes_csv(info)
@@ -55,7 +56,49 @@ class Landing(BaseHandler):
 
 class Home(BaseHandler):
     def get(self):
-        self.render('home.html')
+        district = self.request.get('district')
+        userstats = self.request.get('stats')
+        statlist = ['Party Loyalty','Legislative Index','Bills Sponsored','Bills Cosponsored','% of Votes Missed','Number of Bills Enacted','Performance']
+        basicstats = '1,2,3,5,7'
+        if valid_district(district):
+            if userstats:
+                params = self.pullReps(district, statlist, userstats)
+                self.render('home.html',PAGESTATE='found-district', **params)
+            else:
+                params = self.pullReps(district, statlist, basicstats)
+                self.render('home.html',PAGESTATE='found-district', **params)
+        elif userstats:
+            params = self.getBig2(statlist, userstats)
+            self.render('home.html', **params)
+        else:
+            params = self.getBig2(statlist, basicstats)
+            self.render('home.html', **params)
+
+    def post(self):
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Performance']
+        issuelist = self.request.get('issuelist')
+        district = self.request.get('district')
+        address = self.request.get('address')
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        if issuelist:
+            logging.error('+++++++++++++++++++ HERE')
+            logging.error(issuelist)
+            params = self.getBig2(statlist)
+            params['issuelist'] = issuelist
+            self.render('home.html', issuelist=issuelist, **params)
+        elif lat and lng:
+            district = self.latlngToDistrict(lat, lng)
+            logging.error(district)
+            self.write(district)
+        elif address:
+            district = self.address_to_district(address)
+            logging.error(district)
+            self.write(district)
+        else:
+            params = self.getBig2(statlist)
+            logging.error(params)
+            self.render('home.html', **params)
 
 class Election(BaseHandler):
     def get(self):
@@ -108,17 +151,28 @@ class NewsLetter(BaseHandler):
 
 class Feedback(BaseHandler):
     def get(self):
-        self.render('new-feedback.html')
+        infos = self.read_secure_cookie('feedback_info')
+        logging.error(str(infos))
+        #if infos:
+        #    info_str = str(infos)
+        #    info = info_str.split('$$$')
+        self.render('new-feedback.html')#, envir='checked=1')
     def post(self):
-        cookiedata = Cookie_Info(times_visit = 1, signup = False)
-        cookiedata.put()
-        cookkey = cookiedata.key()
-        cookid = cookkey.id()
-        ret = self.request.get('return-likelihood')
-        rec = self.request.get('recommend-likelihood')
-        origin = self.request.get('origin')
+        oldcookie = self.read_secure_cookie('feedback_info')
+        cookid = 0
+        if oldcookie:
+            temp = oldcookie.split('$$$')
+            cookid = temp[0][10:]
+        else:
+            cookiedata = Cookie_Info(times_visit = 1, signup = False)
+            cookiedata.put()
+            cookkey = cookiedata.key()
+            cookid = cookkey.id()
+        activepart = self.request.get('activepart')
+        listens = self.request.get('listens')
+        easierpart = self.request.get('easierpart')
         issues = [self.request.get('environment'),
-                  self.request.get('criminal-justice'),
+                  self.request.get('criminaljustice'),
                   self.request.get('health-care'),
                   self.request.get('privacy'),
                   self.request.get('education'),
@@ -129,30 +183,45 @@ class Feedback(BaseHandler):
                   self.request.get('economy'),
                   self.request.get('foreign-policy'),
                   self.request.get('terrorism')]
+        if activepart == '':
+            activepart = -1
+        if listens == '':
+            listens = -1
+        if easierpart == '':
+            easierpart = -1
         for count in range(len(issues)):
             if (issues[count] == ''):
                 issues[count] = 0
             else:
                 issues[count] = 1
-        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), origin_val = int(origin), return_val = int(ret), recomm_val = int(rec))
+        feedradio = Feed_Radio_Buttons(cookie_id = int(cookid), listen_val = int(listens), active_val = int(activepart), easier_val = int(easierpart))
         feedradio.put()
         feedissues = Feed_Top_Issues(cookie_id = int(cookid), envir_sci = int(issues[0]), crim_just = int(issues[1]), health = int(issues[2]), privacy = int(issues[3]), edu = int(issues[4]), camp_fin_lobby = int(issues[5]), soc_issues = int(issues[6]), gun_cont = int(issues[7]), immig = int(issues[8]), econ = int(issues[9]), for_pol = int(issues[10]), terror = int(issues[11]))
         feedissues.put()
-        self.render('feedback.html')
+        cookietext = ('cookie_id='+str(cookid)+
+                      '$$$listen_val='+str(listens)+
+                      '$$$active_val='+str(activepart)+
+                      '$$$easier_val='+str(easierpart))
+        for i in range(len(issues)):
+            cookietext += ('$$$issues-'+str(i)+'='+str(issues[i]))
+        self.set_secure_cookie('feedback_info', cookietext)
+        self.render('new-feedback.html')
 
 class Vprop(BaseHandler):
     def get(self):
         district = self.request.get('district')
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
         if valid_district(district):
-            params = self.pullReps(district)
+            params = self.pullReps(district, statlist)
             logging.error(params)
             self.render('interactives.html',PAGESTATE='found-district', **params)
         else:
             logging.error('WHY T F IS THIS HAPPENING')
-            params = self.getBig2()
+            params = self.getBig2(statlist)
             self.render('interactives.html', **params)
 
     def post(self):
+        statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Effectiveness']
         issuelist = self.request.get('issuelist')
         district = self.request.get('district')
         address = self.request.get('address')
@@ -161,15 +230,16 @@ class Vprop(BaseHandler):
         if issuelist:
             logging.error('+++++++++++++++++++ HERE')
             logging.error(issuelist)
-            params = self.getBig2()
-            #params['issuelist'] = issuelist
+            params = self.getBig2(statlist)
+            params['issuelist'] = issuelist
             self.render('interactives.html', issuelist=issuelist, **params)
         elif lat and lng:
             district = self.latlngToDistrict(lat, lng)
             logging.error(district)
             self.write(district)
         else:
-            params = self.getBig2()
+            params = self.getBig2(statlist)
+            logging.error(params)
             self.render('interactives.html', **params)
 
 class PollServer(BaseHandler):
@@ -197,13 +267,10 @@ class UpdateAll(BaseHandler):
     def get(self):
         logging.error('National Polls')
         getNationalPolls()
-        logging.error('Votes')
-        getVotesUpdate()
-        logging.error('Bills')
-        getBillsUpdate()
-        #logging.error('Cosponsors')
-        #getCosponsorsUpdate()
-        #self.redirect('/')
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
         self.response.set_status(200)
 
     def post(self):
@@ -231,16 +298,23 @@ class Marketing(BaseHandler):
 
 class Login(BaseHandler):
     def get(self):
-        if self.user:
-            self.redirect('/')
-        self.render('login.html')
+        msg = 'Session expired, login again to continue browsing'
+        if self.read_secure_cookie('sid'):
+            secleft = self.is_session_active()
+            if secleft >= 0:
+                msg = 'Session cookie still active: '+str(secleft)+' seconds left.'
+        self.render('login.html', error = msg)
 
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
         u = User.login(username, password)
         if u:
-            self.login(u)
+            expr = datetime.now()+timedelta(seconds=SESSION_LENGTH)
+            uid = u.key().id()
+            sess = Session(userid = uid, expiration = expr)
+            sess.put()
+            self.login(sess, expr)
             self.redirect('/')
         else:
             msg = 'Invalid username or password'
@@ -261,7 +335,7 @@ class PassReset(BaseHandler):
             token = base64.urlsafe_b64encode(random_bytes).decode('utf-8')
             reset_key = token[:-2]
             databaseuser.reset_code = reset_key
-            databaseuser.reset_expr = datetime.now() + timedelta(seconds=7200)
+            databaseuser.reset_expr = datetime.now() + timedelta(seconds=3600)
             databaseuser.put()
             reset_url = 'http://www.glasscapitol.com/emailreset?user=%s&key=%s' % (username, reset_key)
             logging.error(reset_url)
@@ -338,7 +412,7 @@ class CreateUser(BaseHandler):
         email = self.request.get('email')
         password = self.request.get('password')
         if (username != '' and email != '' and password != ''):
-            u = User.register(username, email, password)
+            u = User.register(username, email, password, '', '')
             u.put()
             self.response.out.write('congrats it should have worked. Now go get a cookie')
         else:
@@ -382,6 +456,14 @@ class Signup(BaseHandler):
                 else:
                     temp = User.register(uname, email, password, fname, lname)
                     temp.put()
+                    feedcookie = self.read_secure_cookie('feedback_info')
+                    if feedcookie:
+                        tempcook = feedcookie.split('$$$')
+                        cookid = tempcook[0][10:]
+                        user_id = temp.key().id()
+                        tempcook = Cookie_Info.get_by_id(int(cookid))
+                        tempcook.user_id = user_id
+                        tempcook.put()
                     logging.error('User created')
                     self.render('successfulsignup.html')
             else:

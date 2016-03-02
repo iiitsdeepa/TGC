@@ -1,5 +1,28 @@
 {% extends "newbase.html" %}
 {% block content %}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
+      feed.load(function(result) {
+        if (!result.error) {
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(entry.title));
+            container.appendChild(div);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize)
+    </script>
+
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
@@ -8,25 +31,7 @@
 </div>
 
 <div id='news' class='tab'>
-	<h1 class='tab-title'>Current News</h1>
-		<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
-		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
-		</div>
-	</div>
+	<div id="feed"></div>
 </div>
 
 <div id='election' class='tab'>
@@ -34,66 +39,414 @@
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
 		<div class='dstandings cstanding'>
-			<h2 class='cstanding-title'>Democrats</h2>
+			<h2 class='cstanding-title'>Democratic Primary</h2>
 			<div class='cstanding-basicinfo'>
-				<h3>Delegates won</h3>
-				2,383 needed for nomination out of 4,189 total
+				<!--<h3>Delegates won</h3>-->
+				2,383 needed for nomination out of 4,762 total<br>
+				4,132 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
-				<h3>The Process</h3>
-				The Democratic primary has two types of delegates that are awarded to the candidates<br><br>
-				<b>Pledged Delegates:</b> Delegates that vote with primary election results<br>
-				<b>Superdelegates:</b> Delegates that do not vote with primary election results
+				<h3>Graph Key</h3>
+				<b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br>
+				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
 			</div>
 		</div>
 		<div class='rstandings cstanding'>
-			<h2 class='cstanding-title'>Republicans</h2>
+			<h2 class='cstanding-title'>Republican Primary</h2>
 			<div class='cstanding-basicinfo'>
-				<h3>Delegates won</h3>
-				1,237 needed for nomination out of 2,340 total
+				<!--<h3>Delegates won</h3>-->
+				1,237 needed for nomination out of 2,472 total<br>
+				2,340 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
-				<h3>The Process</h3>
-				The Republican primary only has pledged delegates that vote as per the primary election, unlike the Democratic primary.
+				<h3>Graph Key</h3>
+				<b>93% - Bound delegates:</b> vote according to their state’s primary results<br>
+				<b>7% - Unbound delegates:</b>  can switch candidates, regardless of their state’s primary results
 			</div>
 		</div>
+		<div id='learn_button_wrapper'>
+			<span id='learnmore' class='dformbutton' onclick="javascript:learnMore();return false;">Learn More About The Election Process</span>
+		</div>
 		<h1 class='cstandings-title'>Current National Polls</h1>
+		<div id='form_wrapper'>
+			<form id='graph-form' method='post'>
+				<div id='form-one'>
+					<div id='length_title'>Select Time Length (Shorter -> Longer): </div>
+					<div id='smoothness_wrapper'><input id='timelength' type="range" min="0" max="100" value="0" step="25" /></div>
+				</div>
+				<div id='form-two'>
+					<div id='smooth_title'>Select Line Smoothness (Less -> More Smooth): </div>
+					<div id='timelength_wrapper'><input id='smoothness' type="range" min="0" max="100" value="25" step="25" /></div>
+				</div>
+				<div id='graph_submit_wrapper'><input id='graph_submit' type="button" onclick="javascript:submitGraph();return false;" value='Submit'></div>
+			</form>
+		</div>
 		<div class='dpoll cstanding'>
 			<h2 class='cstanding-title'>Democrats</h2>
-			<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper'></div>
+			<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 		</div>
 		<div class='rpoll cstanding'>
 			<h2 class='cstanding-title'>Republicans</h2>
-			<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper'></div>
+			<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 		</div>
 	</div>
 </div>
 
 <div id='reps' class='tab'>
-	<h1 class='tab-title'>Your Representatives</h1>
-		<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
+	<div id='demo_wrapper'>
+		<h2>Find Your Representatives</h2>
+		<div class='findform_wrapper z-index-1' onmouseover="javascript:rhover('bleh');return false;">
+			<div class='findform_wrapper'>
+				<div id='location_data' class="dformbutton" onclick="javascript:useLocation();return false;">Find Using Your Location</div>
+				<span style='font-size:250%;margin: 0 auto;margin-top:30px'>-OR-</span>
+				<div id='use_address' class='districtentry'>
+					<form method='post' name='districtform' id='districtform' onsubmit="javascript:handleZip();return false;">
+						<div class='formhead'>Enter Street Address</div>
+			  			<input id='address' type="text" name="address" placeholder='Street Address' style='width:calc(100% - 4px)'><br>
+			  			<input id='city' type="text" name="city" placeholder='City' style='width:calc(50% - 5px)'>
+			  			<input id='state' type="text" name="state" placeholder='State Abbreviation (XX)' style='width:calc(50% - 7px)'>
+					</form>
+					<div id='zip_submit' class='z-depth-1 dformbutton' onclick="javascript:useAddress();return false;">Find Using Your Address</div>
+				</div>
+			</div>
+			<span id='privacy-statement' style='font-size:80%'>*Privacy: We won't save your location data. When you use these buttons it will be single use to find your district.</span>
 		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
+
+		<div id='demo_content' class='z-index-1'>
+			<div id='statdescription' class='z-index-1 tooltip'>
+				<span class="tooltiptext2">{{colorhover}}</span>
+				<div class='stattitle'>Color Key:</div>
+				<div class='statgradientbackground'></div>
+				<table id='statdata'>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #FF0000;'></div>-->
+							<div class='statkeytext'>Best</div>
+						</td> 
+					</tr>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #FFFF00;'></div>-->
+							<div class='statkeytext'>Average</div>
+						</td> 
+					</tr>
+					<tr class='dtrow'>
+						<td class ='drepstat3'>
+							<!--<div class='statkeybackground' style='background-color: #00FF00;'></div>-->
+							<div class='statkeytext'>Worst</div>
+						</td> 
+					</tr> 
+				</table>
+				<div class ='drepstat2'>
+					<div class='statkeybackground' style='background-color: #AAAAAA;'></div>
+					<div class='statkeytext2'>N/A</div>
+				</div>
+			</div>
+			<div id='reps_container'>
+				
+				<div id='reps_slider' value='leaders'>
+					<div id='hr_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{hrtitle}}</h4>
+						<div id='hr_head_wrapper' class='head_wrapper'>
+							<div id='hrpic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{hrpic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='hrname' class='repname'>{{hrname}}</div>
+								<div id='hrparty' class='repparty'>{{hrparty}}</div>
+								<div id='hryears' class='repyears'>In office since {{hrfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr1back}};'></div>
+										<div class='stattext'>{{hrstat1}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr2back}};'></div>
+										<div class='stattext'>{{hrstat2}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr3back}};'></div>
+										<div class='stattext'>{{hrstat3}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr4back}};'></div>
+										<div class='stattext'>{{hrstat4}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{hr5back}};'></div>
+										<div class='stattext'>{{hrstat5}}</div>
+									</td> 
+								</tr>
+							</table>
+						</div>
+						<div class='mobrep_spacer'></div>
+						<div class='mobrep_info'>
+							<table>
+								<tr class='mtrow'>
+									<td class='msname'>Party Loyalty</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 2 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 3 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 4 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 5 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div id='ss_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{sstitle}}</h4>
+						<div id='ss_head_wrapper' class='head_wrapper'>
+							<div id='sspic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{sspic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='ssname' class='repname'>{{ssname}}</div>
+								<div id='ssparty' class='repparty'>{{ssparty}}</div>
+								<div id='ssyears' class='repyears'>In office since {{ssfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss1back}};'></div>
+										<div class='stattext'>{{ssstat1}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss2back}};'></div>
+										<div class='stattext'>{{ssstat2}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss3back}};'></div>
+										<div class='stattext'>{{ssstat3}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss4back}};'></div>
+										<div class='stattext'>{{ssstat4}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{ss5back}};'></div>
+										<div class='stattext'>{{ssstat5}}</div>
+									</td> 
+								</tr>
+							</table>
+						</div>
+						<div class='mobrep_spacer'></div>
+						<div class='mobrep_info'>
+							<table>
+								<tr class='mtrow'>
+									<td class='msname'>Party Loyalty</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 2 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 3 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 4 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 5 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id='js_wrapper' class='rep_wrapper z-index-1'>
+						<h4>{{jstitle}}</h4>
+						<div id='js_head_wrapper' class='head_wrapper'>
+							<div id='jspic' class='reppic_wrapper'>
+								<img src='/images/headshots/{{jspic}}.png' class='rep-pic'>
+							</div>
+							<div class='basic_info'>
+								<div id='jsname' class='repname'>{{jsname}}</div>
+								<div id='jsparty' class='repparty'>{{jsparty}}</div>
+								<div id='jsyears' class='repyears'>In office since {{jsfyio}}</div>
+								<div class='partypic_wrapper'></div>
+							</div>
+						</div>
+						<div class='desrep_info'>
+							<table class='tabledisplay'>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js1back}};'></div>
+										<div class='stattext'>{{jsstat1}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js2back}};'></div>
+										<div class='stattext'>{{jsstat2}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js3back}};'></div>
+										<div class='stattext'>{{jsstat3}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js4back}};'></div>
+										<div class='stattext'>{{jsstat4}}</div>
+									</td> 
+								</tr>
+								<tr class='dtrow'>
+									<td class ='erow drepstat'>
+										<div class='statbackground' style='background-color: {{js5back}};'></div>
+										<div class='stattext'>{{jsstat5}}</div>
+									</td> 
+								</tr>
+							</table>
+						</div>
+						<div class='mobrep_spacer'></div>
+						<div class='mobrep_info'>
+							<table>
+								<tr class='mtrow'>
+									<td class='msname'>Party Loyalty</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 2 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 3 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 4 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+								<tr class='mtrow'>
+									<td class='msname'>Stat 5 Name</td>
+									<td class ='mrepstat'>X%</td> 
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id='repsheader_wrapper'>
+				<table class='tabledisplay'>
+					<tr id='head1' class='erow sporow'>
+						<td class='sname tooltip'>{{stat1name}}<span class="tooltiptext">{{hover1}}</span></td>
+						
+					</tr>
+					<tr id='head2' class='erow plrow'>
+						<td class='sname tooltip'>{{stat2name}}<span class="tooltiptext">{{hover2}}</span></td>
+						
+					</tr>
+					<tr id='head3' class='erow'>
+						<td class='sname tooltip'>{{stat3name}}<span class="tooltiptext">{{hover3}}</span></td>
+						
+					</tr>
+					<tr id='head4' class='erow'>
+						<td class='sname tooltip'>{{stat4name}}<span class="tooltiptext">{{hover4}}</span></td>
+						
+					</tr>
+					<tr id='head5' class='erow'>
+						<td class='sname tooltip'>{{stat5name}}<span class="tooltiptext">{{hover5}}</span></td>
+						
+					</tr>
+				</table>
+			</div>
+			<div id='change_button_wrapper'>
+				<span id='changetext' class='dformbutton' onclick="javascript:loadStats();return false;">Change Stats</span>
+			</div>
+			<div id='replinks_wrapper'>
+				<div class='replinks'>
+					<a href='{{hrwebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{hrfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{hrtwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+				<div class='replinks'>
+					<a href='{{sswebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{ssfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{sstwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+				<div id='last_replink' class='replinks'>
+					<a href='{{jswebsite}}' class='rep-link'target='blank'>Website</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://facebook.com/{{jsfbid}}' class='rep-link'target='blank'>Facebook</a>
+					<div class='rep-link_spacer'></div>
+					<a href='http://twitter.com/{{jstwid}}' class='rep-link'target='blank'>Twitter</a>
+				</div>
+			</div>
+			<div id='change_selector_wrapper' class='z-index-1'>
+					<div class='change_header'><h3>Select 5 legislator statictics to display from the list below.</h3></div>
+					<div id='change_checkbox_wrapper'>
+						<div class='change_checkbox'>
+							<div class='change-check'><input type='checkbox' {{stat1checked}} class='leg-stats' name='leg-stats' value='1'>Party Loyalty</div>
+							<div class='change-check'><input type='checkbox' {{stat2checked}} class='leg-stats' name='leg-stats' value='2'>Legislative Index</div>
+							<div class='change-check'><input type='checkbox' {{stat3checked}} class='leg-stats' name='leg-stats' value='3'>Bills Sponsored</div>
+							<div class='change-check'><input type='checkbox' {{stat4checked}} class='leg-stats' name='leg-stats' value='4'>Bills Cosponsored</div>
+						<!--</div>
+						<div class='change_checkbox'>-->
+							<div class='change-check'><input type='checkbox' {{stat5checked}} class='leg-stats' name='leg-stats' value='5'>Percent of Votes Missed</div>
+							<div class='change-check'><input type='checkbox' {{stat6checked}} class='leg-stats' name='leg-stats' value='6'>Number of Sponsored and Cosponsored Bills Enacted</div>
+							<div class='change-check'><input type='checkbox' {{stat7checked}} class='leg-stats' name='leg-stats' value='7'>Performance</div>
+				        </div>
+					</div>
+					<div id='change_submit_wrapper'>
+						<span id='change_submit_button' class='dformbutton' onclick="javascript:submitStats();return false;">Submit</span>
+						<span id='change_cancel_button' class='dformbutton' onclick="javascript:cancelStats();return false;">Cancel</span>
+					</div>
+				</div>
 		</div>
 	</div>
 </div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
+
+<link rel='stylesheet' href='css/demo.css'/>
+<script type="text/javascript" src="/js/demo.js"></script>
 
 <script>
 var dpresults;
@@ -153,6 +506,7 @@ function drawLineChart(d){
 .dstandings{border-right:solid 1px #eee;}
 .rstandings{border-left:solid 1px #eee;}
 .cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .cstanding-processinfo{margin:20px;}
 </style>
 {% endblock %}

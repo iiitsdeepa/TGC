@@ -3,7 +3,7 @@ import csv
 bioids = []
 outputpy = open('indVoterDatabase.py', 'w')
 outputcsvpy = open('indVoterCSVProcess.py', 'w')
-#outputcsv = open('ind_Voter_Table.csv', 'w')
+outputcsv = open('ind_Voter_Table.csv', 'w')
 outputpy.write('class Ind_Votes(db.Model):\n\tbill_id = db.StringProperty(required = True)\n\troll_id = db.StringProperty(required = True)\n')
 outputcsvpy.write('entry = Ind_Votes(bill_id = temp[0], roll_id = temp[1])\n')
 for congress in range(112,115):
@@ -86,4 +86,4 @@ for tempbioid in bioids:
 
 outputpy.close()
 outputcsvpy.close()
-#outputcsv.close()
+outputcsv.close()

@@ -105,14 +105,23 @@ class User(db.Model):
                     pw_hash = pw_hash)
 
 class Cookie_Info(db.Model):
+    user_id = db.IntegerProperty()
     times_visit = db.IntegerProperty(required = True)
     signup = db.BooleanProperty(required = True)
 
+    @classmethod
+    def by_id(cls, uid):
+        return Cookie_Info.get_by_id(uid)
+
+class Session(db.Model):
+    userid = db.IntegerProperty(required = True)
+    expiration = db.DateTimeProperty(required = True)
+
 class Feed_Radio_Buttons(db.Model):
     cookie_id = db.IntegerProperty(required = True)
-    origin_val = db.IntegerProperty()
-    return_val = db.IntegerProperty()
-    recomm_val = db.IntegerProperty()
+    listen_val = db.IntegerProperty()
+    active_val = db.IntegerProperty()
+    easier_val = db.IntegerProperty()
 
 class Feed_Top_Issues(db.Model):
     cookie_id = db.IntegerProperty(required = True)
@@ -955,6 +964,28 @@ class Politician(db.Model):
     twitter_id = db.StringProperty(required = True)
     youtube_id = db.StringProperty(required = True)
     facebook_id = db.StringProperty(required = True)
+
+class Politician_Stats(db.Model):
+    bioguide_id = db.StringProperty(required = True)
+    party_loyalty = db.StringProperty()
+    legislative_index = db.StringProperty()
+    bills_sponsored = db.StringProperty()
+    bills_cosponsored = db.StringProperty()
+    attendance = db.StringProperty()
+    approval = db.StringProperty()
+    yio = db.StringProperty()
+    number_enacted = db.StringProperty()
+    effectiveness = db.StringProperty()
+    total_contributions = db.StringProperty()
+    record_gun_control = db.StringProperty()
+    record_military_spending = db.StringProperty()
+    record_immigration = db.StringProperty()
+    record_criminal_justice = db.StringProperty()
+    record_privacy = db.StringProperty()
+    sponsor_sub = db.StringProperty()
+    cosponsor_sub = db.StringProperty()
+    enacted_sub = db.StringProperty()
+    missed_sub = db.StringProperty()
 
 class Bill(db.Model):
     bill_id = db.StringProperty(required = True)
