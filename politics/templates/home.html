@@ -26,7 +26,7 @@
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('election','tab');return false;">2016 Election</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:electionScroller();return false;">2016 Election</div>
 	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('reps','tab');return false;">My Representatives</div>
 </div>
 
@@ -43,7 +43,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				4,132 delegates remaining
+				3,323 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -57,7 +57,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				2,340 delegates remaining
+				1,784 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -451,8 +451,8 @@
 <script>
 var dpresults;
 var rpresults;
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(loadData);
+var toelection = 0;
+startState()
 function loadData(){
 	$.post('/vishandle', {'visualization':'dpresults'},function(data){
 		chart_data = $.parseJSON(data);
@@ -469,9 +469,15 @@ function loadData(){
 	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
 		chart_data = $.parseJSON(data);
 		drawLineChart(chart_data)
-		startState()
 	})
-
+}
+function electionScroller(){
+	scroller('election','tab')
+	if (toelection == 0){
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(loadData);
+		toelection++;
+	}
 }
 function drawBarChart(d) {
 	console.log(d['data'])
