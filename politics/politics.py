@@ -267,11 +267,12 @@ class UpdateAll(BaseHandler):
     def get(self):
         logging.error('National Polls')
         getNationalPolls()
-        #logging.error('')
-        logging.error('Votes')
-        getVotesUpdate()
-        logging.error('Bills')
-        getBillsUpdate()
+        logging.error('')
+        getStatePolls()
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
         self.response.set_status(200)
 
     def post(self):
