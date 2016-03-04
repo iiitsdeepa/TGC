@@ -1,16 +1,23 @@
 {% extends "newbase.html" %}
-{% block content %}
+{% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_standings']();return false;">Current Standings</div>
-	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_candidates']();return false;">Candidates</div>
-	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_map']();return false;">Map</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('standings','election_standings');return false;">Current Standings</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('candidates','election_candidates');return false;">Candidates</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('map','election_map');return false;">Map</div>
 </div>
+{% endblock %}
 
+{% block content %}
 <link rel='stylesheet' href='css/demo.css'/>
 <script type="text/javascript" src="/js/demo.js"></script>
 
-<div id='standings' class='tab'>
+<div id='display-tab'>
+	This is the display tab
+</div>
+
+<div id='standings' class='tab t1'>
+<div class='tab-content'>
 	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
@@ -69,8 +76,10 @@
 		</div>
 	</div>
 </div>
+</div>
 
-<div id='candidates' class='tab'>
+<div id='candidates' class='tab t2'>
+<div class='tab-content'>
 	<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
 			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
@@ -90,8 +99,10 @@
 		</div>
 	</div>
 </div>
+</div>
 
-<div id='map' class='tab'>
+<div id='map' class='tab t3'>
+<div class='tab-content'>
 	<h1 class='tab-title'>Map</h1>
 	<div id='primary-map' class='whiteback'>Where the map will go</div>
 	<div class='primary-data-wrapper whiteback'>
@@ -126,6 +137,7 @@
 		{% endfor %}
 	</div>
 </div>
+</div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
@@ -156,29 +168,6 @@ FUNCTIONS['election_map'] = function () {
 	}
 };
 
-//startState()
-	/*function standingsScroller(){
-		scroller('standings','tab')
-		var test = election_standings
-		if (tostandings == 0){
-			google.charts.setOnLoadCallback(test);
-			toelection++;
-		}
-	}
-	function candidatesScroller(){
-		scroller('candidates','tab')
-		if (tocandidates == 0){
-			google.charts.setOnLoadCallback(election_candidates);
-			tocandidates++;
-		}
-	}
-	function mapScroller(){
-		scroller('map','tab')
-		if (tomap == 0){
-			google.charts.setOnLoadCallback(election_map);
-			tomap++;
-		}
-	}*/
 	function selectState(){
 		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
 		scroller(id,'state-data-wrapper')
@@ -226,7 +215,7 @@ FUNCTIONS['election_map'] = function () {
 		scroller('standings','tab')
 		if (toelection == 0){
 			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(loadData);
+			//google.charts.setOnLoadCallback(loadData);
 			toelection++;
 		}
 	}

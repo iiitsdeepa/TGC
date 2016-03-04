@@ -2,12 +2,17 @@
 {% block content %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div id='personalize-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_news']();return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_election']();return false;">2016 Election</div>
-	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_reps']();return false;">My Representatives</div>
+	<div id='personalize-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_news');return false;">News</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_election');return false;">2016 Election</div>
+	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_reps');return false;">My Representatives</div>
 </div>
 
-<div id='news' class='tab'>
+<div id='display-tab'>
+	This is the display tab
+</div>
+
+<div id='news' class='tab t1'>
+<div class='tab-content'>
 <h1 class='tab-title'>Current News</h1>
 	<div id='feeds-container'>
 		<div id='left-feed-wrapper' class='feed-wrapper whiteback'>
@@ -32,8 +37,10 @@
 				</div>
 				</div>
 </div>
+</div>
 
-<div id='election' class='tab'>
+<div id='election' class='tab t2'>
+<div class='tab-content'>
 	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
@@ -92,8 +99,10 @@
 		</div>
 	</div>
 </div>
+</div>
 
-<div id='reps' class='tab'>
+<div id='reps' class='tab t3'>
+<div class='tab-content'>
 	<div id='demo_wrapper'>
 		<h2>Find Your Representatives</h2>
 		<div class='findform_wrapper z-index-1' onmouseover="javascript:rhover('bleh');return false;">
@@ -440,6 +449,7 @@
 				</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>

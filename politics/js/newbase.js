@@ -71,12 +71,15 @@ function showHide(classname, index, hide){
   }
 }
 
-function tabSwitcher(id){
-  $('.'+classname).each(function(index){
-    $(this).css('display','none')
-  })
-  $('#'+id).css('display','block')
-  fadeIn(id, 'block')
+function tabSwitcher(id, functext){
+  var html = $('#'+id).html()
+  $('#display-tab').html('')
+  $('#display-tab').html(html)
+  $('#display-tab  .tab-content').css('opacity','0')
+  $('#display-tab  .tab-content').animate({
+        opacity: "1"
+        }, 500);
+  var result = FUNCTIONS[functext]()
 }
 
 function startState(pagetext){
@@ -86,17 +89,7 @@ function startState(pagetext){
   }
   scroller(tab, 'tab')
   var functext = pagetext + tab
-  console.log(functext)
-  var result = FUNCTIONS[functext]()
-  /*if (tab == 'standings'){
-    google.charts.setOnLoadCallback(election_standings);
-  } else if (tab == 'candidates') {
-    //google.charts.setOnLoadCallback(election_candidates);
-  } else if (tab == 'map') {
-    google.charts.setOnLoadCallback(election_map);
-  } else if (tab == 'election') {
-    google.charts.setOnLoadCallback(election_standings);
-  } //else if ()*/
+  tabSwitcher(tab, functext)
 }
 
 function submitESF() {
