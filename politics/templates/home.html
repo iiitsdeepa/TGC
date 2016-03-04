@@ -469,6 +469,30 @@
 	  });
 	}
 	google.setOnLoadCallback(loadFeeds)
+	function loadFeeds(){
+		var leftfeedlist = [
+	        {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
+	        {"name":"Politico","rss":"http://www.politico.com/rss/politicopicks.xml","ideology":2},
+	        {"name":"The New York Times","rss":"http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml","ideology":2},
+	        {"name":"The Huffington Post","rss":"http://feeds.huffingtonpost.com/c/35496/f/677086/index.rss","ideology":1}
+	    ]
+	    loadFeed(leftfeedlist,'#left-feed')
+	    var centerfeedlist = [
+	        {"name":"NPR","rss":"http://www.npr.org/rss/rss.php?","ideology":3},
+	        {"name":"Wall Street Journal","rss":"http://online.wsj.com/xml/rss/3_7085.xml","ideology":3},
+	        {"name":"Christian Science Monitor","rss":"http://rss.csmonitor.com/feeds/usa","ideology":3},
+	        {"name":"CNN","rss":"http://rss.cnn.com/rss/cnn_allpolitics.rss","ideology":3}
+	    ]
+	   	loadFeed(centerfeedlist,'#center-feed')
+	   	var rightfeedlist = [
+	        {"name":"FOX","rss":"http://feeds.foxnews.com/foxnews/politics","ideology":5},
+	        {"name":"Washington Times","rss":"http://www.washingtontimes.com/rss/headlines/news/politics/","ideology":4},
+	        {"name":"Herritage","rss":"http://www.heritage.org/static/rss/reports.xml","ideology":5},
+	        {"name":"The Blaze","rss":"http://www.theblaze.com/stories/feed/","ideology":5},
+	    ]
+	   	loadFeed(rightfeedlist,'#right-feed')
+
+	}
 	function RssEntry(date,title,link,description,source,ideology) {
   		this.date = new Date(date);
   		this.title = title;
@@ -483,13 +507,8 @@
 			return -1;
 		return 0;
 	}
-	function loadFeeds() {
-		var feedlist = [
-                {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
-                {"name":"Politico","rss":"http://www.politico.com/rss/politicopicks.xml","ideology":2},
-                {"name":"The New York Times","rss":"http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml","ideology":2},
-                {"name":"The Huffington Post","rss":"http://feeds.huffingtonpost.com/c/35496/f/677086/index.rss","ideology":1}
-            ]
+	function loadFeed(feedlist,cid) {
+
 		var entries = [];
 		var numFeeds = feedlist.length;
 	 
@@ -511,7 +530,7 @@
 					numFeeds--;
 					if (numFeeds == 0) {
 						entries.sort(compareDate);
-						var container = $("#left-feed");
+						var container = $(cid);
 						for (var k = 0; k < entries.length; k++) {
 							var ht = $("#fl-template").html()
 							strdate = (entries[k].date.getMonth() + 1) + '/' + entries[k].date.getDate() + '/' +  entries[k].date.getFullYear()
