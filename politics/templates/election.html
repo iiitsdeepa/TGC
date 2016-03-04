@@ -2,9 +2,9 @@
 {% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div class='pagenav-option' onclick="javascript:electionScroller();return false;">Current Standings</div>
-	<div class='pagenav-option' onclick="javascript:scroller('candidates','tab');return false;">Candidates</div>
-	<div class='pagenav-option' onclick="javascript:scroller('map','tab');return false;">Map</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('standings');return false;">Current Standings</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('candidates');return false;">Candidates</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('map');return false;">Map</div>
 </div>
 {% endblock %}
 
@@ -17,6 +17,7 @@
 </div>
 
 <div id='standings' class='tab t1'>
+<div class='tab-content'>
 	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
@@ -75,8 +76,10 @@
 		</div>
 	</div>
 </div>
+</div>
 
 <div id='candidates' class='tab t2'>
+<div class='tab-content'>
 	<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
 			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
@@ -96,8 +99,10 @@
 		</div>
 	</div>
 </div>
+</div>
 
 <div id='map' class='tab t3'>
+<div class='tab-content'>
 	<h1 class='tab-title'>Map</h1>
 	<div id='primary-map' class='whiteback'>Where the map will go</div>
 	<div class='primary-data-wrapper whiteback'>
@@ -132,6 +137,7 @@
 		{% endfor %}
 	</div>
 </div>
+</div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
@@ -141,12 +147,11 @@
 	var dpresults;
 	var rpresults;
 	var toelection = 0;
-	startState()
 
 	function electionScroller(){
 		scroller('standings','tab')
 		if (toelection == 0){
-			google.charts.setOnLoadCallback(loadData);
+			//google.charts.setOnLoadCallback(loadData);
 			toelection++;
 		}
 	}
@@ -197,7 +202,7 @@
 		scroller('standings','tab')
 		if (toelection == 0){
 			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(loadData);
+			//google.charts.setOnLoadCallback(loadData);
 			toelection++;
 		}
 	}
@@ -223,7 +228,7 @@
 }
 
 $( document ).ready(function() {
-    startState(FUNCTIONS)
+	startState()
 });
 </script>
 

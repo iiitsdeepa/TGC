@@ -6,10 +6,10 @@ a:hover{text-decoration:underline;}
 a:visited{color:#0000EE;}
 div{border-radius:2px;}
 input{padding:0;border:none;}
-#display-tab{position:relative;z-index:50;min-height:calc(100vh - 360px);background:url('/images/paper.png');background-repeat:repeat;;}
-.t1{position:absolute;top:50px;left:0;z-index:1;}
-.t2{position:absolute;top:50px;left:0;z-index:2;}
-.t3{position:absolute;top:50px;left:0;z-index:3;}
+#display-tab{padding:50px 5vw;position:relative;z-index:50;min-height:calc(100vh - 360px);background:url('/images/paper.png');background-repeat:repeat;;}
+.t1{position:absolute;top:0;left:0;z-index:1;}
+.t2{position:absolute;top:0;left:0;z-index:2;}
+.t3{position:absolute;top:0;left:0;z-index:3;}
 .toptext{vertical-align: top;}
 .R{background: #cc0000;color:white;}
 .D{background: #1a53ff;color:white;}

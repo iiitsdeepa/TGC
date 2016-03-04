@@ -72,11 +72,13 @@ function showHide(classname, index, hide){
 }
 
 function tabSwitcher(id){
-  $('.'+classname).each(function(index){
-    $(this).css('display','none')
-  })
-  $('#'+id).css('display','block')
-  fadeIn(id, 'block')
+  var html = $('#'+id).html()
+  $('#display-tab').html('')
+  $('#display-tab').html(html)
+  $('#display-tab  .tab-content').css('opacity','0')
+  $('#display-tab  .tab-content').animate({
+        opacity: "1"
+        }, 500);
 }
 
 function startState(){
@@ -86,7 +88,7 @@ function startState(){
   if (!tab){
     tab = $('.tab').first().attr('id')
   }
-  scroller(tab, 'tab')
+  tabSwitcher(tab)
 }
 
 function submitESF() {
