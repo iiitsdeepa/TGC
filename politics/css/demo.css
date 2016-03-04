@@ -26,6 +26,7 @@
 #privacy-statement{position:relative;margin: 0 auto;}
 .dformbutton{position: absolute;bottom: 0;left: 0;width: calc(100% - 10px);height: 25px;line-height: 25px;font-weight: bold;text-align: center;color: white;background-color: darkred;border: double #4d0000 5px;}
 .dformbutton:active{background-color: #AE4D4D;}
+.dformbutton:hover{background-color: #e8caca;}
 #demo_content{position:relative;margin:0 auto;width:950px;background-color:white;height:500px;margin-top: 20px;}
 #reps_slider{display: flex;}
 .abtext{display: none;}

@@ -3,7 +3,7 @@
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('election','tab');return false;">2016 Election</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:electionScroller();return false;">2016 Election</div>
 	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('reps','tab');return false;">My Representatives</div>
 </div>
 
@@ -34,7 +34,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				4,132 delegates remaining
+				3,323 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -48,7 +48,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				2,340 delegates remaining
+				1,784 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -440,6 +440,7 @@
 <script type="text/javascript" src="/js/demo.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
+<<<<<<< HEAD
 
 	google.load("feeds", "1");
 
@@ -489,6 +490,44 @@
 	    var chart1_options = {
 	        title: d['title'],
 	    };
+=======
+var dpresults;
+var rpresults;
+var toelection = 0;
+startState()
+function loadData(){
+	$.post('/vishandle', {'visualization':'dpresults'},function(data){
+		chart_data = $.parseJSON(data);
+		drawBarChart(chart_data)
+	})
+	$.post('/vishandle', {'visualization':'rpresults'},function(data){
+		chart_data = $.parseJSON(data);
+		drawBarChart(chart_data)
+	})
+	$.post('/vishandle', {'visualization':'dnpolls'},function(data){
+		chart_data = $.parseJSON(data);
+		drawLineChart(chart_data)
+	})
+	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
+		chart_data = $.parseJSON(data);
+		drawLineChart(chart_data)
+	})
+}
+function electionScroller(){
+	scroller('election','tab')
+	if (toelection == 0){
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(loadData);
+		toelection++;
+	}
+}
+function drawBarChart(d) {
+	console.log(d['data'])
+    var chart1_data = new google.visualization.DataTable(d['data']);
+    var chart1_options = {
+        title: d['title'],
+    };
+>>>>>>> version1
 
 	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
 	    chart1_chart.draw(chart1_data, chart1_options);

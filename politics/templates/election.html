@@ -2,49 +2,70 @@
 {% block content %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div class='pagenav-option' onclick="javascript:scroller('standings', 'tab');return false;">Current Standings</div>
+	<div class='pagenav-option' onclick="javascript:electionScroller();return false;">Current Standings</div>
 	<div class='pagenav-option' onclick="javascript:scroller('candidates','tab');return false;">Candidates</div>
 	<div class='pagenav-option' onclick="javascript:scroller('map','tab');return false;">Map</div>
 </div>
 
+<link rel='stylesheet' href='css/demo.css'/>
+<script type="text/javascript" src="/js/demo.js"></script>
+
 <div id='standings' class='tab'>
-	<h1 class='tab-title'>Current Standings</h1>
+	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
 		<div class='dstandings cstanding'>
-			<h2 class='cstanding-title'>Democrats</h2>
+			<h2 class='cstanding-title'>Democratic Primary</h2>
 			<div class='cstanding-basicinfo'>
-				<h3>Delegates won</h3>
-				2,383 needed for nomination out of 4,189 total
+				<!--<h3>Delegates won</h3>-->
+				2,383 needed for nomination out of 4,762 total<br>
+				3,323 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
-				<h3>The Process</h3>
-				The Democratic primary has two types of delegates that are awarded to the candidates<br><br>
-				<b>Pledged Delegates:</b> Delegates that vote with primary election results<br>
-				<b>Superdelegates:</b> Delegates that do not vote with primary election results
+				<h3>Graph Key</h3>
+				<b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br>
+				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
 			</div>
 		</div>
 		<div class='rstandings cstanding'>
-			<h2 class='cstanding-title'>Republicans</h2>
+			<h2 class='cstanding-title'>Republican Primary</h2>
 			<div class='cstanding-basicinfo'>
-				<h3>Delegates won</h3>
-				1,237 needed for nomination out of 2,340 total
+				<!--<h3>Delegates won</h3>-->
+				1,237 needed for nomination out of 2,472 total<br>
+				1,784 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
-				<h3>The Process</h3>
-				The Republican primary only has pledged delegates that vote as per the primary election, unlike the Democratic primary.
+				<h3>Graph Key</h3>
+				<b>93% - Bound delegates:</b> vote according to their state’s primary results<br>
+				<b>7% - Unbound delegates:</b>  can switch candidates, regardless of their state’s primary results
 			</div>
 		</div>
+		<div id='learn_button_wrapper'>
+			<span id='learnmore' class='dformbutton' onclick="javascript:learnMore();return false;">Learn More About The Election Process</span>
+		</div>
 		<h1 class='cstandings-title'>Current National Polls</h1>
+		<div id='form_wrapper'>
+			<form id='graph-form' method='post'>
+				<div id='form-one'>
+					<div id='length_title'>Select Time Length (Shorter -> Longer): </div>
+					<div id='smoothness_wrapper'><input id='timelength' type="range" min="0" max="100" value="0" step="25" /></div>
+				</div>
+				<div id='form-two'>
+					<div id='smooth_title'>Select Line Smoothness (Less -> More Smooth): </div>
+					<div id='timelength_wrapper'><input id='smoothness' type="range" min="0" max="100" value="25" step="25" /></div>
+				</div>
+				<div id='graph_submit_wrapper'><input id='graph_submit' type="button" onclick="javascript:submitGraph();return false;" value='Submit'></div>
+			</form>
+		</div>
 		<div class='dpoll cstanding'>
 			<h2 class='cstanding-title'>Democrats</h2>
-			<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper'></div>
+			<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 		</div>
 		<div class='rpoll cstanding'>
 			<h2 class='cstanding-title'>Republicans</h2>
-			<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper'></div>
+			<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 		</div>
 	</div>
 </div>
@@ -98,8 +119,10 @@
 <script>
 var dpresults;
 var rpresults;
+var toelection = 0;
+startState()
 google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(loadData);
+		google.charts.setOnLoadCallback(loadData);
 function loadData(){
 	$.post('/vishandle', {'visualization':'dpresults'},function(data){
 		chart_data = $.parseJSON(data);
@@ -116,9 +139,15 @@ function loadData(){
 	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
 		chart_data = $.parseJSON(data);
 		drawLineChart(chart_data)
-		startState()
 	})
-
+}
+function electionScroller(){
+	scroller('standings','tab')
+	if (toelection == 0){
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(loadData);
+		toelection++;
+	}
 }
 function drawBarChart(d) {
 	console.log(d['data'])
@@ -144,5 +173,7 @@ function drawLineChart(d){
 </script>
 
 <style>
+.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 </style>
 {% endblock %}
