@@ -3,7 +3,7 @@
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:scroller('election','tab');return false;">2016 Election</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:electionScroller();return false;">2016 Election</div>
 	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('reps','tab');return false;">My Representatives</div>
 </div>
 
@@ -42,12 +42,12 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				3,323 delegates remaining
+				3,286 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br>
+				<div id=''></div><b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br><
 				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				1,784 delegates remaining
+				1,777 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -448,8 +448,37 @@
 <script type="text/javascript" src="/js/demo.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-	google.load("feeds", "1");
-	google.setOnLoadCallback(loadFeeds)
+var dpresults;
+var rpresults;
+var toelection = 0;
+startState()
+google.charts.load('current', {'packages':['corechart']});
+var homeparams = getQueryParams(document.location.search);
+if (homeparams.s == 'election'){
+	google.charts.setOnLoadCallback(loadData);
+	toelection++;
+}
+google.load("feeds", "1");
+google.setOnLoadCallback(loadFeeds)
+	function initialize() {
+	  var feed = new google.feeds.Feed("http://www.politico.com/rss/politicopicks.xml");
+	  feed.setNumEntries(5)
+	  feed.load(function(result) {
+	    if (!result.error) {
+	      var container = $("#left-feed");
+	      for (var i = 0; i < result.feed.entries.length; i++) {
+	        var entry = result.feed.entries[i];
+	        console.log(entry.title,entry.publishedDate,entry.link,entry.contentSnippet,entry.categories)
+	        var ht = $("#fl-template").html()
+	        ht = ht.replace('ELINK',entry.link)
+	        ht = ht.replace('ETITLE',entry.title)
+	        ht = ht.replace('EDATE',entry.publishedDate)
+	        ht = ht.replace('EDESC',entry.contentSnippet)
+	        container.append(ht)
+	      }
+	    }
+	  });
+	}
 	function loadFeeds(){
 		var leftfeedlist = [
 	        {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
@@ -528,11 +557,13 @@
 			});	
 		}
 	}
-
-	var dpresults;
-	var rpresults;
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(loadData);
+	function electionScroller(){
+		scroller('election','tab')
+		if (toelection == 0){
+			google.charts.setOnLoadCallback(loadData);
+			toelection++;
+		}
+	}
 	function loadData(){
 		$.post('/vishandle', {'visualization':'dpresults'},function(data){
 			chart_data = $.parseJSON(data);
@@ -549,9 +580,7 @@
 		$.post('/vishandle', {'visualization':'rnpolls'},function(data){
 			chart_data = $.parseJSON(data);
 			drawLineChart(chart_data)
-			startState()
 		})
-
 	}
 	function drawBarChart(d) {
 		console.log(d['data'])
@@ -584,6 +613,8 @@
 #right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
 .fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
 .fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
+.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .fl-title:visited{color:#660066;}
 .fl-description{color:#595959;}
 .fl-date{color:#8c8c8c;}

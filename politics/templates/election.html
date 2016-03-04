@@ -19,7 +19,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				3,323 delegates remaining
+				3,286 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -33,7 +33,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				1,784 delegates remaining
+				1,777 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -130,16 +130,25 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-	FUNCTIONS = ['electionStandings','electctionCandidates','electionMap']
+FUNCTIONS = ['election_standings','electction_candidates','election_map']
 
+var dpresults;
+var rpresults;
+var toelection = 0;
+startState()
 
+	function electionScroller(){
+		scroller('standings','tab')
+		if (toelection == 0){
+			google.charts.setOnLoadCallback(loadData);
+			toelection++;
+		}
+	}
 	function selectState(){
 		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
 		scroller(id,'state-data-wrapper')
 	}
 
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(loadData);
 	function election_standings(){
 		$.post('/vishandle', {'visualization':'dpresults'},function(data){
 			chart_data = $.parseJSON(data);
@@ -207,7 +216,9 @@
     chart1_chart.draw(chart1_data, chart1_options);
 }
 
-
+$( document ).ready(function() {
+    startState(FUNCTIONS)
+});
 </script>
 
 <style>

@@ -80,6 +80,8 @@ function tabSwitcher(id){
 }
 
 function startState(){
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(election_standings);
   var tab = getParameterByName('s')
   if (!tab){
     tab = $('.tab').first().attr('id')
