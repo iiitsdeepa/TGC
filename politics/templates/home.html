@@ -23,6 +23,13 @@
 			<div id="right-feed"></div>
 		</div>
 	</div>
+				<div id='fl-template'>
+				<div class='fl'>
+					<a href='ELINK' target='blank' class='fl-title'>ETITLE</a>
+					<div class='fl-description'><span class='fl-date'>EDATE • </span>EDESC</div>
+					<div class='fl-source'>ESOURCE</div>
+				</div>
+				</div>
 </div>
 
 <div id='election' class='tab'>
@@ -440,25 +447,86 @@
 <script type="text/javascript" src="/js/demo.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-<<<<<<< HEAD
-
 	google.load("feeds", "1");
 
 	function initialize() {
-	  var feed = new google.feeds.Feed("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
+	  var feed = new google.feeds.Feed("http://www.politico.com/rss/politicopicks.xml");
+	  feed.setNumEntries(5)
 	  feed.load(function(result) {
 	    if (!result.error) {
-	      var container = document.getElementById("left-feed");
+	      var container = $("#left-feed");
 	      for (var i = 0; i < result.feed.entries.length; i++) {
 	        var entry = result.feed.entries[i];
-	        var div = document.createElement("div");
-	        div.appendChild(document.createTextNode(entry.title));
-	        container.appendChild(div);
+	        console.log(entry.title,entry.publishedDate,entry.link,entry.contentSnippet,entry.categories)
+	        var ht = $("#fl-template").html()
+	        ht = ht.replace('ELINK',entry.link)
+	        ht = ht.replace('ETITLE',entry.title)
+	        ht = ht.replace('EDATE',entry.publishedDate)
+	        ht = ht.replace('EDESC',entry.contentSnippet)
+	        container.append(ht)
 	      }
 	    }
 	  });
 	}
-	google.setOnLoadCallback(initialize)
+	google.setOnLoadCallback(loadFeeds)
+	function RssEntry(date,title,link,description,source,ideology) {
+  		this.date = new Date(date);
+  		this.title = title;
+		this.link = link;
+		this.description = description;
+		this.source = source;		
+	}
+	function compareDate(a, b) {
+		if (a.date < b.date)
+			return 1;
+		if (a.date > b.date)
+			return -1;
+		return 0;
+	}
+	function loadFeeds() {
+		var feedlist = [
+                {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
+                {"name":"Politico","rss":"http://www.politico.com/rss/politicopicks.xml","ideology":2},
+                {"name":"The New York Times","rss":"http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml","ideology":2},
+                {"name":"The Huffington Post","rss":"http://feeds.huffingtonpost.com/c/35496/f/677086/index.rss","ideology":1}
+            ]
+		var entries = [];
+		var numFeeds = feedlist.length;
+	 
+		for (var i = 0; i < feedlist.length; i++) {
+			var name = feedlist[i]["name"]
+			var ideology = feedlist[i]["ideology"]
+			var feed = new google.feeds.Feed(feedlist[i]["rss"]);
+			feed.setNumEntries(3);
+			console.log(name,ideology)
+			feed.load(function(result) {
+				console.log(i)
+			 	if (!result.error) {
+					for (var j = 0; j < result.feed.entries.length; j++) {
+						console.log(name,ideology)
+						var rawEntry = result.feed.entries[j];
+						entries.push(new RssEntry(rawEntry.publishedDate,rawEntry.title,rawEntry.link,rawEntry.contentSnippet,result.feed.title,ideology));
+					}
+	 
+					numFeeds--;
+					if (numFeeds == 0) {
+						entries.sort(compareDate);
+						var container = $("#left-feed");
+						for (var k = 0; k < entries.length; k++) {
+							var ht = $("#fl-template").html()
+							strdate = (entries[k].date.getMonth() + 1) + '/' + entries[k].date.getDate() + '/' +  entries[k].date.getFullYear()
+					        ht = ht.replace('ELINK',entries[k].link)
+					        ht = ht.replace('ETITLE',entries[k].title)
+					        ht = ht.replace('EDATE',strdate)
+					        ht = ht.replace('EDESC',entries[k].description)
+					        ht = ht.replace('ESOURCE',entries[k].source)
+					        container.append(ht)
+						}
+					}	
+			 	}
+			});	
+		}
+	}
 
 	var dpresults;
 	var rpresults;
@@ -490,45 +558,6 @@
 	    var chart1_options = {
 	        title: d['title'],
 	    };
-=======
-var dpresults;
-var rpresults;
-var toelection = 0;
-startState()
-function loadData(){
-	$.post('/vishandle', {'visualization':'dpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'dnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-	})
-}
-function electionScroller(){
-	scroller('election','tab')
-	if (toelection == 0){
-		google.charts.load('current', {'packages':['corechart']});
-		google.charts.setOnLoadCallback(loadData);
-		toelection++;
-	}
-}
-function drawBarChart(d) {
-	console.log(d['data'])
-    var chart1_data = new google.visualization.DataTable(d['data']);
-    var chart1_options = {
-        title: d['title'],
-    };
->>>>>>> version1
-
 	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
 	    chart1_chart.draw(chart1_data, chart1_options);
 	}
@@ -547,10 +576,16 @@ function drawBarChart(d) {
 
 <style>
 #feeds-container{display:flex;justify-content:space-between;}
-.feed-wrapper{width:calc(30% - 40px);padding:25px;}
+.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
 .feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
 #left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
 #center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
 #right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
+.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
+.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
+.fl-title:visited{color:#660066;}
+.fl-description{color:#595959;}
+.fl-date{color:#8c8c8c;}
+#fl-template{display:none;}
 </style>
 {% endblock %}
