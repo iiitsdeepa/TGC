@@ -130,6 +130,9 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
+	FUNCTIONS = ['electionStandings','electctionCandidates','electionMap']
+
+
 	function selectState(){
 		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
 		scroller(id,'state-data-wrapper')
@@ -137,7 +140,7 @@
 
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(loadData);
-	function loadData(){
+	function election_standings(){
 		$.post('/vishandle', {'visualization':'dpresults'},function(data){
 			chart_data = $.parseJSON(data);
 			drawBarChart(chart_data)
@@ -154,6 +157,12 @@
 			chart_data = $.parseJSON(data);
 			drawLineChart(chart_data)
 		})
+		drawPrimaryMap()
+	}
+	function election_candidates(){
+		console.log('nothing')
+	}
+	function election_map(){
 		drawPrimaryMap()
 	}
 	function drawPrimaryMap(){
@@ -205,8 +214,8 @@
 .cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .primary-data-wrapper{position:relative;padding:25px;}
-#primary-map{height:60vw;margin-bottom:50px;}
-.pdata-columns{margin-topo:20px;position:relative;display:flex;justify-content:space-between;}
+#primary-map{height:60vw;max-height:725px;margin-bottom:50px;}
+.pdata-columns{margin-top:20px;position:relative;display:flex;justify-content:space-between;}
 .pdata-section{width:calc(50% - 25px);}
 .registerbutton{width:200px;padding:15px 0;border-radius:10px;text-align:center;font-weight:bold;}
 .primary-poll-graph-wrapper{height:300px;}

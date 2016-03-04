@@ -71,6 +71,14 @@ function showHide(classname, index, hide){
   }
 }
 
+function tabSwitcher(id){
+  $('.'+classname).each(function(index){
+    $(this).css('display','none')
+  })
+  $('#'+id).css('display','block')
+  fadeIn(id, 'block')
+}
+
 function startState(){
   var tab = getParameterByName('s')
   if (!tab){
