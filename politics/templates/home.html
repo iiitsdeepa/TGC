@@ -2,9 +2,9 @@
 {% block content %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:electionScroller();return false;">2016 Election</div>
-	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:scroller('reps','tab');return false;">My Representatives</div>
+	<div id='personalize-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_news']();return false;">News</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_election']();return false;">2016 Election</div>
+	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:FUNCTIONS['home_reps']();return false;">My Representatives</div>
 </div>
 
 <div id='news' class='tab'>
@@ -448,18 +448,22 @@
 <script type="text/javascript" src="/js/demo.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-var dpresults;
-var rpresults;
+var FUNCTIONS = [];
 var toelection = 0;
-startState()
-google.charts.load('current', {'packages':['corechart']});
-var homeparams = getQueryParams(document.location.search);
-if (homeparams.s == 'election'){
-	google.charts.setOnLoadCallback(loadData);
-	toelection++;
-}
-google.load("feeds", "1");
-google.setOnLoadCallback(loadFeeds)
+FUNCTIONS['home_news'] = function () { 
+	scroller('news','tab')
+	google.setOnLoadCallback(loadFeeds)
+};
+FUNCTIONS['home_election'] = function () { 
+	scroller('election','tab')
+	if (toelection == 0){
+		google.charts.setOnLoadCallback(loadData);
+		toelection++
+	}
+};
+FUNCTIONS['home_reps'] = function () { 
+	scroller('reps','tab')
+};
 	function initialize() {
 	  var feed = new google.feeds.Feed("http://www.politico.com/rss/politicopicks.xml");
 	  feed.setNumEntries(5)
@@ -601,6 +605,11 @@ google.setOnLoadCallback(loadFeeds)
 	    var chart1_chart = new google.visualization.LineChart(document.getElementById(d['element']));
 	    chart1_chart.draw(chart1_data, chart1_options);
 	}
+	$( document ).ready(function() {
+		google.charts.load('current', {'packages':['corechart']});
+		google.load("feeds", "1");
+    	startState('home_')
+	});
 
 </script>
 

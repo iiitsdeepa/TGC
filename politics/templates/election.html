@@ -2,9 +2,9 @@
 {% block content %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div class='pagenav-option' onclick="javascript:electionScroller();return false;">Current Standings</div>
-	<div class='pagenav-option' onclick="javascript:scroller('candidates','tab');return false;">Candidates</div>
-	<div class='pagenav-option' onclick="javascript:scroller('map','tab');return false;">Map</div>
+	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_standings']();return false;">Current Standings</div>
+	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_candidates']();return false;">Candidates</div>
+	<div class='pagenav-option' onclick="javascript:FUNCTIONS['election_map']();return false;">Map</div>
 </div>
 
 <link rel='stylesheet' href='css/demo.css'/>
@@ -130,20 +130,55 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-FUNCTIONS = ['election_standings','electction_candidates','election_map']
+var FUNCTIONS = [];
+var tostandings = 0;
+var tocandidates = 0;
+var tomap = 0;
+FUNCTIONS['election_standings'] = function () { 
+	scroller('standings','tab')
+	if (tostandings == 0){
+		google.charts.setOnLoadCallback(election_standings);
+		toelection++;
+	}
+};
+FUNCTIONS['election_candidates'] = function () { 
+	scroller('candidates','tab')
+	/*if (tocandidates == 0){
+		google.charts.setOnLoadCallback(election_candidates);
+		tocandidates++;
+	}*/
+};
+FUNCTIONS['election_map'] = function () { 
+	scroller('map','tab')
+	if (tomap == 0){
+		google.charts.setOnLoadCallback(election_map);
+		tomap++;
+	}
+};
 
-var dpresults;
-var rpresults;
-var toelection = 0;
-startState()
-
-	function electionScroller(){
+//startState()
+	/*function standingsScroller(){
 		scroller('standings','tab')
-		if (toelection == 0){
-			google.charts.setOnLoadCallback(loadData);
+		var test = election_standings
+		if (tostandings == 0){
+			google.charts.setOnLoadCallback(test);
 			toelection++;
 		}
 	}
+	function candidatesScroller(){
+		scroller('candidates','tab')
+		if (tocandidates == 0){
+			google.charts.setOnLoadCallback(election_candidates);
+			tocandidates++;
+		}
+	}
+	function mapScroller(){
+		scroller('map','tab')
+		if (tomap == 0){
+			google.charts.setOnLoadCallback(election_map);
+			tomap++;
+		}
+	}*/
 	function selectState(){
 		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
 		scroller(id,'state-data-wrapper')
@@ -217,7 +252,8 @@ startState()
 }
 
 $( document ).ready(function() {
-    startState(FUNCTIONS)
+	google.charts.load('current', {'packages':['corechart']});
+    startState('election_')
 });
 </script>
 

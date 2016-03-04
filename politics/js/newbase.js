@@ -79,14 +79,24 @@ function tabSwitcher(id){
   fadeIn(id, 'block')
 }
 
-function startState(){
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(election_standings);
+function startState(pagetext){
   var tab = getParameterByName('s')
   if (!tab){
     tab = $('.tab').first().attr('id')
   }
   scroller(tab, 'tab')
+  var functext = pagetext + tab
+  console.log(functext)
+  var result = FUNCTIONS[functext]()
+  /*if (tab == 'standings'){
+    google.charts.setOnLoadCallback(election_standings);
+  } else if (tab == 'candidates') {
+    //google.charts.setOnLoadCallback(election_candidates);
+  } else if (tab == 'map') {
+    google.charts.setOnLoadCallback(election_map);
+  } else if (tab == 'election') {
+    google.charts.setOnLoadCallback(election_standings);
+  } //else if ()*/
 }
 
 function submitESF() {
