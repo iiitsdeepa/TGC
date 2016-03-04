@@ -10,7 +10,11 @@
 <link rel='stylesheet' href='css/demo.css'/>
 <script type="text/javascript" src="/js/demo.js"></script>
 
-<div id='standings' class='tab'>
+<div id='display-tab'>
+	This is the display tab
+</div>
+
+<div id='standings' class='tab t1'>
 	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
 		<h1 class='cstandings-title'>Current Standings</h1>
@@ -70,7 +74,7 @@
 	</div>
 </div>
 
-<div id='candidates' class='tab'>
+<div id='candidates' class='tab t2'>
 	<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
 			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
@@ -91,7 +95,7 @@
 	</div>
 </div>
 
-<div id='map' class='tab'>
+<div id='map' class='tab t3'>
 	<h1 class='tab-title'>Map</h1>
 	<div id='primary-map' class='whiteback'>Where the map will go</div>
 	<div class='primary-data-wrapper whiteback'>
@@ -130,12 +134,12 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-FUNCTIONS = ['election_standings','electction_candidates','election_map']
+	FUNCTIONS = ['election_standings','electction_candidates','election_map']
 
-var dpresults;
-var rpresults;
-var toelection = 0;
-startState()
+	var dpresults;
+	var rpresults;
+	var toelection = 0;
+	startState()
 
 	function electionScroller(){
 		scroller('standings','tab')
