@@ -1,12 +1,13 @@
 {% extends "newbase.html" %}
-{% block content %}
+{% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div id='personalize-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_news');return false;">News</div>
-	<div id='partycomp-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_election');return false;">2016 Election</div>
-	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:tabSwitcher('map','home_reps');return false;">My Representatives</div>
+	<div id='personalize-option' class='pagenav-option' onclick="javascript:tabSwitcher('news','home_news');return false;">News</div>
+	<div id='partycomp-option' class='pagenav-option' onclick="javascript:tabSwitcher('election','home_election');return false;">2016 Election</div>
+	<div id='currentpolls-option' class='pagenav-option' onclick="javascript:tabSwitcher('reps','home_reps');return false;">My Representatives</div>
 </div>
-
+{% endblock %}
+{% block content %}
 <div id='display-tab'>
 	This is the display tab
 </div>
