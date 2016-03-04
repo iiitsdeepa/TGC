@@ -29,6 +29,21 @@ from databaseclasses import *
 
 #------------------------File Processing----------------------------
 
+def process_state_csv(blob_info):
+    blob_reader = blobstore.BlobReader(blob_info.key())
+    reader = csv.reader(blob_reader, delimiter='\n')
+    for row in reader:
+        row_str = row[0]
+        temp = row_str.split(',')
+        namequery = GqlQuery("SELECT * FROM State WHERE name = :1", temp[0])
+        tempqueryrow = namequery.get()
+        logging.error(tempqueryrow)
+        if tempqueryrow is None:
+            ddate = datetime.strptime(temp[5], "%m/%d/%Y")
+            rdate = datetime.strptime(temp[9], "%m/%d/%Y")
+            entry = State(name=temp[0],abbreviation=temp[1],num_reps=int(temp[2]),ge_delegates=int(temp[3]),primary_type=temp[4],D_primary_date=ddate,D_delegates=int(temp[6]),D_pledged=int(temp[7]),D_super=int(temp[8]),R_primary_date=rdate,R_delegates=int(temp[10]),R_pledged=int(temp[11]),R_super=int(temp[12]),primary_notes=temp[13],registration_link=temp[14])
+            entry.put()
+
 def process_visualization_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())
     reader = csv.reader(blob_reader, delimiter='\n')
@@ -54,41 +69,6 @@ def process_candidate_csv(blob_info):
             entry = Candidate(name=temp[0],party=temp[1],delegates=int(temp[2]),superdelegates=int(temp[3]))
             entry.put()
 
-def process_state_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        name, abb, num, ss, js = row_str.split(',')
-        entry = State(name=name, abbreviation=abb, num_districts=int(num), senior_senator=ss, junior_senator=js)
-        entry.put()
-
-def process_district_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        rep, state, num = row_str.split(',')
-        entry = District(representative=rep, state=state, num=int(num))
-        entry.put()
-
-def process_senator_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        id, state, rank, name, gender, party, fyio, fbid, twid, ployalty, enacted, sponsored, cosponsored, li = row_str.split(',')
-        entry = Senator(bioguide_id=id, state=state, rank=rank, name=name.decode('latin-1'), gender=gender, party=party, fyio=int(fyio), fbid=fbid, twid=twid, ployalty=int(ployalty), enacted=int(enacted), sponsored=int(sponsored), cosponsored=int(cosponsored), li=int(li))
-        entry.put()
-
-def process_rep_csv(blob_info):
-    blob_reader = blobstore.BlobReader(blob_info.key())
-    reader = csv.reader(blob_reader, delimiter='\n')
-    for row in reader:
-        row_str = row[0]
-        id, state, district, name, gender, party, fyio, fbid, twid, ployalty, enacted, sponsored, cosponsored, li = row_str.split(',')
-        entry = Representative(bioguide_id=id, state=state, district=int(district), name=name.decode('latin-1'), gender=gender, party=party, fyio=int(fyio), fbid=fbid, twid=twid, ployalty=int(ployalty), enacted=int(enacted), sponsored=int(sponsored), cosponsored=int(cosponsored), li=int(li))
-        entry.put()
 
 def process_stat_csv(blob_info):
     blob_reader = blobstore.BlobReader(blob_info.key())

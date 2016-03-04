@@ -93,25 +93,38 @@
 
 <div id='map' class='tab'>
 	<h1 class='tab-title'>Map</h1>
-		<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
+	<div id='primary-map' class='whiteback'>Where the map will go</div>
+	<div class='primary-data-wrapper whiteback'>
+		<div id='state-select-wrapper'>
+			Select State:
+			<select id='state-dropdown' onclick="javascript:selectState()">
+				{% for p in pinfo %}
+				<option class='' value="{{p.name}}">{{p.name}}</option>
+				{% endfor %}
+			</select>
 		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
+		{% for p in pinfo %}
+		<div id='{{p.name}}-data-wrapper' class='state-data-wrapper' value='{{p.gedelegates}}'>
+			<h2>{{p.name}}</h2>
+			<h3>Primary Date: <span class='fade-2'>{{p.ddate}}</span></h3>
+			<div class='pdata-columns'>
+				<div class='pdata-dem pdata-section'>
+					<h3>State Democratic Primary</h3>
+					<a href='{{p.rlink}}' target='blank' class='bluebutton registerbutton'>Register Here!</a>
+					<h3>{{p.ddelegates}} primary delegates</h3>
+					<div>XX {{p.dpledged}} and {{p.dsuper}} superdelegates</div>
+					<div class='primary-poll-graph-wrapper whiteback'>This is where the graph goes</div>
+				</div>
+				<div class='pdata-repub pdata-section'>
+					<h3>State Republican Primary</h3>
+					<a href='{{p.rlink}}' target='blank' class='redbutton registerbutton'>Register Here!</a>
+					<h3>{{p.rdelegates}} primary delegates</h3>
+					<div class='primary-poll-graph-wrapper whiteback'>This is where the graph goes</div>
+				</div>
+			</div>
 		</div>
+		{% endfor %}
 	</div>
-
 </div>
 
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
@@ -122,57 +135,111 @@ var rpresults;
 var toelection = 0;
 startState()
 google.charts.load('current', {'packages':['corechart']});
-//google.charts.setOnLoadCallback(loadData);
-function loadData(){
-	$.post('/vishandle', {'visualization':'dpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'dnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-	})
-}
-function electionScroller(){
-	scroller('standings','tab')
-	if (toelection == 0){
-		google.charts.setOnLoadCallback(loadData);
-		toelection++;
+var homeparams = getQueryParams(document.location.search);
+google.charts.setOnLoadCallback(loadData);
+	function loadData(){
+		$.post('/vishandle', {'visualization':'dpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'dnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+		})
 	}
-}
-function drawBarChart(d) {
-	console.log(d['data'])
-    var chart1_data = new google.visualization.DataTable(d['data']);
-    var chart1_options = {
-        title: d['title'],
-    };
+	function electionScroller(){
+		scroller('standings','tab')
+		if (toelection == 0){
+			google.charts.setOnLoadCallback(loadData);
+			toelection++;
+		}
+	}
+	function selectState(){
+		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
+		scroller(id,'state-data-wrapper')
+	}
 
-    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
-    chart1_chart.draw(chart1_data, chart1_options);
-}
-function drawLineChart(d){
-	console.log(d['data'])
-    var chart1_data = new google.visualization.DataTable(d['data']);
-    var chart1_options = {
-        title: d['title'],
-    };
+	function loadData(){
+		$.post('/vishandle', {'visualization':'dpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'dnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+		})
+		drawPrimaryMap()
+	}
+	function drawPrimaryMap(){
+		var dataa = [['state','Delegates']]
+		$('.state-data-wrapper').each(function(i){
+			name = $(this).attr('id').split('-')[0]
+			total = $(this).attr('value')
+			t = [name,total]
+			dataa.push(t)
+		})
+		var data = google.visualization.arrayToDataTable(dataa)
+		var geochart = new google.visualization.GeoChart(
+      		document.getElementById('primary-map'));
+  			geochart.draw(data, {region: "US", resolution: "provinces",colors:[0xFF8747, 0xFFB581, 0xc06000]});
+	}
+	function electionScroller(){
+		scroller('standings','tab')
+		if (toelection == 0){
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(loadData);
+			toelection++;
+		}
+	}
+	function drawBarChart(d) {
+		console.log(d['data'])
+	    var chart1_data = new google.visualization.DataTable(d['data']);
+	    var chart1_options = {
+	        title: d['title'],
+	    };
+
+	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
+	    chart1_chart.draw(chart1_data, chart1_options);
+	}
+	function drawLineChart(d){
+		console.log(d['data'])
+	    var chart1_data = new google.visualization.DataTable(d['data']);
+	    var chart1_options = {
+	        title: d['title'],
+	    };
 
     var chart1_chart = new google.visualization.LineChart(document.getElementById(d['element']));
     chart1_chart.draw(chart1_data, chart1_options);
 }
+
 
 </script>
 
 <style>
 .cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.primary-data-wrapper{position:relative;padding:25px;}
+#primary-map{height:60vw;margin-bottom:50px;}
+.pdata-columns{margin-topo:20px;position:relative;display:flex;justify-content:space-between;}
+.pdata-section{width:calc(50% - 25px);}
+.registerbutton{width:200px;padding:15px 0;border-radius:10px;text-align:center;font-weight:bold;}
+.primary-poll-graph-wrapper{height:300px;}
+.state-data-wrapper{display:none;}
 </style>
 {% endblock %}

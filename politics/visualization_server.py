@@ -103,8 +103,6 @@ class VisualizationHandler(BaseHandler):
                 rows.insert(0,ret)
         return rows
                 
-
-
     def linejson(self,v):
         cols = [{"id":"","label":v.xaxis,"pattern":"","type":"string"}]
         col_array = v.query_columns.split('$$$')
@@ -130,6 +128,8 @@ class VisualizationHandler(BaseHandler):
                 data = data)
         return(json.dumps(final))
 
+    def mapjson(self,v):
+        a=1
 
     def get(self):
         self.render('e1.html')

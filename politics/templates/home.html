@@ -28,6 +28,7 @@
 					<a href='ELINK' target='blank' class='fl-title'>ETITLE</a>
 					<div class='fl-description'><span class='fl-date'>EDATE • </span>EDESC</div>
 					<div class='fl-source'>ESOURCE</div>
+					<a href='RLINK' target='blank' class='redlink'>Read More -></a>
 				</div>
 				</div>
 </div>
@@ -544,6 +545,7 @@ google.setOnLoadCallback(loadFeeds)
 							var ht = $("#fl-template").html()
 							strdate = (entries[k].date.getMonth() + 1) + '/' + entries[k].date.getDate() + '/' +  entries[k].date.getFullYear()
 					        ht = ht.replace('ELINK',entries[k].link)
+					        ht = ht.replace('RLINK',entries[k].link)
 					        ht = ht.replace('ETITLE',entries[k].title)
 					        ht = ht.replace('EDATE',strdate)
 					        ht = ht.replace('EDESC',entries[k].description)
@@ -611,6 +613,8 @@ google.setOnLoadCallback(loadFeeds)
 #right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
 .fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
 .fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
+.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .fl-title:visited{color:#660066;}
 .fl-description{color:#595959;}
 .fl-date{color:#8c8c8c;}

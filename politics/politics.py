@@ -32,15 +32,11 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         info = upload_files[0]
  
-        #process_state_csv(info)
-        #process_district_csv(info)
-        #process_senator_csv(info)
-        #process_rep_csv(info)
-        #process_stat_csv(info)
-        #process_nationalpolls(info, 'R')
+        process_state_csv(info)
+        #process_nationalpolls(info, 'D')
         #process_politician_csv(info)
         #process_politician_stats(info)
-        process_candidate_csv(info)
+        #process_candidate_csv(info)
         #process_visualization_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
@@ -101,8 +97,28 @@ class Home(BaseHandler):
             self.render('home.html', **params)
 
 class Election(BaseHandler):
+    def get_primary_info(self):
+        pinfo = GqlQuery('SELECT * FROM State ORDER BY name').get().all()
+        ret = []
+        for p in pinfo:
+            t = dict(name = p.name,
+                abbreviation = p.abbreviation,
+                gedelegates = p.ge_delegates,
+                ptype = p.primary_type,
+                ddate = p.D_primary_date,
+                ddelegates = p.D_delegates,
+                dpledged = p.D_pledged,
+                dsuper = p.D_super,
+                rdate = p.R_primary_date,
+                rdelegates = p.R_delegates,
+                notes = p.primary_notes,
+                rlink = p.registration_link)
+            ret.append(t)
+        return ret
+
     def get(self):
-        self.render('election.html')
+        pinfo = self.get_primary_info()
+        self.render('election.html',pinfo=pinfo)
 
 class Lb(BaseHandler):
     def get(self):

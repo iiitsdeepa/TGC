@@ -2,3 +2,4 @@ dpresults,bar,Delegates Won,Candidate,Delegates,#1a53ff,name&&&delegates&&&color
 rpresults,bar,Delegates Won,Candidate,Delegates,#cc0000,name&&&delegates&&&color,rstanding-graph-wrapper,SELECT * FROM Candidate WHERE party = 'R' ORDER BY delegates DESC
 dnpolls,line,Democratic National Polls,Date,Percentage,hill$$$sanders,Clinton$$$Sanders,dpoll-graph-wrapper,SELECT * FROM NationalDemocraticPrimary %s
 rnpolls,line,Republican National Polls,Date,Percentage,trump$$$cruz$$$rubio$$$kasich$$$carson,Trump$$$Cruz$$$Rubio$$$Kasich$$$Carson,rpoll-graph-wrapper,SELECT * FROM NationalRepublicanPrimary %s
+primarygeo,geo,Primary Dates and Results,date,None,None,None,primary-map,SELECT * FROM State
