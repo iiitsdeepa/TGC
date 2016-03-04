@@ -205,12 +205,8 @@ function setState(){
 	}
 }
 
-function startPosition(){
-	scrollTo('demo_wrapper');
-}
 
 $( document ).ready(function() {
 	setState();
-	startPosition();
 	slider(1,'topic','','flex');
 });

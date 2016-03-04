@@ -1,0 +1,52 @@
+{
+    "responseData": {
+        "feed": {
+            "author": "", 
+            "description": "Newsmax RSS Feed", 
+            "entries": [
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "An Internet video purports to show the beheading of U.S. journalist Steven Sotloff by the Islamic State group.Sotloff, who freelanced for Time and Foreign Policy magazines, had last been seen in Syrian in August 2013 until he appeared in a video released online last month...", 
+                    "contentSnippet": "An Internet video purports to show the beheading of U.S. journalist Steven Sotloff by the Islamic State group.Sotloff, who ...", 
+                    "link": "http://www.Newsmax.com/Newsfront/video-beheading-steven-sotloff/2014/09/02/id/592111", 
+                    "publishedDate": "Tue, 02 Sep 2014 10:18:45 -0700", 
+                    "title": "Video Purports to Show Beheading of Second US Journalist"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "Amnesty International has accused Islamic State jihadists of  systematic ethnic cleansing  and mass killings of minorities in northern Iraq, in a report published Tuesday.Citing  hair-raising  accounts from survivors of massacres, the rights group said the jihadists...", 
+                    "contentSnippet": "Amnesty International has accused Islamic State jihadists of  systematic ethnic cleansing  and mass killings of minorities in ...", 
+                    "link": "http://www.Newsmax.com/Newsfront/Iraq-unrest-rights-minorities/2014/09/02/id/592100", 
+                    "publishedDate": "Tue, 02 Sep 2014 09:52:13 -0700", 
+                    "title": "ISIS Condemned For 'Ethnic-Cleansing' in Iraq"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "President Barack Obama has had plenty of strategy options for combating the Islamic State (ISIS) in the Mideast, but he has simply opted for indecision, Middle East expert Walid Phares said Tuesday on Newsmax TV's \"America's Forum.\"", 
+                    "contentSnippet": "President Barack Obama has had plenty of strategy options for combating the Islamic State (ISIS) in the Mideast, but he has ...", 
+                    "link": "http://www.Newsmax.com/Newsfront/ISIS-Islamic-State-indecision-Obama/2014/09/02/id/592096", 
+                    "publishedDate": "Tue, 02 Sep 2014 09:46:22 -0700", 
+                    "title": "Walid Phares: Indecision Is Obama's Decision"
+                }, 
+                {
+                    "author": "", 
+                    "categories": [], 
+                    "content": "The Obama administration is unable to locate 6,000 foreign nationals who have entered the United States on student visas, raising concerns about the government's ability to track potential terror suspects who may already be in the country.\n My greatest concern is that they...", 
+                    "contentSnippet": "The Obama administration is unable to locate 6,000 foreign nationals who have entered the United States on student visas, ...", 
+                    "link": "http://www.Newsmax.com/Newsfront/immigration-fear-visa-students/2014/09/02/id/592088", 
+                    "publishedDate": "Tue, 02 Sep 2014 09:15:23 -0700", 
+                    "title": "US Immigration Fears Terror Threat From 6,000 Missing on Student Visas"
+                }
+            ], 
+            "feedUrl": "http://www.newsmax.com/rss/Newsfront/16.xml", 
+            "link": "http://www.Newsmax.com", 
+            "title": "Newsmax - Newsfront", 
+            "type": "rss20"
+        }
+    }, 
+    "responseDetails": null, 
+    "responseStatus": 200
+}
