@@ -450,9 +450,10 @@
 <script>
 var FUNCTIONS = [];
 var toelection = 0;
+google.load("feeds", "1");
+google.setOnLoadCallback(loadFeeds)
 FUNCTIONS['home_news'] = function () { 
 	scroller('news','tab')
-	google.setOnLoadCallback(loadFeeds)
 };
 FUNCTIONS['home_election'] = function () { 
 	scroller('election','tab')
@@ -464,25 +465,7 @@ FUNCTIONS['home_election'] = function () {
 FUNCTIONS['home_reps'] = function () { 
 	scroller('reps','tab')
 };
-	function initialize() {
-	  var feed = new google.feeds.Feed("http://www.politico.com/rss/politicopicks.xml");
-	  feed.setNumEntries(5)
-	  feed.load(function(result) {
-	    if (!result.error) {
-	      var container = $("#left-feed");
-	      for (var i = 0; i < result.feed.entries.length; i++) {
-	        var entry = result.feed.entries[i];
-	        console.log(entry.title,entry.publishedDate,entry.link,entry.contentSnippet,entry.categories)
-	        var ht = $("#fl-template").html()
-	        ht = ht.replace('ELINK',entry.link)
-	        ht = ht.replace('ETITLE',entry.title)
-	        ht = ht.replace('EDATE',entry.publishedDate)
-	        ht = ht.replace('EDESC',entry.contentSnippet)
-	        container.append(ht)
-	      }
-	    }
-	  });
-	}
+
 	function loadFeeds(){
 		var leftfeedlist = [
 	        {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
@@ -606,8 +589,8 @@ FUNCTIONS['home_reps'] = function () {
 	    chart1_chart.draw(chart1_data, chart1_options);
 	}
 	$( document ).ready(function() {
+		
 		google.charts.load('current', {'packages':['corechart']});
-		google.load("feeds", "1");
     	startState('home_')
 	});
 
