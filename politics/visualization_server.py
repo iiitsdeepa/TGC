@@ -18,6 +18,13 @@ class VisualizationHandler(BaseHandler):
             temp = dict(c=t3)
             #logging.error(d.name+' '+d.party)
             rows.append(temp)
+            if v.name == 'dpresults':
+                s1 = dict(v=d.name)
+                s2 = dict(v=d.superdelegates)
+                ss = dict(v='#809fff')
+                s3 = [s1,s2,ss]
+                stemp = dict(c=s3)
+                rows.append(stemp)
         data = dict(cols = cols,
                 rows = rows)
         final = dict(title = v.title,

@@ -43,12 +43,12 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				3,323 delegates remaining
+				3,286 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br>
+				<div id=''></div><b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br><
 				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				1,784 delegates remaining
+				1,777 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
@@ -453,6 +453,8 @@ var dpresults;
 var rpresults;
 var toelection = 0;
 startState()
+google.charts.load('current', {'packages':['corechart']});
+//google.charts.setOnLoadCallback(loadData);
 function loadData(){
 	$.post('/vishandle', {'visualization':'dpresults'},function(data){
 		chart_data = $.parseJSON(data);
@@ -474,7 +476,6 @@ function loadData(){
 function electionScroller(){
 	scroller('election','tab')
 	if (toelection == 0){
-		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(loadData);
 		toelection++;
 	}
