@@ -6,10 +6,10 @@ a:hover{text-decoration:underline;}
 a:visited{color:#0000EE;}
 div{border-radius:2px;}
 input{padding:0;border:none;}
-#display-tab{z-index:50;min-height:calc(100vh - 412px);background:url('/images/paper.png');background-repeat:repeat;}
-.t1{z-index:1;}
-.t2{z-index:2;}
-.t3{z-index:3;}
+#display-tab{position:relative;z-index:50;min-height:calc(100vh - 360px);background:url('/images/paper.png');background-repeat:repeat;;}
+.t1{position:absolute;top:50px;left:0;z-index:1;}
+.t2{position:absolute;top:50px;left:0;z-index:2;}
+.t3{position:absolute;top:50px;left:0;z-index:3;}
 .toptext{vertical-align: top;}
 .R{background: #cc0000;color:white;}
 .D{background: #1a53ff;color:white;}
@@ -47,7 +47,7 @@ input{padding:0;border:none;}
 .top-button{position:absolute;right:2vw; top:-84px;height:34px;line-height:34px;padding:0 20px;}
 .medium-text-input{height:44px;width:calc(100% - 12px);margin-bottom:10px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 .small-text-input{padding-left:10px;height:32px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
-#pagenav{display:flex;position:absolute;text-align:center;z-index:10;top: -30px;}
+#pagenav{display:flex;position:absolute;text-align:center;z-index:10;bottom:0;left:10px;}
 .pagenav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
 .tab{position:absolute;min-height:calc(100vh - 362px);padding:50px 5vw;background:url('/images/paper.png');background-repeat:repeat;}
 .incomplete-tab{margin:50px auto;width:60vw;}
@@ -89,7 +89,7 @@ input{padding:0;border:none;}
 #alphacall{height:50px;line-height:50px;padding:0 20px;}
 #alphacall:hover{background-color:#5CD6FF;}
 #alogform{padding:20px;}
-#content{position:relative;z-index:5;border-top:solid 1px #D9D9D9;}
+#content{position:relative;z-index:5;border-top:solid 1px #D9D9D9;overflow:hidden;}
 #footer{position:relative;color:white;height:50px;line-height:50px;text-align:right;padding-right:20px;background-color:#0B1628;border-top:solid 2px #091220;}
 #footlogo{vertical-align: bottom;height: 95%;}
 

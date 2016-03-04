@@ -1,12 +1,14 @@
 {% extends "newbase.html" %}
-{% block content %}
+{% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div class='pagenav-option' onclick="javascript:electionScroller();return false;">Current Standings</div>
 	<div class='pagenav-option' onclick="javascript:scroller('candidates','tab');return false;">Candidates</div>
 	<div class='pagenav-option' onclick="javascript:scroller('map','tab');return false;">Map</div>
 </div>
+{% endblock %}
 
+{% block content %}
 <link rel='stylesheet' href='css/demo.css'/>
 <script type="text/javascript" src="/js/demo.js"></script>
 
