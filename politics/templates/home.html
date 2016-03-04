@@ -1,28 +1,5 @@
 {% extends "newbase.html" %}
 {% block content %}
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-    google.load("feeds", "1");
-
-    function initialize() {
-      var feed = new google.feeds.Feed("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
-      feed.load(function(result) {
-        if (!result.error) {
-          var container = document.getElementById("feed");
-          for (var i = 0; i < result.feed.entries.length; i++) {
-            var entry = result.feed.entries[i];
-            var div = document.createElement("div");
-            div.appendChild(document.createTextNode(entry.title));
-            container.appendChild(div);
-          }
-        }
-      });
-    }
-    google.setOnLoadCallback(initialize)
-    </script>
-
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
 	<div id='personalize-option' class='pagenav-option' onclick="javascript:scroller('news', 'tab');return false;">News</div>
@@ -31,7 +8,21 @@
 </div>
 
 <div id='news' class='tab'>
-	<div id="feed"></div>
+<h1 class='tab-title'>Current News</h1>
+	<div id='feeds-container'>
+		<div id='left-feed-wrapper' class='feed-wrapper whiteback'>
+			<h3 id='left-feed-title' class='feed-title'>Leaning Left</h3>
+			<div id="left-feed"></div>
+		</div>
+		<div id='center-feed-wrapper' class='feed-wrapper whiteback'>
+			<h3 id='center-feed-title' class='feed-title'>Center</h3>
+			<div id="center-feed"></div>
+		</div>
+		<div id='right-feed-wrapper' class='feed-wrapper whiteback'>
+			<h3 id='right-feed-title' class='feed-title'>Leaning Right</h3>
+			<div id="right-feed"></div>
+		</div>
+	</div>
 </div>
 
 <div id='election' class='tab'>
@@ -447,66 +438,80 @@
 
 <link rel='stylesheet' href='css/demo.css'/>
 <script type="text/javascript" src="/js/demo.js"></script>
-
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-var dpresults;
-var rpresults;
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(loadData);
-function loadData(){
-	$.post('/vishandle', {'visualization':'dpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rpresults'},function(data){
-		chart_data = $.parseJSON(data);
-		drawBarChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'dnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-	})
-	$.post('/vishandle', {'visualization':'rnpolls'},function(data){
-		chart_data = $.parseJSON(data);
-		drawLineChart(chart_data)
-		startState()
-	})
 
-}
-function drawBarChart(d) {
-	console.log(d['data'])
-    var chart1_data = new google.visualization.DataTable(d['data']);
-    var chart1_options = {
-        title: d['title'],
-    };
+	google.load("feeds", "1");
 
-    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
-    chart1_chart.draw(chart1_data, chart1_options);
-}
-function drawLineChart(d){
-	console.log(d['data'])
-    var chart1_data = new google.visualization.DataTable(d['data']);
-    var chart1_options = {
-        title: d['title'],
-    };
+	function initialize() {
+	  var feed = new google.feeds.Feed("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
+	  feed.load(function(result) {
+	    if (!result.error) {
+	      var container = document.getElementById("left-feed");
+	      for (var i = 0; i < result.feed.entries.length; i++) {
+	        var entry = result.feed.entries[i];
+	        var div = document.createElement("div");
+	        div.appendChild(document.createTextNode(entry.title));
+	        container.appendChild(div);
+	      }
+	    }
+	  });
+	}
+	google.setOnLoadCallback(initialize)
 
-    var chart1_chart = new google.visualization.LineChart(document.getElementById(d['element']));
-    chart1_chart.draw(chart1_data, chart1_options);
-}
+	var dpresults;
+	var rpresults;
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(loadData);
+	function loadData(){
+		$.post('/vishandle', {'visualization':'dpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rpresults'},function(data){
+			chart_data = $.parseJSON(data);
+			drawBarChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'dnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+		})
+		$.post('/vishandle', {'visualization':'rnpolls'},function(data){
+			chart_data = $.parseJSON(data);
+			drawLineChart(chart_data)
+			startState()
+		})
+
+	}
+	function drawBarChart(d) {
+		console.log(d['data'])
+	    var chart1_data = new google.visualization.DataTable(d['data']);
+	    var chart1_options = {
+	        title: d['title'],
+	    };
+
+	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
+	    chart1_chart.draw(chart1_data, chart1_options);
+	}
+	function drawLineChart(d){
+		console.log(d['data'])
+	    var chart1_data = new google.visualization.DataTable(d['data']);
+	    var chart1_options = {
+	        title: d['title'],
+	    };
+
+	    var chart1_chart = new google.visualization.LineChart(document.getElementById(d['element']));
+	    chart1_chart.draw(chart1_data, chart1_options);
+	}
 
 </script>
 
 <style>
-.cstandings-wrapper{display:flex;flex-wrap:wrap;border:solid 2px #eee;}
-.cstandings-title{width:100%;text-align:center;}
-.cstanding{width:calc(50% - 1px);}
-.cstanding-title{text-align:center;margin:0;padding:20px 0;border-bottom:solid 2px #eee;border-top:solid 2px #eee;}
-.cstanding-basicinfo{padding:20px;}
-.cstanding h3{margin:0 0 10px 0;}
-.dstandings{border-right:solid 1px #eee;}
-.rstandings{border-left:solid 1px #eee;}
-.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-.cstanding-processinfo{margin:20px;}
+#feeds-container{display:flex;justify-content:space-between;}
+.feed-wrapper{width:calc(30% - 40px);padding:25px;}
+.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
+#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
+#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
+#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
 </style>
 {% endblock %}
