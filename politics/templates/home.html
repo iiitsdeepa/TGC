@@ -28,6 +28,7 @@
 					<a href='ELINK' target='blank' class='fl-title'>ETITLE</a>
 					<div class='fl-description'><span class='fl-date'>EDATE • </span>EDESC</div>
 					<div class='fl-source'>ESOURCE</div>
+					<a href='RLINK' target='blank' class='redlink'>Read More -></a>
 				</div>
 				</div>
 </div>
@@ -448,26 +449,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
 	google.load("feeds", "1");
-
-	function initialize() {
-	  var feed = new google.feeds.Feed("http://www.politico.com/rss/politicopicks.xml");
-	  feed.setNumEntries(5)
-	  feed.load(function(result) {
-	    if (!result.error) {
-	      var container = $("#left-feed");
-	      for (var i = 0; i < result.feed.entries.length; i++) {
-	        var entry = result.feed.entries[i];
-	        console.log(entry.title,entry.publishedDate,entry.link,entry.contentSnippet,entry.categories)
-	        var ht = $("#fl-template").html()
-	        ht = ht.replace('ELINK',entry.link)
-	        ht = ht.replace('ETITLE',entry.title)
-	        ht = ht.replace('EDATE',entry.publishedDate)
-	        ht = ht.replace('EDESC',entry.contentSnippet)
-	        container.append(ht)
-	      }
-	    }
-	  });
-	}
 	google.setOnLoadCallback(loadFeeds)
 	function loadFeeds(){
 		var leftfeedlist = [
@@ -535,6 +516,7 @@
 							var ht = $("#fl-template").html()
 							strdate = (entries[k].date.getMonth() + 1) + '/' + entries[k].date.getDate() + '/' +  entries[k].date.getFullYear()
 					        ht = ht.replace('ELINK',entries[k].link)
+					        ht = ht.replace('RLINK',entries[k].link)
 					        ht = ht.replace('ETITLE',entries[k].title)
 					        ht = ht.replace('EDATE',strdate)
 					        ht = ht.replace('EDESC',entries[k].description)
