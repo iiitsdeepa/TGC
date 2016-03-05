@@ -1,7 +1,7 @@
 {% extends "newbase.html" %}
 
-{% block content %}
-<div id='about'>
+{% block pagenav %}
+
 	<div id='pagenav'>
 		<div class='pagenav-option' onclick="javascript:scrollTo('mission-wrapper');return false;">Mission</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('core-wrapper');return false;">Core Beliefs</div>
@@ -10,7 +10,10 @@
 		<div class='pagenav-option' onclick="javascript:scrollTo('team-wrapper');return false;">The Team</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('code-wrapper');return false;">Our Code</div>
 	</div>
+{% endblock %}
 
+{% block content %}
+<div id='about'>
 	<div id='top-wrapper' class='section'>
 		<h1>About Us</h1>
 		<p>A message from the TGC team:<br>
