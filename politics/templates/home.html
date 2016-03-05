@@ -459,23 +459,23 @@
 <script type="text/javascript" src="/js/demo.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-var FUNCTIONS = [];
-var toelection = 0;
-google.load("feeds", "1");
-google.setOnLoadCallback(loadFeeds)
-FUNCTIONS['home_news'] = function () { 
-	scroller('news','tab')
-};
-FUNCTIONS['home_election'] = function () { 
-	scroller('election','tab')
-	if (toelection == 0){
-		google.charts.setOnLoadCallback(loadData);
-		toelection++
-	}
-};
-FUNCTIONS['home_reps'] = function () { 
-	scroller('reps','tab')
-};
+	var FUNCTIONS = [];
+	var toelection = 0;
+	google.load("feeds", "1");
+	google.setOnLoadCallback(loadFeeds)
+	FUNCTIONS['home_news'] = function () {
+		scroller('news','tab') 
+	};
+	FUNCTIONS['home_election'] = function () { 
+		scroller('election','tab')
+		if (toelection == 0){
+			google.charts.setOnLoadCallback(election_standings);
+			toelection++
+		}
+	};
+	FUNCTIONS['home_reps'] = function () {
+		scroller('reps','tab') 
+	};
 
 	function loadFeeds(){
 		var leftfeedlist = [
@@ -499,7 +499,6 @@ FUNCTIONS['home_reps'] = function () {
 	        {"name":"The Blaze","rss":"http://www.theblaze.com/stories/feed/","ideology":5},
 	    ]
 	   	loadFeed(rightfeedlist,'#right-feed')
-
 	}
 	function RssEntry(date,title,link,description,source,ideology) {
   		this.date = new Date(date);
@@ -525,12 +524,9 @@ FUNCTIONS['home_reps'] = function () {
 			var ideology = feedlist[i]["ideology"]
 			var feed = new google.feeds.Feed(feedlist[i]["rss"]);
 			feed.setNumEntries(3);
-			console.log(name,ideology)
 			feed.load(function(result) {
-				console.log(i)
 			 	if (!result.error) {
 					for (var j = 0; j < result.feed.entries.length; j++) {
-						console.log(name,ideology)
 						var rawEntry = result.feed.entries[j];
 						entries.push(new RssEntry(rawEntry.publishedDate,rawEntry.title,rawEntry.link,rawEntry.contentSnippet,result.feed.title,ideology));
 					}
@@ -555,14 +551,8 @@ FUNCTIONS['home_reps'] = function () {
 			});	
 		}
 	}
-	function electionScroller(){
-		scroller('election','tab')
-		if (toelection == 0){
-			google.charts.setOnLoadCallback(loadData);
-			toelection++;
-		}
-	}
-	function loadData(){
+	function election_standings(){
+		console.log('WORK DAMNIT')
 		$.post('/vishandle', {'visualization':'dpresults'},function(data){
 			chart_data = $.parseJSON(data);
 			drawBarChart(chart_data)
@@ -581,7 +571,6 @@ FUNCTIONS['home_reps'] = function () {
 		})
 	}
 	function drawBarChart(d) {
-		console.log(d['data'])
 	    var chart1_data = new google.visualization.DataTable(d['data']);
 	    var chart1_options = {
 	        title: d['title'],
@@ -590,7 +579,6 @@ FUNCTIONS['home_reps'] = function () {
 	    chart1_chart.draw(chart1_data, chart1_options);
 	}
 	function drawLineChart(d){
-		console.log(d['data'])
 	    var chart1_data = new google.visualization.DataTable(d['data']);
 	    var chart1_options = {
 	        title: d['title'],
@@ -600,7 +588,6 @@ FUNCTIONS['home_reps'] = function () {
 	    chart1_chart.draw(chart1_data, chart1_options);
 	}
 	$( document ).ready(function() {
-		
 		google.charts.load('current', {'packages':['corechart']});
     	startState('home_')
 	});

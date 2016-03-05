@@ -72,14 +72,15 @@ function showHide(classname, index, hide){
 }
 
 function tabSwitcher(id, functext){
-  var html = $('#'+id).html()
   $('#display-tab').html('')
-  $('#display-tab').html(html)
-  $('#display-tab  .tab-content').css('opacity','0')
-  $('#display-tab  .tab-content').animate({
-        opacity: "1"
-        }, 500);
   var result = FUNCTIONS[functext]()
+  //var curr = $('#display-tab').val()
+  var html = $('#'+id).html()
+  //$('#display-tab').html(html)
+  //$('#display-tab  .tab-content').css('opacity','0')
+  //$('#display-tab  .tab-content').animate({
+        //opacity: "1"
+        //}, 500);
 }
 
 function startState(pagetext){
@@ -87,7 +88,7 @@ function startState(pagetext){
   if (!tab){
     tab = $('.tab').first().attr('id')
   }
-  scroller(tab, 'tab')
+  $('#display-tab').attr('value',tab)
   var functext = pagetext + tab
   tabSwitcher(tab, functext)
 }

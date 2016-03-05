@@ -150,15 +150,15 @@ FUNCTIONS['election_standings'] = function () {
 	scroller('standings','tab')
 	if (tostandings == 0){
 		google.charts.setOnLoadCallback(election_standings);
-		toelection++;
+		tostandings++;
 	}
 };
 FUNCTIONS['election_candidates'] = function () { 
 	scroller('candidates','tab')
-	/*if (tocandidates == 0){
+	if (tocandidates == 0){
 		google.charts.setOnLoadCallback(election_candidates);
 		tocandidates++;
-	}*/
+	}
 };
 FUNCTIONS['election_map'] = function () { 
 	scroller('map','tab')
