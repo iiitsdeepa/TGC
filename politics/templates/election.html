@@ -2,10 +2,10 @@
 {% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
-	<div class='pagenav-option' onclick="javascript:tabSwitcher('basicinfo','election_info');return false;">Election Info</div>
+	<!--<div class='pagenav-option' onclick="javascript:tabSwitcher('basicinfo','election_info');return false;">Election Info</div>-->
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('standings','election_standings');return false;">Current Standings</div>
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('candidates','election_candidates');return false;">Candidates</div>
-	<div class='pagenav-option' onclick="javascript:tabSwitcher('map','election_map');return false;">Map</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('primaries','election_primaries');return false;">Primaries</div>
 </div>
 {% endblock %}
 
@@ -17,7 +17,7 @@
 	This is the display tab
 </div>
 
-<div id='basicinfo' class='tab t1'>
+<!--<div id='basicinfo' class='tab t1'>
 <div class='tab-content'>
 	<div class='incomplete-tab'>
 		<div class='incomp-tab incomp-pre'>
@@ -38,9 +38,9 @@
 		</div>
 	</div>
 </div>
-</div>
+</div>-->
 
-<div id='standings' class='tab t2'>
+<div id='standings' class='tab t1'>
 <div class='tab-content'>
 	<h1 class='tab-title'>The 2016 Election</h1>
 	<div class='cstandings-wrapper'>
@@ -102,30 +102,122 @@
 </div>
 </div>
 
-<div id='candidates' class='tab t3'>
+<div id='candidates' class='tab t2'>
 <div class='tab-content'>
-	<div class='incomplete-tab'>
-		<div class='incomp-tab incomp-pre'>
-			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
-			<h2>TGC is currently in development and we're looking for new testers</h2>
-			<ul>
-				<li>Get exclusive access to new features</li>
-				<li>Stay up to date with development</li>
-				<li>Direct contact our team so we can make the best possible service for you</li>
-			</ul>
-			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
-				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
-				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
-			</form>
+	<div class='party-columns'>
+		<div id='Dpary-column' class='party-column'>
+			<h1 class='party-column-title'>Democratic Candidates</h1>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>Bernie Sanders</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/bernie.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					Senator, United States Senate, 2006-present
+					Representative, United States House of Representatives, 1990-2006
+					Mayor, City of Burlington, 1981-1989
+					Candidate, United States House of Representatives, 1988
+					Candidate, Governor of Vermont, 1972, 1976, 1986
+					Candidate, United States Senate, 1972, 1974
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/BernieSanders" data-widget-id="706551623359799298">Tweets by @BernieSanders</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>Hilldog</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/hilldog.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					United States Secretary of State, 2009-2013
+					Sworn In, United States Secretary of State, January 21, 2009
+					Senator, United States Senate, 2001-2009
+					Candidate, United States President, 2008
+					First Lady, President Bill Clinton, 1993-2001
+					First Lady, State of Arkansas, 1979-1981, 1983-1992
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/HillaryClinton" data-widget-id="706552937024249856">Tweets by @HillaryClinton</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
 		</div>
-		<div class='incomp-tab incomp-post'>
-			<h2>Thanks for signing up! We just sent you an email</h2>
+		<div id='Rpary-column' class='party-column'>
+			<h1 class='party-column-title'>Republican Candidates</h1>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>Donald Trump</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/drumpf.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					Fucking nothing
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/realDonaldTrump" data-widget-id="706553481159647233">Tweets by @realDonaldTrump</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>The Cruzinator</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/cruz.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					Senator, United States Senate, 2012-present
+					Domestic Policy Advisor, Bush Presidential Campaign, 1999-2000
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/tedcruz" data-widget-id="706553936883412993">Tweets by @tedcruz</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>Marco Rubio</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/marco.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					Senator, United States Senate, 2011-present
+					Representative, Florida State House of Representatives, 2000-2008
+					Speaker, Florida State House of Representatives, 2006-2008
+					Majority Leader, Florida State House of Representatives, 2003-2006
+					Commissioner, City of West Miami, 1998-2000
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/marcorubio" data-widget-id="706554236675424260">Tweets by @marcorubio</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+			<div class='candidate-wrapper whiteback'>
+				<h2 class='candidate-name'>John Kasich</h2>
+				<div class='candidate-img-wrapper'>
+					<img class='candidate-img' src='/images/candidates/kasich.png' alt='...'>
+				</div>
+				<div class='candidate-info-wrapper'>
+					<h3>Political Experience</h3>
+					Governor, State of Ohio, 2010-present
+					Representative, United States House of Representatives, 1983-2000
+					Candidate, United States President, 2000
+					Ohio State Senate, 1979-1983
+				</div>
+				<div class='candidate-tw-wrapper'>
+					<a class="twitter-timeline" href="https://twitter.com/JohnKasich" data-widget-id="706554419916234753">Tweets by @JohnKasich</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 </div>
 
-<div id='map' class='tab t4'>
+<div id='primaries' class='tab t3'>
 <div class='tab-content'>
 	<h1 class='tab-title'>Map</h1>
 	<div id='primary-map' class='whiteback'>Where the map will go</div>
@@ -169,35 +261,36 @@
 var FUNCTIONS = [];
 var tostandings = 0;
 var tocandidates = 0;
+var toprimaries = 0;
 var tomap = 0;
-FUNCTIONS['election_info'] = function () { 
+/*FUNCTIONS['election_info'] = function () { 
 	scroller('basicinfo','tab')
 	if (tomap == 0){
 		//google.charts.setOnLoadCallback(election_map);
 		tomap++;
 	}
-};
-FUNCTIONS['election_standings'] = function () { 
-	scroller('standings','tab')
-	if (tostandings == 0){
-		google.charts.setOnLoadCallback(election_standings);
-		tostandings++;
-	}
-};
-FUNCTIONS['election_candidates'] = function () { 
-	scroller('candidates','tab')
-	if (tocandidates == 0){
-		google.charts.setOnLoadCallback(election_candidates);
-		tocandidates++;
-	}
-};
-FUNCTIONS['election_map'] = function () { 
-	scroller('map','tab')
-	if (tomap == 0){
-		google.charts.setOnLoadCallback(election_map);
-		tomap++;
-	}
-};
+};*/
+	FUNCTIONS['election_standings'] = function () { 
+		scroller('standings','tab')
+		if (tostandings == 0){
+			google.charts.setOnLoadCallback(election_standings);
+			tostandings++;
+		}
+	};
+	FUNCTIONS['election_candidates'] = function () { 
+		scroller('candidates','tab')
+		if (tocandidates == 0){
+			google.charts.setOnLoadCallback(election_candidates);
+			tocandidates++;
+		}
+	};
+	FUNCTIONS['election_primaries'] = function () { 
+		scroller('primaries','tab')
+		if (toprimaries == 0){
+			google.charts.setOnLoadCallback(election_primaries);
+			toprimaries++;
+		}
+	};
 
 	function selectState(){
 		var id = $('#state-dropdown :selected').text()+'-data-wrapper'
@@ -226,7 +319,7 @@ FUNCTIONS['election_map'] = function () {
 	function election_candidates(){
 		console.log('nothing')
 	}
-	function election_map(){
+	function election_primaries(){
 		drawPrimaryMap()
 	}
 	function drawPrimaryMap(){
@@ -261,15 +354,21 @@ FUNCTIONS['election_map'] = function () {
 
     var chart1_chart = new google.visualization.LineChart(document.getElementById(d['element']));
     chart1_chart.draw(chart1_data, chart1_options);
-}
+	}
 
-$( document ).ready(function() {
-	google.charts.load('current', {'packages':['corechart']});
-    startState('election_')
-});
+	$( document ).ready(function() {
+		google.charts.load('current', {'packages':['corechart']});
+	    startState('election_')
+	});
 </script>
 
 <style>
+.candidate-wrapper{padding:25px;display:flex;flex-wrap:wrap;justify-content:center;margin-bottom:50px;}
+.candidate-name{width:100%;margin:0 0 15px 0;padding-bottom:10px;border-bottom:solid 1px #d9d9d9;}
+.candidate-img-wrapper{width:calc(25% - 26px);margin-right:25px;height:200px;border-right:solid 1px #d9d9d9;}
+.candidate-img{display:block;height:100%;border-radius:50%;}
+.candidate-info-wrapper{width:75%;}
+.candidate-tw-wrapper{width:80%;margin:20px auto;height:400px;}
 .cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
 .primary-data-wrapper{position:relative;padding:25px;}
@@ -279,5 +378,8 @@ $( document ).ready(function() {
 .registerbutton{width:200px;padding:15px 0;border-radius:10px;text-align:center;font-weight:bold;}
 .primary-poll-graph-wrapper{height:300px;}
 .state-data-wrapper{display:none;}
+.party-columns{display:flex;justify-content:space-between;}
+.party-column{width:calc(50% - 25px);}
+.party-column-title{text-align:center;}
 </style>
 {% endblock %}

@@ -32,9 +32,9 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         info = upload_files[0]
  
-        #process_state_csv(info)
+        process_state_csv(info)
         #process_nationalpolls(info, 'D')
-        process_politician_csv(info)
+        #process_politician_csv(info)
         #process_politician_stats(info)
         #process_candidate_csv(info)
         #process_visualization_csv(info)

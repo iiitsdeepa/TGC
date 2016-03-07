@@ -19,6 +19,7 @@ input{padding:0;border:none;}
 .redlink{color:#CC0000;text-decoration:none;cursor:pointer;}
 .redlink:hover{text-decoration:underline;}
 .redlink:visited{color:#CC0000;}
+.whitelink{color:white !important;}
 .subtle-link{color:#0E1C32;cursor:pointer;}
 .subtle-link:hover{color:#0E1C32;text-decoration:none;}
 .subtle-link:visited{color:#0E1C32;}
@@ -32,7 +33,7 @@ input{padding:0;border:none;}
 .button{font-size:13px;height:34px;line-height:34px;border-radius:500px;width:275px;cursor:pointer;margin-bottom:10px !important;text-align:center;font-weight:bold;}
 .bluebutton{display:block;background:#162D50;color:white !important}
 .bluebutton:hover{background:#263D60;text-decoration:none;}
-.redbutton{display:block;background:#cc0000;border-radius:500px;cursor:pointer;color:white !important;}
+.redbutton{display:block;background:#cc0000;border-radius:5px;cursor:pointer;color:white !important;}
 .redbutton:hover{background:red;text-decoration:none;}
 .togglebutton{width:275px;height:50px;line-height:50px;cursor:pointer;text-align:center;color:white;font-size:18px;border-radius:2px;}
 .leftarrow-block{position:absolute;top:0;left:0;width:50px;height:100%;background:lavender;z-index:10;}
@@ -49,7 +50,7 @@ input{padding:0;border:none;}
 .medium-text-input{height:44px;width:calc(100% - 12px);margin-bottom:10px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 .small-text-input{padding-left:10px;height:32px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 #pagenav{display:flex;position:absolute;text-align:center;z-index:10;bottom:0;left:10px;}
-.pagenav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
+.pagenav-option{position:relative;margin:10px 5px 0 5px;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;}
 .tab{min-height:calc(100vh - 360px);padding:50px 5vw;}
 .incomplete-tab{margin:50px auto;width:60vw;}
 .incomptab-title{margin-bottom:50px;}
@@ -69,9 +70,8 @@ input{padding:0;border:none;}
 .cstanding-processinfo{margin:20px;}
 
 #alpha-alert{display:block;position:absolute;top:100px;right:0;z-index:101;width:275px;}
-#head{position:relative;height:300px;background-color:#F7F7F7;padding:5px 5vw;}
-#title{display:block;position:absolute;top:50px;font-size:36px;font-weight:bold;}
-#slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
+#head{position:relative;height:300px;background-color:#F7F7F7;padding:0 5vw;}
+
 #centerpiece{display:block;position:relative;margin:30px auto 0;height:70%;}
 #nav-container{position:absolute;top:50px;right:0;z-index:100}
 #back-to-top{position:fixed;bottom:30px;right:3vw;font-weight:bold;cursor:pointer;margin:40px 0;}
@@ -79,8 +79,9 @@ input{padding:0;border:none;}
 
 
 
-
-
+#top-bar{display:none;}
+#hmenu{height:100%;}
+#title{display:block;position:absolute;top:50px;font-size:36px;font-weight:bold;}
 
 
 #nav ul{list-style:none;}
@@ -91,18 +92,17 @@ input{padding:0;border:none;}
 #alphacall:hover{background-color:#5CD6FF;}
 #alogform{padding:20px;}
 #content{position:relative;z-index:5;border-top:solid 1px #D9D9D9;overflow:hidden;background:url('/images/paper.png');background-repeat:repeat;}
-#footer{position:relative;color:white;height:50px;line-height:50px;text-align:right;padding-right:20px;background-color:#0B1628;border-top:solid 2px #091220;}
+#footer{background:#0E1C32;color:white;padding:50px 5vw;border-top:solid 2px #091220;border-radius:0;}
+#footfoot{position:relative;color:white;height:50px;line-height:50px;text-align:center;padding-right:20px;background-color:#0B1628;border-top:solid 2px #091220;}
 #footlogo{vertical-align: bottom;height: 95%;}
 
-
-/*Sources Styles*/
-
-/*Feedback Styles*/
 
 
 /*Mobile only*/
 @media screen and (max-width: 520px){
-
+	.sitemap-link{margin:0 5px !important;}
+	.pagenav-option{width:auto;}
+	#footcontributions{width:100%;}
 	/*Sources Styles*/
 	#sources{padding:100px 5vw 50px 5vw;}
 	#sourceimgtext{width:80%;}
@@ -110,14 +110,19 @@ input{padding:0;border:none;}
 
 /*Mobile and Tablet*/
 @media screen and (max-width: 965px){
+	#head{padding-top:70px;}
+	#top-bar{display:block;position:fixed;top:0;width:100%;height:50px;background:#0E1C32;color:white;z-index:100;}
+	#title{top:0;position:relative;text-align:center;margin-bottom:10px;font-weight:bold;width:100%;}
+	#slogan{}
+	#centerpiece{position:relative;height:165px;margin:0 auto 15px auto;}
 	#popuplayer{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;opacity:1;}
 	#badge{border-radius:2px;position: fixed;top: 0;left: 0;width: 100vw;height: 50px;font-weight: bold;color: white;font-size: 125%;line-height: 50px;text-align: center;z-index: 50;font-family: 'Playball', cursive;}
 	#logo{vertical-align: bottom;}
 	#titlebar{position: fixed;top: 0;width: 100vw;height: 50px;background-color: darkred;z-index: 45;}
-	#nav_expand{position: fixed;top: 0;left: 0;width: 50px;height: 50px;z-index: 60;}
-	#pagenav_expand{position: fixed;top: 0;right: 0;width: 50px;height: 50px;line-height: 50px;text-align: center;z-index: 51;}
-	#nav_close{position: relative;bottom: 0;left: 0;width: 100%;height: 40px;background-color: gainsboro;}
-	#nav_container{position: fixed;left: 0;top: -100vh;width: 100vw;max-height: 100vh;background-color: white;z-index: 52;opacity: .95;overflow: auto;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
+	#nav_expand{position:fixed;top:0;left:0;width:50px;height:50px;z-index: 60;}
+	#pagenav_expand{position:fixed;top:0;right:0;width:50px;height:50px;line-height: 50px;text-align: center;z-index: 51;}
+	#nav-close{position:relative;bottom:0;left:0;width:100%;height:40px;background-color: gainsboro;}
+	#nav-container{padding-top:70px;position:fixed;left:0;top:-100vh;width:100vw;max-height:100vh;background:white;z-index: 52;opacity: .95;overflow: auto;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 	.mexp{position: absolute;top: 5%;right: 0;width: 15%;height: 30px;text-align: center;font-size: 200%;z-index: 5;}
 	#nav ul{margin: 0;padding: 0;}
 	#nav ul li{position: relative;overflow: hidden;}
@@ -125,7 +130,6 @@ input{padding:0;border:none;}
 	#nav ul ul{	}
 	#nav ul ul a{font-size: 85%;background-color: gainsboro;}
 
-	#footer{padding:50px 20px;}
 	.foottext{min-width:calc(100% - 40px); margin:0;}
 	#footcontributions{position:relative;width:100%;}
 	.footcontribution{min-width:300px;}
@@ -133,6 +137,8 @@ input{padding:0;border:none;}
 
 /*Desktop*/
 @media screen and (min-width: 966px){
+
+	#slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
 	#nav_wrapper{font-size:16px;}
 	#badge{border-radius:2px;position: fixed;top: 0;left: 0;padding-left: 45px;padding-right: 20px;height: 70px;line-height: 70px;font-weight: bold;color: white;z-index: 50;text-align: center;background-color: #0E1C32;border: solid 2px #122440;font-family: 'Playball', cursive;font-size: 115%;font-weight: bold;}
 	#logo{position:absolute;height:90%;top:5%;left:2%;}

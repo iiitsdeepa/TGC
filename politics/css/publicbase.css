@@ -30,7 +30,7 @@ a{text-decoration:none}
 #footbox_wrapper{position: relative;display: flex;margin: 20px;margin-bottom:0;background-color: #3F4C60;}
 .footbox{}
 #fboxmargin{position: absolute;bottom: 0;left: 0;width: 100%;height: 20px;background-color: #0E1C32;}
-#footsocial{width:50%;max-width:95vw;}
+
 #footsocioconline{display:flex;justif-content:space-between;}
 .footsociocontwit{width:133px;height:20px;margin-top:13px;margin-left:15px;background:#162d50;}
 .footsocioconinst{width:48px;height:48px;margin-top:1px;margin-right:15px;margin-left:10px;background:#162d50;}

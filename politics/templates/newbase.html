@@ -17,12 +17,15 @@
     </head>
 
     <body>
+      <div id='top-bar' class='z-index-1'>
+        <img id='hmenu' src='/images/hmenu.png' alt='...' onclick="javascript:navShowHide();return false;">
+      </div>
       <input type='hidden' id="page-data" value="{{PAGESTATE}}">
       <div id='popuplayer'>
         {% block popup %}
         {% endblock %}
       </div>
-      <div id='nav-container'>
+      <div id='nav-container' value='contracted'>
         <nav id='nav'>
           <ul>
             <li id='home_option' class='nav_option' value='contracted'>
@@ -47,7 +50,6 @@
           </ul>
         </nav>
       </div>
-      <a href='/login' id='alpha-alert' class='alert'>Already part of the alpha?</a>
       <div id='head'>
         <a href='/' id='title' class='subtle-link'>The Glass Capitol</a>
         <div id='slogan'>Government Transparency For The Communication Era</div>
@@ -62,9 +64,55 @@
       </div>
       
       <div id='footer'>
-          <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
+        <div id='sitemap' class='foottext'>
+          <h3 style='padding-left:10px;width:100%;margin-bottom:15px'>Site Map</h3>
+          <div class='sitemap-link'>
+            <a class='footer-link redlink' href='/home'>Home</a>
+            <ul class='footer-sublinks'>
+              <a class='whitelink' href='/home?s=news'>News</a><br>
+              <a class='whitelink' href='/home?s=election'>Election</a><br>
+              <a class='whitelink' href='/home?s=reps'>My Reps</a>
+            </ul>
+          </div>
+          <div class='sitemap-link'>
+            <a class='footer-link redlink' href='/election'>Election</a>
+            <ul class='footer-sublinks'>
+              <a class='whitelink' href='/election?s=standings'>Standings</a><br>
+              <a class='whitelink' href='/election?s=candidates'>Candidates</a><br>
+              <a class='whitelink' href='/election?s=primaries'>Primaries</a>
+            </ul>
+          </div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/feedback'>Feedback</a></div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/about'>About</a></div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/sources'>Sources</a></div>
+        </div>
+        <div id='footcontributions'>
+          <h1 id='footer-banner'>Together We Can Forge A More Responsive Government</h1>
+          <form id='footer-esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
+            <input type='text' name='esfemail' id='footer-esfemail' class='medium-text-input' placeholder='Enter Email'>
+            <input id='footer-esfsubmit' type='button' value='Submit' onclick="javascript:submitESF();return false;">
+          </form>
+        </div>
       </div>
-
+      <div id='footfoot'>
+          <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol © 2015
+      </div>
+      <style>
+      #footer{position:relative;display:flex;flex-wrap:wrap;}
+      #sitemap{width:50%;max-width:95vw;display:flex;flex-wrap:wrap;}
+      .footer-sublinks{padding:0;}
+      .sitemap-link{margin:0 10px;}
+      .redlink{color:#CC0000 !important;text-decoration:none;cursor:pointer;}
+      .redlink:hover{text-decoration:underline;}
+      .redlink:visited{color:#CC0000;}
+      .whitelink{color:white !important;}
+      #footer-banner{margin-bottom:50px;}
+      #footer-esfform{display:flex;width:765px;max-width:100%;}
+      #footer-esfemail{background:none;color:#CC0000;border:none;border-bottom:solid #CC0000 2px;margin-bottom:0;font-size:30px;}
+      #footer-esfemail::-webkit-input-placeholder{color:#CC0000;}
+      #footer-esfsubmit{display:inline-block;border-bottom:solid #CC0000 2px;background:none;color:#CC0000;font-weight:bold;cursor:pointer;}
+      #footer-esfsubmit:hover{color:red;}
+      </style>
       <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     </body>
