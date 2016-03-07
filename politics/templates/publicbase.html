@@ -76,47 +76,34 @@
       </div>
       
       <div id='footer'>
-        <div id='footsocial'class='foottext'>
-          <h2>Follow Us on Social Media</h2>
-          <div id='footsocioconline'>
-            <div class="fb-like" data-href="https://www.facebook.com/glasscapitol" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
-            <div class="g-follow" data-annotation="vertical-bubble" data-height="20" data-href="https://plus.google.com/103856422488893766971" data-rel="publisher"></div>
-            <div class='footsocioconred'>
-              <script type="text/javascript">reddit_newwindow='1'</script>
-              <script type="text/javascript" src="//www.redditstatic.com/button/button3.js"></script>
-            </div>
-            <div class='footsocioconinst'>
-              <style>.ig-b- { display: inline-block; }
-                .ig-b- img { visibility: hidden; }
-                .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
-                .ig-b-48 { width: 48px; height: 48px; background: url(//badges.instagram.com/static/images/ig-badge-sprite-48.png) no-repeat 0 0; }
-                @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-                .ig-b-48 { background-image: url(//badges.instagram.com/static/images/ig-badge-sprite-48@2x.png); background-size: 60px 178px; } }</style>
-                <a href="https://www.instagram.com/glasscapitol/?ref=badge" class="ig-b- ig-b-48"><img src="//badges.instagram.com/static/images/ig-badge-48.png" alt="Instagram" /></a>
-            </div>
-            <div class='footsociocontwit'>
-              <a href="https://twitter.com/glasscapitol" class="twitter-follow-button" data-show-count="false">Follow @glasscapitol</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            </div>
+        <div id='sitemap'class='foottext'>
+          <h3 style='width:100%;margin-bottom:15px'>Site Map</h3>
+          <div class='sitemap-link'>
+            <a class='footer-link redlink' href='/home'>Home</a>
+            <ul class='footer-sublinks'>
+              <a class='whitelink' href='/home?s=news'>News</a><br>
+              <a class='whitelink' href='/home?s=election'>Election</a><br>
+              <a class='whitelink' href='/home?s=reps'>My Reps</a>
+            </ul>
           </div>
+          <div class='sitemap-link'>
+            <a class='footer-link redlink' href='/election'>Election</a>
+            <ul class='footer-sublinks'>
+              <a class='whitelink' href='/election?s=standings'>Standings</a><br>
+              <a class='whitelink' href='/election?s=candidates'>Candidates</a><br>
+              <a class='whitelink' href='/election?s=primaries'>Primaries</a>
+            </ul>
+          </div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/feedback'>Feedback</a></div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/about'>About</a></div>
+          <div class='sitemap-link'><a class='footer-link redlink' href='/sources'>Sources</a></div>
         </div>
         <div id='footcontributions'>
-          <div id='footcontact' class='footcontribution'>
-            <h3>Help Us Improve</h3>
-            <form>
-              <textarea id='footmessage' name='footmessage' class='footcontactinput' placeholder='Comments'></textarea>
-              <input id='footemail' name='footemail' class='footcontactinput' type='text' placeholder='Enter Email'></br>
-              <div class="g-recaptcha" data-sitekey="6Lcz-BYTAAAAAJqQBmRlbPETj64hWA9fIK1AvLVt"></div>
-              <input type='button' id='footformbutton' value='Submit'>
-            </form>
-          </div>
-          <div id='footdonate' class='footcontribution'>
-            <h3>Donation Station</h3>
-            We want to ensure that The Glass Capitol is free of bias or influencing advertisements. That is why we are relying on individual donations.
-            <h4>Contribute Today!</h4>
-            <h4>Donate (via PayPal) **Comming Soon**</h4>
-            <div id='footdonatebutton'></div>
-          </div>
+          <h1 id='footer-banner'>Together We Can Forge A More Responsive Government</h1>
+          <form id='footer-esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
+            <input type='text' name='esfemail' id='footer-esfemail' class='medium-text-input' placeholder='Enter Email'>
+            <input id='footer-esfsubmit' type='button' value='Submit' onclick="javascript:submitESF();return false;">
+          </form>
         </div>
         <div id='footabout' class='foottext'>
           <h3>About Us</h3>
@@ -128,29 +115,25 @@
           We are committed to being the most trustworthy, non-partisan, and comprehensive source of government data on the internet. All of our stats are cross checked against multiple sources, and all of our data comes from primary sources, either directly from the government or from other open data sources that distribute data directly from the government.          <a class='foottextlink' href='/sources'>Learn More About Our Data and Sources -></a>
         </div>
         <div id='footfoot'>
-            <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
+            <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol © 2015 | All Rights Reserved
         </div>
       </div>
-
-      <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-71696329-1', 'auto');
-        ga('send', 'pageview');
-
-      </script>
+      <style>
+      #sitemap{width:50%;max-width:95vw;display:flex;flex-wrap:wrap;}
+      .sitemap-link{margin:0 10px;}
+      .redlink{color:#FF3333 !important;text-decoration:none;cursor:pointer;}
+      .redlink:hover{text-decoration:underline;}
+      .redlink:visited{color:#CC0000;}
+      .whitelink{color:white !important;}
+      #footer-banner{margin-bottom:50px;}
+      #footer-esfform{display:flex;width:765px;max-width:95vw;}
+      #footer-esfemail{background:none;color:#CC0000;border:none;border-bottom:solid #CC0000 2px;margin-bottom:0;font-size:30px;}
+      #footer-esfemail::-webkit-input-placeholder{color:#CC0000;}
+      #footer-esfsubmit{display:inline-block;border-bottom:solid #CC0000 2px;background:none;color:#CC0000;font-weight:bold;cursor:pointer;}
+      #footer-esfsubmit:hover{color:red;}
+      #footcontributions{display:flex;flex-wrap:wrap;width:50%;}
+      #footcontributions h2{width:100%;text-align:center;}
+      </style>
       
       <script src="https://apis.google.com/js/platform.js" async defer></script>
 
