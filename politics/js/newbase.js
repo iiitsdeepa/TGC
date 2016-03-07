@@ -105,14 +105,14 @@ function submitESF() {
   });
 }
 
-function expandGlobalNav(){
+function navShowHide(){
   //expand
-  if ($('#nav_expand').attr('value') == 'contracted'){
+  if ($('#nav-container').attr('value') == 'contracted'){
     console.log('expanding nav')
-    $('#nav_container').animate({top:"0"}, 350, function(){$('#nav_expand').attr('value','expanded')})
+    $('#nav-container').animate({top:"0"}, 350, function(){$('#nav-container').attr('value','expanded')})
   } else{ //contract
     console.log('contracting nav')
-    $('#nav_container').animate({top:"-100vh"}, 350, function(){$('#nav_expand').attr('value','contracted')})
+    $('#nav-container').animate({top:"-100vh"}, 350, function(){$('#nav-container').attr('value','contracted')})
   }
 }
 function expandPagenav(){

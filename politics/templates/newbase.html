@@ -17,12 +17,15 @@
     </head>
 
     <body>
+      <div id='top-bar' class='z-index-1'>
+        <img id='hmenu' src='/images/hmenu.png' alt='...' onclick="javascript:navShowHide();return false;">
+      </div>
       <input type='hidden' id="page-data" value="{{PAGESTATE}}">
       <div id='popuplayer'>
         {% block popup %}
         {% endblock %}
       </div>
-      <div id='nav-container'>
+      <div id='nav-container' value='contracted'>
         <nav id='nav'>
           <ul>
             <li id='home_option' class='nav_option' value='contracted'>
@@ -47,7 +50,6 @@
           </ul>
         </nav>
       </div>
-      <a href='/login' id='alpha-alert' class='alert'>Already part of the alpha?</a>
       <div id='head'>
         <a href='/' id='title' class='subtle-link'>The Glass Capitol</a>
         <div id='slogan'>Government Transparency For The Communication Era</div>

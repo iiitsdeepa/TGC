@@ -49,7 +49,7 @@ input{padding:0;border:none;}
 .medium-text-input{height:44px;width:calc(100% - 12px);margin-bottom:10px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 .small-text-input{padding-left:10px;height:32px;width:calc(100% - 15px);border-radius:2px;border:solid 1px #d9d9d9;background:#F2F2F2;}
 #pagenav{display:flex;position:absolute;text-align:center;z-index:10;bottom:0;left:10px;}
-.pagenav-option{position:relative;margin:10px 0;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;margin:0 5px;}
+.pagenav-option{position:relative;margin:10px 5px 0 5px;padding:5px;width:150px;font-weight:bold;cursor:pointer;border-radius:2px;border:solid 1px #D9D9D9;border-bottom:none;background:white;}
 .tab{min-height:calc(100vh - 360px);padding:50px 5vw;}
 .incomplete-tab{margin:50px auto;width:60vw;}
 .incomptab-title{margin-bottom:50px;}
@@ -69,9 +69,8 @@ input{padding:0;border:none;}
 .cstanding-processinfo{margin:20px;}
 
 #alpha-alert{display:block;position:absolute;top:100px;right:0;z-index:101;width:275px;}
-#head{position:relative;height:300px;background-color:#F7F7F7;padding:5px 5vw;}
-#title{display:block;position:absolute;top:50px;font-size:36px;font-weight:bold;}
-#slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
+#head{position:relative;height:300px;background-color:#F7F7F7;padding:0 5vw;}
+
 #centerpiece{display:block;position:relative;margin:30px auto 0;height:70%;}
 #nav-container{position:absolute;top:50px;right:0;z-index:100}
 #back-to-top{position:fixed;bottom:50px;right:5vw;font-weight:bold;cursor:pointer;margin:40px 0;}
@@ -79,8 +78,9 @@ input{padding:0;border:none;}
 
 
 
-
-
+#top-bar{display:none;}
+#hmenu{height:100%;}
+#title{display:block;position:absolute;top:50px;font-size:36px;font-weight:bold;}
 
 
 #nav ul{list-style:none;}
@@ -100,6 +100,7 @@ input{padding:0;border:none;}
 /*Mobile only*/
 @media screen and (max-width: 520px){
 	.sitemap-link{margin:0 5px !important;}
+	.pagenav-option{width:auto;}
 	#footcontributions{width:100%;}
 	/*Sources Styles*/
 	#sources{padding:100px 5vw 50px 5vw;}
@@ -108,14 +109,19 @@ input{padding:0;border:none;}
 
 /*Mobile and Tablet*/
 @media screen and (max-width: 965px){
+	#head{padding-top:70px;}
+	#top-bar{display:block;position:fixed;top:0;width:100%;height:50px;background:#0E1C32;color:white;z-index:100;}
+	#title{top:0;position:relative;text-align:center;margin-bottom:10px;font-weight:bold;width:100%;}
+	#slogan{}
+	#centerpiece{position:relative;height:165px;margin:0 auto 15px auto;}
 	#popuplayer{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;opacity:1;}
 	#badge{border-radius:2px;position: fixed;top: 0;left: 0;width: 100vw;height: 50px;font-weight: bold;color: white;font-size: 125%;line-height: 50px;text-align: center;z-index: 50;font-family: 'Playball', cursive;}
 	#logo{vertical-align: bottom;}
 	#titlebar{position: fixed;top: 0;width: 100vw;height: 50px;background-color: darkred;z-index: 45;}
-	#nav_expand{position: fixed;top: 0;left: 0;width: 50px;height: 50px;z-index: 60;}
-	#pagenav_expand{position: fixed;top: 0;right: 0;width: 50px;height: 50px;line-height: 50px;text-align: center;z-index: 51;}
-	#nav_close{position: relative;bottom: 0;left: 0;width: 100%;height: 40px;background-color: gainsboro;}
-	#nav_container{position: fixed;left: 0;top: -100vh;width: 100vw;max-height: 100vh;background-color: white;z-index: 52;opacity: .95;overflow: auto;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
+	#nav_expand{position:fixed;top:0;left:0;width:50px;height:50px;z-index: 60;}
+	#pagenav_expand{position:fixed;top:0;right:0;width:50px;height:50px;line-height: 50px;text-align: center;z-index: 51;}
+	#nav-close{position:relative;bottom:0;left:0;width:100%;height:40px;background-color: gainsboro;}
+	#nav-container{padding-top:70px;position:fixed;left:0;top:-100vh;width:100vw;max-height:100vh;background:white;z-index: 52;opacity: .95;overflow: auto;-moz-box-shadow: 0px 0px 11px rgba(0,0,0,1);-webkit-box-shadow: 0px 0px 11px rgba(0,0,0,1);box-shadow: 0px 0px 11px rgba(0,0,0,1);}
 	.mexp{position: absolute;top: 5%;right: 0;width: 15%;height: 30px;text-align: center;font-size: 200%;z-index: 5;}
 	#nav ul{margin: 0;padding: 0;}
 	#nav ul li{position: relative;overflow: hidden;}
@@ -130,6 +136,8 @@ input{padding:0;border:none;}
 
 /*Desktop*/
 @media screen and (min-width: 966px){
+
+	#slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
 	#nav_wrapper{font-size:16px;}
 	#badge{border-radius:2px;position: fixed;top: 0;left: 0;padding-left: 45px;padding-right: 20px;height: 70px;line-height: 70px;font-weight: bold;color: white;z-index: 50;text-align: center;background-color: #0E1C32;border: solid 2px #122440;font-family: 'Playball', cursive;font-size: 115%;font-weight: bold;}
 	#logo{position:absolute;height:90%;top:5%;left:2%;}
