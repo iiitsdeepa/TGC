@@ -33,7 +33,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         info = upload_files[0]
  
         #process_state_csv(info)
-        #process_nationalpolls(info, 'R')
+        #process_nationalpolls(info, 'D')
         #process_politician_csv(info)
         #process_politician_stats(info)
         #process_candidate_csv(info)

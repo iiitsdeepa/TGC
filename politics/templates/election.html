@@ -4,7 +4,7 @@
 <div id='pagenav'>
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('standings','election_standings');return false;">Current Standings</div>
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('candidates','election_candidates');return false;">Candidates</div>
-	<div class='pagenav-option' onclick="javascript:tabSwitcher('primaries','election_map');return false;">Primaries</div>
+	<div class='pagenav-option' onclick="javascript:tabSwitcher('primaries','election_primaries');return false;">Primaries</div>
 </div>
 {% endblock %}
 
@@ -237,7 +237,7 @@
 	var FUNCTIONS = [];
 	var tostandings = 0;
 	var tocandidates = 0;
-	var tomap = 0;
+	var toprimaries = 0;
 	FUNCTIONS['election_standings'] = function () { 
 		scroller('standings','tab')
 		if (tostandings == 0){
@@ -252,11 +252,11 @@
 			tocandidates++;
 		}
 	};
-	FUNCTIONS['election_map'] = function () { 
-		scroller('map','tab')
-		if (tomap == 0){
-			google.charts.setOnLoadCallback(election_map);
-			tomap++;
+	FUNCTIONS['election_primaries'] = function () { 
+		scroller('primaries','tab')
+		if (toprimaries == 0){
+			google.charts.setOnLoadCallback(election_primaries);
+			toprimaries++;
 		}
 	};
 
@@ -287,7 +287,7 @@
 	function election_candidates(){
 		console.log('nothing')
 	}
-	function election_map(){
+	function election_primaries(){
 		drawPrimaryMap()
 	}
 	function drawPrimaryMap(){

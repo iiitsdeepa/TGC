@@ -62,9 +62,47 @@
       </div>
       
       <div id='footer'>
-          <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol™ Founded 2015
+        <div id='footer-links' class='footer-section'>
+          <h3 style='margin-bottom:15px'>Site Map</h3>
+          <a class='footer-link redlink' href='/home'>Home</a>
+          <ul class='footer-sublinks'>
+            <a class='whitelink' href='/home?s=news'>- News</a><br>
+            <a class='whitelink' href='/home?s=election'>- Election</a><br>
+            <a class='whitelink' href='/home?s=reps'>- My Representatives</a>
+          </ul>
+          <a class='footer-link redlink' href='/election'>Election</a>
+          <ul class='footer-sublinks'>
+            <a class='whitelink' href='/election?s=standings'>- Standings</a><br>
+            <a class='whitelink' href='/election?s=candidates'>- Candidates</a><br>
+            <a class='whitelink' href='/election?s=primaries'>- Primaries</a>
+          </ul>
+          <a class='footer-link redlink' href='/feedback'>Feedback</a>
+          <a class='footer-link redlink' href='/about'>About</a>
+          <a class='footer-link redlink' href='/sources'>Sources</a>
+        </div>
+        <div id='footer-signup-wrapper' class='footer-section'>
+          <h1 id='footer-banner'>Together We Can Forge A More Responsive Government</h1>
+          <form id='footer-esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
+            <input type='text' name='esfemail' id='footer-esfemail' class='medium-text-input' placeholder='Enter Email'>
+            <input id='footer-esfsubmit' type='button' value='Submit' onclick="javascript:submitESF();return false;">
+          </form>
+        </div>
       </div>
-
+      <div id='footfoot'>
+          <img id='footlogo' src='/images/awlogo.png'>The Glass Capitol © 2015 | All Rights Reserved
+      </div>
+      <style>
+      #footer{display:flex;justify-content:center;padding:50px 5vw 25px 5vw;}
+      .footer-section{margin:0 50px;}
+      .footer-link{display:block;}
+      .footer-sublinks{padding:0}
+      #footer-banner{margin-bottom:50px;}
+      #footer-esfform{display:flex;width:765px;max-width:95vw;}
+      #footer-esfemail{background:none;color:#CC0000;border:none;border-bottom:solid #CC0000 2px;margin-bottom:0;font-size:30px;}
+      #footer-esfemail::-webkit-input-placeholder{color:#CC0000;}
+      #footer-esfsubmit{display:inline-block;border-bottom:solid #CC0000 2px;background:none;color:#CC0000;font-weight:bold;cursor:pointer;}
+      #footer-esfsubmit:hover{color:red;}
+      </style>
       <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     </body>
