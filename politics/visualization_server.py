@@ -1,5 +1,7 @@
 from basehandler import *
 from datetime import datetime, date, time, timedelta
+from google.appengine.api import memcache
+from caching import *
 
 class VisualizationHandler(BaseHandler):
     def barjson(self,v):
@@ -61,8 +63,22 @@ class VisualizationHandler(BaseHandler):
         return ret
 
     def natpolls(self,v):
-        rows = []
-        if self.request.get('length') != '' and self.request.get('length') != '':
+        if self.request.get('length') != '' and self.request.get('smooth') != '':
+            length = self.request.get('length')
+            smooth = self.request.get('smooth')
+        else:
+            length = 30
+            smooth = 10
+        keytext = v.name + str(smooth) + str(length)
+        rows = memcache.get(keytext)
+        if rows is None:
+            rows = setNatPolls(length, smooth, v.name, v.color)
+            logging.error('memcache miss')
+        else:
+            logging.error('memcache hit')
+        return rows
+        """rows = []
+        if self.request.get('length') != '' and self.request.get('smooth') != '':
             length = self.request.get('length')
             smooth = self.request.get('smooth')
         else:
@@ -118,6 +134,7 @@ class VisualizationHandler(BaseHandler):
             else:
                 rows.insert(0,ret)
         return rows
+        """
                 
     def linejson(self,v):
         cols = [{"id":"","label":v.xaxis,"pattern":"","type":"string"}]
