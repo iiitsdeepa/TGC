@@ -50,13 +50,19 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				3,286 delegates remaining
+				3,136 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<div id=''></div><b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br><
-				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#1a53ff;'></div>
+					<b>85% - Pledged Delegates: </b>&nbsp;Delegates that vote according to their primary results
+				</div>
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#809fff;'></div>
+					<b>15% - Superdelegates: </b>&nbsp;Delegates that can cast their vote for any candidate 
+				</div>
 			</div>
 		</div>
 		<div class='rstandings cstanding'>
@@ -64,13 +70,19 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				1,777 delegates remaining
+				1,585 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<b>93% - Bound delegates:</b> vote according to their state’s primary results<br>
-				<b>7% - Unbound delegates:</b>  can switch candidates, regardless of their state’s primary results
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#cc0000;'></div>
+					<b>~94% - Bound delegates: </b>&nbsp;vote according to their state’s primary results
+				</div>
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#cc0000;'></div>
+					<b>~6% - Unbound delegates: </b>&nbsp;can switch candidates, regardless of their state’s primary results
+				</div>
 			</div>
 		</div>
 	</div>
@@ -604,6 +616,7 @@
 	    var chart1_data = new google.visualization.DataTable(d['data']);
 	    var chart1_options = {
 	        title: d['title'],
+	        legend: 'none',
 	    };
 	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
 	    chart1_chart.draw(chart1_data, chart1_options);
@@ -624,19 +637,21 @@
 </script>
 
 <style>
-	#feeds-container{display:flex;justify-content:space-between;}
-	.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
-	.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
-	#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
-	#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
-	#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
-	.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
-	.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
-	.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-	.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-	.fl-title:visited{color:#660066;}
-	.fl-description{color:#595959;}
-	.fl-date{color:#8c8c8c;}
-	#fl-template{display:none;}
+#feeds-container{display:flex;justify-content:space-between;}
+.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
+.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
+#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
+#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
+#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
+.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
+.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
+.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+.fl-title:visited{color:#660066;}
+.fl-description{color:#595959;}
+.fl-date{color:#8c8c8c;}
+#fl-template{display:none;}
+.key_wrapper{display:flex;margin-bottom:5px;}
+.coloredkey{width:20px;height:20px;margin-right:5px;}
 </style>
 {% endblock %}
