@@ -8,23 +8,39 @@ class VisualizationHandler(BaseHandler):
                 {"id":"","label":v.yaxis,"pattern":"","type":"number"},
                 {"id":"","role":"style","type":"string"}
             ]
+        if v.name == 'dpresults':
+            cols = [
+                    {"id":"","label":v.xaxis,"pattern":"","type":"string"},
+                    {"id":"","label":v.yaxis,"pattern":"","type":"number"},
+                    {"id":"","role":"style","type":"string"},
+                    {"id":"","label":"Superdelegates","pattern":"","type":"number"},
+                    {"id":"","role":"style","type":"string"}
+                ]
         dataquery = GqlQuery(v.query)
         rows = []
         for d in dataquery:
+            t4, t5 = 0, 0
             t1 = dict(v=d.name)
             t2 = dict(v=d.delegates)
+            if v.name == 'dpresults':
+                t4 = dict(v=d.superdelegates)
+                t5 = dict(v='#809fff')
             ts = dict(v=v.color)
             t3 = [t1,t2,ts]
+            if t4 is not int and t5 is not int:
+                t3.append(t4)
+                t3.append(t5)
             temp = dict(c=t3)
             #logging.error(d.name+' '+d.party)
             rows.append(temp)
-            if v.name == 'dpresults':
-                s1 = dict(v=d.name)
+            """if v.name == 'dpresults':
+                s1 = dict(v=d.name.split(' ')[1] + '\'s super delegates')
                 s2 = dict(v=d.superdelegates)
                 ss = dict(v='#809fff')
                 s3 = [s1,s2,ss]
                 stemp = dict(c=s3)
                 rows.append(stemp)
+            """
         data = dict(cols = cols,
                 rows = rows)
         final = dict(title = v.title,

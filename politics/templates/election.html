@@ -50,13 +50,19 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				2,383 needed for nomination out of 4,762 total<br>
-				3,286 delegates remaining
+				3,136 delegates remaining
 			</div>
 			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<b>85% - Pledged Delegates:</b> Delegates that vote according to their primary results<br>
-				<b>15% - Superdelegates:</b> Delegates that can cast their vote for any candidate 
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#1a53ff;'></div>
+					<b>85% - Pledged Delegates: </b>&nbsp;Delegates that vote according to their primary results
+				</div>
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#809fff;'></div>
+					<b>15% - Superdelegates: </b>&nbsp;Delegates that can cast their vote for any candidate 
+				</div>
 			</div>
 		</div>
 		<div class='rstandings cstanding'>
@@ -64,13 +70,19 @@
 			<div class='cstanding-basicinfo'>
 				<!--<h3>Delegates won</h3>-->
 				1,237 needed for nomination out of 2,472 total<br>
-				1,777 delegates remaining
+				1,585 delegates remaining
 			</div>
 			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
 			<div class='cstanding-processinfo'>
 				<h3>Graph Key</h3>
-				<b>93% - Bound delegates:</b> vote according to their state’s primary results<br>
-				<b>7% - Unbound delegates:</b>  can switch candidates, regardless of their state’s primary results
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#cc0000;'></div>
+					<b>~94% - Bound delegates: </b>&nbsp;vote according to their state’s primary results
+				</div>
+				<div class='key_wrapper'>
+					<div class='coloredkey' style='background:#cc0000;'></div>
+					<b>~6% - Unbound delegates: </b>&nbsp;can switch candidates, regardless of their state’s primary results
+				</div>
 			</div>
 		</div>
 		<div id='learn_button_wrapper'>
@@ -340,6 +352,7 @@ var tomap = 0;
 	    var chart1_data = new google.visualization.DataTable(d['data']);
 	    var chart1_options = {
 	        title: d['title'],
+	        legend: 'none',
 	    };
 
 	    var chart1_chart = new google.visualization.ColumnChart(document.getElementById(d['element']));
@@ -381,5 +394,7 @@ var tomap = 0;
 .party-columns{display:flex;justify-content:space-between;}
 .party-column{width:calc(50% - 25px);}
 .party-column-title{text-align:center;}
+.key_wrapper{display:flex;margin-bottom:5px;}
+.coloredkey{width:20px;height:20px;margin-right:5px;}
 </style>
 {% endblock %}
