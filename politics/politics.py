@@ -32,7 +32,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         info = upload_files[0]
  
-        #process_state_csv(info)
+        process_state_csv(info)
         #process_nationalpolls(info, 'D')
         #process_politician_csv(info)
         #process_politician_stats(info)
@@ -285,10 +285,10 @@ class UpdateAll(BaseHandler):
         getNationalPolls()
         logging.error('')
         getStatePolls()
-        logging.error('Votes')
-        getVotesUpdate()
-        logging.error('Bills')
-        getBillsUpdate()
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
         self.response.set_status(200)
 
     def post(self):

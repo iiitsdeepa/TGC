@@ -2,6 +2,7 @@
 {% block pagenav %}
 <input type='hidden' id="page-statename" value="{{hrstatename}}">
 <div id='pagenav'>
+	<!--<div class='pagenav-option' onclick="javascript:tabSwitcher('basicinfo','election_info');return false;">Election Info</div>-->
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('standings','election_standings');return false;">Current Standings</div>
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('candidates','election_candidates');return false;">Candidates</div>
 	<div class='pagenav-option' onclick="javascript:tabSwitcher('primaries','election_primaries');return false;">Primaries</div>
@@ -15,6 +16,29 @@
 <div id='display-tab'>
 	This is the display tab
 </div>
+
+<!--<div id='basicinfo' class='tab t1'>
+<div class='tab-content'>
+	<div class='incomplete-tab'>
+		<div class='incomp-tab incomp-pre'>
+			<h1 class='incomptab-title'>This section can only be viewed by our currrent members</h1>
+			<h2>TGC is currently in development and we're looking for new testers</h2>
+			<ul>
+				<li>Get exclusive access to new features</li>
+				<li>Stay up to date with development</li>
+				<li>Direct contact our team so we can make the best possible service for you</li>
+			</ul>
+			<form id='esfform' name='esfform' onsubmit="javascript:submitESF();return false;">
+				<input type='text' name='esfemail' id='esfemail' class='medium-text-input' placeholder='Enter Email'>
+				<div id='esfsubmit' class='bluebutton button' onclick="javascript:submitESF();return false;">Become a tester now</div>
+			</form>
+		</div>
+		<div class='incomp-tab incomp-post'>
+			<h2>Thanks for signing up! We just sent you an email</h2>
+		</div>
+	</div>
+</div>
+</div>-->
 
 <div id='standings' class='tab t1'>
 <div class='tab-content'>
@@ -234,10 +258,18 @@
 <div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 
 <script>
-	var FUNCTIONS = [];
-	var tostandings = 0;
-	var tocandidates = 0;
-	var toprimaries = 0;
+var FUNCTIONS = [];
+var tostandings = 0;
+var tocandidates = 0;
+var toprimaries = 0;
+var tomap = 0;
+/*FUNCTIONS['election_info'] = function () { 
+	scroller('basicinfo','tab')
+	if (tomap == 0){
+		//google.charts.setOnLoadCallback(election_map);
+		tomap++;
+	}
+};*/
 	FUNCTIONS['election_standings'] = function () { 
 		scroller('standings','tab')
 		if (tostandings == 0){
@@ -302,14 +334,6 @@
 		var geochart = new google.visualization.GeoChart(
       		document.getElementById('primary-map'));
   			geochart.draw(data, {region: "US", resolution: "provinces",colors:[0xFF8747, 0xFFB581, 0xc06000]});
-	}
-	function electionScroller(){
-		scroller('standings','tab')
-		if (toelection == 0){
-			google.charts.load('current', {'packages':['corechart']});
-			//google.charts.setOnLoadCallback(loadData);
-			toelection++;
-		}
 	}
 	function drawBarChart(d) {
 		console.log(d['data'])

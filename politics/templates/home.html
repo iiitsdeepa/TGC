@@ -500,14 +500,14 @@
 	var FUNCTIONS = [];
 	var toelection = 0;
 	google.load("feeds", "1");
-	google.setOnLoadCallback(loadFeeds)
+	google.setOnLoadCallback(home_feed)
 	FUNCTIONS['home_news'] = function () {
 		scroller('news','tab') 
 	};
 	FUNCTIONS['home_election'] = function () { 
 		scroller('election','tab')
 		if (toelection == 0){
-			google.charts.setOnLoadCallback(election_standings);
+			google.charts.setOnLoadCallback(home_election);
 			toelection++
 		}
 	};
@@ -515,7 +515,7 @@
 		scroller('reps','tab') 
 	};
 
-	function loadFeeds(){
+	function home_feed(){
 		var leftfeedlist = [
 	        {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
 	        {"name":"Politico","rss":"http://www.politico.com/rss/politicopicks.xml","ideology":2},
@@ -589,7 +589,7 @@
 			});	
 		}
 	}
-	function election_standings(){
+	function home_election(){
 		console.log('WORK DAMNIT')
 		$.post('/vishandle', {'visualization':'dpresults'},function(data){
 			chart_data = $.parseJSON(data);

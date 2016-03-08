@@ -2,22 +2,21 @@
 
 {% block pagenav %}
 
-	<div id='pagenav'>
+	<!--<div id='pagenav'>
 		<div class='pagenav-option' onclick="javascript:scrollTo('mission-wrapper');return false;">Mission</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('core-wrapper');return false;">Core Beliefs</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('works-wrapper');return false;">How TGC Works</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('tgc-gov-wrapper');return false;">TGC and Government</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('team-wrapper');return false;">The Team</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('code-wrapper');return false;">Our Code</div>
-	</div>
+	</div>-->
 {% endblock %}
 
 {% block content %}
 <div id='about'>
-	<div id='top-wrapper' class='section'>
-		<h1>About Us</h1>
+<!--	<div id='top_banner'>
 		<p>A message from the TGC team:<br>
-		We are currently a 8 person startup trying to fundamentally change the way Americans interact with our government. There is a lot we are still in the process of preparing and some of the things we intend to bring to the site might be missing at the moment, so please keep that in mind as you go through our beta test phase. If you like what we are doing, become a part of TCG family by: 
+		We are currently a 8 person startup trying to fundamentally change the way Americans interact with our government. There is a lot we are still in the process of preparing and some of the things we intend to bring to the site might be missing at the moment, so please keep that in mind as you go through our beta test phase. If you like what we are doing, become a part of the TGC family by: 
 		</p>
 		<ul>
 			<li>Helping us improve with feedback</li>
@@ -26,82 +25,130 @@
 		</ul>
 		<p>Together we can raise the standard of American politics and we are just getting started.</p>
 	</div>
-
-	<div id='mission-wrapper' class='section'>
-		<h1>TGC Mission</h1>
-		<ul>
-			<li>Create a greater knowledge base of our nation’s workings through well presented, simple to analyze data, that is open and honest about potential biases.</li>
-			<li>Elevate the political debate by providing unbiased information and a networking platform for Americans to critically think about and enact change in our government.</li>
-			<li>Hold our government and political media to higher standard of truth and transparency.</li>
-			<li>Make involvement and engagement in politics easy and accessible to everyone.</li>		
-		</ul>
-	</div>
-
-	<div id='mission-wrapper' class='section'>
-		<h1>TGC Mission</h1>
-		<ul>
-			<li>Create a greater knowledge base of our nation’s workings through well presented, simple to analyze data, that is open and honest about potential biases.</li>
-			<li>Elevate the political debate by providing unbiased information and a networking platform for Americans to critically think about and enact change in our government.</li>
-			<li>Hold our government and political media to higher standard of truth and transparency.</li>
-			<li>Make involvement and engagement in politics easy and accessible to everyone.</li>		
-		</ul>
-	</div>
-
-	<div id='core-wrapper' class='section'>
-		<h1>TGC Core Belief</h1>
-		<div class='quote-wrapper'>
-			<div class='quote-img-wrapper'></div>
-			<div class='quote-text'>“An enlightened citizenry is indispensable for the functioning of a republic”<br> - Thomas Jefferson</div>
+-->
+	<div id='topsection'>
+		<img src='/images/flagswaving.png' id='topgraphic'>
+		<div id='top_section_wrap' class='topsection_wrapper'>
+			<div id='core-wrapper' class='top_section'>
+				<h2>TGC Core Belief</h2>
+				<div class='quote-wrapper'>
+					<div class='quote-img-wrapper'></div>
+					<div class='quote-text' style='color:white'>“An enlightened citizenry is indispensable for the functioning of a republic”<br> - Thomas Jefferson</div>
+				</div>
+				<p>We believe in the American public. When more people have the power to know, critically evaluate, and spread information about our government, we will constitute a better society. Throughout history, this means has repeatedly allowed us to overcome adversity and create a more inclusive, more peaceful, and more technologically advanced society. TGC strives to evolve our capabilities to match the information age of the 21st century.
+				</p>
+			</div>
+			<div id='mission-wrapper' class='top_section'>
+				<h2>TGC Mission</h2>
+				<ul>
+					<li>Create a greater knowledge base of our nation’s workings through well presented, simple to analyze data, that is open and honest about potential biases.</li>
+					<li>Elevate the political debate by providing unbiased information and a networking platform for Americans to critically think about and enact change in our government.</li>
+					<li>Hold our government and political media to higher standard of truth and transparency.</li>
+					<li>Make involvement and engagement in politics easy and accessible to everyone.</li>		
+				</ul>
+			</div>
 		</div>
-		<p>We believe in the American public. When more people have the power to know, critically evaluate, and spread information about our government, we will constitute a better society. Throughout history, this means has repeatedly allowed us to overcome adversity and create a more inclusive, more peaceful, and more technologically advanced society. TGC strives to evolve our capabilities to match the information age of the 21st century.
-		</p>
+		<img src='/images/arrowdown.png' id='arrowgraphic'>
 	</div>
 
-	<div id='works-wrapper' class='section'>
-		<h1>How TGC Works</h1>
-		<h2>Data</h2>
-		<p>Much of the political data available is a mess to sort through so TGC takes all of it and presents it in a way that is easy to read and comprehend. Thus we make this organized raw data available to users so that they may compare and create their own graphical analyses and conclusions as they so wish.<br> 
-		But raw data is can still be arduous to access and all the data in the world means nothing if don’t know where to start looking. That’s why we aims to present this data in new, refreshing, and meaningful ways. So TGC offers a multitude of graphs, charts, and statistics created from this data, analyzing for its relatability, relevance, and the novelty of information it can provide. There are 3 main features that can be found for each piece of data - sources, context, and bias checks.</p>
-		<h2>Surveys</h2>
-		<p>Users are given optional surveys to personalize their experience with TGC. This allows you to stay up to date on issues that matter most to you. You can track personal changes and get to know yourself more. TGC also uses this for everyone to better understand TGC’s user base and to stay informed on other biases that may exist, e.g. population/selection bias, reporting bias. We keep surveys short and simple because they are meant to enhance your interactive experience, not be a time hinderance.</p>
-		<h2>Discussion</h2>
-		<p>We provide a forum to discuss the data or add your own insights. We also link any websites, news outlets, bloggers that use our data in their articles, so that you can see how others are interpreting the data. You can also use our data or create your own graphs and statistics with the data any time to build your own arguments to be further posted, shared, and discussed.</p>
+	<h1 style='padding:20px 5vw 20px 40vw;left:50%;text-align:center;'>How TGC Works</h1>
+	<div class='section_wrapper'>
+		<div class='graphic_wrapper'><img src='/images/placeholderimg.png' class='graphic'></div>
+		<div id='works-wrapper1' class='section'>
+			<h1>Data</h1>
+			<p>Much of the political data available is a mess to sort through so TGC takes all of it and presents it in a way that is easy to read and comprehend. Thus we make this organized raw data available to users so that they may compare and create their own graphical analyses and conclusions as they so wish.<br> 
+			But raw data is can still be arduous to access and all the data in the world means nothing if don’t know where to start looking. That’s why we aims to present this data in new, refreshing, and meaningful ways. So TGC offers a multitude of graphs, charts, and statistics created from this data, analyzing for its relatability, relevance, and the novelty of information it can provide. There are 3 main features that can be found for each piece of data - sources, context, and bias checks.</p>
+		</div>
+	</div>
+	<div class=section_wrapper>
+		<div class='graphic_wrapper'><img src='/images/placeholderimg.png' class='graphic'></div>
+		<div id='works-wrapper2' class='section'>
+			<h1>Surveys</h1>
+			<p>Users are given optional surveys to personalize their experience with TGC. This allows you to stay up to date on issues that matter most to you. You can track personal changes and get to know yourself more. TGC also uses this for everyone to better understand TGC’s user base and to stay informed on other biases that may exist, e.g. population/selection bias, reporting bias. We keep surveys short and simple because they are meant to enhance your interactive experience, not be a time hinderance.</p>
+		</div>
+	</div>
+	<div class='section_wrapper'>
+		<div class='graphic_wrapper'><img src='/images/placeholderimg.png' class='graphic'></div>
+		<div id='works-wrapper3' class='section'>
+			<h1>Discussion</h1>
+			<p>We provide a forum to discuss the data or add your own insights. We also link any websites, news outlets, bloggers that use our data in their articles, so that you can see how others are interpreting the data. You can also use our data or create your own graphs and statistics with the data any time to build your own arguments to be further posted, shared, and discussed.</p>
+		</div>
 	</div>
 
-	<div id='tgc-gov-wrapper' class='section'>
-		<h1>How TGC Can Affect Government</h1>
-		<p>We create an environment that promotes critical analysis of information. So when you form your own opinions, then discuss and share and take surveys to understand yourself to ultimately develop an informed position, you can change the way we approach government. By being informed you can challenge and demote misinformation caused by sensationalized media, poor data analysis, and lack of critical thinking in the realm of political reporting. By being informed you can hold your representatives accountable, contact them, and make sure your vote is going to what you really want come election day. By being informed, you can network and form coalitions through social media to show our representatives what the american people want. Together we can remove the ambiguity, fallacies, and blind bandwagoning from the debate to get to the heart of the issues and find productive solutions.</p>
+	<div class='section_wrapper' style='margin-top:40px;'>
+		<div id='tgc-gov-wrapper' class='section'>
+			<h1>How TGC Can Affect Government</h1>
+			<p>We create an environment that promotes critical analysis of information. So when you form your own opinions, then discuss and share and take surveys to understand yourself to ultimately develop an informed position, you can change the way we approach government. By being informed you can challenge and demote misinformation caused by sensationalized media, poor data analysis, and lack of critical thinking in the realm of political reporting. By being informed you can hold your representatives accountable, contact them, and make sure your vote is going to what you really want come election day. By being informed, you can network and form coalitions through social media to show our representatives what the american people want. Together we can remove the ambiguity, fallacies, and blind bandwagoning from the debate to get to the heart of the issues and find productive solutions.</p>
+		</div>
+		<div class='graphic_wrapper'><img src='/images/placeholderimg.png' class='graphic'></div>
 	</div>
 
+	<!--<div class='section_wrapper'>
+	<div class='graphic_wrapper'><img src='/images/awlogo.png' class='graphic'></div>
 	<div id='team-wrapper' class='section'>
 		<h1>The TGC Team</h1>
 		a list of team members with faces + description coming soon
 	</div>
+	</div>-->
 
-	<div id='code-wrapper' class='section'>
-		<h1>Our Code of Operation</h1>
-		<ol>
-			<li>TGC will forever remain party and ideology independent.</li>
-			<li>We serve the Individual - one person, one vote. </li>
-			<li>We will maintain our database to provide meaningful, accurate, and up to date statistics.</li>
-			<li>We will check for and report to users any research biases that may be inherent in the information we present.</li>
-			<li>We will provide users with the methodology and derivation behind every statistic so as to maintain transparency to our users.</li>
-			<li>We will provide well sourced context (historical, legal, etc.) to the data we present. All quotes or statements that are factually inaccurate will be labeled as such. </li>
-			<li>We will never use data, context, or any others means to tell users what they should think.</li>
-			<li>Any user information provided to TGC must be relevant to enhancing the user’s experience and to the quality of information available to the user.</li>
-			<li>We will not raise funds through advertisements on the site because we believe it would be a harmful to the purpose of TGC.</li>
-			<li>If any users feel we have violated our code in any way, we will provide a forum for discussion to resolve the issues as quickly as possible.</li>		
-		</ol>
+	<div class='section_wrapper' style='margin-top:40px;'>
+	<div id='code-wrapper' class='sectioncenter'>
+		<img src='/images/scrollbackground.png' id='scrollgraphic'>
+		<div id='code-text'>
+			<h1>Our Code of Operation</h1>
+			<ol>
+				<li>TGC will forever remain party and ideology independent.</li>
+				<li>We serve the Individual - one person, one vote. </li>
+				<li>We will maintain our database to provide meaningful, accurate, and up to date statistics.</li>
+				<li>We will check for and report to users any research biases that may be inherent in the information we present.</li>
+				<li>We will provide users with the methodology and derivation behind every statistic so as to maintain transparency to our users.</li>
+				<li>We will provide well sourced context (historical, legal, etc.) to the data we present. All quotes or statements that are factually inaccurate will be labeled as such. </li>
+				<li>We will never use data, context, or any others means to tell users what they should think.</li>
+				<li>Any user information provided to TGC must be relevant to enhancing the user’s experience and to the quality of information available to the user.</li>
+				<li>We will not raise funds through advertisements on the site because we believe it would be a harmful to the purpose of TGC.</li>
+				<li>If any users feel we have violated our code in any way, we will provide a forum for discussion to resolve the issues as quickly as possible.</li>		
+			</ol>
+		</div>
 	</div>
+	</div>
+	<div id='scrollsrc'><a href="http://cliparts.co">Image Source</a></div>
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 </div>
 
 <style>
+	#top-wrapper{padding-top:80px;}
 	#about-nav-wrapper{position:fixed;top:200px;right:0;width:15vw;}
 	.about-nav-option{width:100%;text-align:center;font-weight:bold;color:white;background:darkred;margin:10px 0;padding:10px;cursor:pointer;border-radius:2px;}
 	.about-nav-option:hover{background:#A23333;}
-	.section{position:relative;padding:50px 20vw 100px 5vw;}
-	#top-wrapper{padding-top:80px;}
+	.section_wrapper{position:relative;display:flex;width:100%;}
+	#top_banner{position:relative;background:#ffe680;padding:5px 1vw 10px;}
+	#top_banner p{margin:2px;font-size:85%;line-height:115%}
+	#top_banner ul{margin:5px;font-size:85%;line-height:115%}
+	.topsection_wrapper{position:relative;display:block;width:40%;max-width:600px;margin-left:5%;z-index:1;background:#002850;border:solid 8px #990000;border-bottom:solid 1px #002850;z-index:1;}
+	.topsection_wrapper p{color:white;}
+	.topsection_wrapper h2{color:white;border-bottom:solid 3px white;height:25px;}
+	.topsection_wrapper li{color:white;}
+	.top_section{position:relative;padding:10px 1vw;min-height:300px;}
+	#topsection{position:relative;width:100%;z-index:1;margin-bottom:40px;}
+	#topgraphic{position:absolute;background:white;z-index:0;width:100vw;z-index:0;}
+	#arrowgraphic{position:absolute;width:calc(40% + 16px);max-width:616px;margin-left:5%;z-index:2;height:100px;}
+	.graphic_wrapper{display:flex;position:relative;width:34%;height:80%;margin:1% 3%;}
+	.graphic{position:relative;margin: 0 auto;width:100%;height:100%;background-color:lightgray;}
+	.section{position:relative;padding:10px 5vw 10px;width:60%;}
+	.section h1{height:30px;border-bottom:solid 3px black;}
+	.sectioncenter{position:relative;padding:10px 5vw 10px;min-width:400px;max-width:800px;margin: 0 auto;}
+	#code-text{position:relative;padding:100px 130px 90px 110px;margin: 0 auto;}
+	#code-text h1{position:relative;text-align:center;}
+	#scrollgraphic{position:absolute;width:inherit;height:100%;}
+	#scrollsrc{position:relative;margin: 0 auto;text-align:center;margin-bottom:20px;}
 </style>
+<script>
+var topheight = $('#top_section_wrap').height() + 8;
+var scrollwidth = $('#code-wrapper').width();
+console.log(String(topheight))
+document.getElementById('topgraphic').style.height=String(topheight)+"px";
+document.getElementById('arrowgraphic').style.top=String(topheight)+"px";
+document.getElementById('scrollgraphic').style.width=String(scrollwidth)+"px";
+</script>
 {% endblock %}
 

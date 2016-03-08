@@ -10,6 +10,7 @@ input{padding:0;border:none;}
 .t1{position:relative;top:0;left:0;z-index:1;}
 .t2{position:relative;top:0;left:0;z-index:2;}
 .t3{position:relative;top:0;left:0;z-index:3;}
+.t4{position:relative;top:0;left:0;z-index:4;}
 .toptext{vertical-align: top;}
 .R{background: #cc0000;color:white;}
 .D{background: #1a53ff;color:white;}
@@ -73,7 +74,7 @@ input{padding:0;border:none;}
 
 #centerpiece{display:block;position:relative;margin:30px auto 0;height:70%;}
 #nav-container{position:absolute;top:50px;right:0;z-index:100}
-#back-to-top{position:fixed;bottom:50px;right:5vw;font-weight:bold;cursor:pointer;margin:40px 0;}
+#back-to-top{position:fixed;bottom:30px;right:3vw;font-weight:bold;cursor:pointer;margin:40px 0;}
 #back-to-top:hover{text-decoration:underline;}
 
 
