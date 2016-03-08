@@ -136,7 +136,7 @@ input{padding:0;border:none;}
 
 /*Desktop*/
 @media screen and (min-width: 966px){
-
+	#head{padding-top:5px;}
 	#slogan{position:absolute;top:100px;text-align:left;font-style:italic;font-weight:bold;}
 	#nav_wrapper{font-size:16px;}
 	#badge{border-radius:2px;position: fixed;top: 0;left: 0;padding-left: 45px;padding-right: 20px;height: 70px;line-height: 70px;font-weight: bold;color: white;z-index: 50;text-align: center;background-color: #0E1C32;border: solid 2px #122440;font-family: 'Playball', cursive;font-size: 115%;font-weight: bold;}
