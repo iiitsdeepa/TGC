@@ -52,6 +52,34 @@ class Landing(BaseHandler):
 
 class Home(BaseHandler):
     def get(self):
+        self.render('landing.html')
+
+class Election(BaseHandler):
+    def get_primary_info(self):
+        pinfo = GqlQuery('SELECT * FROM State ORDER BY name').get().all()
+        ret = []
+        for p in pinfo:
+            t = dict(name = p.name,
+                abbreviation = p.abbreviation,
+                gedelegates = p.ge_delegates,
+                ptype = p.primary_type,
+                ddate = p.D_primary_date,
+                ddelegates = p.D_delegates,
+                dpledged = p.D_pledged,
+                dsuper = p.D_super,
+                rdate = p.R_primary_date,
+                rdelegates = p.R_delegates,
+                notes = p.primary_notes,
+                rlink = p.registration_link)
+            ret.append(t)
+        return ret
+
+    def get(self):
+        pinfo = self.get_primary_info()
+        self.render('election.html',pinfo=pinfo)
+
+class Mreps(BaseHandler):
+    def get(self):
         district = self.request.get('district')
         userstats = self.request.get('stats')
         statlist = ['Party Loyalty','Legislative Index','Bills Sponsored','Bills Cosponsored','% of Votes Missed','Number of Bills Enacted','Performance']
@@ -59,16 +87,16 @@ class Home(BaseHandler):
         if valid_district(district):
             if userstats:
                 params = self.pullReps(district, statlist, userstats)
-                self.render('home.html',PAGESTATE='found-district', **params)
+                self.render('mreps.html',PAGESTATE='found-district', **params)
             else:
                 params = self.pullReps(district, statlist, basicstats)
-                self.render('home.html',PAGESTATE='found-district', **params)
+                self.render('mreps.html',PAGESTATE='found-district', **params)
         elif userstats:
             params = self.getBig2(statlist, userstats)
-            self.render('home.html', **params)
+            self.render('mreps.html', **params)
         else:
             params = self.getBig2(statlist, basicstats)
-            self.render('home.html', **params)
+            self.render('mreps.html', **params)
 
     def post(self):
         statlist = ['Party Loyalty','Legislative Index','Sponsored Bills','% of Votes Missed','Performance']
@@ -96,74 +124,9 @@ class Home(BaseHandler):
             logging.error(params)
             self.render('home.html', **params)
 
-class Election(BaseHandler):
-    def get_primary_info(self):
-        pinfo = GqlQuery('SELECT * FROM State ORDER BY name').get().all()
-        ret = []
-        for p in pinfo:
-            t = dict(name = p.name,
-                abbreviation = p.abbreviation,
-                gedelegates = p.ge_delegates,
-                ptype = p.primary_type,
-                ddate = p.D_primary_date,
-                ddelegates = p.D_delegates,
-                dpledged = p.D_pledged,
-                dsuper = p.D_super,
-                rdate = p.R_primary_date,
-                rdelegates = p.R_delegates,
-                notes = p.primary_notes,
-                rlink = p.registration_link)
-            ret.append(t)
-        return ret
-
+class News(BaseHandler):
     def get(self):
-        pinfo = self.get_primary_info()
-        self.render('election.html',pinfo=pinfo)
-
-class Lb(BaseHandler):
-    def get(self):
-        self.render('lb.html')
-
-class About(BaseHandler):
-    def get(self):
-        self.render('about.html')
-    def post(self):
-        self.render('about.html')
-
-class Sources(BaseHandler):
-    def get(self):
-        self.render('sources.html')
-    def post(self):
-        self.render('sources.html')
-
-class NewsLetter(BaseHandler):
-    def get(self):
-        self.render('esf.html')
-
-    def post(self):
-        email = self.request.get('email')
-        error_message = 'none'
-        have_error = False
-        if not valid_email(email):
-            error_message = "invalid email"
-            have_error = True
-
-        if have_error:
-            self.write(error_message)
-        else:
-            e = NewsLetterUser.by_email(email)
-            if e:
-                error_message='already on list'
-                self.write(error_message)
-            else: #vetted email: add to db, send thankyou email, and success code to front end
-                potential_signee=NewsLetterUser(email=email)
-                potential_signee.put()
-                self.write('success')
-                #send thank you email
-                sender_address = "glasscapitol.com Mailing List <glasscapitol@gmail.com>"
-                subject = "Welcome to the NewsLetter!!"
-                body = 'congrats on becoming a boss'
-                mail.send_mail(sender_address, email, subject, body)
+        self.render('news.html')
 
 class Feedback(BaseHandler):
     def get(self):
@@ -222,6 +185,47 @@ class Feedback(BaseHandler):
             cookietext += ('$$$issues-'+str(i)+'='+str(issues[i]))
         self.set_secure_cookie('feedback_info', cookietext)
         self.render('new-feedback.html')
+
+class Sources(BaseHandler):
+    def get(self):
+        self.render('sources.html')
+    def post(self):
+        self.render('sources.html')
+
+class About(BaseHandler):
+    def get(self):
+        self.render('about.html')
+    def post(self):
+        self.render('about.html')
+
+class NewsLetter(BaseHandler):
+    def get(self):
+        self.render('esf.html')
+
+    def post(self):
+        email = self.request.get('email')
+        error_message = 'none'
+        have_error = False
+        if not valid_email(email):
+            error_message = "invalid email"
+            have_error = True
+
+        if have_error:
+            self.write(error_message)
+        else:
+            e = NewsLetterUser.by_email(email)
+            if e:
+                error_message='already on list'
+                self.write(error_message)
+            else: #vetted email: add to db, send thankyou email, and success code to front end
+                potential_signee=NewsLetterUser(email=email)
+                potential_signee.put()
+                self.write('success')
+                #send thank you email
+                sender_address = "glasscapitol.com Mailing List <glasscapitol@gmail.com>"
+                subject = "Welcome to the NewsLetter!!"
+                body = 'congrats on becoming a boss'
+                mail.send_mail(sender_address, email, subject, body)
 
 class Vprop(BaseHandler):
     def get(self):
@@ -543,10 +547,10 @@ class ESF(BaseHandler):
                 mail.send_mail(sender_address, email, subject, body)
 
 application = webapp2.WSGIApplication([
-    ('/', Landing),
-    ('/home', Home),
+    ('/', Home),
     ('/election', Election),
-    ('/lb', Lb),
+    ('/reps', Mreps),
+    ('/news', News),
     ('/signup', Signup),
     ('/passwordreset', PassReset),
     ('/emailreset', EmailReset),

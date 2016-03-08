@@ -14,7 +14,7 @@
 
 <div id='news' class='tab t1'>
 <div class='tab-content'>
-<h1 class='tab-title'>Current News</h1>
+	<h1 class='tab-title'>Current News</h1>
 	<div id='feeds-container'>
 		<div id='left-feed-wrapper' class='feed-wrapper whiteback'>
 			<h3 id='left-feed-title' class='feed-title'>Leaning Left</h3>
@@ -621,23 +621,22 @@
 		google.charts.load('current', {'packages':['corechart']});
     	startState('home_')
 	});
-
 </script>
 
 <style>
-#feeds-container{display:flex;justify-content:space-between;}
-.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
-.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
-#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
-#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
-#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
-.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
-.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
-.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
-.fl-title:visited{color:#660066;}
-.fl-description{color:#595959;}
-.fl-date{color:#8c8c8c;}
-#fl-template{display:none;}
+	#feeds-container{display:flex;justify-content:space-between;}
+	.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
+	.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
+	#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
+	#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
+	#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
+	.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
+	.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
+	.cstanding-graph-wrapper{height:300px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+	.cstanding-graph-wrapper2{height:400px;margin:0 20px;border-bottom:solid 1px #d9d9d9;}
+	.fl-title:visited{color:#660066;}
+	.fl-description{color:#595959;}
+	.fl-date{color:#8c8c8c;}
+	#fl-template{display:none;}
 </style>
 {% endblock %}

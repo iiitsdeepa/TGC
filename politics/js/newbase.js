@@ -1,5 +1,29 @@
 "use strict"
 
+function fontAdjust(id){
+  if (id[0] == '.'){
+    console.log('MULTIPLE THINGS')
+    $(id).each(function(index){
+      var dw = $(this).width()
+      var tw = $(this).find('span').width()
+      console.log(tw,dw)
+      var csize
+      var diff
+      var step
+      var nsize
+      while (tw >= dw){
+        diff = dw - tw
+        csize = parseInt($(this).find('span').css('font-size'))
+        step = .02 * diff
+        nsize = csize + step
+        $(this).find('span').css('font-size',nsize+'px')
+        var tw = $(this).find('span').width()
+        console.log(csize,nsize,diff,tw,dw)
+      }
+    })
+  }
+}
+
 function getVisualizationData(vis){
   $.post('/vishandle', {'visualization':vis}, function(data){
     var objJSON = eval("(function(){return " + data + ";})()");

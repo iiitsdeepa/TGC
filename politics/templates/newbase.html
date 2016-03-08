@@ -29,23 +29,31 @@
         <nav id='nav'>
           <ul>
             <li id='home_option' class='nav_option' value='contracted'>
-              <a href='/home'>Home</a>
+              <a href='/'>Home</a>
             </li>
-            <li id='mrep_option' class='nav_option' value='contracted'>
+            <li id='election_option' class='nav_option' value='contracted'>
               <a href='/election'>2016 Election</a>
               <div id='mrepexp' class='mexp' onclick="javascript:submarine('mrep_option', 'mrepexp');return false;"></div>
             </li>
-            <li id='ccomp_option' class='nav_option' value='contracted'>
+            <li id='reps_option' class='nav_option' value='contracted'>
+              <a href='/reps'>My Representatives</a>
+              <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+            </li>
+            <li id='news_option' class='nav_option' value='contracted'>
+              <a href='/news'>News</a>
+              <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+            </li>
+            <li id='feedback_option' class='nav_option' value='contracted'>
               <a href='/feedback'>Feedback</a>
               <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
             </li>
-            <li id='pcomp_option' class='nav_option' value='contracted'>
-              <a href='/about'>About Us</a>
-              <div id='pcompexp' class='mexp' onclick="javascript:submarine('pcomp_option', 'pcompexp');return false;"></div>
-            </li>
-            <li id='ccomp_option' class='nav_option' value='contracted'>
+            <li id='sources_option' class='nav_option' value='contracted'>
               <a href='/sources'>Sources</a>
               <div id='ccompexp' class='mexp' onclick="javascript:submarine('ccomp_option', 'ccompexp');return false;"></div>
+            </li>
+            <li id='about_option' class='nav_option' value='contracted'>
+              <a href='/about'>About Us</a>
+              <div id='pcompexp' class='mexp' onclick="javascript:submarine('pcomp_option', 'pcompexp');return false;"></div>
             </li>
           </ul>
         </nav>
@@ -57,10 +65,8 @@
         {% block pagenav %}{% endblock %}
       </div>
       <div id='content'>
-
-      {% block content %}
-      {% endblock %}
-        
+        {% block content %}
+        {% endblock %}
       </div>
       
       <div id='footer'>
