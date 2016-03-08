@@ -6,6 +6,7 @@ import databaseclasses
 from csvprocessing import *
 from basehandler import *
 from visualization_server import *
+from caching import *
 
 #from oauth2client.client import flow_from_clientsecrets
 #from oauth2client.client import FlowExchangeError
@@ -285,14 +286,16 @@ class PollServer(BaseHandler):
 
 class UpdateAll(BaseHandler):
     def get(self):
-        logging.error('National Polls')
-        getNationalPolls()
-        logging.error('')
-        getStatePolls()
-        logging.error('Votes')
-        getVotesUpdate()
-        logging.error('Bills')
-        getBillsUpdate()
+        #logging.error('National Polls')
+        #getNationalPolls()
+        #logging.error('')
+        #getStatePolls()
+        #logging.error('Votes')
+        #getVotesUpdate()
+        #logging.error('Bills')
+        #getBillsUpdate()
+        logging.error('Setting Cache')
+        updateCache()
         self.response.set_status(200)
 
     def post(self):
