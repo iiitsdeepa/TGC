@@ -1,26 +1,21 @@
 "use strict"
 
-function fontAdjust(id){
-  if (id[0] == '.'){
-    console.log('MULTIPLE THINGS')
-    $(id).each(function(index){
-      var dw = $(this).width()
-      var tw = $(this).find('span').width()
-      console.log(tw,dw)
-      var csize
-      var diff
-      var step
-      var nsize
-      while (tw >= dw){
-        diff = dw - tw
-        csize = parseInt($(this).find('span').css('font-size'))
-        step = .02 * diff
-        nsize = csize + step
-        $(this).find('span').css('font-size',nsize+'px')
-        var tw = $(this).find('span').width()
-        console.log(csize,nsize,diff,tw,dw)
-      }
-    })
+function fontAdjust(id, wrapper){
+  console.log(id)
+  var tw
+  var dw = $(wrapper).width()
+  tw = $(id).find('.text-sizer').width()
+  console.log(tw,dw,  $(id).find('.text-sizer').html())
+  var csize
+  var diff
+  while (tw < (dw - 100)){
+    csize = parseInt($(id).find('.text-sizer').css('font-size'))
+    var nsize = csize + 1
+    $(id).find('.text-sizer').css('font-size',nsize+'px')
+    $(id).css('font-size',nsize+'px')
+    $(id).css('line-height',nsize+'px')
+    tw = $(id).find('.text-sizer').width()
+    console.log(csize,nsize,tw,dw)
   }
 }
 
@@ -49,6 +44,7 @@ function rightEntry(id){
 
 function fadeIn(id,display){
   $('#'+id).css('display',display)
+  $('#'+id).css('visibility','shown')
   $('#'+id).css('opacity','0')
   $('#'+id).animate({
         opacity: "1"

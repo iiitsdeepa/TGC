@@ -20,25 +20,49 @@
 	    	<div id='construction-banner'>Under Construction</div>
 	    	<img id='biglogo' src='/images/gclogo_noback.png'>
 	    	<div id='content'>
-	    		<div id='ps1' style='display:block' class='prop-section'>
-		    		<h1>The Glass Capitol</span></h1>
-		    		<h2>Government transparency for the communication era</h2>
-	    		</div>
+	    		<div id='ps1' style='display:block;position:relative' class='prop-section'>
+		    		<div class='headtext'>
+		    			The Glass Capitol
+		    			<div class='text-sizer'>The Glass Capitol</div>
+		    		</div>
+		    		<div class='subtext'>
+		    			Government transparency for the communication era
+		    			<div class='text-sizer'>Government transparency for the communication era</div>
+		    		</div>
+		    	</div>
 	    		<div id='ps2' class='prop-section'>
-		    		<h1>Politics Needs To Be Simpler</h1>
-		    		<h2>You shouldn’t have to wade through bias and clamour to be an informed voter</h2>
+		    		<div class='headtext'>
+		    			Politics Needs To Be Simpler
+		    			<div class='text-sizer'>Politics Needs To Be Simpler</div>
+		    		</div>
+		    		<div class='subtext'>
+		    			You shouldn’t have to wade through bias and clamour to be an informed voter
+		    			<div class='text-sizer'>You shouldn’t have to wade through bias and clamour to be an informed voter</div>
+		    		</div>
 	    		</div>
 	    		<div id='ps3' class='prop-section'>
-		    		<h1>We Make It Easy For You To Be Informed</h1>
-		    		<h2>Nothing is more powerful or important than an informed citizenry</h2>
+		    		<div class='headtext'>
+		    			We Make It Easy For You To Be Informed
+		    			<div class='text-sizer'>We Make It Easy For You To Be Informed</div>
+		    		</div>
+		    		<div class='subtext'>
+		    			Nothing is more powerful or important than an informed citizenry
+		    			<div class='text-sizer'>Nothing is more powerful or important than an informed citizenry</div>
+		    		</div>
 	    		</div>
 	    		<div id='ps4' class='prop-section'>
-		    		<h1>Together We Can Forge A More Responsive Government</h1>
-		    		<h2>Connect to and support compatriots working to affect real change in our government</h2>
+		    		<div class='headtext'>
+		    			Together We Can Forge A More Responsive Government
+		    			<div class='text-sizer'>Together We Can Forge A More Responsive Government</div>
+		    		</div>
+		    		<div class='subtext'>
+		    			Connect to and support compatriots working to affect real change in our government
+		    			<div class='text-sizer'>Connect to and support compatriots working to affect real change in our government</div>
+		    		</div>
 	    		</div>
 	    	</div>
 	    	<div id='prop-nav'>
-				<div id='pn1' class='prop-nav-bubble' style='background:#CC0000' onclick="javascript:propScroller('pn1','ps1','prop-section');return false;"></div>
+				<div id='pn1' class='prop-nav-bubble' onclick="javascript:propScroller('pn1','ps1','prop-section');return false;"></div>
 				<div id='pn2' class='prop-nav-bubble' onclick="javascript:propScroller('pn2','ps2','prop-section');return false;"></div>
 				<div id='pn3' class='prop-nav-bubble' onclick="javascript:propScroller('pn3','ps3','prop-section');return false;"></div>
 				<div id='pn4' class='prop-nav-bubble' onclick="javascript:propScroller('pn4','ps4','prop-section');return false;"></div>	    	
@@ -58,33 +82,21 @@
 
     </body>
 
-<script>
- //fontAdjust('.prop-section h1')
- function propScroller(red, id, classname){
- 	$('.'+classname).each(function(index){
-    	$(this).css('display','none')
-	})
-	$('#'+id).css('display','block')
-	fadeIn(id, 'block')
-	$('.prop-nav-bubble').each(function(index){$(this).css('background','none')})
- 	$('#'+red).css('background','#CC0000')
-  }
-</script>
 
 <style>
 	#button-panel{display:flex;justify-content:space-between;position:fixed;left:40vw;bottom:100px;width:55vw;}
 	.landing-button{border-radius:5px;display:block;background:#CC0000;height:50px;line-height:50px;text-align:center;width:33%;color:white !important;font-weight:bold;}
-    .prop-section{padding-top:20vh;display:none;}
-    .prop-section h1{margin:0 0 20px 0;font-size:50px}
-    .prop-section h2{margin:0 0 0 2vw;color:red;}
+    .prop-section{padding:20vh 0 15px 0;position:absolute;}
+    .headtext{position:relative;font-weight:bold;margin:0 0 20px 0;font-size:50px;line-height:60px;}
+    .subtext{position:relative;margin:0 0 25px 2vw;color:red;}
     #prop-nav{position:fixed;top:50%;right:1.2vw;transform:translate(0,-50%);}
-    .prop-nav-bubble{height:20px;width:20px;border-radius:50%;border:solid 2px white;margin:10px 0;}
+    .prop-nav-bubble{height:20px;width:20px;border-radius:50%;border:solid 2px white;margin:10px 0;cursor:pointer;}
 
     body{color:white;}
     #construction-banner{height:40px;line-height:40px;background:yellow;color:#0E1C32;text-align:center;position:fixed;width:100%;border-top:dashed 5px black;border-bottom:dashed 5px black;font-size:16px;font-weight:bold;}
     #pagebody{border-radius:0;min-height:calc(100vh - 70px);background:#0E1C32;padding:10px 0;}
     #biglogo{position:fixed;left:5vw;bottom:50px;height:80vh;}
-    #content{position:relative;width:62vw;min-height:30vh;margin:100px 0 0 33vw;padding:0;border:none;min-height:;background:#0E1C32;}
+    #content{position:relative;width:62vw;min-height:60vh;margin:100px 0 0 33vw;padding:0;border:none;min-height:;background:#0E1C32;}
     #footer{padding:0;border-radius:0;position:relative;color:white;height:50px;line-height:50px;text-align:center;padding-right:20px;background-color:#0B1628;border-top:solid 2px #091220;}
 	#landing{text-align:center;}
 	#landing h1{margin-bottom:50px;}
@@ -109,3 +121,18 @@
         #ettt{font-size:26px;}
     }
 </style>
+
+<script>
+ function propScroller(red, id, classname){
+ 	$('.'+classname).each(function(index){
+    	$(this).css('display','none')
+	})
+	console.log('SCROLLING PROP')
+	fadeIn(id, 'block')
+	fontAdjust('#'+id+' .headtext','#content')
+	fontAdjust('#'+id+' .subtext','#content')
+	$('.prop-nav-bubble').each(function(index){$(this).css('background','none')})
+ 	$('#'+red).css('background','#CC0000')
+  }
+  propScroller('pn1','ps1','prop-section')
+</script>
