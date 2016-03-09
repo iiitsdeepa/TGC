@@ -100,10 +100,10 @@
 	    		</div>
 	    	</div>
 	    	<div id='prop-nav'>
-				<div id='pn0' class='prop-nav-bubble' onclick="javascript:propScroller('pn0','ps0','prop-section');return false;"></div>
-				<div id='pn1' class='prop-nav-bubble' onclick="javascript:propScroller('pn1','ps1','prop-section');return false;"></div>
-				<div id='pn2' class='prop-nav-bubble' onclick="javascript:propScroller('pn2','ps2','prop-section');return false;"></div>
-				<div id='pn3' class='prop-nav-bubble' onclick="javascript:propScroller('pn3','ps3','prop-section');return false;"></div>	    	
+				<div id='pn0' class='prop-nav-bubble' onclick="javascript:propScroller('pn0','ps0','prop-section','1');return false;"></div>
+				<div id='pn1' class='prop-nav-bubble' onclick="javascript:propScroller('pn1','ps1','prop-section','1');return false;"></div>
+				<div id='pn2' class='prop-nav-bubble' onclick="javascript:propScroller('pn2','ps2','prop-section','1');return false;"></div>
+				<div id='pn3' class='prop-nav-bubble' onclick="javascript:propScroller('pn3','ps3','prop-section','1');return false;"></div>	    	
 	    	</div>
 	    	<div id='button-panel'>
 				<a href='/election' class='landing-button'>Stay current with the election</a>	
@@ -124,7 +124,8 @@
 
 
 <script>
- function propScroller(red, id, classname){
+  var PROPINTERVAL
+ function propScroller(red, id, classname,interval){
  	$('.'+classname).each(function(index){
     	$(this).css('display','none')
 	})
@@ -134,12 +135,13 @@
 	$('.prop-nav-bubble').each(function(index){$(this).css('background','none')})
  	$('#'+red).css('background','#CC0000')
  	$('#content').attr('value',id[2])
+ 	if(interval == '1'){clearInterval(PROPINTERVAL);console.log('CLEARED INTERVAL')}
   }
   $( document ).ready(function() {
-  	propScroller('pn0','ps0','prop-section')
- 	setInterval(function() {
+  	propScroller('pn0','ps0','prop-section','0')
+ 	PROPINTERVAL=setInterval(function() {
  		var num = (parseInt($('#content').attr('value')) + 1) % 4
- 		propScroller('pn'+num,'ps'+num,'prop-section')
+ 		propScroller('pn'+num,'ps'+num,'prop-section','0')
  		$('#content').attr('value',num)
 	}, 4000);
   });
