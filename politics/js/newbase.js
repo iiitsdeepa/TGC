@@ -5,7 +5,6 @@ function fontAdjust(id, wrapper){
   var tw
   var dw = $(wrapper).width()
   tw = $(id).find('.text-sizer').width()
-  console.log(tw,dw,  $(id).find('.text-sizer').html())
   var csize
   var diff
   while (tw < (dw - 100)){
@@ -15,7 +14,6 @@ function fontAdjust(id, wrapper){
     $(id).css('font-size',nsize+'px')
     $(id).css('line-height',nsize+'px')
     tw = $(id).find('.text-sizer').width()
-    console.log(csize,nsize,tw,dw)
   }
 }
 
