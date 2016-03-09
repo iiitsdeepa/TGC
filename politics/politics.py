@@ -111,7 +111,7 @@ class Mreps(BaseHandler):
             logging.error(issuelist)
             params = self.getBig2(statlist)
             params['issuelist'] = issuelist
-            self.render('home.html', issuelist=issuelist, **params)
+            self.render('mreps.html', issuelist=issuelist, **params)
         elif lat and lng:
             district = self.latlngToDistrict(lat, lng)
             logging.error(district)
@@ -123,7 +123,7 @@ class Mreps(BaseHandler):
         else:
             params = self.getBig2(statlist)
             logging.error(params)
-            self.render('home.html', **params)
+            self.render('mreps.html', **params)
 
 class News(BaseHandler):
     def get(self):

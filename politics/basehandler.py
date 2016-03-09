@@ -466,7 +466,7 @@ class BaseHandler(webapp2.RequestHandler):
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%snumber_enacted'%(temprep[i])]
                     big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     big2['stat6checked'] = 'checked="yes"'
-                    big2['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
+                    big2['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored and cosponsored that became law.'
                 elif tempstat[j] == '7':
                     big2['%sstat%s'%(temprep[i],str(j+1))] = big2['%seffectiveness'%(temprep[i])]+'%'
                     big2['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(big2['%senactedsub'%(temprep[i])])
@@ -517,7 +517,7 @@ class BaseHandler(webapp2.RequestHandler):
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%snumber_enacted'%(temprep[i])]
                     reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode('-1.0')
                     reps['stat6checked'] = 'checked="yes"'
-                    reps['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored/cosponsored that became law.'
+                    reps['hover%s'%(str(j+1))] = 'Number of bills that they politician sponsored and cosponsored that became law.'
                 elif tempstat[j] == '7':
                     reps['%sstat%s'%(temprep[i],str(j+1))] = reps['%seffectiveness'%(temprep[i])]+'%'
                     reps['%s%sback'%(temprep[i],str(j+1))] = strtohexcode(reps['%senactedsub'%(temprep[i])])

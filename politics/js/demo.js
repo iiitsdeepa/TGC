@@ -11,38 +11,6 @@ function abText(id){
 	text = $("#"+id).html()
 	$('#abilitytext').html(text)
 }
-function rhover(id){
-	s1 = 'This is the text for stat 1'
-	s2 = 'This is the text for stat 2'
-	s3 = 'This is the text for stat 3'
-	s4 = 'This is the text for stat 4'
-	s5 = 'This is the text for stat 5'
-	s6 = 'This is the text for stat 5'
-	s7 = 'This is the text for stat 5'
-	s8 = ''
-	s9 = ''
-	/*
-	switch (id){
-		case 'head1':
-			$('#statdescription').html(s1)
-			break
-		case 'head2':
-			$('#statdescription').html(s2)
-			break
-		case 'head3':
-			$('#statdescription').html(s3)
-			break
-		case 'head4':
-			$('#statdescription').html(s4)
-			break
-		case 'head5':
-			$('#statdescription').html(s5)
-			break
-		default:
-			$('#statdescription').html(s8)
-			break
-	}*/
-}
 
 function showThird(){
 	$('#demo_content').css('width', '1200px')
@@ -125,14 +93,14 @@ function submitStats(){
 	$('#change_selector_wrapper').css('display','none')
 	if(distparams.district == undefined){
 		if (checkedValue == '') {
-			window.location.replace("/homes=reps&");
+			window.location.replace("/reps?s=reps&");
 		} else {
-			window.location.replace("/home?s=reps&stats="+checkedValue);
+			window.location.replace("/reps?s=reps&stats="+checkedValue);
 		}
 	} else if (checkedValue == '') {
-		window.location.replace("/home?s=reps&district="+distparams.district);
+		window.location.replace("/reps?s=reps&district="+distparams.district);
 	} else {
-		window.location.replace("/home?s=reps&district="+distparams.district+"&stats="+checkedValue);
+		window.location.replace("/reps?s=reps&district="+distparams.district+"&stats="+checkedValue);
 	}
 }
 
@@ -145,12 +113,12 @@ function gotGPS(position) {
 	lng = position.coords.longitude;
 	var distparams = getQueryParams(document.location.search);
 	if (distparams.stats == undefined){
-		$.post('/home', {lat: lat, lng: lng}, function(data){
-			window.location.replace("/home?s=reps&district="+data);
+		$.post('/reps', {lat: lat, lng: lng}, function(data){
+			window.location.replace("/reps?s=reps&district="+data);
 		});
 	} else {
-		$.post('/home', {lat: lat, lng: lng}, function(data){
-			window.location.replace("/home?s=reps&district="+data+"&stats="+distparams.stats);
+		$.post('/reps', {lat: lat, lng: lng}, function(data){
+			window.location.replace("/reps?s=reps&district="+data+"&stats="+distparams.stats);
 		});
 	}
 }
@@ -187,12 +155,12 @@ function useAddress(){
 	address = street+' '+city+' '+state
 	var distparams = getQueryParams(document.location.search);
 	if (distparams.stats == undefined){
-		$.post('/home', {address: address}, function(data){
-			window.location.replace("/home?s=reps&district="+data);
+		$.post('/reps', {address: address}, function(data){
+			window.location.replace("/reps?s=reps&district="+data);
 		});
 	} else {
-		$.post('/home', {address: address}, function(data){
-			window.location.replace("/home?s=reps&district="+data+"&stats="+distparams.stats);
+		$.post('/reps', {address: address}, function(data){
+			window.location.replace("/reps?s=reps&district="+data+"&stats="+distparams.stats);
 		});
 	}
 }
