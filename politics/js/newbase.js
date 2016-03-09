@@ -1,7 +1,6 @@
 "use strict"
 
 function fontAdjust(id, wrapper){
-  console.log(id)
   var tw
   var dw = $(wrapper).width()
   tw = $(id).find('.text-sizer').width()
