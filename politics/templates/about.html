@@ -1,19 +1,23 @@
 {% extends "newbase.html" %}
 
 {% block pagenav %}
-
-	<!--<div id='pagenav'>
-		<div class='pagenav-option' onclick="javascript:scrollTo('mission-wrapper');return false;">Mission</div>
-		<div class='pagenav-option' onclick="javascript:scrollTo('core-wrapper');return false;">Core Beliefs</div>
-		<div class='pagenav-option' onclick="javascript:scrollTo('works-wrapper');return false;">How TGC Works</div>
+<input type='hidden' id="page-statename" value="{{hrstatename}}">
+	<div id='pagenav'>
+		<div class='pagenav-option' onclick="javascript:tabSwitcher('about','about_about');return false;">About TGC</div>
+		<div class='pagenav-option' onclick="javascript:tabSwitcher('team','about_team');return false;">Our Teammembers</div>
+		<!--<div class='pagenav-option' onclick="javascript:scrollTo('works-wrapper');return false;">How TGC Works</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('tgc-gov-wrapper');return false;">TGC and Government</div>
 		<div class='pagenav-option' onclick="javascript:scrollTo('team-wrapper');return false;">The Team</div>
-		<div class='pagenav-option' onclick="javascript:scrollTo('code-wrapper');return false;">Our Code</div>
-	</div>-->
+		<div class='pagenav-option' onclick="javascript:scrollTo('code-wrapper');return false;">Our Code</div>-->
+	</div>
 {% endblock %}
 
 {% block content %}
-<div id='about'>
+
+<div id='display-tab'>
+	This is the display tab
+</div>
+<div id='about' class='tab abouttab t1'>
 <!--	<div id='top_banner'>
 		<p>A message from the TGC team:<br>
 		We are currently a 8 person startup trying to fundamentally change the way Americans interact with our government. There is a lot we are still in the process of preparing and some of the things we intend to bring to the site might be missing at the moment, so please keep that in mind as you go through our beta test phase. If you like what we are doing, become a part of the TGC family by: 
@@ -115,6 +119,123 @@
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 </div>
 
+<div id='team' class='tab t2'>
+	<h1 style='text-align:center;'>Meet Our Teammembers!</h1>
+	<div id='table-wrapper'>
+		<table id='headshot-table'>
+			<tr>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("alex");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("travis");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("steven");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("jordan");return false;'></td>
+			</tr>
+			<tr>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("kshma");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("aaron");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("deepa");return false;'></td>
+				<td><img src='/images/placeholderheadshot.png' class='tableheadshot' onclick='javascript:scrollTo("daniel");return false;'></td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colorone z-index-1'>
+		<table id='alex' class='person'>
+			<tr>
+				<td class='pictureleft'><img src='/images/placeholderheadshot.png' class='graphicleft'></td>
+				<td class='textright'>
+					<h2>Alex Haynes</h2>
+					<h4>Founder, Chief Developer, Data Acquisition</h4>
+					<p>In 2008 when I turned 18 and gained the right to vote I sought out as much information as possible to ensure my vote went to the right person. I knew then that politics needs to be easier. As founder I am responsible for the overall vision and goals of the company. In addition to that I have been the chief developer since I started developing this website on my own in 2015. I believe in hands on leadership and I have a significant role in every aspect of TGC.</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colortwo z-index-1'>
+		<table id='travis' class='person'>
+			<tr>
+				<td class='textleft'>
+					<h2>Travis Cook</h2>
+					<h4>Designer, Analyst, Manager</h4>
+					<p>Ever since I could think for myself I’ve known that American Politics is overly complicated, too hard to understand, and far too time consuming for the average citizen to have their voice heard in our noisy political system.  I truly believe The Glass Capitol will be the first great step towards realizing a less monotonous, more efficient political system where effective communication and action takes place between citizens and their representatives.  I work directly with the president collaborating on product ideas and concepts, and serve as an information conduit to aid in guiding company activity on various time-scales.  Additionally, I utilize Industrial Engineering techniques to optimize the site layout and navigation, making it possible for new and recurring users to intuitively get where they want as fast as possible.</p>
+				</td>
+				<td class='pictureright'><img src='/images/placeholderheadshot.png' class='graphicright'></td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colorone z-index-1'>
+		<table id='steven' class='person'>
+			<tr>
+				<td class='pictureleft'><img src='/images/placeholderheadshot.png' class='graphicleft'></td>
+				<td class='textright'>
+					<h2>Steven Schweinhart</h2>
+					<h4>Lead Developer, Lead Systems Architect</h4>
+					<p>I am the primary developer finding and compiling data we have on our website. I focus on using APIs to keep TGC updated with the latest data. Ensuring that our data is correct and available is my priority. In addition I help create the front end designing and implementing the interactives our users see.</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colortwo z-index-1'>
+		<table id='jordan' class='person'>
+			<tr>
+				<td class='textleft'>
+					<h2>Jordan Smith</h2>
+					<h4>Marketing, Business Liaison</h4>
+					<p>From the moment Alex pitched the idea of the glass capitol to me, I was confident that we could make it into something real and important. The success of The Glass Capitol is very important to me personally as such, my goal is to help spread the word about The Glass Capitol and make sure we function properly as a business unit. It is pivotal that we are dynamic and responsive to the ever changing world around us and I hope to set forth business practices that ensure that we are.</p>
+				</td>
+				<td class='pictureright'><img src='/images/placeholderheadshot.png' class='graphicright'></td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colorone z-index-1'>
+		<table id='kshma' class='person'>
+			<tr>
+				<td class='pictureleft'><img src='/images/placeholderheadshot.png' class='graphicleft'></td>
+				<td class='textright'>
+					<h2>Kshma Kulkarni</h2>
+					<h4>Chief Operations Officer, Editor in Chief, Public Relations</h4>
+					<p>I manage the team to make sure everything is running smoothly in order to build TGC toward our long term goals of changing how we as Americans approach our government. Additionally, I design page layouts/alternatives, (write some and) edit all text on the page to be accurate and user-friendly, direct the survey system, and oversee affiliations and public services. </p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colortwo z-index-1'>
+		<table id='aaron' class='person'>
+			<tr>
+				<td class='textleft'>
+					<h2>Aaron Wiggen</h2>
+					<h4>Visual Design, Chief Space Wizard</h4>
+					<p>-I believe The Glass Capitol has the potential  to offer legitimate change to our current political system by creating a more informed voter. By providing users with easily accessible information, we hope to allow people to make their votes count more towards what matters to them. It’s my responsibility to make sure that this is presented in a simple, yet attractive way - something that will keep people coming back to the site time after time.</p>
+				</td>
+				<td class='pictureright'><img src='/images/placeholderheadshot.png' class='graphicright'></td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colorone z-index-1'>
+		<table id='deepa' class='person'>
+			<tr>
+				<td class='pictureleft'><img src='/images/placeholderheadshot.png' class='graphicleft'></td>
+				<td class='textright'>
+					<h2>Deepa Singh</h2>
+					<h4>Marketing, Developer, Social Media</h4>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class='person-wrapper colortwo z-index-1'>
+		<table id='daniel' class='person'>
+			<tr>
+				<td class='textleft'>
+					<h2>Daniel Altman</h2>
+					<h4>Legal Consultant, Newsletter Manager, Editor</h4>
+					<p></p>
+				</td>
+				<td class='pictureright'><img src='/images/placeholderheadshot.png' class='graphicright'></td>
+			</tr>
+		</table>
+	</div>
+	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
+</div>
+
 <style>
 	#top-wrapper{padding-top:80px;}
 	#about-nav-wrapper{position:fixed;top:200px;right:0;width:15vw;}
@@ -142,6 +263,23 @@
 	#thingforscrollbackground{background-color:#CBB265;}
 	#scrollgraphic{position:absolute;width:inherit;height:100%;}
 	#scrollsrc{position:relative;margin: 0 auto;text-align:center;padding-bottom:20px;background-color:#CBB265;}
+	.person{margin: 0 auto;height:700px;}
+	.person-wrapper{display:flex;position:relative;width:80vw;margin: 0 auto;margin-top:30px;margin-bottom:30px;}
+	.colorone{background-color:#ffaaaa;border:solid 5px #ff4848;}
+	.colortwo{background-color:#aaaaff;border:solid 5px #4848ff;}
+	.pictureleft{position:relative;width:21vw;padding:10px 0px 10px 7vw;}
+	.pictureright{position:relative;width:15vw;padding:10px 8vw 10px 0px;}
+	.textright{position:relative;width:45vw;padding:10px 5vw 10px 0px;}
+	.textleft{position:relative;width:70vw;padding:10px 10vw 10px 5vw;}
+	.textleft h2{text-align:right;}
+	.textleft h4{text-align:right;margin:7px 0px;}
+	.textright h2{text-align:left;}
+	.textright h4{text-align:left;margin:7px 0px;}
+	td p{text-align:justify;}
+	.tableheadshot{width:70%;height:70%;}
+	#headshot-table{margin: 0 auto}
+	#headshot-table td{padding:10px;}
+	#table-wrapper{width:100%;}
 </style>
 <script>
 var topheight = $('#top_section_wrap').height() + 8;
@@ -150,6 +288,16 @@ console.log(String(topheight))
 document.getElementById('topgraphic').style.height=String(topheight+3)+"px";
 document.getElementById('arrowgraphic').style.top=String(topheight)+"px";
 document.getElementById('scrollgraphic').style.width=String(scrollwidth)+"px";
+FUNCTIONS = [];
+FUNCTIONS['about_about'] = function () { 
+	scroller('about','tab')
+};
+FUNCTIONS['about_team'] = function () { 
+	scroller('team','tab')
+};
+$( document ).ready(function() {
+	startState('about_')
+});
 </script>
 {% endblock %}
 

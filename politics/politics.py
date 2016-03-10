@@ -195,7 +195,7 @@ class Sources(BaseHandler):
 
 class About(BaseHandler):
     def get(self):
-        self.render('teammembers.html')
+        self.render('about.html')
     def post(self):
         self.render('about.html')
 
