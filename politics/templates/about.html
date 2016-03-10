@@ -91,7 +91,7 @@
 	</div>
 	</div>-->
 
-	<div class='section_wrapper' style='margin-top:40px;'>
+	<div id='thingforscrollbackground' class='section_wrapper' style='margin-top:40px;'>
 	<div id='code-wrapper' class='sectioncenter'>
 		<img src='/images/scrollbackground.png' id='scrollgraphic'>
 		<div id='code-text'>
@@ -111,7 +111,7 @@
 		</div>
 	</div>
 	</div>
-	<div id='scrollsrc'><a href="http://cliparts.co">Image Source</a></div>
+	<div id='scrollsrc'><a href="http://cliparts.co" style='color:#0E1C32;font-weight: bold;'>Image Source</a></div>
 	<div id='back-to-top' onclick="javascript:scrollTo('top');return false;">Back To Top</div>
 </div>
 
@@ -139,8 +139,9 @@
 	.sectioncenter{position:relative;padding:10px 5vw 10px;min-width:400px;max-width:800px;margin: 0 auto;}
 	#code-text{position:relative;padding:100px 130px 90px 110px;margin: 0 auto;}
 	#code-text h1{position:relative;text-align:center;}
+	#thingforscrollbackground{background-color:#CBB265;}
 	#scrollgraphic{position:absolute;width:inherit;height:100%;}
-	#scrollsrc{position:relative;margin: 0 auto;text-align:center;margin-bottom:20px;}
+	#scrollsrc{position:relative;margin: 0 auto;text-align:center;padding-bottom:20px;background-color:#CBB265;}
 </style>
 <script>
 var topheight = $('#top_section_wrap').height() + 8;
