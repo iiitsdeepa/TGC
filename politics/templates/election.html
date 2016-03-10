@@ -13,10 +13,6 @@
 <link rel='stylesheet' href='css/demo.css'/>
 <script type="text/javascript" src="/js/demo.js"></script>
 
-<div id='display-tab'>
-	This is the display tab
-</div>
-
 <!--<div id='basicinfo' class='tab t1'>
 <div class='tab-content'>
 	<div class='incomplete-tab'>
@@ -42,73 +38,88 @@
 
 <div id='standings' class='tab t1'>
 <div class='tab-content'>
-	<h1 class='tab-title'>The 2016 Election</h1>
-	<div class='cstandings-wrapper'>
-		<h1 class='cstandings-title'>Current Standings</h1>
-		<div class='dstandings cstanding'>
-			<h2 class='cstanding-title'>Democratic Primary</h2>
-			<div class='cstanding-basicinfo'>
-				<!--<h3>Delegates won</h3>-->
-				2,383 needed for nomination out of 4,762 total<br>
-				3,136 delegates remaining
+	<div class='party-columns'>
+		<div class='party-colums-head'>
+			<h1 class='pc-title'>Primary Results</h1>
+			<div class='pc-dem-title pc-section-title' onclick="javascript:drSwitcher('.dpc');return false;">DEMOCRATS</div>
+			<div class='pc-repub-title pc-section-title' onclick="javascript:drSwitcher('.rpc');return false;">REPUBLICANS</div>
+		</div>
+
+		<div class='pc-content-wrapper'>
+			<div class='dpc party-column'>
+				<div class='whiteback'>
+					<div class='cstanding-basicinfo'>
+						<!--<h3>Delegates won</h3>-->
+						2,383 needed for nomination out of 4,762 total<br>
+						3,136 delegates remaining
+					</div>
+					<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
+					<div class='cstanding-processinfo'>
+						<h3>Graph Key</h3>
+						<div class='key_wrapper'>
+							<div class='coloredkey' style='background:#1a53ff;'></div>
+							<b>85% - Pledged Delegates: </b>&nbsp;Delegates that vote according to their primary results
+						</div>
+						<div class='key_wrapper'>
+							<div class='coloredkey' style='background:#809fff;'></div>
+							<b>15% - Superdelegates: </b>&nbsp;Delegates that can cast their vote for any candidate 
+						</div>
+					</div>
+				</div>
+				<div id='form_wrapper'>
+					<form id='graph-form' method='post'>
+						<div id='form-one'>
+							<div id='length_title'>Select Time Length (Shorter -> Longer): </div>
+							<div id='smoothness_wrapper'><input id='timelength' type="range" min="0" max="100" value="0" step="25" /></div>
+						</div>
+						<div id='form-two'>
+							<div id='smooth_title'>Select Line Smoothness (Less -> More Smooth): </div>
+							<div id='timelength_wrapper'><input id='smoothness' type="range" min="0" max="100" value="25" step="25" /></div>
+						</div>
+						<div id='graph_submit_wrapper'><input id='graph_submit' type="button" onclick="javascript:submitGraph();return false;" value='Submit'></div>
+					</form>
+				</div>
+				<div class='dpoll whiteback'>
+					<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
+				</div>
 			</div>
-			<div id='dstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
-			<div class='cstanding-processinfo'>
-				<h3>Graph Key</h3>
-				<div class='key_wrapper'>
-					<div class='coloredkey' style='background:#1a53ff;'></div>
-					<b>85% - Pledged Delegates: </b>&nbsp;Delegates that vote according to their primary results
+			<div class='rpc party-column'>
+				<div class='whiteback'>
+					<div class='cstanding-basicinfo'>
+						<!--<h3>Delegates won</h3>-->
+						1,237 needed for nomination out of 2,472 total<br>
+						1,585 delegates remaining
+					</div>
+					<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
+					<div class='cstanding-processinfo'>
+						<h3>Graph Key</h3>
+						<div class='key_wrapper'>
+							<div class='coloredkey' style='background:#cc0000;'></div>
+							<b>~94% - Bound delegates: </b>&nbsp;vote according to their state’s primary results
+						</div>
+						<div class='key_wrapper'>
+							<div class='coloredkey' style='background:#cc0000;'></div>
+							<b>~6% - Unbound delegates: </b>&nbsp;can switch candidates, regardless of their state’s primary results
+						</div>
+					</div>
 				</div>
-				<div class='key_wrapper'>
-					<div class='coloredkey' style='background:#809fff;'></div>
-					<b>15% - Superdelegates: </b>&nbsp;Delegates that can cast their vote for any candidate 
+				<div id='form_wrapper'>
+					<form id='graph-form' method='post'>
+						<div id='form-one'>
+							<div id='length_title'>Select Time Length (Shorter -> Longer): </div>
+							<div id='smoothness_wrapper'><input id='timelength' type="range" min="0" max="100" value="0" step="25" /></div>
+						</div>
+						<div id='form-two'>
+							<div id='smooth_title'>Select Line Smoothness (Less -> More Smooth): </div>
+							<div id='timelength_wrapper'><input id='smoothness' type="range" min="0" max="100" value="25" step="25" /></div>
+						</div>
+						<div id='graph_submit_wrapper'><input id='graph_submit' type="button" onclick="javascript:submitGraph();return false;" value='Submit'></div>
+					</form>
+				</div>
+				<div class='rpoll whiteback'>
+					<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 				</div>
 			</div>
-		</div>
-		<div class='rstandings cstanding'>
-			<h2 class='cstanding-title'>Republican Primary</h2>
-			<div class='cstanding-basicinfo'>
-				<!--<h3>Delegates won</h3>-->
-				1,237 needed for nomination out of 2,472 total<br>
-				1,585 delegates remaining
-			</div>
-			<div id='rstanding-graph-wrapper' class='cstanding-graph-wrapper'></div>
-			<div class='cstanding-processinfo'>
-				<h3>Graph Key</h3>
-				<div class='key_wrapper'>
-					<div class='coloredkey' style='background:#cc0000;'></div>
-					<b>~94% - Bound delegates: </b>&nbsp;vote according to their state’s primary results
-				</div>
-				<div class='key_wrapper'>
-					<div class='coloredkey' style='background:#cc0000;'></div>
-					<b>~6% - Unbound delegates: </b>&nbsp;can switch candidates, regardless of their state’s primary results
-				</div>
-			</div>
-		</div>
-		<div id='learn_button_wrapper'>
-			<span id='learnmore' class='dformbutton' onclick="javascript:learnMore();return false;">Learn More About The Election Process</span>
-		</div>
-		<h1 class='cstandings-title'>Current National Polls</h1>
-		<div id='form_wrapper'>
-			<form id='graph-form' method='post'>
-				<div id='form-one'>
-					<div id='length_title'>Select Time Length (Shorter -> Longer): </div>
-					<div id='smoothness_wrapper'><input id='timelength' type="range" min="0" max="100" value="0" step="25" /></div>
-				</div>
-				<div id='form-two'>
-					<div id='smooth_title'>Select Line Smoothness (Less -> More Smooth): </div>
-					<div id='timelength_wrapper'><input id='smoothness' type="range" min="0" max="100" value="25" step="25" /></div>
-				</div>
-				<div id='graph_submit_wrapper'><input id='graph_submit' type="button" onclick="javascript:submitGraph();return false;" value='Submit'></div>
-			</form>
-		</div>
-		<div class='dpoll cstanding'>
-			<h2 class='cstanding-title'>Democrats</h2>
-			<div id='dpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
-		</div>
-		<div class='rpoll cstanding'>
-			<h2 class='cstanding-title'>Republicans</h2>
-			<div id='rpoll-graph-wrapper' class='cstanding-graph-wrapper2'></div>
 		</div>
 	</div>
 </div>
@@ -377,6 +388,7 @@
 	$( document ).ready(function() {
 		google.charts.load('current', {'packages':['corechart']});
 	    startState('election_')
+	    drSwitcher('.dpc')
 	});
 </script>
 

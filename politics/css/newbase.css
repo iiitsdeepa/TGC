@@ -96,7 +96,7 @@ input{padding:0;border:none;}
 #alphacall{height:50px;line-height:50px;padding:0 20px;}
 #alphacall:hover{background-color:#5CD6FF;}
 #alogform{padding:20px;}
-#content{position:relative;z-index:5;border-top:solid 1px #D9D9D9;overflow:hidden;background:#0E1C32;color:lime;}
+#content{position:relative;z-index:5;border-top:solid 1px #D9D9D9;overflow:hidden;background:url('/images/stitched_wool.png');background-repeat:repeat;}
 #footer{background:#0E1C32;color:white;padding:50px 5vw;border-top:solid 2px #091220;border-radius:0;}
 #footfoot{position:relative;color:white;height:50px;line-height:50px;text-align:center;padding-right:20px;background-color:#0B1628;border-top:solid 2px #091220;}
 #footlogo{vertical-align: bottom;height: 95%;}
@@ -104,7 +104,7 @@ input{padding:0;border:none;}
 .party-columns{display:flex;justify-content:space-between;flex-wrap:wrap;}
 .party-colums-head{width:100%;text-align:center;margin-bottom:50px;}
 .pc-title{padding-bottom:25px;}
-.pc-section-title{cursor:pointer;height:50px;line-height:50px;width:calc(50% - 25px);text-align:center;font-size:2em;font-weight:bold;}
+.pc-section-title{height:50px;line-height:50px;width:calc(50% - 25px);text-align:center;font-size:2em;font-weight:bold;}
 .pc-dem-title{background:#00aef3;float:left;color:white;}
 .pc-repub-title{background:#CC0000;float:right;color:white;}
 .pc-content-wrapper{display:flex;justify-content:space-between;}
@@ -125,7 +125,7 @@ input{padding:0;border:none;}
 @media screen and (max-width: 965px){
 	.party-colums-head{padding:0;margin-bottom:25px;}
 	.pc-title{padding:0;}
-	.pc-section-title{width:50%;}
+	.pc-section-title{width:50%;cursor:pointer;}
 	.pc-dem-title{background:white;color:#999999;}
 	.pc-repub-title{background:white;color:#999999;}
 	.party-column{width:100%;position:absolute;visibility:hidden;}
