@@ -88,6 +88,16 @@ indexes:
   - name: undecided
   - name: walker
 
+- kind: StateDemocraticPrimary
+  properties:
+  - name: state
+  - name: entry_date
+
+- kind: StateRepublicanPrimary
+  properties:
+  - name: state
+  - name: entry_date
+
 - kind: User
   properties:
   - name: username

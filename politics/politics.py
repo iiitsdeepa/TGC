@@ -294,8 +294,8 @@ class UpdateAll(BaseHandler):
         getVotesUpdate()
         logging.error('Bills')
         getBillsUpdate()
-        logging.error('Setting Cache')
-        updateCache()
+        #logging.error('Setting Cache')
+        #updateCache()
         self.response.set_status(200)
 
     def post(self):
