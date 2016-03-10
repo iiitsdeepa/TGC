@@ -1,5 +1,28 @@
 "use strict"
 
+function drSwitcher(party){
+  if($(window).width() < 966){
+    console.log(party)
+    $('.pc-section-title').each(function(index){
+      $(this).css('background','white')
+      $(this).css('color','#999999')
+    })
+    $('.party-column').each(function(index){
+      $(this).css('visibility','hidden')
+      $(this).css('position','absolute')
+    })
+    if(party=='.dpc'){
+      $('.pc-dem-title').css('background','#00aef3')
+      $('.pc-dem-title').css('color','white')
+    } else {
+      $('.pc-repub-title').css('background','#CC0000')
+      $('.pc-repub-title').css('color','white')
+    }
+    $(party).css('position','relative')
+    $(party).css('visibility','visible')
+  }
+}
+
 function fontAdjust(id, wrapper){
   var tw
   var dw = $(wrapper).width()
@@ -22,7 +45,6 @@ function getVisualizationData(vis){
     google.charts.setOnLoadCallback(drawChart(objJSON))
   })
 }
-
 
 function validDistrict(str){
   var re = '^[A-Z]{2}:[0-9]{1,2}';
