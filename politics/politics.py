@@ -38,7 +38,7 @@ class Upload(blobstore_handlers.BlobstoreUploadHandler):
         #process_politician_csv(info)
         #process_politician_stats(info)
         #process_candidate_csv(info)
-        #process_visualization_csv(info)
+        process_visualization_csv(info)
         #process_votes_csv(info)
         #process_ind_votes_csv(info)
         #process_bill_csv(info)
@@ -294,8 +294,8 @@ class UpdateAll(BaseHandler):
         getVotesUpdate()
         logging.error('Bills')
         getBillsUpdate()
-        logging.error('Setting Cache')
-        updateCache()
+        #logging.error('Setting Cache')
+        #updateCache()
         self.response.set_status(200)
 
     def post(self):

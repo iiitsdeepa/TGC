@@ -35,14 +35,6 @@ class VisualizationHandler(BaseHandler):
             temp = dict(c=t3)
             #logging.error(d.name+' '+d.party)
             rows.append(temp)
-            """if v.name == 'dpresults':
-                s1 = dict(v=d.name.split(' ')[1] + '\'s super delegates')
-                s2 = dict(v=d.superdelegates)
-                ss = dict(v='#809fff')
-                s3 = [s1,s2,ss]
-                stemp = dict(c=s3)
-                rows.append(stemp)
-            """
         data = dict(cols = cols,
                 rows = rows)
         final = dict(title = v.title,
@@ -62,13 +54,23 @@ class VisualizationHandler(BaseHandler):
         ret = dict(c=retarray)
         return ret
 
+    def statepolls(self,v,polltype):
+        keytext = polltype[4:]
+        rows = memcache.get(keytext)
+        if rows is None:
+            rows = setStatePolls(polltype, v.color)
+            logging.error('memcache miss')
+        else:
+            logging.error('memcache hit')
+        return rows
+
     def natpolls(self,v):
         if self.request.get('length') != '' and self.request.get('smooth') != '':
             length = self.request.get('length')
             smooth = self.request.get('smooth')
         else:
             length = 30
-            smooth = 10
+            smooth = 20
         keytext = v.name + str(smooth) + str(length)
         rows = memcache.get(keytext)
         if rows is None:
@@ -77,66 +79,8 @@ class VisualizationHandler(BaseHandler):
         else:
             logging.error('memcache hit')
         return rows
-        """rows = []
-        if self.request.get('length') != '' and self.request.get('smooth') != '':
-            length = self.request.get('length')
-            smooth = self.request.get('smooth')
-        else:
-            length = 30
-            smooth = 10
-        ultstartday = datetime.now() - timedelta(days=(int(smooth)+int(length)))
-        ultendday = datetime.now()
-        querystr = 'WHERE entry_date >= :1 AND entry_date <= :2'
-        querystr = v.query%(querystr)
-        query = GqlQuery(querystr, ultstartday, ultendday)
-        masterquery = []
-        for row in query:
-            masterquery.append(row)
-        for i in range(int(length)):
-            startday = datetime.now() - timedelta(days=(i+int(smooth)))
-            endday = datetime.now() - timedelta(days=i)
-            tempquery = []
-            for mq in masterquery:
-                if mq.entry_date >= startday and mq.entry_date <= endday:
-                    tempquery.append(mq)
-            endday = endday.date()
-            retarray = [{"v":str(endday)}]
-            if v.name == 'dnpolls':
-                average = [0,0]
-            else:
-                average = [0,0,0,0,0]
-            count = 0
-            for each in tempquery:
-                narray = v.color.split('$$$')
-
-                for i in range(len(narray)):
-                    temp = getattr(each,narray[i])
-                    average[i] += temp
-                count += 1
-            for j in range(len(average)):
-                if average[j] < 0:
-                    average[j] = 0;
-            if v.name == 'dnpolls' and count != 0:
-                average[0] = float(average[0])/float(count)
-                average[1] = float(average[1])/float(count)
-            elif count != 0:
-                average[0] = float(average[0])/float(count)
-                average[1] = float(average[1])/float(count)
-                average[2] = float(average[2])/float(count)
-                average[3] = float(average[3])/float(count)
-                average[4] = float(average[4])/float(count)
-            for each in average:
-                t = dict(v=each)
-                retarray.append(t)
-            ret = dict(c=retarray)
-            if i == 0:
-                rows.append(ret)
-            else:
-                rows.insert(0,ret)
-        return rows
-        """
                 
-    def linejson(self,v):
+    def linejson(self,v,polltype):
         cols = [{"id":"","label":v.xaxis,"pattern":"","type":"string"}]
         col_array = v.query_columns.split('$$$')
         for c in col_array:
@@ -145,8 +89,12 @@ class VisualizationHandler(BaseHandler):
         cols.append({"id":"","role":"style","type":"string"})
         
         rows = []
+        logging.error(polltype)
         if v.name == 'dnpolls' or v.name == 'rnpolls':
             rows = self.natpolls(v)
+        elif polltype[0:4] == '_st_':
+            v.title = v.title % (codeToName(polltype[5:7]).capitalize())
+            rows = self.statepolls(v, polltype)
         else:
             dataquery = GqlQuery(v.query)#%('ORDER BY start_date DESC LIMIT 10')
             for d in dataquery:
@@ -169,11 +117,17 @@ class VisualizationHandler(BaseHandler):
 
     def post(self):
         vis = self.request.get('visualization')
-        v = GqlQuery("SELECT * FROM Visualization WHERE name = :1", vis).get()
+        logging.error(vis)
+        if vis[0:4] == '_st_':
+            #vis = '_st_'+vis[4:5]+'%spolls'
+            logging.error(str(vis))
+            v = GqlQuery("SELECT * FROM Visualization WHERE name = :1", '_st_'+vis[4:5]+'%spolls').get()
+        else:
+            v = GqlQuery("SELECT * FROM Visualization WHERE name = :1", vis).get()
         if v.vtype == 'bar':
             logging.error('bar')    
             j = self.barjson(v)
         elif v.vtype == 'line':
             logging.error('line')
-            j = self.linejson(v)
+            j = self.linejson(v, vis)
         self.response.out.write(j)
