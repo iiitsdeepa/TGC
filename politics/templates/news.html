@@ -3,18 +3,20 @@
 <div id='news' class='tab t1'>
 <div class='tab-content'>
 	<h1 class='tab-title'>Current News</h1>
+	<div id='feed-header'>
+		<h3 id='left-feed-title' class='feed-title'  onclick="javascript:feedSwitcher('#left-feed-wrapper');return false;">Leaning Left</h3>
+		<h3 id='center-feed-title' class='feed-title'  onclick="javascript:feedSwitcher('#center-feed-wrapper');return false;">Center</h3>
+		<h3 id='right-feed-title' class='feed-title'  onclick="javascript:feedSwitcher('#right-feed-wrapper');return false;">Leaning Right</h3>
+	</div>
 	<div id='feeds-container'>
-		<div id='left-feed-wrapper' class='feed-wrapper whiteback'>
-			<h3 id='left-feed-title' class='feed-title'>Leaning Left</h3>
-			<div id="left-feed"></div>
+		<div id='left-feed-wrapper' class='feed-wrapper'>
+			<div id="left-feed" class='feed whiteback'></div>
 		</div>
-		<div id='center-feed-wrapper' class='feed-wrapper whiteback'>
-			<h3 id='center-feed-title' class='feed-title'>Center</h3>
-			<div id="center-feed"></div>
+		<div id='center-feed-wrapper' class='feed-wrapper'>
+			<div id="center-feed" class='feed whiteback'></div>
 		</div>
-		<div id='right-feed-wrapper' class='feed-wrapper whiteback'>
-			<h3 id='right-feed-title' class='feed-title'>Leaning Right</h3>
-			<div id="right-feed"></div>
+		<div id='right-feed-wrapper' class='feed-wrapper'>
+			<div id="right-feed" class='feed whiteback'></div>
 		</div>
 	</div>
 				<div id='fl-template'>
@@ -32,6 +34,33 @@
 <script>
 	google.load("feeds", "1");
 	google.setOnLoadCallback(home_feed)
+	
+	function feedSwitcher(feed){
+	  if($(window).width() < 966){
+	    console.log(feed)
+	    $('.feed-title').each(function(index){
+	      $(this).css('background','white')
+	      $(this).css('color','#999999')
+	    })
+	    $('.feed-wrapper').each(function(index){
+	      $(this).css('visibility','hidden')
+	      $(this).css('position','absolute')
+	    })
+	    if(feed=='#left-feed-wrapper'){
+	      $('#left-feed-title').css('background','#1a53ff')
+	      $('#left-feed-title').css('color','white')
+	    } else if(feed=='#right-feed-wrapper'){
+	      $('#right-feed-title').css('background','#CC0000')
+	      $('#right-feed-title').css('color','white')
+	    } else {
+	      $('#center-feed-title').css('background','#9900CC')
+	      $('#center-feed-title').css('color','white')
+	    }
+	    $(feed).css('position','relative')
+	    $(feed).css('visibility','visible')
+	  }
+	}
+
 	function home_feed(){
 		var leftfeedlist = [
 	        {"name":"The Atlantic","rss":"http://feeds.feedburner.com/AtlanticPoliticsChannel","ideology":2},
@@ -106,20 +135,30 @@
 			});	
 		}
 	}
+
+	$( document ).ready(function() {
+	    feedSwitcher('#center-feed-wrapper')
+	});
 </script>
 
 <style>
-	#feeds-container{display:flex;justify-content:space-between;}
-	.feed-wrapper{width:calc(31.5% - 40px);padding:25px;}
-	.feed-title{padding-bottom:10px;margin-bottom:25px;text-align:center;}
-	#left-feed-title{color:#1a53ff;border-bottom:solid 2px #1a53ff;}
-	#center-feed-title{color:#9900cc;border-bottom:solid 2px #9900cc;}
-	#right-feed-title{color:#cc0000;border-bottom:solid 2px #cc0000;}
+	#feed-header{display:flex;justify-content:space-between;}
+	#feeds-container{display:flex;justify-content:space-between;min-height:70vh;}
+	.feed-wrapper{width:calc(32%);}
+	.feed{padding:25px;}
+	.feed-title{margin-bottom:25px;text-align:center;color:white;height:50px;line-height:50px;border-radius:2px;font-size:24px;width:32%;}
+	#left-feed-title{background:#1a53ff;}
+	#center-feed-title{background:#9900cc;}
+	#right-feed-title{background:#cc0000;}
 	.fl{margin-top:15px;padding-bottom:25px;border-bottom:solid 1px #d9d9d9;}
 	.fl-title{display:block;cursor:pointer;color:#1a53ff;font-weight:bold;font-size:115%;margin-bottom:5px;}
 	.fl-title:visited{color:#660066;}
 	.fl-description{color:#595959;}
 	.fl-date{color:#8c8c8c;}
 	#fl-template{display:none;}
+	/*Mobile and Tablet*/
+	@media screen and (max-width: 965px){
+		.feed-wrapper{width:90vw;position:absolute;}
+	}
 </style>
 {% endblock %}
